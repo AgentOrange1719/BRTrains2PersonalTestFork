@@ -233,8 +233,7 @@ switch(FEAT_TRAINS,SELF, sw_BR350d,cargo_subtype){
 }
 
 // Reversed livery switches.
-// Only LM reversed sprites are defined currently; other liveries fall back to non-reversed sprites.
-switch(FEAT_TRAINS,SELF, sw_BR350a_rev,cargo_subtype){
+switch(FEAT_TRAINS,SELF, sw_BR350a_rev,[STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]){
     0:	spriteset_BR350a_LM_rev;
 	1:	spriteset_BR350a_SLinkCentral_rev;
 	2:	spriteset_BR350a_TPE_rev;
@@ -243,7 +242,7 @@ switch(FEAT_TRAINS,SELF, sw_BR350a_rev,cargo_subtype){
 	5:	spriteset_BR350a_LNWRUkraine_rev;
 }
 
-switch(FEAT_TRAINS,SELF, sw_BR350b_rev,cargo_subtype){
+switch(FEAT_TRAINS,SELF, sw_BR350b_rev,[STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]){
     0:	spriteset_BR350b_LM_rev;
 	1:	spriteset_BR350b_SLinkCentral_rev;
 	2:	spriteset_BR350b_TPE_rev;
@@ -252,7 +251,7 @@ switch(FEAT_TRAINS,SELF, sw_BR350b_rev,cargo_subtype){
 	5:	spriteset_BR350b_LNWRUkraine_rev;
 }
 
-switch(FEAT_TRAINS,SELF, sw_BR350c_rev,cargo_subtype){
+switch(FEAT_TRAINS,SELF, sw_BR350c_rev,[STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]){
     0:	spriteset_BR350c_LM_rev;
 	1:	spriteset_BR350c_SLinkCentral_rev;
 	2:	spriteset_BR350c_TPE_rev;
@@ -261,7 +260,7 @@ switch(FEAT_TRAINS,SELF, sw_BR350c_rev,cargo_subtype){
 	5:	spriteset_BR350c_LNWRUkraine_rev;
 }
 
-switch(FEAT_TRAINS,SELF, sw_BR350d_rev,cargo_subtype){
+switch(FEAT_TRAINS,SELF, sw_BR350d_rev,[STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]){
     0:	spriteset_BR350d_LM_rev;
 	1:	spriteset_BR350d_SLinkCentral_rev;
 	2:	spriteset_BR350d_TPE_rev;
