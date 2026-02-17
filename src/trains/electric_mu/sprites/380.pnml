@@ -23,13 +23,6 @@ switch(FEAT_TRAINS, SELF, sw_BR380_role_from_vehicle, vehicle_type_id) {
     771:  spriteset_BR380_middle_ScotRail_Saltire;
     772:  spriteset_BR380_middle_panto_ScotRail_Saltire;
     773:  spriteset_BR380_rear_ScotRail_Saltire;
-    2767: spriteset_BR380_front_ScotRail_Saltire;
-    2768: spriteset_BR380_front_ScotRail_Saltire;
-    2769: spriteset_BR380_middle_panto_ScotRail_Saltire;
-    2770: spriteset_BR380_rear_ScotRail_Saltire;
-    2771: spriteset_BR380_middle_ScotRail_Saltire;
-    2772: spriteset_BR380_middle_panto_ScotRail_Saltire;
-    2773: spriteset_BR380_rear_ScotRail_Saltire;
     default: spriteset_BR380_front_ScotRail_Saltire;
 }
 
@@ -42,13 +35,6 @@ switch(FEAT_TRAINS, SELF, sw_BR380_rev_from_mirror, [STORE_TEMP(position_in_cons
     771:  spriteset_BR380_middle_ScotRail_Saltire;
     772:  spriteset_BR380_middle_panto_ScotRail_Saltire_reversed;
     773:  spriteset_BR380_rear_ScotRail_Saltire_reversed;
-    2767: spriteset_BR380_front_ScotRail_Saltire_reversed;
-    2768: spriteset_BR380_front_ScotRail_Saltire_reversed;
-    2769: spriteset_BR380_middle_panto_ScotRail_Saltire_reversed;
-    2770: spriteset_BR380_rear_ScotRail_Saltire_reversed;
-    2771: spriteset_BR380_middle_ScotRail_Saltire;
-    2772: spriteset_BR380_middle_panto_ScotRail_Saltire_reversed;
-    2773: spriteset_BR380_rear_ScotRail_Saltire_reversed;
     default: spriteset_BR380_front_ScotRail_Saltire_reversed;
 }
 

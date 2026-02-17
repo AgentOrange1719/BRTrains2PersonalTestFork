@@ -451,18 +451,6 @@ switch(FEAT_TRAINS, SELF, sw_BR350_subclass_rev_from_mirror, [STORE_TEMP(positio
 	783: sw_BR350_34b_rev;
 	784: sw_BR350_34c_rev;
 	785: sw_BR350_34d_rev;
-	2774: sw_BR350_1a_rev;
-	2775: sw_BR350_2a_rev;
-	2776: sw_BR350_34a_rev;
-	2777: sw_BR350_1b_rev;
-	2778: sw_BR350_1c_rev;
-	2779: sw_BR350_1d_rev;
-	2780: sw_BR350_2b_rev;
-	2781: sw_BR350_2c_rev;
-	2782: sw_BR350_2d_rev;
-	2783: sw_BR350_34b_rev;
-	2784: sw_BR350_34c_rev;
-	2785: sw_BR350_34d_rev;
 	default: sw_BR350_1a_rev;
 }
 
@@ -479,18 +467,6 @@ switch(FEAT_TRAINS, SELF, sw_BR350_subclass_role_from_vehicle, vehicle_type_id) 
 	783: sw_BR350_34b;
 	784: sw_BR350_34c;
 	785: sw_BR350_34d;
-	2774: sw_BR350_1a;
-	2775: sw_BR350_2a;
-	2776: sw_BR350_34a;
-	2777: sw_BR350_1b;
-	2778: sw_BR350_1c;
-	2779: sw_BR350_1d;
-	2780: sw_BR350_2b;
-	2781: sw_BR350_2c;
-	2782: sw_BR350_2d;
-	2783: sw_BR350_34b;
-	2784: sw_BR350_34c;
-	2785: sw_BR350_34d;
 	default: sw_BR350_1a;
 }
 
