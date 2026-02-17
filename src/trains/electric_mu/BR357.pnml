@@ -1,82 +1,614 @@
-switch (FEAT_TRAINS, SELF, switch_articulated_BR357, extra_callback_info1) {
-	1..3: return item_BR357;
-    return CB_RESULT_NO_MORE_ARTICULATED_PARTS; //stop adding vehicle parts
+switch(FEAT_TRAINS, SELF, switch_articulated_BR357_0, extra_callback_info1) {
+	1: return item_BR357_0_b;
+	2: return item_BR357_0_c;
+	3: return item_BR357_0_d;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
-switch(FEAT_TRAINS,SELF,sw_BR357,cargo_subtype){
-    0:	sw_BR357_C2CWhite;
-	1:	sw_BR357_C2CBlue;
-	2:	sw_BR357_C2CGoGold;
-	3:	sw_BR357_C2CPink;
-	4:	sw_BR357_C2CGreen;
-	5:	sw_BR357_LTS;
-	 return CB_RESULT_NO_TEXT;
+switch(FEAT_TRAINS, SELF, switch_articulated_BR357_2, extra_callback_info1) {
+	1: return item_BR357_2_b;
+	2: return item_BR357_2_c;
+	3: return item_BR357_2_d;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
-switch(FEAT_TRAINS,SELF,sw_BR357_cargo_subtype_text,cargo_subtype){
-    0:	return string(STR_LIVERY, string(str_comp_C2C), string(str_col_White));
-	1:	return string(STR_LIVERY, string(str_comp_C2C), string(str_col_Blue));
-	2:	return string(STR_LIVERY, string(str_comp_C2C), string(str_special_GoGold));
-	3:	return string(STR_LIVERY, string(str_comp_C2C), string(str_col_Pink));
-	4:	return string(STR_LIVERY, string(str_comp_C2C), string(str_col_Green));
-	5:	return string(str_LTS);
-	 return CB_RESULT_NO_TEXT;
+switch(FEAT_TRAINS, SELF, switch_articulated_BR357_3, extra_callback_info1) {
+	1: return item_BR357_3_b;
+	2: return item_BR357_3_c;
+	3: return item_BR357_3_d;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR357_cargo_capacity, position_in_articulated_veh_from_end)
-{
-	0: return(68 * param_pax);
-	4: return(68 * param_pax);
-	return(74 * param_pax);
+switch(FEAT_TRAINS, SELF, sw_BR357_can_attach_wagon, vehicle_type_id) {
+	item_BR357_0: return CB_RESULT_ATTACH_ALLOW;
+	item_BR357_2: return CB_RESULT_ATTACH_ALLOW;
+	item_BR357_3: return CB_RESULT_ATTACH_ALLOW;
+	item_BR357_0_b: return CB_RESULT_ATTACH_ALLOW;
+	item_BR357_0_c: return CB_RESULT_ATTACH_ALLOW;
+	item_BR357_0_d: return CB_RESULT_ATTACH_ALLOW;
+	item_BR357_2_b: return CB_RESULT_ATTACH_ALLOW;
+	item_BR357_2_c: return CB_RESULT_ATTACH_ALLOW;
+	item_BR357_2_d: return CB_RESULT_ATTACH_ALLOW;
+	item_BR357_3_b: return CB_RESULT_ATTACH_ALLOW;
+	item_BR357_3_c: return CB_RESULT_ATTACH_ALLOW;
+	item_BR357_3_d: return CB_RESULT_ATTACH_ALLOW;
+	return string(STR_CANNOT_ATTACH);
 }
 
-item (FEAT_TRAINS, item_BR357, 531) {
+// Compatibility alias: role/livery sprite selection now lives in sprites/357.pnml.
+switch(FEAT_TRAINS, SELF, sw_BR357, vehicle_type_id) {
+	return sw_BR357_role_from_vehicle;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR357_cargo_subtype_text, cargo_subtype) {
+	0: return string(STR_LIVERY, string(str_comp_C2C), string(str_col_White));
+	1: return string(STR_LIVERY, string(str_comp_C2C), string(str_col_Blue));
+	2: return string(STR_LIVERY, string(str_comp_C2C), string(str_special_GoGold));
+	3: return string(STR_LIVERY, string(str_comp_C2C), string(str_col_Pink));
+	4: return string(STR_LIVERY, string(str_comp_C2C), string(str_col_Green));
+	5: return string(str_LTS);
+	return CB_RESULT_NO_TEXT;
+}
+
+// BR357 vehicle IDs use a compact contiguous range (600-611).
+// Layout below is grouped by subclass for easier maintenance.
+
+// -----------------------------------------------------------------------------
+// Class 357/0 (4-car set)
+// A car: DMSO (A cab)
+item(FEAT_TRAINS, item_BR357_0, 600) {
 	property {
-		variant_group:					header_Electrostar;
-		name: 							string(STR_NAME_BR357);
-		climates_available: 			ALL_CLIMATES;
-		introduction_date:				date(1999,1,1);
-		model_life:						15;
-		retire_early:					1;
-		vehicle_life:					50;
-		reliability_decay:				7;
-		refittable_cargo_classes:		CC_PASSENGERS;
-		cargo_allow_refit:				[PASS, TOUR];
-		loading_speed:					35;
-		cost_factor:					46;
-		running_cost_factor:			58;
-		sprite_id:						SPRITE_ID_NEW_TRAIN;
-		speed:							100 mph;
-		refit_cost:						0;
-		track_type:						ELRL;
-		ai_special_flag:				AI_FLAG_CARGO;
-		power:							2682 hp;
-		running_cost_base:				RUNNING_COST_ELECTRIC;
-		dual_headed:					0;
-		default_cargo_type:				PASS;
-		cargo_capacity:					68;
-		weight:							191 ton;
-		engine_class:					ENGINE_CLASS_ELECTRIC;
-		tractive_effort_coefficient:	0.3;
-		air_drag_coefficient:			0.2;
-		length:							8;
-		effect_spawn_model_and_powered:	EFFECT_SPAWN_MODEL_ELECTRIC;
-		extra_weight_per_wagon:			0;
-		bitmask_vehicle_info:			0;
-		cargo_age_period:				139;
+		variant_group: header_Electrostar;
+		name: string(STR_NAME_BR357_0);
+		climates_available: ALL_CLIMATES;
+		introduction_date: date(1999, 1, 1);
+		model_life: 15;
+		retire_early: 1;
+		vehicle_life: 50;
+		reliability_decay: 7;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 35;
+		cost_factor: 46;
+		running_cost_factor: 58;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: ELRL;
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 2682 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 68;
+        weight: 157.6 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.2;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 139;
 	}
 	graphics {
-		additional_text:			return(string(str_purchase_loco_with_liveries,string(str_purchase_type_emu),string(str_BR357_usage),string(str_BR357_eos),string(str_BR357_liveries)));
-		can_attach_wagon:			CB_RESULT_ATTACH_ALLOW;
-		cargo_subtype_text:			sw_BR357_cargo_subtype_text;
-		articulated_part:        	switch_articulated_BR357;
-		default: 					sw_BR357;
-		purchase:					spriteset_BR357_Purchase;
-		colour_mapping: 			return PALETTE_CC_FIRST;
-		create_effect:				electric_create_visual_effect;
-		sound_effect:				sw_sound_electric_88;
-		cargo_capacity: 			sw_BR357_cargo_capacity;
-		cost_factor:				return(GetAdjustedCost(46));
-		running_cost_factor: 		return(GetAdjustedCost(58));
+		additional_text: return(string(str_purchase_loco_with_liveries_and_mw, string(str_purchase_type_emu), string(str_BR357_usage), string(str_multiple_working_within_class), string(str_BR357_eos), string(str_BR357_liveries)));
+		can_attach_wagon: sw_BR357_can_attach_wagon;
+		cargo_subtype_text: sw_BR357_cargo_subtype_text;
+		articulated_part: switch_articulated_BR357_0;
+		// Push-pull aware selector (normal + mirrored consist handling).
+		default: sw_BR357_pushpull;
+		purchase: spriteset_BR357_Purchase;
+		colour_mapping: return PALETTE_CC_FIRST;
+		create_effect: electric_create_visual_effect;
+		sound_effect: sw_sound_electric_88;
+		cargo_capacity: return(68 * param_pax);
+		cost_factor: return(GetAdjustedCost(46));
+		running_cost_factor: return(GetAdjustedCost(58));
 	}
 }
+
+// B car: MSO
+item(FEAT_TRAINS, item_BR357_0_b, 603) {
+	property {
+		name: string(STR_NAME_BR357_0);
+		climates_available: NO_CLIMATE;
+		introduction_date: date(1999, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		retire_early: 0;
+		vehicle_life: 50;
+		reliability_decay: 0;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 35;
+		cost_factor: 1;
+		running_cost_factor: 1;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: ELRL;
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 0 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 72;
+		weight: 36.7 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.2;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 139;
+	}
+	graphics {
+		can_attach_wagon: sw_BR357_can_attach_wagon;
+		default: sw_BR357_pushpull;
+		colour_mapping: return PALETTE_CC_FIRST;
+		sound_effect: sw_sound_electric_88;
+		cargo_capacity: return(72 * param_pax);
+	}
+}
+
+// C car: PTSO (pantograph car)
+item(FEAT_TRAINS, item_BR357_0_c, 604) {
+	property {
+		name: string(STR_NAME_BR357_0);
+		climates_available: NO_CLIMATE;
+		introduction_date: date(1999, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		retire_early: 0;
+		vehicle_life: 50;
+		reliability_decay: 0;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 35;
+		cost_factor: 1;
+		running_cost_factor: 1;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: ELRL;
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 0 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 72;
+		weight: 39.5 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.2;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 139;
+	}
+	graphics {
+		can_attach_wagon: sw_BR357_can_attach_wagon;
+		default: sw_BR357_pushpull;
+		colour_mapping: return PALETTE_CC_FIRST;
+		sound_effect: sw_sound_electric_88;
+		cargo_capacity: return(72 * param_pax);
+	}
+}
+
+// D car: DMSO (B cab)
+item(FEAT_TRAINS, item_BR357_0_d, 605) {
+	property {
+		name: string(STR_NAME_BR357_0);
+		climates_available: NO_CLIMATE;
+		introduction_date: date(1999, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		retire_early: 0;
+		vehicle_life: 50;
+		reliability_decay: 0;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 35;
+		cost_factor: 1;
+		running_cost_factor: 1;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: ELRL;
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 0 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 68;
+		weight: 40.7 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.2;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 139;
+	}
+	graphics {
+		can_attach_wagon: sw_BR357_can_attach_wagon;
+		default: sw_BR357_pushpull;
+		colour_mapping: return PALETTE_CC_FIRST;
+		sound_effect: sw_sound_electric_88;
+		cargo_capacity: return(68 * param_pax);
+	}
+}
+
+// -----------------------------------------------------------------------------
+// Class 357/2 (4-car set)
+// A car: DMSO (A cab)
+item(FEAT_TRAINS, item_BR357_2, 601) {
+	property {
+		variant_group: header_Electrostar;
+		name: string(STR_NAME_BR357_2);
+		climates_available: ALL_CLIMATES;
+		introduction_date: date(2001, 1, 1);
+		model_life: 15;
+		retire_early: 1;
+		vehicle_life: 50;
+		reliability_decay: 7;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 35;
+		cost_factor: 46;
+		running_cost_factor: 58;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: ELRL;
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 2682 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 68;
+        weight: 157.6 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.2;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 139;
+	}
+	graphics {
+		additional_text: return(string(str_purchase_loco_with_liveries_and_mw, string(str_purchase_type_emu), string(str_BR357_usage), string(str_multiple_working_within_class), string(str_BR357_eos), string(str_BR357_liveries)));
+		can_attach_wagon: sw_BR357_can_attach_wagon;
+		cargo_subtype_text: sw_BR357_cargo_subtype_text;
+		articulated_part: switch_articulated_BR357_2;
+		default: sw_BR357_pushpull;
+		purchase: spriteset_BR357_Purchase;
+		colour_mapping: return PALETTE_CC_FIRST;
+		create_effect: electric_create_visual_effect;
+		sound_effect: sw_sound_electric_88;
+		cargo_capacity: return(68 * param_pax);
+		cost_factor: return(GetAdjustedCost(46));
+		running_cost_factor: return(GetAdjustedCost(58));
+	}
+}
+
+// B car: MSO
+item(FEAT_TRAINS, item_BR357_2_b, 606) {
+	property {
+		name: string(STR_NAME_BR357_2);
+		climates_available: NO_CLIMATE;
+		introduction_date: date(2001, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		retire_early: 0;
+		vehicle_life: 50;
+		reliability_decay: 0;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 35;
+		cost_factor: 1;
+		running_cost_factor: 1;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: ELRL;
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 0 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 72;
+		weight: 36.7 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.2;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 139;
+	}
+	graphics {
+		can_attach_wagon: sw_BR357_can_attach_wagon;
+		default: sw_BR357_pushpull;
+		colour_mapping: return PALETTE_CC_FIRST;
+		sound_effect: sw_sound_electric_88;
+		cargo_capacity: return(72 * param_pax);
+	}
+}
+
+// C car: PTSO (pantograph car)
+item(FEAT_TRAINS, item_BR357_2_c, 607) {
+	property {
+		name: string(STR_NAME_BR357_2);
+		climates_available: NO_CLIMATE;
+		introduction_date: date(2001, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		retire_early: 0;
+		vehicle_life: 50;
+		reliability_decay: 0;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 35;
+		cost_factor: 1;
+		running_cost_factor: 1;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: ELRL;
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 0 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 72;
+		weight: 39.5 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.2;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 139;
+	}
+	graphics {
+		can_attach_wagon: sw_BR357_can_attach_wagon;
+		default: sw_BR357_pushpull;
+		colour_mapping: return PALETTE_CC_FIRST;
+		sound_effect: sw_sound_electric_88;
+		cargo_capacity: return(72 * param_pax);
+	}
+}
+
+// D car: DMSO (B cab)
+item(FEAT_TRAINS, item_BR357_2_d, 608) {
+	property {
+		name: string(STR_NAME_BR357_2);
+		climates_available: NO_CLIMATE;
+		introduction_date: date(2001, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		retire_early: 0;
+		vehicle_life: 50;
+		reliability_decay: 0;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 35;
+		cost_factor: 1;
+		running_cost_factor: 1;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: ELRL;
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 0 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 68;
+		weight: 40.7 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.2;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 139;
+	}
+	graphics {
+		can_attach_wagon: sw_BR357_can_attach_wagon;
+		default: sw_BR357_pushpull;
+		colour_mapping: return PALETTE_CC_FIRST;
+		sound_effect: sw_sound_electric_88;
+		cargo_capacity: return(68 * param_pax);
+	}
+}
+
+// -----------------------------------------------------------------------------
+// Class 357/3 (4-car set)
+// A car: DMSO (A cab)
+item(FEAT_TRAINS, item_BR357_3, 602) {
+	property {
+		variant_group: header_Electrostar;
+		name: string(STR_NAME_BR357_3);
+		climates_available: ALL_CLIMATES;
+		introduction_date: date(2002, 1, 1);
+		model_life: 15;
+		retire_early: 1;
+		vehicle_life: 50;
+		reliability_decay: 7;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 35;
+		cost_factor: 46;
+		running_cost_factor: 58;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: ELRL;
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 2682 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 54;
+        weight: 157.6 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.2;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 139;
+	}
+	graphics {
+		additional_text: return(string(str_purchase_loco_with_liveries_and_mw, string(str_purchase_type_emu), string(str_BR357_usage), string(str_multiple_working_within_class), string(str_BR357_eos), string(str_BR357_liveries)));
+		can_attach_wagon: sw_BR357_can_attach_wagon;
+		cargo_subtype_text: sw_BR357_cargo_subtype_text;
+		articulated_part: switch_articulated_BR357_3;
+		default: sw_BR357_pushpull;
+		purchase: spriteset_BR357_Purchase;
+		colour_mapping: return PALETTE_CC_FIRST;
+		create_effect: electric_create_visual_effect;
+		sound_effect: sw_sound_electric_88;
+		cargo_capacity: return(54 * param_pax);
+		cost_factor: return(GetAdjustedCost(46));
+		running_cost_factor: return(GetAdjustedCost(58));
+	}
+}
+
+// B car: MSO
+item(FEAT_TRAINS, item_BR357_3_b, 609) {
+	property {
+		name: string(STR_NAME_BR357_3);
+		climates_available: NO_CLIMATE;
+		introduction_date: date(2002, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		retire_early: 0;
+		vehicle_life: 50;
+		reliability_decay: 0;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 35;
+		cost_factor: 1;
+		running_cost_factor: 1;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: ELRL;
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 0 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 57;
+		weight: 36.7 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.2;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 139;
+	}
+	graphics {
+		can_attach_wagon: sw_BR357_can_attach_wagon;
+		default: sw_BR357_pushpull;
+		colour_mapping: return PALETTE_CC_FIRST;
+		sound_effect: sw_sound_electric_88;
+		cargo_capacity: return(57 * param_pax);
+	}
+}
+
+// C car: PTSO (pantograph car)
+item(FEAT_TRAINS, item_BR357_3_c, 610) {
+	property {
+		name: string(STR_NAME_BR357_3);
+		climates_available: NO_CLIMATE;
+		introduction_date: date(2002, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		retire_early: 0;
+		vehicle_life: 50;
+		reliability_decay: 0;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 35;
+		cost_factor: 1;
+		running_cost_factor: 1;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: ELRL;
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 0 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 57;
+		weight: 39.5 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.2;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 139;
+	}
+	graphics {
+		can_attach_wagon: sw_BR357_can_attach_wagon;
+		default: sw_BR357_pushpull;
+		colour_mapping: return PALETTE_CC_FIRST;
+		sound_effect: sw_sound_electric_88;
+		cargo_capacity: return(57 * param_pax);
+	}
+}
+
+// D car: DMSO (B cab)
+item(FEAT_TRAINS, item_BR357_3_d, 611) {
+	property {
+		name: string(STR_NAME_BR357_3);
+		climates_available: NO_CLIMATE;
+		introduction_date: date(2002, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		retire_early: 0;
+		vehicle_life: 50;
+		reliability_decay: 0;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 35;
+		cost_factor: 1;
+		running_cost_factor: 1;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: ELRL;
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 0 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 54;
+		weight: 40.7 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.2;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 139;
+	}
+	graphics {
+		can_attach_wagon: sw_BR357_can_attach_wagon;
+		default: sw_BR357_pushpull;
+		colour_mapping: return PALETTE_CC_FIRST;
+		sound_effect: sw_sound_electric_88;
+		cargo_capacity: return(54 * param_pax);
+	}
+}
+
