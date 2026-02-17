@@ -1,3 +1,7 @@
+A personal fork of BRTrains2, created for me to expiriment with the code of my favorite NewGRF, with the hope of coming up with something good enough to make it to main.
+
+//Original BRtrains2 readme below
+
 # BR Trains v2
 A UK Train Set addon (newGRF) for OpenTTD, aiming to replicate UK rail (train and tram) rolling stock from the entire history of the British Railway Network
 
