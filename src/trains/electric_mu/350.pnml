@@ -63,7 +63,7 @@ item(FEAT_TRAINS, item_BR350_1, 774) {
 		cargo_age_period: 185;
 	}
 	graphics {
-		additional_text: return(string(str_purchase_loco_with_liveries, string(str_purchase_type_emu), string(str_BR350_usage), string(str_BR350_eos), string(str_BR350_1_liveries)));
+		additional_text: return(string(str_purchase_loco_with_liveries_and_mw, string(str_purchase_type_emu), string(str_BR350_usage), string(str_multiple_working_within_class), string(str_BR350_eos), string(str_BR350_1_liveries)));
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		cargo_subtype_text: sw_BR350_1_cargo_subtype_text;
 		articulated_part: sw_articulated_BR350_1;
@@ -115,7 +115,7 @@ item(FEAT_TRAINS, item_BR350_2, 775) {
 		cargo_age_period: 185;
 	}
 	graphics {
-		additional_text: return(string(str_purchase_loco_with_liveries, string(str_purchase_type_emu), string(str_BR350_usage), string(str_BR350_eos), string(str_BR350_2_liveries)));
+		additional_text: return(string(str_purchase_loco_with_liveries_and_mw, string(str_purchase_type_emu), string(str_BR350_usage), string(str_multiple_working_within_class), string(str_BR350_eos), string(str_BR350_2_liveries)));
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		cargo_subtype_text: sw_BR350_2_cargo_subtype_text;
 		articulated_part: sw_articulated_BR350_2;
@@ -167,7 +167,7 @@ item(FEAT_TRAINS, item_BR350_34, 776) {
 		cargo_age_period: 185;
 	}
 	graphics {
-		additional_text: return(string(str_purchase_loco_with_liveries, string(str_purchase_type_emu), string(str_BR350_usage), string(str_BR350_eos), string(str_BR350_34_liveries)));
+		additional_text: return(string(str_purchase_loco_with_liveries_and_mw, string(str_purchase_type_emu), string(str_BR350_usage), string(str_multiple_working_within_class), string(str_BR350_eos), string(str_BR350_34_liveries)));
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		cargo_subtype_text: sw_BR350_34_cargo_subtype_text;
 		articulated_part: sw_articulated_BR350_34;

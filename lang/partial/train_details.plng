@@ -825,6 +825,9 @@ str_ElectroTest_eos				:---
 str_ElectroTest_liveries		:
 
 STR_NAME_BR357					:BR Class 357 "Electrostar" (4-car)
+STR_NAME_BR357_0				:BR Class 357/0 "Electrostar" (4-car)
+STR_NAME_BR357_2				:BR Class 357/2 "Electrostar" (4-car)
+STR_NAME_BR357_3				:BR Class 357/3 "Electrostar" (4-car)
 str_BR357_usage					:Surburban Passenger
 str_BR357_eos					:---
 str_BR357_liveries				:C2C White, C2C Blue, C2C Go Gold for Childhood Cancer Prevention, C2C Pink, C2C Green (Eco), LTS
