@@ -67,7 +67,7 @@ item(FEAT_TRAINS, item_BR350_1, 774) {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		cargo_subtype_text: sw_BR350_1_cargo_subtype_text;
 		articulated_part: sw_articulated_BR350_1;
-		default: sw_BR350_1a_pushpull;
+		default: sw_BR350_pushpull;
 		purchase: spriteset_BR350_Purchase;
 		colour_mapping: return PALETTE_CC_FIRST;
 		create_effect: electric_create_visual_effect;
@@ -119,7 +119,7 @@ item(FEAT_TRAINS, item_BR350_2, 775) {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		cargo_subtype_text: sw_BR350_2_cargo_subtype_text;
 		articulated_part: sw_articulated_BR350_2;
-		default: sw_BR350_2a_pushpull;
+		default: sw_BR350_pushpull;
 		purchase: spriteset_BR350_Purchase;
 		colour_mapping: return PALETTE_CC_FIRST;
 		create_effect: electric_create_visual_effect;
@@ -171,7 +171,7 @@ item(FEAT_TRAINS, item_BR350_34, 776) {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		cargo_subtype_text: sw_BR350_34_cargo_subtype_text;
 		articulated_part: sw_articulated_BR350_34;
-		default: sw_BR350_34a_pushpull;
+		default: sw_BR350_pushpull;
 		purchase: spriteset_BR350_Purchase;
 		colour_mapping: return PALETTE_CC_FIRST;
 		create_effect: electric_create_visual_effect;
@@ -220,7 +220,7 @@ item(FEAT_TRAINS, item_BR350_1_b, 777) {
 	}
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
-		default: sw_BR350_1b_pushpull;
+		default: sw_BR350_pushpull;
 		colour_mapping: return PALETTE_CC_FIRST;
 		sound_effect: sw_sound_electric_350;
 		cargo_capacity: return(62 * param_pax);
@@ -263,7 +263,7 @@ item(FEAT_TRAINS, item_BR350_1_c, 778) {
 	}
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
-		default: sw_BR350_1c_pushpull;
+		default: sw_BR350_pushpull;
 		colour_mapping: return PALETTE_CC_FIRST;
 		sound_effect: sw_sound_electric_350;
 		cargo_capacity: return(60 * param_pax);
@@ -306,7 +306,7 @@ item(FEAT_TRAINS, item_BR350_1_d, 779) {
 	}
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
-		default: sw_BR350_1d_pushpull;
+		default: sw_BR350_pushpull;
 		colour_mapping: return PALETTE_CC_FIRST;
 		sound_effect: sw_sound_electric_350;
 		cargo_capacity: return(60 * param_pax);
@@ -351,7 +351,7 @@ item(FEAT_TRAINS, item_BR350_2_b, 780) {
 	}
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
-		default: sw_BR350_2b_pushpull;
+		default: sw_BR350_pushpull;
 		colour_mapping: return PALETTE_CC_FIRST;
 		sound_effect: sw_sound_electric_350;
 		cargo_capacity: return(62 * param_pax);
@@ -394,7 +394,7 @@ item(FEAT_TRAINS, item_BR350_2_c, 781) {
 	}
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
-		default: sw_BR350_2c_pushpull;
+		default: sw_BR350_pushpull;
 		colour_mapping: return PALETTE_CC_FIRST;
 		sound_effect: sw_sound_electric_350;
 		cargo_capacity: return(60 * param_pax);
@@ -437,7 +437,7 @@ item(FEAT_TRAINS, item_BR350_2_d, 782) {
 	}
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
-		default: sw_BR350_2d_pushpull;
+		default: sw_BR350_pushpull;
 		colour_mapping: return PALETTE_CC_FIRST;
 		sound_effect: sw_sound_electric_350;
 		cargo_capacity: return(60 * param_pax);
@@ -482,7 +482,7 @@ item(FEAT_TRAINS, item_BR350_34_b, 783) {
 	}
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
-		default: sw_BR350_34b_pushpull;
+		default: sw_BR350_pushpull;
 		colour_mapping: return PALETTE_CC_FIRST;
 		sound_effect: sw_sound_electric_350;
 		cargo_capacity: return(62 * param_pax);
@@ -525,7 +525,7 @@ item(FEAT_TRAINS, item_BR350_34_c, 784) {
 	}
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
-		default: sw_BR350_34c_pushpull;
+		default: sw_BR350_pushpull;
 		colour_mapping: return PALETTE_CC_FIRST;
 		sound_effect: sw_sound_electric_350;
 		cargo_capacity: return(60 * param_pax);
@@ -568,9 +568,10 @@ item(FEAT_TRAINS, item_BR350_34_d, 785) {
 	}
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
-		default: sw_BR350_34d_pushpull;
+		default: sw_BR350_pushpull;
 		colour_mapping: return PALETTE_CC_FIRST;
 		sound_effect: sw_sound_electric_350;
 		cargo_capacity: return(60 * param_pax);
 	}
 }
+
