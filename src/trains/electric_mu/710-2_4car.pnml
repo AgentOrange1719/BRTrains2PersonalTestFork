@@ -39,7 +39,7 @@ switch(FEAT_TRAINS, SELF, switch_br_710_2_4car_start_stop, num_vehs_in_consist) 
 // Only allow the same train type to be added to itself
 switch(FEAT_TRAINS, SELF, switch_br_710_2_4car_can_attach_wagon, vehicle_type_id) {
 	item_br_710_2_4car: return CB_RESULT_ATTACH_ALLOW;
-	item_br_710_3_5car: return CB_RESULT_ATTACH_ALLOW;
+	item_br_710_2_5car: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
 
@@ -69,7 +69,7 @@ item(FEAT_TRAINS, item_br_710_2_4car, 445) {
 		
 		sprite_id: SPRITE_ID_NEW_TRAIN; // required
 		refit_cost: 0;
-		track_type: [THIRD, ELRL];
+		track_type: THIRD;
 		ai_special_flag: AI_FLAG_PASSENGER; // tell ai that this is a passenger train
 		running_cost_base: RUNNING_COST_ELECTRIC;
 		dual_headed: 0; // set to 0 otherwise limited to 2 cars only

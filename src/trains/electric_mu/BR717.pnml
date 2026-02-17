@@ -11,6 +11,9 @@ spriteset(spriteset_BR717b_GTR, "gfx/BR700_v2.png") {
 spriteset(spriteset_BR717c_GTR, "gfx/BR700_v2.png") {
 	template_train32px_old(0, 50)
 }
+spriteset(spriteset_BR717c_GTR_rev, "gfx/BR700_v2.png") {
+	template_train32px_old(175, 50)
+}
 spriteset(spriteset_BR717d_GTR, "gfx/BR700_v2.png") {
 	template_train32px_old(0, 25)
 }
@@ -32,8 +35,8 @@ switch(FEAT_TRAINS,SELF, sw_BR717d,cargo_subtype){
 }
 
 switch (FEAT_TRAINS, SELF, switch_articulated_BR717, extra_callback_info1) {	
-	1: return item_BR717c;
-	2..4: return item_BR717d;
+	1..3: return item_BR717d;
+	4: return item_BR717c;
 	5: return item_BR717b;
     return CB_RESULT_NO_MORE_ARTICULATED_PARTS; //stop adding vehicle parts
 }
@@ -61,13 +64,13 @@ item (FEAT_TRAINS, item_BR717, 518) {
 		sprite_id:						SPRITE_ID_NEW_TRAIN;
 		speed:							100 mph;
 		refit_cost:						0;
-		track_type:						[THIRD, ELRL];
+		track_type:						[THIRD, THIRD, ELRL];
 		ai_special_flag:				AI_FLAG_CARGO;
 		power:							3300 hp; // Wiki says 1600, that seems very low so using 550hp/car like the BR717
 		running_cost_base:				RUNNING_COST_ELECTRIC;
 		dual_headed:					0;
 		default_cargo_type:				PASS;
-		cargo_capacity:					56;
+		cargo_capacity:					157;
 		weight:							306 ton;
 		engine_class:					ENGINE_CLASS_ELECTRIC;
 		tractive_effort_coefficient:	0.15;
@@ -85,9 +88,8 @@ item (FEAT_TRAINS, item_BR717, 518) {
 	default: 							sw_BR717a;
 	purchase:							spriteset_BR717_Purchase;
 	colour_mapping: 					return PALETTE_CC_FIRST;
-	create_effect:						electric_create_visual_effect;
 	sound_effect:						sw_sound_electric_350;
-	cargo_capacity: return(56 * param_pax);
+	cargo_capacity: return(157 * param_pax);
 	cost_factor:	return(GetAdjustedCost(123));
 	running_cost_factor: return(GetAdjustedCost(70));
 
@@ -112,13 +114,13 @@ item (FEAT_TRAINS, item_BR717b, 519) {
 		speed:							100 mph;
 		misc_flags:		 TRAIN_FLAG_NO_BREAKDOWN_SMOKE;
 		refit_cost:						0;
-		track_type:						[THIRD, ELRL];
+		track_type:						[THIRD, THIRD, ELRL];
 		ai_special_flag:				AI_FLAG_CARGO;
 		power:							0 hp;
 		running_cost_base:				RUNNING_COST_ELECTRIC;
 		dual_headed:					0;
 		default_cargo_type:				PASS;
-		cargo_capacity:					53;
+		cargo_capacity:					157;
 		weight:							0 ton;
 		engine_class:					ENGINE_CLASS_ELECTRIC;
 		tractive_effort_coefficient:	0.15;
@@ -133,7 +135,7 @@ item (FEAT_TRAINS, item_BR717b, 519) {
 	default: 							sw_BR717b;
 	colour_mapping: 					return PALETTE_CC_FIRST;
 	sound_effect:						sw_sound_electric_350;
-	cargo_capacity: return(53 * param_pax);
+	cargo_capacity: return(157 * param_pax);
 }
 }
 
@@ -154,13 +156,13 @@ item (FEAT_TRAINS, item_BR717c, 520) {
 		sprite_id:						SPRITE_ID_NEW_TRAIN;
 		speed:							100 mph;
 		refit_cost:						0;
-		track_type:						[THIRD, ELRL];
+		track_type:						[THIRD, THIRD, ELRL];
 		ai_special_flag:				AI_FLAG_CARGO;
 		power:							0 hp;
 		running_cost_base:				RUNNING_COST_ELECTRIC;
 		dual_headed:					0;
 		default_cargo_type:				PASS;
-		cargo_capacity:					53;
+		cargo_capacity:					158;
 		weight:							0 ton;
 		engine_class:					ENGINE_CLASS_ELECTRIC;
 		tractive_effort_coefficient:	0.15;
@@ -176,8 +178,9 @@ item (FEAT_TRAINS, item_BR717c, 520) {
 	cargo_subtype_text:					sw_BR717_cargo_subtype_text;
 	default: 							sw_BR717c;
 	colour_mapping: 					return PALETTE_CC_FIRST;
+	create_effect:						electric_create_visual_effect;
 	sound_effect:						sw_sound_electric_350;
-	cargo_capacity: return(53 * param_pax);
+	cargo_capacity: return(158 * param_pax);
 }
 }
 
@@ -198,13 +201,13 @@ item (FEAT_TRAINS, item_BR717d, 521) {
 		sprite_id:						SPRITE_ID_NEW_TRAIN;
 		speed:							100 mph;
 		refit_cost:						0;
-		track_type:						[THIRD, ELRL];
+		track_type:						[THIRD, THIRD, ELRL];
 		ai_special_flag:				AI_FLAG_CARGO;
 		power:							0 hp;
 		running_cost_base:				RUNNING_COST_ELECTRIC;
 		dual_headed:					0;
 		default_cargo_type:				PASS;
-		cargo_capacity:					53;
+		cargo_capacity:					157;
 		weight:							0 ton;
 		engine_class:					ENGINE_CLASS_ELECTRIC;
 		tractive_effort_coefficient:	0.15;
@@ -221,6 +224,6 @@ item (FEAT_TRAINS, item_BR717d, 521) {
 	default: 							sw_BR717d;
 	colour_mapping: 					return PALETTE_CC_FIRST;
 	sound_effect:						sw_sound_electric_350;
-	cargo_capacity: return(53 * param_pax);
+	cargo_capacity: return(157 * param_pax);
 }
 }

@@ -11,6 +11,7 @@ STR_ExpressSprinter_Header      :British Rail Class 158-159 "Express Sprinter"
 STR_Turbo_Header                :British Rail Class 165-166 "Turbo"
 STR_Turbostar_Header            :British Rail Class 168-172 "Turbostar"/"Clubman"
 STR_Voyager_Header              :British Rail Class 220-222 "Voyager"/"Meridian"
+STR_Desiro_Header               :British Rail "Desiro" family
 STR_DesiroCity_Header           :British Rail "Desiro City" family
 STR_Aventra_Header              :British Rail "Aventra" family
 STR_Electrostar_Header          :British Rail "Electrostar" family

@@ -58,8 +58,7 @@ switch(FEAT_TRAINS, SELF, sw_BR380_rear_rev, [STORE_TEMP(position_in_consist_fro
 
 // Shared reversed-role mapper based on mirrored consist vehicle type.
 // This keeps mixed 3-car/4-car unit order stable in reverse.
-switch(FEAT_TRAINS, SELF, sw_BR380_rev_from_mirror,
-[STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
+switch(FEAT_TRAINS, SELF, sw_BR380_rev_from_mirror,[STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
 	767: sw_BR380_front_rev;
 	768: sw_BR380_front_rev;
 	769: sw_BR380_middle_panto_rev;
