@@ -1,0 +1,527 @@
+spriteset(spriteset_BR350_Purchase, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_purchase(175, 25)
+}
+
+spriteset(spriteset_BR350a_LM, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 0)
+}
+
+spriteset(spriteset_BR350b_LM, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 25)
+}
+
+spriteset(spriteset_BR350c_LM, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 50)
+}
+
+spriteset(spriteset_BR350d_LM, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 75)
+}
+
+spriteset(spriteset_BR350a_LM_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(175, 0)
+}
+
+spriteset(spriteset_BR350b_LM_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(0, 25)
+}
+
+spriteset(spriteset_BR350c_LM_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(0, 50)
+}
+
+spriteset(spriteset_BR350d_LM_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(175, 75)
+}
+
+spriteset(spriteset_BR350a_SLinkCentral, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 100)
+}
+
+spriteset(spriteset_BR350b_SLinkCentral, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 125)
+}
+
+spriteset(spriteset_BR350c_SLinkCentral, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 150)
+}
+
+spriteset(spriteset_BR350d_SLinkCentral, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 175)
+}
+
+spriteset(spriteset_BR350a_SLinkCentral_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(175, 100)
+}
+
+spriteset(spriteset_BR350b_SLinkCentral_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(0, 125)
+}
+
+spriteset(spriteset_BR350c_SLinkCentral_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(0, 150)
+}
+
+spriteset(spriteset_BR350d_SLinkCentral_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(175, 175)
+}
+
+spriteset(spriteset_BR350a_TPE, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 200)
+}
+
+spriteset(spriteset_BR350b_TPE, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 225)
+}
+
+spriteset(spriteset_BR350c_TPE, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 250)
+}
+
+spriteset(spriteset_BR350d_TPE, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 275)
+}
+
+spriteset(spriteset_BR350a_TPE_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(175, 200)
+}
+
+spriteset(spriteset_BR350b_TPE_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(0, 225)
+}
+
+spriteset(spriteset_BR350c_TPE_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(0, 250)
+}
+
+spriteset(spriteset_BR350d_TPE_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(175, 275)
+}
+
+spriteset(spriteset_BR350a_LNWRSimple, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 300)
+}
+
+spriteset(spriteset_BR350b_LNWRSimple, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 325)
+}
+
+spriteset(spriteset_BR350c_LNWRSimple, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 350)
+}
+
+spriteset(spriteset_BR350d_LNWRSimple, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 375)
+}
+
+spriteset(spriteset_BR350a_LNWRSimple_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(175, 300)
+}
+
+spriteset(spriteset_BR350b_LNWRSimple_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(0, 325)
+}
+
+spriteset(spriteset_BR350c_LNWRSimple_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(0, 350)
+}
+
+spriteset(spriteset_BR350d_LNWRSimple_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(175, 375)
+}
+
+spriteset(spriteset_BR350a_LNWRFull, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 400)
+}
+
+spriteset(spriteset_BR350b_LNWRFull, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 425)
+}
+
+spriteset(spriteset_BR350c_LNWRFull, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 450)
+}
+
+spriteset(spriteset_BR350d_LNWRFull, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 475)
+}
+
+spriteset(spriteset_BR350a_LNWRFull_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(175, 400)
+}
+
+spriteset(spriteset_BR350b_LNWRFull_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(0, 425)
+}
+
+spriteset(spriteset_BR350c_LNWRFull_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(0, 450)
+}
+
+spriteset(spriteset_BR350d_LNWRFull_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(175, 475)
+}
+
+spriteset(spriteset_BR350a_LNWRUkraine, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 700)
+}
+
+spriteset(spriteset_BR350b_LNWRUkraine, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 725)
+}
+
+spriteset(spriteset_BR350c_LNWRUkraine, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 750)
+}
+
+spriteset(spriteset_BR350d_LNWRUkraine, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old(0, 775)
+}
+
+spriteset(spriteset_BR350a_LNWRUkraine_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(175, 700)
+}
+
+spriteset(spriteset_BR350b_LNWRUkraine_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(0, 725)
+}
+
+spriteset(spriteset_BR350c_LNWRUkraine_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(0, 750)
+}
+
+spriteset(spriteset_BR350d_LNWRUkraine_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+	template_train32px_old_reversed(175, 775)
+}
+
+// Subclass-specific Class 350 livery and push-pull switches.
+// Keeps each subclass on its intended livery subset while preserving mirror-based reversing.
+
+// Class 350/1: LM, Silverlink Central, LNWR Transitional, LNWR Full, LNWR Ukraine (no TPE)
+switch(FEAT_TRAINS, SELF, sw_BR350_1a, cargo_subtype) {
+	0: spriteset_BR350a_LM;
+	1: spriteset_BR350a_SLinkCentral;
+	2: spriteset_BR350a_LNWRSimple;
+	3: spriteset_BR350a_LNWRFull;
+	4: spriteset_BR350a_LNWRUkraine;
+	5: spriteset_BR350a_LNWRUkraine;
+	default: spriteset_BR350a_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_1b, cargo_subtype) {
+	0: spriteset_BR350b_LM;
+	1: spriteset_BR350b_SLinkCentral;
+	2: spriteset_BR350b_LNWRSimple;
+	3: spriteset_BR350b_LNWRFull;
+	4: spriteset_BR350b_LNWRUkraine;
+	5: spriteset_BR350b_LNWRUkraine;
+	default: spriteset_BR350b_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_1c, cargo_subtype) {
+	0: spriteset_BR350c_LM;
+	1: spriteset_BR350c_SLinkCentral;
+	2: spriteset_BR350c_LNWRSimple;
+	3: spriteset_BR350c_LNWRFull;
+	4: spriteset_BR350c_LNWRUkraine;
+	5: spriteset_BR350c_LNWRUkraine;
+	default: spriteset_BR350c_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_1d, cargo_subtype) {
+	0: spriteset_BR350d_LM;
+	1: spriteset_BR350d_SLinkCentral;
+	2: spriteset_BR350d_LNWRSimple;
+	3: spriteset_BR350d_LNWRFull;
+	4: spriteset_BR350d_LNWRUkraine;
+	5: spriteset_BR350d_LNWRUkraine;
+	default: spriteset_BR350d_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_1a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350a_LM_rev;
+	1: spriteset_BR350a_SLinkCentral_rev;
+	2: spriteset_BR350a_LNWRSimple_rev;
+	3: spriteset_BR350a_LNWRFull_rev;
+	4: spriteset_BR350a_LNWRUkraine_rev;
+	5: spriteset_BR350a_LNWRUkraine_rev;
+	default: spriteset_BR350a_LM_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_1b_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350b_LM_rev;
+	1: spriteset_BR350b_SLinkCentral_rev;
+	2: spriteset_BR350b_LNWRSimple_rev;
+	3: spriteset_BR350b_LNWRFull_rev;
+	4: spriteset_BR350b_LNWRUkraine_rev;
+	5: spriteset_BR350b_LNWRUkraine_rev;
+	default: spriteset_BR350b_LM_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_1c_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350c_LM_rev;
+	1: spriteset_BR350c_SLinkCentral_rev;
+	2: spriteset_BR350c_LNWRSimple_rev;
+	3: spriteset_BR350c_LNWRFull_rev;
+	4: spriteset_BR350c_LNWRUkraine_rev;
+	5: spriteset_BR350c_LNWRUkraine_rev;
+	default: spriteset_BR350c_LM_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_1d_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350d_LM_rev;
+	1: spriteset_BR350d_SLinkCentral_rev;
+	2: spriteset_BR350d_LNWRSimple_rev;
+	3: spriteset_BR350d_LNWRFull_rev;
+	4: spriteset_BR350d_LNWRUkraine_rev;
+	5: spriteset_BR350d_LNWRUkraine_rev;
+	default: spriteset_BR350d_LM_rev;
+}
+
+// Class 350/2: London Midland and LNWR Transitional only
+switch(FEAT_TRAINS, SELF, sw_BR350_2a, cargo_subtype) {
+	0: spriteset_BR350a_LM;
+	1: spriteset_BR350a_LNWRSimple;
+	2: spriteset_BR350a_LNWRSimple;
+	3: spriteset_BR350a_LNWRSimple;
+	default: spriteset_BR350a_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_2b, cargo_subtype) {
+	0: spriteset_BR350b_LM;
+	1: spriteset_BR350b_LNWRSimple;
+	2: spriteset_BR350b_LNWRSimple;
+	3: spriteset_BR350b_LNWRSimple;
+	default: spriteset_BR350b_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_2c, cargo_subtype) {
+	0: spriteset_BR350c_LM;
+	1: spriteset_BR350c_LNWRSimple;
+	2: spriteset_BR350c_LNWRSimple;
+	3: spriteset_BR350c_LNWRSimple;
+	default: spriteset_BR350c_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_2d, cargo_subtype) {
+	0: spriteset_BR350d_LM;
+	1: spriteset_BR350d_LNWRSimple;
+	2: spriteset_BR350d_LNWRSimple;
+	3: spriteset_BR350d_LNWRSimple;
+	default: spriteset_BR350d_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_2a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350a_LM_rev;
+	1: spriteset_BR350a_LNWRSimple_rev;
+	2: spriteset_BR350a_LNWRSimple_rev;
+	3: spriteset_BR350a_LNWRSimple_rev;
+	default: spriteset_BR350a_LM_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_2b_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350b_LM_rev;
+	1: spriteset_BR350b_LNWRSimple_rev;
+	2: spriteset_BR350b_LNWRSimple_rev;
+	3: spriteset_BR350b_LNWRSimple_rev;
+	default: spriteset_BR350b_LM_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_2c_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350c_LM_rev;
+	1: spriteset_BR350c_LNWRSimple_rev;
+	2: spriteset_BR350c_LNWRSimple_rev;
+	3: spriteset_BR350c_LNWRSimple_rev;
+	default: spriteset_BR350c_LM_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_2d_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350d_LM_rev;
+	1: spriteset_BR350d_LNWRSimple_rev;
+	2: spriteset_BR350d_LNWRSimple_rev;
+	3: spriteset_BR350d_LNWRSimple_rev;
+	default: spriteset_BR350d_LM_rev;
+}
+
+// Class 350/3 and 350/4: London Midland, TPE, LNWR Full
+switch(FEAT_TRAINS, SELF, sw_BR350_34a, cargo_subtype) {
+	0: spriteset_BR350a_LM;
+	1: spriteset_BR350a_TPE;
+	2: spriteset_BR350a_LNWRFull;
+	3: spriteset_BR350a_LNWRFull;
+	4: spriteset_BR350a_LNWRFull;
+	default: spriteset_BR350a_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_34b, cargo_subtype) {
+	0: spriteset_BR350b_LM;
+	1: spriteset_BR350b_TPE;
+	2: spriteset_BR350b_LNWRFull;
+	3: spriteset_BR350b_LNWRFull;
+	4: spriteset_BR350b_LNWRFull;
+	default: spriteset_BR350b_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_34c, cargo_subtype) {
+	0: spriteset_BR350c_LM;
+	1: spriteset_BR350c_TPE;
+	2: spriteset_BR350c_LNWRFull;
+	3: spriteset_BR350c_LNWRFull;
+	4: spriteset_BR350c_LNWRFull;
+	default: spriteset_BR350c_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_34d, cargo_subtype) {
+	0: spriteset_BR350d_LM;
+	1: spriteset_BR350d_TPE;
+	2: spriteset_BR350d_LNWRFull;
+	3: spriteset_BR350d_LNWRFull;
+	4: spriteset_BR350d_LNWRFull;
+	default: spriteset_BR350d_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_34a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350a_LM_rev;
+	1: spriteset_BR350a_TPE_rev;
+	2: spriteset_BR350a_LNWRFull_rev;
+	3: spriteset_BR350a_LNWRFull_rev;
+	4: spriteset_BR350a_LNWRFull_rev;
+	default: spriteset_BR350a_LM_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_34b_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350b_LM_rev;
+	1: spriteset_BR350b_TPE_rev;
+	2: spriteset_BR350b_LNWRFull_rev;
+	3: spriteset_BR350b_LNWRFull_rev;
+	4: spriteset_BR350b_LNWRFull_rev;
+	default: spriteset_BR350b_LM_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_34c_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350c_LM_rev;
+	1: spriteset_BR350c_TPE_rev;
+	2: spriteset_BR350c_LNWRFull_rev;
+	3: spriteset_BR350c_LNWRFull_rev;
+	4: spriteset_BR350c_LNWRFull_rev;
+	default: spriteset_BR350c_LM_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_34d_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350d_LM_rev;
+	1: spriteset_BR350d_TPE_rev;
+	2: spriteset_BR350d_LNWRFull_rev;
+	3: spriteset_BR350d_LNWRFull_rev;
+	4: spriteset_BR350d_LNWRFull_rev;
+	default: spriteset_BR350d_LM_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_1_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_LondonMidland);
+	1: return string(str_SilverlinkCentral);
+	2: return string(str_LNWRSimple);
+	3: return string(str_LNWR);
+	4: return string(STR_LIVERY, string(str_LNWR), string(str_special_Ukraine));
+	return CB_RESULT_NO_TEXT;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_2_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_LondonMidland);
+	1: return string(str_LNWRSimple);
+	return CB_RESULT_NO_TEXT;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_34_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_LondonMidland);
+	1: return string(str_TPE);
+	2: return string(str_LNWR);
+	return CB_RESULT_NO_TEXT;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_subclass_rev_from_mirror, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
+	774: sw_BR350_1a_rev;
+	775: sw_BR350_2a_rev;
+	776: sw_BR350_34a_rev;
+	777: sw_BR350_1b_rev;
+	778: sw_BR350_1c_rev;
+	779: sw_BR350_1d_rev;
+	780: sw_BR350_2b_rev;
+	781: sw_BR350_2c_rev;
+	782: sw_BR350_2d_rev;
+	783: sw_BR350_34b_rev;
+	784: sw_BR350_34c_rev;
+	785: sw_BR350_34d_rev;
+	2774: sw_BR350_1a_rev;
+	2775: sw_BR350_2a_rev;
+	2776: sw_BR350_34a_rev;
+	2777: sw_BR350_1b_rev;
+	2778: sw_BR350_1c_rev;
+	2779: sw_BR350_1d_rev;
+	2780: sw_BR350_2b_rev;
+	2781: sw_BR350_2c_rev;
+	2782: sw_BR350_2d_rev;
+	2783: sw_BR350_34b_rev;
+	2784: sw_BR350_34c_rev;
+	2785: sw_BR350_34d_rev;
+	default: sw_BR350_1a_rev;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_1a_pushpull, vehicle_is_reversed) {
+	0: sw_BR350_1a;
+	1: sw_BR350_subclass_rev_from_mirror;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_1b_pushpull, vehicle_is_reversed) {
+	0: sw_BR350_1b;
+	1: sw_BR350_subclass_rev_from_mirror;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_1c_pushpull, vehicle_is_reversed) {
+	0: sw_BR350_1c;
+	1: sw_BR350_subclass_rev_from_mirror;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_1d_pushpull, vehicle_is_reversed) {
+	0: sw_BR350_1d;
+	1: sw_BR350_subclass_rev_from_mirror;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_2a_pushpull, vehicle_is_reversed) {
+	0: sw_BR350_2a;
+	1: sw_BR350_subclass_rev_from_mirror;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_2b_pushpull, vehicle_is_reversed) {
+	0: sw_BR350_2b;
+	1: sw_BR350_subclass_rev_from_mirror;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_2c_pushpull, vehicle_is_reversed) {
+	0: sw_BR350_2c;
+	1: sw_BR350_subclass_rev_from_mirror;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_2d_pushpull, vehicle_is_reversed) {
+	0: sw_BR350_2d;
+	1: sw_BR350_subclass_rev_from_mirror;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_34a_pushpull, vehicle_is_reversed) {
+	0: sw_BR350_34a;
+	1: sw_BR350_subclass_rev_from_mirror;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_34b_pushpull, vehicle_is_reversed) {
+	0: sw_BR350_34b;
+	1: sw_BR350_subclass_rev_from_mirror;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_34c_pushpull, vehicle_is_reversed) {
+	0: sw_BR350_34c;
+	1: sw_BR350_subclass_rev_from_mirror;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_34d_pushpull, vehicle_is_reversed) {
+	0: sw_BR350_34d;
+	1: sw_BR350_subclass_rev_from_mirror;
+}
