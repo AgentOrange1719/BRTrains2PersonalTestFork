@@ -50,8 +50,8 @@ STR_BR_701_5                            :BR Class 701/5 "Aventra" (5-Car)
 STR_BR_707                              :BR Class 707 "Desiro City" (5-Car)
 
 STR_BR_710_1                            :BR Class 710/1 "Aventra" (4-Car)
-STR_BR_710_2_4CAR                       :BR Class 710/2 "Aventra" (4-Car, Dual Voltage)
-STR_BR_710_3_5CAR                       :BR Class 710/3 "Aventra" (5-Car, Dual Voltage)
+STR_BR_710_2_4CAR                       :BR Class 710/2 "Aventra" (4-Car)
+STR_BR_710_2_5CAR                       :BR Class 710/2 "Aventra" (5-Car)
 
 STR_BR_720                              :BR Class 720 "Aventra" (5-Car)
 STR_BR_720_1                            :BR Class 720/1 "Aventra" (10-Car)
@@ -810,10 +810,14 @@ str_BR334_usage					:Suburban Passenger
 str_BR334_eos					:---
 str_BR334_liveries				:"Carmine and Cream", ScotRail Saltire
 
-STR_NAME_BR350					:BR Class 350 "Desiro" (4-car)
+STR_NAME_BR350_1				:BR Class 350/1 "Desiro" (4-car)
+STR_NAME_BR350_2				:BR Class 350/2 "Desiro" (4-car)
+STR_NAME_BR350_34			:BR Class 350/3/4 "Desiro" (4-car)
 str_BR350_usage					:Passenger
 str_BR350_eos					:---
-str_BR350_liveries				:London Midland
+str_BR350_1_liveries			:London Midland, Silverlink/Central, LNWR Transitional, LNWR, LNWR (Eurovision Ukraine)
+str_BR350_2_liveries			:London Midland, LNWR Transitional
+str_BR350_34_liveries			:London Midland, TransPennine Express, LNWR
 
 STR_NAME_ElectroTest			:TEST UNIT
 str_ElectroTest_usage			:
@@ -1129,7 +1133,7 @@ str_BR700_usage					:Regional Passenger
 str_BR700_eos					:---
 str_BR700_liveries				:Siemens Demonstrator, Govia Thameslink
 
-STR_NAME_BR700_2				:BR Class 700/1 "Desiro City" (12-car)
+STR_NAME_BR700_2				:BR Class 700/1 "Desiro City" (10-car)
 
 STR_NAME_BR707					:BR Class 707 "Desiro City"
 str_BR707_usage					:Regional Passenger
