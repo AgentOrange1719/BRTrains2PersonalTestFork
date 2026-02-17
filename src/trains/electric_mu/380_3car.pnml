@@ -65,7 +65,7 @@ item(FEAT_TRAINS, item_BR380_3car, 767) {
 	}
 	
 	graphics {
-		default: sw_BR380_3car_front;
+		default: sw_BR380_pushpull;
 		purchase: spriteset_BR380_Purchase;
 		cargo_subtype_text: sw_BR380_cargo_subtype_text;
 		articulated_part: sw_BR380_3car_articulated;
@@ -113,7 +113,7 @@ item(FEAT_TRAINS, item_BR380_3car_b, 769) {
 	}
 
 	graphics {
-		default: sw_BR380_3car_middle_panto;
+		default: sw_BR380_pushpull;
 		can_attach_wagon: sw_BR380_3car_can_attach_wagon;
 		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
 		cargo_capacity: return(63 * param_pax);
@@ -154,9 +154,11 @@ item(FEAT_TRAINS, item_BR380_3car_c, 770) {
 	}
 
 	graphics {
-		default: sw_BR380_3car_rear;
+		default: sw_BR380_pushpull;
 		can_attach_wagon: sw_BR380_3car_can_attach_wagon;
 		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
 		cargo_capacity: return(64 * param_pax);
 	}
 }
+
+
