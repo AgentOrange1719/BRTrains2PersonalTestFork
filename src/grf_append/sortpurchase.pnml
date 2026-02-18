@@ -157,9 +157,9 @@ sort(FEAT_TRAINS, [
    item_BR350_1,
    item_BR350_2,
    item_BR350_34,
- item_BR360_1,
- item_BR360_2_4car,
- item_BR360_2_5car,
+   item_BR360_1,
+   item_BR360_2_4car,
+   item_BR360_2_5car,
  item_BR91, // Intercity 225
  item_BluePullman_6Car,
  item_BluePullman_8Car,
