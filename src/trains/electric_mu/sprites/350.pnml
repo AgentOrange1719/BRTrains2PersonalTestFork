@@ -1,196 +1,196 @@
-spriteset(spriteset_BR350_Purchase, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350_Purchase, "gfx/EMU/350_450.png") {
 	template_purchase(175, 25)
 }
 
-spriteset(spriteset_BR350a_LM, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350a_LM, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 0)
 }
 
-spriteset(spriteset_BR350b_LM, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350b_LM, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 25)
 }
 
-spriteset(spriteset_BR350c_LM, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350c_LM, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 50)
 }
 
-spriteset(spriteset_BR350d_LM, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350d_LM, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 75)
 }
 
-spriteset(spriteset_BR350a_LM_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350a_LM_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(175, 0)
 }
 
-spriteset(spriteset_BR350b_LM_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350b_LM_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(0, 25)
 }
 
-spriteset(spriteset_BR350c_LM_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350c_LM_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(0, 50)
 }
 
-spriteset(spriteset_BR350d_LM_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350d_LM_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(175, 75)
 }
 
-spriteset(spriteset_BR350a_SLinkCentral, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350a_SLinkCentral, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 100)
 }
 
-spriteset(spriteset_BR350b_SLinkCentral, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350b_SLinkCentral, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 125)
 }
 
-spriteset(spriteset_BR350c_SLinkCentral, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350c_SLinkCentral, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 150)
 }
 
-spriteset(spriteset_BR350d_SLinkCentral, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350d_SLinkCentral, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 175)
 }
 
-spriteset(spriteset_BR350a_SLinkCentral_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350a_SLinkCentral_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(175, 100)
 }
 
-spriteset(spriteset_BR350b_SLinkCentral_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350b_SLinkCentral_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(0, 125)
 }
 
-spriteset(spriteset_BR350c_SLinkCentral_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350c_SLinkCentral_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(0, 150)
 }
 
-spriteset(spriteset_BR350d_SLinkCentral_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350d_SLinkCentral_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(175, 175)
 }
 
-spriteset(spriteset_BR350a_TPE, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350a_TPE, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 200)
 }
 
-spriteset(spriteset_BR350b_TPE, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350b_TPE, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 225)
 }
 
-spriteset(spriteset_BR350c_TPE, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350c_TPE, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 250)
 }
 
-spriteset(spriteset_BR350d_TPE, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350d_TPE, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 275)
 }
 
-spriteset(spriteset_BR350a_TPE_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350a_TPE_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(175, 200)
 }
 
-spriteset(spriteset_BR350b_TPE_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350b_TPE_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(0, 225)
 }
 
-spriteset(spriteset_BR350c_TPE_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350c_TPE_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(0, 250)
 }
 
-spriteset(spriteset_BR350d_TPE_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350d_TPE_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(175, 275)
 }
 
-spriteset(spriteset_BR350a_LNWRSimple, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350a_LNWRSimple, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 300)
 }
 
-spriteset(spriteset_BR350b_LNWRSimple, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350b_LNWRSimple, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 325)
 }
 
-spriteset(spriteset_BR350c_LNWRSimple, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350c_LNWRSimple, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 350)
 }
 
-spriteset(spriteset_BR350d_LNWRSimple, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350d_LNWRSimple, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 375)
 }
 
-spriteset(spriteset_BR350a_LNWRSimple_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350a_LNWRSimple_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(175, 300)
 }
 
-spriteset(spriteset_BR350b_LNWRSimple_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350b_LNWRSimple_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(0, 325)
 }
 
-spriteset(spriteset_BR350c_LNWRSimple_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350c_LNWRSimple_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(0, 350)
 }
 
-spriteset(spriteset_BR350d_LNWRSimple_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350d_LNWRSimple_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(175, 375)
 }
 
-spriteset(spriteset_BR350a_LNWRFull, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350a_LNWRFull, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 400)
 }
 
-spriteset(spriteset_BR350b_LNWRFull, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350b_LNWRFull, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 425)
 }
 
-spriteset(spriteset_BR350c_LNWRFull, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350c_LNWRFull, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 450)
 }
 
-spriteset(spriteset_BR350d_LNWRFull, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350d_LNWRFull, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 475)
 }
 
-spriteset(spriteset_BR350a_LNWRFull_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350a_LNWRFull_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(175, 400)
 }
 
-spriteset(spriteset_BR350b_LNWRFull_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350b_LNWRFull_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(0, 425)
 }
 
-spriteset(spriteset_BR350c_LNWRFull_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350c_LNWRFull_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(0, 450)
 }
 
-spriteset(spriteset_BR350d_LNWRFull_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350d_LNWRFull_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(175, 475)
 }
 
-spriteset(spriteset_BR350a_LNWRUkraine, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350a_LNWRUkraine, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 700)
 }
 
-spriteset(spriteset_BR350b_LNWRUkraine, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350b_LNWRUkraine, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 725)
 }
 
-spriteset(spriteset_BR350c_LNWRUkraine, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350c_LNWRUkraine, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 750)
 }
 
-spriteset(spriteset_BR350d_LNWRUkraine, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350d_LNWRUkraine, "gfx/EMU/350_450.png") {
 	template_train32px_old(0, 775)
 }
 
-spriteset(spriteset_BR350a_LNWRUkraine_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350a_LNWRUkraine_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(175, 700)
 }
 
-spriteset(spriteset_BR350b_LNWRUkraine_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350b_LNWRUkraine_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(0, 725)
 }
 
-spriteset(spriteset_BR350c_LNWRUkraine_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350c_LNWRUkraine_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(0, 750)
 }
 
-spriteset(spriteset_BR350d_LNWRUkraine_rev, "gfx/BR350_450_Desiro_pushpull.png") {
+spriteset(spriteset_BR350d_LNWRUkraine_rev, "gfx/EMU/350_450.png") {
 	template_train32px_old_reversed(175, 775)
 }
 
