@@ -1,0 +1,12 @@
+Changes from BRTrains2 Baseline as of 15 Feb 2026
+
+Reworked Class 350 for multiple working (push-pull).
+Split Class 350 into /1, /2, and /3/4 subclasses with appropriate livery restrictions and introduction dates.
+Made Class 350/1 dual voltage (25kv AC/750v DC).
+Reworked Class 380 for multiple working.
+Reworked Class 357 for multiple working.
+Split Class 357 into /0, /2, and /3 subclasses. Livery restrictions TBD.
+Adjusted pax capacity for Class 357/3 to reflect 2+2 seating, verses 3+2 for rest of class.
+Added Variant Header "Desiro" and grouped 350 and 380 into it. 
+Added string to explain multiple working restrictions in purchase menu. Currently only option is "Within class", as all reworked units currently only work within class.
+Moved Class 357 panto to 3rd car counting from A cab
