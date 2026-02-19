@@ -1,0 +1,109 @@
+// Class 185 sprite groups and multiple-working helpers.
+
+spriteset(spriteset_BR185_Purchase, "gfx/DMU/185.png") { template_purchase(0, 0) }
+
+// Spritegroup definitions. Grouped by livery, with reversed sprites for multiple working.
+// Only cab cars use reversed sprites. Middle car points to existing sprite, as reversed template is enough. If a livery is updated/redrawn to be asymetric, change reversed 185b sprite definitions accordingly.
+// First Dynamic livery sprites (A/B/C plus reversed).
+spriteset(spriteset_BR185a_FirstDynamic, "gfx/DMU/185.png") { template_train32px_old(0, 13) }
+spriteset(spriteset_BR185b_FirstDynamic, "gfx/DMU/185.png") { template_train32px_old(0, 88) }
+spriteset(spriteset_BR185c_FirstDynamic, "gfx/DMU/185.png") { template_train32px_old(0, 163) }
+spriteset(spriteset_BR185a_FirstDynamic_rev, "gfx/DMU/185.png") { template_train32px_old_reversed(175, 13) }
+spriteset(spriteset_BR185b_FirstDynamic_rev, "gfx/DMU/185.png") { template_train32px_old_reversed(0, 88) }
+spriteset(spriteset_BR185c_FirstDynamic_rev, "gfx/DMU/185.png") { template_train32px_old_reversed(175, 163) }
+
+// First Group livery sprites (A/B/C plus reversed).
+spriteset(spriteset_BR185a_FirstGroup, "gfx/DMU/185.png") { template_train32px_old(0, 38) }
+spriteset(spriteset_BR185b_FirstGroup, "gfx/DMU/185.png") { template_train32px_old(0, 113) }
+spriteset(spriteset_BR185c_FirstGroup, "gfx/DMU/185.png") { template_train32px_old(0, 188) }
+spriteset(spriteset_BR185a_FirstGroup_rev, "gfx/DMU/185.png") { template_train32px_old_reversed(175, 38) }
+spriteset(spriteset_BR185b_FirstGroup_rev, "gfx/DMU/185.png") { template_train32px_old_reversed(0, 113) }
+spriteset(spriteset_BR185c_FirstGroup_rev, "gfx/DMU/185.png") { template_train32px_old_reversed(175, 188) }
+
+// First TPE Geometric livery sprites (A/B/C plus reversed).
+spriteset(spriteset_BR185a_FirstTPEGeometric, "gfx/DMU/185.png") { template_train32px_old(0, 63) }
+spriteset(spriteset_BR185b_FirstTPEGeometric, "gfx/DMU/185.png") { template_train32px_old(0, 138) }
+spriteset(spriteset_BR185c_FirstTPEGeometric, "gfx/DMU/185.png") { template_train32px_old(0, 213) }
+spriteset(spriteset_BR185a_FirstTPEGeometric_rev, "gfx/DMU/185.png") { template_train32px_old_reversed(175, 63) }
+spriteset(spriteset_BR185b_FirstTPEGeometric_rev, "gfx/DMU/185.png") { template_train32px_old_reversed(0, 138) }
+spriteset(spriteset_BR185c_FirstTPEGeometric_rev, "gfx/DMU/185.png") { template_train32px_old_reversed(175, 213) }
+
+// Stage 1: Choose livery based on cargo subtype.
+switch(FEAT_TRAINS, SELF, sw_BR185a, cargo_subtype) {
+	0: spriteset_BR185a_FirstDynamic;
+	1: spriteset_BR185a_FirstGroup;
+	2: spriteset_BR185a_FirstTPEGeometric;
+	default: spriteset_BR185a_FirstDynamic;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185b, cargo_subtype) {
+	0: spriteset_BR185b_FirstDynamic;
+	1: spriteset_BR185b_FirstGroup;
+	2: spriteset_BR185b_FirstTPEGeometric;
+	default: spriteset_BR185b_FirstDynamic;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185c, cargo_subtype) {
+	0: spriteset_BR185c_FirstDynamic;
+	1: spriteset_BR185c_FirstGroup;
+	2: spriteset_BR185c_FirstTPEGeometric;
+	default: spriteset_BR185c_FirstDynamic;
+}
+
+// Stage 2: when reversing, grab the mirrored cargo subtype so the sprite remains on the same livery.
+switch(FEAT_TRAINS, SELF, sw_BR185a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR185a_FirstDynamic_rev;
+	1: spriteset_BR185a_FirstGroup_rev;
+	2: spriteset_BR185a_FirstTPEGeometric_rev;
+	default: spriteset_BR185a_FirstDynamic_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185b_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR185b_FirstDynamic_rev;
+	1: spriteset_BR185b_FirstGroup_rev;
+	2: spriteset_BR185b_FirstTPEGeometric_rev;
+	default: spriteset_BR185b_FirstDynamic_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185c_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR185c_FirstDynamic_rev;
+	1: spriteset_BR185c_FirstGroup_rev;
+	2: spriteset_BR185c_FirstTPEGeometric_rev;
+	default: spriteset_BR185c_FirstDynamic_rev;
+}
+
+// Provide text for the available liveries.
+switch(FEAT_TRAINS,SELF,sw_BR185_cargo_subtype_text,cargo_subtype){
+	0:	return string(str_FirstDynamic);
+	1:	return string(str_FirstGroup);
+	2:	return string(str_FirstTPEGeometric);
+	return CB_RESULT_NO_TEXT;
+}
+
+// Stage 3: map every vehicle_type_id to the stationery car role (front/middle/rear).
+switch(FEAT_TRAINS, SELF, sw_BR185_role_from_vehicle, vehicle_type_id) {
+	70: sw_BR185a;
+	71: sw_BR185b;
+	72: sw_BR185c;
+	2070: sw_BR185a;
+	2071: sw_BR185b;
+	2072: sw_BR185c;
+	default: sw_BR185a;
+}
+
+// Stage 4: use the mirrored vehicle_type_id when the parent is reversed so the mirrored car keeps its proper sprite.
+switch(FEAT_TRAINS, SELF, sw_BR185_rev_from_mirror, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
+	70: sw_BR185a_rev;
+	71: sw_BR185b_rev;
+	72: sw_BR185c_rev;
+	2070: sw_BR185a_rev;
+	2071: sw_BR185b_rev;
+	2072: sw_BR185c_rev;
+	default: sw_BR185a_rev;
+}
+
+// Final selector: use the standard role switch unless the entire consist is reversed.
+switch(FEAT_TRAINS, PARENT, sw_BR185_pushpull, vehicle_is_reversed) {
+	0: sw_BR185_role_from_vehicle;
+	1: sw_BR185_rev_from_mirror;
+}
