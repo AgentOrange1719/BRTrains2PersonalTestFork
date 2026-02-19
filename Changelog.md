@@ -2,9 +2,17 @@ Changes from BRTrains2 Baseline as of 15 Feb 2026
 
 
 
+0100 19/02/2026
+
+Added Class 185multiple working and reversing
+
+* Reworked Class 185 file into new file structure with split vehicle ID and spritegroup/reversing code files
+* Moved Class 185 to Desire group. 
+* Desiro family has now been completely moved to new file structure and has reversing sprites with realistic multiple working restrictions
+
+
+
 2330 17/02/2026
-
-
 
 Added class 444/450 multiple working and reversing
 
@@ -15,8 +23,6 @@ Added class 444/450 multiple working and reversing
 
 
 2000 17/02/2026
-
-
 
 Class 360 has been consolidated into a single definition file with updated comments and car-role structure.
 
