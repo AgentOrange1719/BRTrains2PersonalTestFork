@@ -23,7 +23,95 @@ switch(FEAT_TRAINS, SELF, sw_BR350_can_attach_wagon, vehicle_type_id) {
 	item_BR350_1: return CB_RESULT_ATTACH_ALLOW;
 	item_BR350_2: return CB_RESULT_ATTACH_ALLOW;
 	item_BR350_34: return CB_RESULT_ATTACH_ALLOW;
+	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
+}
+
+// Translator handling for Class 350:
+// Disable output if a translator wagon exists anywhere in the parent consist.
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_power_with_translator, count_veh_id(item_BRMk2_Translator)) {
+	0: return 2682;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_te_with_translator, count_veh_id(item_BRMk2_Translator)) {
+	0: return 77; // 0.3 * 255
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_capacity_50_with_translator, count_veh_id(item_BRMk2_Translator)) {
+	0: return (50 * param_pax);
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_capacity_90_with_translator, count_veh_id(item_BRMk2_Translator)) {
+	0: return (90 * param_pax);
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_capacity_62_with_translator, count_veh_id(item_BRMk2_Translator)) {
+	0: return (62 * param_pax);
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_capacity_60_with_translator, count_veh_id(item_BRMk2_Translator)) {
+	0: return (60 * param_pax);
+	return 0;
+}
+
+// Mute Class 350 custom sounds when a translator wagon is present in the consist.
+switch(FEAT_TRAINS, SELF, sw_sound_electric_350_muted, getbits(extra_callback_info1, 0, 8)) {
+	SOUND_EVENT_BREAKDOWN: SOUND_BREAKDOWN_TRAIN_SHIP;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_sound_electric_350_with_translator, count_veh_id(item_BRMk2_Translator)) {
+	0: sw_sound_electric_350;
+	sw_sound_electric_350_muted;
+}
+
+// Disable Class 350 electric visual effects when a translator wagon is present.
+switch(FEAT_TRAINS, PARENT, sw_BR350_visual_effect_with_translator, count_veh_id(item_BRMk2_Translator)) {
+	0: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+// Class 350/1: choose visual effect by available power source.
+// If both are present, overhead takes priority (pantograph sparks).
+switch(FEAT_TRAINS, PARENT, sw_BR350_1_visual_effect_by_railtype_third, tile_powers_railtype("THIRD")) {
+	1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_1_visual_effect_by_railtype, tile_powers_railtype("ELRL")) {
+	1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	sw_BR350_1_visual_effect_by_railtype_third;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_1_visual_effect_with_translator, count_veh_id(item_BRMk2_Translator)) {
+	0: sw_BR350_1_visual_effect_by_railtype;
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+// Disable the explicit electric spark effect callback when translator is present.
+switch(FEAT_TRAINS, PARENT, sw_BR350_create_effect_with_translator, count_veh_id(item_BRMk2_Translator)) {
+	0: electric_create_visual_effect;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_1_create_effect_by_railtype_third, tile_powers_railtype("THIRD")) {
+	1: electric_create_visual_effect_SAA3;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_1_create_effect_by_railtype, tile_powers_railtype("ELRL")) {
+	1: electric_create_visual_effect;
+	sw_BR350_1_create_effect_by_railtype_third;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR350_1_create_effect_with_translator, count_veh_id(item_BRMk2_Translator)) {
+	0: sw_BR350_1_create_effect_by_railtype;
+	return 0;
 }
 
 // Class 350/1
@@ -70,9 +158,11 @@ item(FEAT_TRAINS, item_BR350_1, 774) {
 		default: sw_BR350_pushpull;
 		purchase: spriteset_BR350_Purchase;
 		colour_mapping: return PALETTE_CC_FIRST;
-		create_effect: electric_create_visual_effect;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(50 * param_pax);
+		create_effect: sw_BR350_1_create_effect_with_translator;
+				sound_effect: sw_sound_electric_350_with_translator;
+		power: sw_BR350_power_with_translator;
+		tractive_effort_coefficient: sw_BR350_te_with_translator;
+		cargo_capacity: sw_BR350_capacity_50_with_translator;
 		cost_factor: return(GetAdjustedCost(42));
 		running_cost_factor: return(GetAdjustedCost(38));
 	}
@@ -120,11 +210,14 @@ item(FEAT_TRAINS, item_BR350_2, 775) {
 		cargo_subtype_text: sw_BR350_2_cargo_subtype_text;
 		articulated_part: sw_articulated_BR350_2;
 		default: sw_BR350_pushpull;
+		visual_effect_and_powered: sw_BR350_1_visual_effect_with_translator;
 		purchase: spriteset_BR350_Purchase;
 		colour_mapping: return PALETTE_CC_FIRST;
-		create_effect: electric_create_visual_effect;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(90 * param_pax);
+		create_effect: sw_BR350_create_effect_with_translator;
+		sound_effect: sw_sound_electric_350_with_translator;
+		power: sw_BR350_power_with_translator;
+		tractive_effort_coefficient: sw_BR350_te_with_translator;
+		cargo_capacity: sw_BR350_capacity_90_with_translator;
 		cost_factor: return(GetAdjustedCost(42));
 		running_cost_factor: return(GetAdjustedCost(38));
 	}
@@ -172,11 +265,14 @@ item(FEAT_TRAINS, item_BR350_34, 776) {
 		cargo_subtype_text: sw_BR350_34_cargo_subtype_text;
 		articulated_part: sw_articulated_BR350_34;
 		default: sw_BR350_pushpull;
+		visual_effect_and_powered: sw_BR350_1_visual_effect_with_translator;
 		purchase: spriteset_BR350_Purchase;
 		colour_mapping: return PALETTE_CC_FIRST;
-		create_effect: electric_create_visual_effect;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(50 * param_pax);
+		create_effect: sw_BR350_create_effect_with_translator;
+		sound_effect: sw_sound_electric_350_with_translator;
+		power: sw_BR350_power_with_translator;
+		tractive_effort_coefficient: sw_BR350_te_with_translator;
+		cargo_capacity: sw_BR350_capacity_50_with_translator;
 		cost_factor: return(GetAdjustedCost(42));
 		running_cost_factor: return(GetAdjustedCost(38));
 	}
@@ -221,9 +317,9 @@ item(FEAT_TRAINS, item_BR350_1_b, 777) {
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		default: sw_BR350_pushpull;
-		colour_mapping: return PALETTE_CC_FIRST;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(62 * param_pax);
+				colour_mapping: return PALETTE_CC_FIRST;
+		sound_effect: sw_sound_electric_350_with_translator;
+		cargo_capacity: sw_BR350_capacity_62_with_translator;
 	}
 }
 
@@ -264,9 +360,9 @@ item(FEAT_TRAINS, item_BR350_1_c, 778) {
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		default: sw_BR350_pushpull;
-		colour_mapping: return PALETTE_CC_FIRST;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(60 * param_pax);
+				colour_mapping: return PALETTE_CC_FIRST;
+		sound_effect: sw_sound_electric_350_with_translator;
+		cargo_capacity: sw_BR350_capacity_60_with_translator;
 	}
 }
 
@@ -307,9 +403,9 @@ item(FEAT_TRAINS, item_BR350_1_d, 779) {
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		default: sw_BR350_pushpull;
-		colour_mapping: return PALETTE_CC_FIRST;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(60 * param_pax);
+				colour_mapping: return PALETTE_CC_FIRST;
+		sound_effect: sw_sound_electric_350_with_translator;
+		cargo_capacity: sw_BR350_capacity_60_with_translator;
 	}
 }
 
@@ -352,9 +448,10 @@ item(FEAT_TRAINS, item_BR350_2_b, 780) {
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		default: sw_BR350_pushpull;
+		visual_effect_and_powered: sw_BR350_visual_effect_with_translator;
 		colour_mapping: return PALETTE_CC_FIRST;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(62 * param_pax);
+		sound_effect: sw_sound_electric_350_with_translator;
+		cargo_capacity: sw_BR350_capacity_62_with_translator;
 	}
 }
 
@@ -395,9 +492,10 @@ item(FEAT_TRAINS, item_BR350_2_c, 781) {
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		default: sw_BR350_pushpull;
+		visual_effect_and_powered: sw_BR350_visual_effect_with_translator;
 		colour_mapping: return PALETTE_CC_FIRST;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(60 * param_pax);
+		sound_effect: sw_sound_electric_350_with_translator;
+		cargo_capacity: sw_BR350_capacity_60_with_translator;
 	}
 }
 
@@ -438,9 +536,10 @@ item(FEAT_TRAINS, item_BR350_2_d, 782) {
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		default: sw_BR350_pushpull;
+		visual_effect_and_powered: sw_BR350_visual_effect_with_translator;
 		colour_mapping: return PALETTE_CC_FIRST;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(60 * param_pax);
+		sound_effect: sw_sound_electric_350_with_translator;
+		cargo_capacity: sw_BR350_capacity_60_with_translator;
 	}
 }
 
@@ -483,9 +582,10 @@ item(FEAT_TRAINS, item_BR350_34_b, 783) {
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		default: sw_BR350_pushpull;
+		visual_effect_and_powered: sw_BR350_visual_effect_with_translator;
 		colour_mapping: return PALETTE_CC_FIRST;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(62 * param_pax);
+		sound_effect: sw_sound_electric_350_with_translator;
+		cargo_capacity: sw_BR350_capacity_62_with_translator;
 	}
 }
 
@@ -526,9 +626,10 @@ item(FEAT_TRAINS, item_BR350_34_c, 784) {
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		default: sw_BR350_pushpull;
+		visual_effect_and_powered: sw_BR350_visual_effect_with_translator;
 		colour_mapping: return PALETTE_CC_FIRST;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(60 * param_pax);
+		sound_effect: sw_sound_electric_350_with_translator;
+		cargo_capacity: sw_BR350_capacity_60_with_translator;
 	}
 }
 
@@ -569,9 +670,14 @@ item(FEAT_TRAINS, item_BR350_34_d, 785) {
 	graphics {
 		can_attach_wagon: sw_BR350_can_attach_wagon;
 		default: sw_BR350_pushpull;
+		visual_effect_and_powered: sw_BR350_visual_effect_with_translator;
 		colour_mapping: return PALETTE_CC_FIRST;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(60 * param_pax);
+		sound_effect: sw_sound_electric_350_with_translator;
+		cargo_capacity: sw_BR350_capacity_60_with_translator;
 	}
 }
+
+
+
+
 

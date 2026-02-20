@@ -328,6 +328,7 @@ header_BRMk2,
     item_BRMk2_Late_FO,
     item_BRMk2_BSO,
     item_BRMk2_BFO,
+    item_BRMk2_Translator,
     item_BRMk2_Buffet,
 header_BRMk3,
     item_BRMk3DVT,
@@ -352,3 +353,4 @@ header_BRMk4,
  item_BR438_3,
  item_BR438_4,
  ]);
+
