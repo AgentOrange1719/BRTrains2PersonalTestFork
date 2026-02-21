@@ -1,0 +1,11 @@
+// Shared train parameter switches.
+// Keep reusable, cross-folder parameter callbacks here so they are loaded
+// before any unit files that reference them.
+
+// BR80x family speed profile:
+// param_max_speed = 0 -> 125 mph service speed
+// param_max_speed = 1 -> 140 mph design speed
+switch(FEAT_TRAINS, SELF, switch_BR800_speed, param_max_speed) {
+	0: 201;
+	1: 225;
+}
