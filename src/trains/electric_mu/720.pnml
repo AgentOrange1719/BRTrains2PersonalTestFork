@@ -1,49 +1,130 @@
-// Choose sprites depending on car position
-switch(FEAT_TRAINS, SELF, switch_br_720_spriteset_GA, position_in_articulated_veh % 5) {
+spriteset(spriteset_br_720_purchase, "gfx/Aventra.png") {template_purchase(400, 0)}
+
+// Greater Anglia base and reversed sprites.
+spriteset(spriteset_br_720_front_GA, "gfx/Aventra.png") { template_train32px_old(0, 0) }
+spriteset(spriteset_br_720_middle_GA, "gfx/Aventra.png") { template_train32px_old(0, 25) }
+spriteset(spriteset_br_720_middle_panto_GA, "gfx/Aventra.png") { template_train32px_old(0, 50) }
+spriteset(spriteset_br_720_rear_GA, "gfx/Aventra.png") { template_train32px_old(0, 75) }
+spriteset(spriteset_br_720_front_GA_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(200, 0) }
+spriteset(spriteset_br_720_middle_GA_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(0, 25) }
+spriteset(spriteset_br_720_middle_panto_GA_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(0, 50) }
+spriteset(spriteset_br_720_rear_GA_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(200, 75) }
+
+// C2C base and reversed sprites.
+spriteset(spriteset_br_720_front_C2C, "gfx/Aventra.png") { template_train32px_old(0, 400) }
+spriteset(spriteset_br_720_middle_C2C, "gfx/Aventra.png") { template_train32px_old(0, 425) }
+spriteset(spriteset_br_720_middle_panto_C2C, "gfx/Aventra.png") { template_train32px_old(0, 450) }
+spriteset(spriteset_br_720_rear_C2C, "gfx/Aventra.png") { template_train32px_old(0, 475) }
+spriteset(spriteset_br_720_front_C2C_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(200, 400) }
+spriteset(spriteset_br_720_middle_C2C_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(0, 425) }
+spriteset(spriteset_br_720_middle_panto_C2C_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(0, 450) }
+spriteset(spriteset_br_720_rear_C2C_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(200, 475) }
+
+// Class 720 graphics + selector flow (single articulated item ID).
+//
+// Runtime call order is:
+// Step 1: switch_br_720_spriteset
+//   -> Step 2: switch_br_720_direction_GA / switch_br_720_direction_C2C
+//      -> Step 3: forward role selector (if not reversed), or
+//      -> Step 4: mirrored-livery selector -> Step 5: mirrored-role selector (if reversed).
+//
+// Note: definitions below are grouped by helper function, not listed in runtime order.
+
+// Step 3 (forward path): pick role from articulated index in each 5-car set.
+// position_in_articulated_veh cycles 0..4 within a Class 720 unit.
+// End of forward path 
+switch(FEAT_TRAINS, SELF, switch_br_720_spriteset_GA_fwd, position_in_articulated_veh % 5) {
 	0: spriteset_br_720_front_GA;
 	1: spriteset_br_720_middle_panto_GA;
 	4: spriteset_br_720_rear_GA;
 	spriteset_br_720_middle_GA;
 }
 
-switch(FEAT_TRAINS, SELF, switch_br_720_spriteset_C2C, position_in_articulated_veh % 5) {
+switch(FEAT_TRAINS, SELF, switch_br_720_spriteset_C2C_fwd, position_in_articulated_veh % 5) {
 	0: spriteset_br_720_front_C2C;
 	1: spriteset_br_720_middle_panto_C2C;
 	4: spriteset_br_720_rear_C2C;
 	spriteset_br_720_middle_C2C;
 }
 
-switch(FEAT_TRAINS, SELF, switch_br_720_spriteset, cargo_subtype) {
-	0: switch_br_720_spriteset_GA;
-	1: switch_br_720_spriteset_C2C;	
+// Step 5 (reversed path): pick role from mirrored consist position.
+// Using position_in_consist_from_end keeps car order visually fixed when the
+// whole consist reverses, for any number of units.
+switch(FEAT_TRAINS, SELF, switch_br_720_spriteset_GA_rev, position_in_consist_from_end % 5) {
+	0: spriteset_br_720_front_GA_reversed;
+	1: spriteset_br_720_middle_panto_GA_reversed;
+	4: spriteset_br_720_rear_GA_reversed;
+	spriteset_br_720_middle_GA_reversed;
 }
 
+switch(FEAT_TRAINS, SELF, switch_br_720_spriteset_C2C_rev, position_in_consist_from_end % 5) {
+	0: spriteset_br_720_front_C2C_reversed;
+	1: spriteset_br_720_middle_panto_C2C_reversed;
+	4: spriteset_br_720_rear_C2C_reversed;
+	spriteset_br_720_middle_C2C_reversed;
+}
+
+// Step 4 (reversed path): read mirrored vehicle cargo_subtype (var 0xF2).
+// STORE_TEMP writes mirror offset; var[0x61,...] then reads that mirrored vehicle.
+// This prevents incorrect livery swaps during reversal in multiple-working consists.
+switch(FEAT_TRAINS, SELF, switch_br_720_rev_mirror_livery, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: switch_br_720_spriteset_GA_rev;
+	1: switch_br_720_spriteset_C2C_rev;
+	switch_br_720_spriteset_GA_rev;
+}
+
+// Step 2: direction gate used by the top-level selector.
+// Chooses forward stack or mirrored-reversed stack.
+// If vcehicle is reversed, go to step 4, else go to step 3
+switch(FEAT_TRAINS, PARENT, switch_br_720_direction_GA, vehicle_is_reversed) {
+	1: switch_br_720_rev_mirror_livery;
+	switch_br_720_spriteset_GA_fwd;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_720_direction_C2C, vehicle_is_reversed) {
+	1: switch_br_720_rev_mirror_livery;
+	switch_br_720_spriteset_C2C_fwd;
+}
+
+// Step 1: top-level selector called by item_br_720 graphics.default.
+switch(FEAT_TRAINS, SELF, switch_br_720_spriteset, cargo_subtype) {
+	0: switch_br_720_direction_GA;
+	1: switch_br_720_direction_C2C;
+	switch_br_720_direction_GA;
+}
+
+// End of livery selection chain
+//-------------------------------------------------------------------------------------------------------------------------
+
+
+
+// Purchase menu subtype labels. (Livery options)
 switch(FEAT_TRAINS, SELF, switch_br_720_subtype_text, cargo_subtype) {
 	0: return string(str_GreaterAnglia);
-	1: return string(str_C2C);	
+	1: return string(str_C2C);
 	return CB_RESULT_NO_TEXT;
 }
 
 // Define articulations
 switch(FEAT_TRAINS, SELF, switch_br_720_articulated, extra_callback_info1) {
-	// extra_callback_info1 returns the car number, so 1 is the second car, 2 the third, .. so on
-	// The callback runs this switch until it returns NO_MORE_ARTICULATED_PARTS, which ends the growth
+	// extra_callback_info1 is the articulated index being requested (1=2nd car, 2=3rd, ...).
+	// Return this same item ID for cars 1..4 to build a fixed 5-car articulated unit.
 	1..4: return item_br_720;
-	return CB_RESULT_NO_MORE_ARTICULATED_PARTS; // Stop adding more cars
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
-// Only give particle effects to front/rear cars
+// Only the pantograph car (index 1 in each 5-car unit) shows electric effects.
 switch(FEAT_TRAINS, SELF, switch_br_720_particles, position_in_articulated_veh % 5) {
 	1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
 	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
 }
 
-// Start/stop switch, used to limit maximum length
+// Keep coupling length unrestricted for this unit.
 switch(FEAT_TRAINS, SELF, switch_br_720_start_stop, num_vehs_in_consist) {	
-	return CB_RESULT_NO_TEXT;   // Allow any length
+	return CB_RESULT_NO_TEXT;
 }
 
-// Only allow the same train type to be added to itself
+// Only allow Class 720 units to couple to Class 720 units.
 switch(FEAT_TRAINS, SELF, switch_br_720_can_attach_wagon, vehicle_type_id) {
 	item_br_720: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
@@ -78,6 +159,7 @@ item(FEAT_TRAINS, item_br_720, 448) {
 		track_type: ELRL;
 		ai_special_flag: AI_FLAG_PASSENGER; // tell ai that this is a passenger train
 		running_cost_base: RUNNING_COST_ELECTRIC;
+		misc_flags: TRAIN_FLAG_MU; // acts as multiple-unit
 		dual_headed: 0; // set to 0 otherwise limited to 2 cars only
 		engine_class: ENGINE_CLASS_ELECTRIC; // even if its 3rd rail, ELECTRIC would give overhead wire effects
 		extra_power_per_wagon: 0 kW;
