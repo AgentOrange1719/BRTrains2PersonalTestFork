@@ -51,6 +51,11 @@ STR_PARAM_HIDE_VEHS_DESC:Should we hide default vehicles? (Note, this will not o
 STR_PARAM_HIDE_DEFAULT          :Hide
 STR_PARAM_SHOW_DEFAULT          :Show
 
+STR_PARAM_NAME_STANDING_CAPACITY    :Standing Room Mode
+STR_PARAM_DESC_STANDING_CAPACITY    :Enable higher standing-room capacity values for selected units that, while lacking longitudinal seating, are still designed for significant standing capacity. This is intended to be offset by increased cargo decay speeds, given the nature of these services. (To be implemented)
+STR_PARAM_STANDING_CAPACITY_OFF     :Disabled (seat-based)
+STR_PARAM_STANDING_CAPACITY_ON      :Enabled (seat + standing)
+
 # Warning: these are used for multiple parameters, if you need to modify them, maybe add different strings?
 STR_PARAM_1X                    :1x (Default)
 STR_PARAM_2X                    :2x

@@ -84,6 +84,19 @@ grf {
 				};
 			}
 	}
+	param 5 {
+			param_standing_capacity{
+				name: string(STR_PARAM_NAME_STANDING_CAPACITY);
+				desc: string(STR_PARAM_DESC_STANDING_CAPACITY);
+				min_value: 0;
+				max_value: 1;
+				def_value: 0;
+				names: {
+					0: string(STR_PARAM_STANDING_CAPACITY_OFF);
+					1: string(STR_PARAM_STANDING_CAPACITY_ON);
+				};
+			}
+	}
 }
 
 if(param_default_vehs == 0)
