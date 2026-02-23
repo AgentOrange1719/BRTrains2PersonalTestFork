@@ -1,0 +1,358 @@
+spriteset (spriteset_br_710_front, "gfx/Aventra.png") { template_train32px_old(0, 200) }
+spriteset (spriteset_br_710_middle, "gfx/Aventra.png") { template_train32px_old(0, 225) }
+spriteset (spriteset_br_710_middle_panto, "gfx/Aventra.png") { template_train32px_old(0, 250) }
+spriteset (spriteset_br_710_rear, "gfx/Aventra.png") { template_train32px_old(0, 275) }
+spriteset (spriteset_br_710_purchase, "gfx/Aventra.png") { template_purchase(400, 26) }
+
+// Reversed spritesets.
+// Middle cars use mirrored forward art; front/rear use x=200 for end-specific reversed art.
+spriteset (spriteset_br_710_front_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(200, 200) }
+spriteset (spriteset_br_710_middle_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(0, 225) }
+spriteset (spriteset_br_710_middle_panto_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(0, 250) }
+spriteset (spriteset_br_710_rear_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(200, 275) }
+
+// Class 710 graphics + MW selector flow (single articulated item IDs for /1, /2, /3).
+//
+// Runtime call order for each car:
+// Step 1: item graphics.default
+//   -> switch_br_710_1_direction / switch_br_710_2_4car_direction / switch_br_710_3_5car_direction.
+// Step 2: direction gate
+//   -> forward per-variant role switch (not reversed), or
+//   -> switch_br_710_rev_mirror_type (reversed).
+// Step 3: mirror type dispatch (reversed path)
+//   -> reads mirrored vehicle_type_id to choose 4-car or 5-car reversed role logic.
+// Step 4: reversed role switch by unit length
+//   -> switch_br_710_rev_role_4car or switch_br_710_rev_role_5car.
+// Step 5: reversed role selection
+//   -> uses mirrored same-ID-chain position (var 0x41 ff) to pick front/panto/middle/rear.
+//
+// Note: definitions below are grouped by helper function, not listed in strict runtime order.
+
+// Step 5 (reversed path): role selection for mirrored 4-car units.
+// var 0x41 format is 00nnbbff, where ff is the position from front within same-ID chain.
+// This avoids whole-consist modulo errors in mixed 4-car + 5-car multiple working.
+switch(FEAT_TRAINS, SELF, switch_br_710_rev_role_4car,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x000000FF, 0x41] % 4]) {
+	0: spriteset_br_710_front_reversed;
+	1: spriteset_br_710_middle_panto_reversed;
+	3: spriteset_br_710_rear_reversed;
+	spriteset_br_710_middle_reversed;
+}
+
+// Step 5 (reversed path): role selection for mirrored 5-car units.
+switch(FEAT_TRAINS, SELF, switch_br_710_rev_role_5car,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x000000FF, 0x41] % 5]) {
+	0: spriteset_br_710_front_reversed;
+	1: spriteset_br_710_middle_panto_reversed;
+	4: spriteset_br_710_rear_reversed;
+	spriteset_br_710_middle_reversed;
+}
+
+// Step 3 and step 4 (reversed path): determine mirrored car's unit length.
+// STORE_TEMP writes the signed mirror offset into temp 0x10F.
+// var[0x61, ..., 0xC6] then reads mirrored vehicle_type_id:
+// 444 = 710/1 (4-car), 445 = 710/2 (4-car), 446 = 710/3 (5-car).
+switch(FEAT_TRAINS, SELF, switch_br_710_rev_mirror_type,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x0000FFFF, 0xC6]]) {
+	444: switch_br_710_rev_role_4car;
+	445: switch_br_710_rev_role_4car;
+	446: switch_br_710_rev_role_5car;
+	switch_br_710_rev_role_4car; // fallback: treat unknown as 4-car
+}
+
+// Step 2 Forward path. Normal sprite selection. (Front cab-panto-middle-(middle for /3 only)-rear cab)
+switch(FEAT_TRAINS, SELF, switch_br_710_1_spriteset, position_in_articulated_veh % 4) {
+	0: spriteset_br_710_front;
+	1: spriteset_br_710_middle_panto;
+	3: spriteset_br_710_rear;
+	spriteset_br_710_middle;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_710_2_4car_spriteset, position_in_articulated_veh % 4) {
+	0: spriteset_br_710_front;
+	1: spriteset_br_710_middle_panto;
+	3: spriteset_br_710_rear;
+	spriteset_br_710_middle;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_710_3_5car_spriteset, position_in_articulated_veh % 5) {
+	0: spriteset_br_710_front;
+	1: spriteset_br_710_middle_panto;
+	4: spriteset_br_710_rear;
+	spriteset_br_710_middle;
+}
+
+// Step 1: Initial entry point. Direction gates called by each item's graphics.default.
+// If consist is reversed, go to step 3 (Mirrored role selection) ; otherwise step 2 (normal forward role selection.)
+switch(FEAT_TRAINS, PARENT, switch_br_710_1_direction, vehicle_is_reversed) {
+	1: switch_br_710_rev_mirror_type;
+	switch_br_710_1_spriteset;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_710_2_4car_direction, vehicle_is_reversed) {
+	1: switch_br_710_rev_mirror_type;
+	switch_br_710_2_4car_spriteset;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_710_3_5car_direction, vehicle_is_reversed) {
+	1: switch_br_710_rev_mirror_type;
+	switch_br_710_3_5car_spriteset;
+}
+
+// End of MW graphics chain.
+//-------------------------------------------------------------------------------------------------------------------------
+
+// Build fixed 4-car 710/1 articulation.
+switch(FEAT_TRAINS, SELF, switch_br_710_1_articulated, extra_callback_info1) {
+	1..3: return item_br_710_1;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+// Only pantograph car (index 1) emits electric effects.
+switch(FEAT_TRAINS, SELF, switch_br_710_1_particles, position_in_articulated_veh % 4) {
+	1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_710_1_start_stop, num_vehs_in_consist) {
+	return CB_RESULT_NO_TEXT;
+}
+
+// Allow all Class 710 subclasses to couple in multiple working.
+switch(FEAT_TRAINS, SELF, switch_br_710_1_can_attach_wagon, vehicle_type_id) {
+	item_br_710_1:      return CB_RESULT_ATTACH_ALLOW;
+	item_br_710_2_4car: return CB_RESULT_ATTACH_ALLOW;
+	item_br_710_3_5car: return CB_RESULT_ATTACH_ALLOW;
+	return string(STR_CANNOT_ATTACH);
+}
+
+// Class 710/1 (4-car, overhead only)
+item(FEAT_TRAINS, item_br_710_1, 444) {
+	property {
+		variant_group:					header_Aventra;
+		name: string(STR_BR_710_1);
+		climates_available: ALL_CLIMATES;
+		introduction_date: date(2020, 03, 03);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		reliability_decay: 0;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		cost_factor: 72;
+		loading_speed: 25;
+		running_cost_factor: 45;
+		cargo_allow_refit: [];
+		cargo_disallow_refit: [];
+
+		speed: 75 mph;
+		power: 2400 hp;
+		cargo_capacity: (678/4);
+		weight: 144 ton;
+
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		refit_cost: 0;
+		track_type: railtype("ELRL");
+		ai_special_flag: AI_FLAG_PASSENGER;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		misc_flags: TRAIN_FLAG_MU;
+		dual_headed: 0;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		extra_power_per_wagon: 0 kW;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.06;
+		length: 8;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+		extra_weight_per_wagon: 0 ton;
+		bitmask_vehicle_info: 0;
+	}
+
+	graphics {
+		default: switch_br_710_1_direction;
+		purchase: spriteset_br_710_purchase;
+		articulated_part: switch_br_710_1_articulated;
+		start_stop: switch_br_710_1_start_stop;
+		can_attach_wagon: switch_br_710_1_can_attach_wagon;
+		visual_effect_and_powered: switch_br_710_1_particles;
+		additional_text: string(STR_DSC_BR_710);
+		cargo_capacity: return(678/4 * param_pax);
+		cost_factor: return(GetAdjustedCost(72));
+		running_cost_factor: return(GetAdjustedCost(45));
+	}
+}
+
+// Build fixed 4-car 710/2 articulation.
+switch(FEAT_TRAINS, SELF, switch_br_710_2_4car_articulated, extra_callback_info1) {
+	1..3: return item_br_710_2_4car;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+// Only pantograph car (index 1) emits electric effects.
+switch(FEAT_TRAINS, SELF, switch_br_710_2_4car_particles_elrl, position_in_articulated_veh % 4) {
+	1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_710_2_4car_3rdrailparticles, tile_powers_railtype("THIRD")) {
+	1: switch_br_710_2_4car_particles_elrl;
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_710_2_4car_particles, tile_powers_railtype("ELRL")) {
+	1: switch_br_710_2_4car_particles_elrl;
+	switch_br_710_2_4car_3rdrailparticles;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_710_2_4car_start_stop, num_vehs_in_consist) {
+	return CB_RESULT_NO_TEXT;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_710_2_4car_can_attach_wagon, vehicle_type_id) {
+	item_br_710_1:      return CB_RESULT_ATTACH_ALLOW;
+	item_br_710_2_4car: return CB_RESULT_ATTACH_ALLOW;
+	item_br_710_3_5car: return CB_RESULT_ATTACH_ALLOW;
+	return string(STR_CANNOT_ATTACH);
+}
+
+// Class 710/2 (4-car, dual-voltage)
+item(FEAT_TRAINS, item_br_710_2_4car, 445) {
+	property {
+		variant_group:					header_Aventra;
+		name: string(STR_BR_710_2_4CAR);
+		climates_available: ALL_CLIMATES;
+		introduction_date: date(2020, 03, 03);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		reliability_decay: 0;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		cost_factor: 76;
+		loading_speed: 25;
+		running_cost_factor: 48;
+		cargo_allow_refit: [];
+		cargo_disallow_refit: [];
+
+		speed: 75 mph;
+		power: 2400 hp;
+		cargo_capacity: (678/4);
+		weight: 151 ton;
+
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		refit_cost: 0;
+		track_type: [THIRD, ELRL];
+		ai_special_flag: AI_FLAG_PASSENGER;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		misc_flags: TRAIN_FLAG_MU;
+		dual_headed: 0;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		extra_power_per_wagon: 0 kW;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.06;
+		length: 8;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+		extra_weight_per_wagon: 0 ton;
+		bitmask_vehicle_info: 0;
+	}
+
+	graphics {
+		default: switch_br_710_2_4car_direction;
+		purchase: spriteset_br_710_purchase;
+		articulated_part: switch_br_710_2_4car_articulated;
+		start_stop: switch_br_710_2_4car_start_stop;
+		can_attach_wagon: switch_br_710_2_4car_can_attach_wagon;
+		visual_effect_and_powered: switch_br_710_2_4car_particles;
+		additional_text: string(STR_DSC_BR_710);
+		cargo_capacity: return(678/4 * param_pax);
+		cost_factor: return(GetAdjustedCost(76));
+		running_cost_factor: return(GetAdjustedCost(48));
+	}
+}
+
+// Build fixed 5-car 710/3 articulation.
+switch(FEAT_TRAINS, SELF, switch_br_710_3_5car_articulated, extra_callback_info1) {
+	1..4: return item_br_710_3_5car;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+// Only pantograph car (index 1) emits electric effects.
+switch(FEAT_TRAINS, SELF, switch_br_710_3_5car_particles_elrl, position_in_articulated_veh % 5) {
+	1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_710_3_5car_3rdrailparticles, tile_powers_railtype("THIRD")) {
+	1: switch_br_710_3_5car_particles_elrl;
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_710_3_5car_particles, tile_powers_railtype("ELRL")) {
+	1: switch_br_710_3_5car_particles_elrl;
+	switch_br_710_3_5car_3rdrailparticles;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_710_3_5car_start_stop, num_vehs_in_consist) {
+	return CB_RESULT_NO_TEXT;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_710_3_5car_can_attach_wagon, vehicle_type_id) {
+	item_br_710_1:      return CB_RESULT_ATTACH_ALLOW;
+	item_br_710_2_4car: return CB_RESULT_ATTACH_ALLOW;
+	item_br_710_3_5car: return CB_RESULT_ATTACH_ALLOW;
+	return string(STR_CANNOT_ATTACH);
+}
+
+// Class 710/3 (5-car, dual-voltage)
+item(FEAT_TRAINS, item_br_710_3_5car, 446) {
+	property {
+		variant_group:					header_Aventra;
+		name: string(STR_BR_710_3_5CAR);
+		climates_available: ALL_CLIMATES;
+		introduction_date: date(2020, 03, 03);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		reliability_decay: 0;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		cost_factor: 90;
+		loading_speed: 25;
+		running_cost_factor: 55;
+		cargo_allow_refit: [];
+		cargo_disallow_refit: [];
+
+		speed: 75 mph;
+		power: 3000 hp;
+		cargo_capacity: (882/5);
+		weight: 182 ton;
+
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		refit_cost: 0;
+		track_type: [THIRD, ELRL];
+		ai_special_flag: AI_FLAG_PASSENGER;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		misc_flags: TRAIN_FLAG_MU;
+		dual_headed: 0;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		extra_power_per_wagon: 0 kW;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.06;
+		length: 8;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+		extra_weight_per_wagon: 0 ton;
+		bitmask_vehicle_info: 0;
+	}
+
+	graphics {
+		default: switch_br_710_3_5car_direction;
+		purchase: spriteset_br_710_purchase;
+		articulated_part: switch_br_710_3_5car_articulated;
+		start_stop: switch_br_710_3_5car_start_stop;
+		can_attach_wagon: switch_br_710_3_5car_can_attach_wagon;
+		visual_effect_and_powered: switch_br_710_3_5car_particles;
+		additional_text: string(STR_DSC_BR_710);
+		cargo_capacity: return(882/5 * param_pax);
+		cost_factor: return(GetAdjustedCost(90));
+		running_cost_factor: return(GetAdjustedCost(55));
+	}
+}
