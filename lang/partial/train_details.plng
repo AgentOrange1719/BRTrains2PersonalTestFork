@@ -1146,6 +1146,14 @@ str_BR707_liveries				:South Western Trains, Southeastern
 STR_NAME_BR717					:BR Class 717 "Desiro City"
 str_BR717_usage					:Regional Passenger
 str_BR717_eos					:---
+str_BR717_capacity_1x			:362
+str_BR717_capacity_2x			:724
+str_BR717_capacity_3x			:1086
+str_BR717_capacity_4x			:1448
+str_BR717_capacity_hc_1x		:943
+str_BR717_capacity_hc_2x		:1886
+str_BR717_capacity_hc_3x		:2829
+str_BR717_capacity_hc_4x		:3772
 str_BR717_liveries				:Govia Great Northern
 
 STR_NAME_BR799					:BR Class 799 Hydrogen Prototype (4-car)

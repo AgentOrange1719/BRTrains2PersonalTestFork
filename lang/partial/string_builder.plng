@@ -48,6 +48,7 @@ str_multiple_working_with_class_450 :, and with Class 450
 
 str_purchase_loco_with_liveries	:{BLACK}Type: {STRING}{}{BLACK}Usage: {GOLD}{STRING}{}{BLACK}Withdrawal: {GOLD}{STRING}{}{BLACK}Liveries: {GOLD}{STRING}{BLACK}
 str_purchase_loco_with_liveries_and_mw	:{BLACK}Type: {STRING}{}{BLACK}Usage: {GOLD}{STRING}{}{BLACK}Multiple Working: {GOLD}{STRING}{}{BLACK}Withdrawal: {GOLD}{STRING}{}{BLACK}Liveries: {GOLD}{STRING}{BLACK}
+str_purchase_loco_with_liveries_and_capacity :{BLACK}Type: {STRING}{}{BLACK}Usage: {GOLD}{STRING}{}{BLACK}Withdrawal: {GOLD}{STRING}{}{BLACK}Capacity: {GOLD}{STRING}{}{BLACK}Liveries: {GOLD}{STRING}{BLACK}
 str_purchase_loco				:{BLACK}Type: {STRING}{}{BLACK}Usage: {GOLD}{STRING}{}{BLACK}Withdrawal: {GOLD}{STRING}{}{BLACK}
 str_purchase_steam_liveries		:{BLACK}Type: {STRING}{}{BLACK}Usage: {GOLD}{STRING}{}{BLACK}Withdrawal: {GOLD}{STRING}{}{BLACK}Liveries: {GOLD}{STRING}{BLACK}
 str_purchase_coach				:{BLACK}Liveries: {GOLD}{STRING}{BLACK}
