@@ -59,6 +59,8 @@ switch(FEAT_TRAINS, SELF, switch_BR717_spriteset, cargo_subtype) {
 	switch_BR717_direction;
 }
 
+// End of livery selection chain
+//-------------------------------------------------------------------------------------------------------------------------
 // Build a fixed 6-car articulated unit from one item ID.
 switch(FEAT_TRAINS, SELF, switch_articulated_BR717, extra_callback_info1) {
 	1..5: return item_BR717;
