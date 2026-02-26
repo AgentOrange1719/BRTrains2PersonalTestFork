@@ -1,5 +1,20 @@
 Changes from BRTrains2 Baseline as of 15 Feb 2026
 
+
+
+0030 26/02/2026
+
+
+
+Class 755 rework
+
+* Added multiple working/reversing to class 755
+* Added unique reversed templates for 755/766 due to differing car lengths - needed to tune alignment while reversed.
+
+
+
+
+
 1700 22/02/2026
 
 
