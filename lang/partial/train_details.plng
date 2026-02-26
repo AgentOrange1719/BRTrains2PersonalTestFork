@@ -62,6 +62,7 @@ STR_BR730_2                            :BR Class 730/2 "Aventra" (5-Car)
 STR_BR_745                              :BR Class 745/0/1 "FLIRT" (12-Car)
 STR_BR_755_3CAR                         :BR Class 755/3  "FLIRT" (3-Car with Power Pack)
 STR_BR_755_4CAR                         :BR Class 755/4  "FLIRT" (4-Car with Power Pack)
+STR_BR_755_MW_LIMIT                     :Class 755 units support multiple working up to 3 units maximum.
 
 STR_BR_756_3CAR                         :BR Class 756/3 (3-Car with Power Pack)
 STR_BR_756_4CAR                         :BR Class 756/4 (4-Car with Power Pack)
@@ -1165,6 +1166,10 @@ STR_NAME_BR800					:BR Class 800/1 "IET"
 str_BR800_usage					:Regional Passenger
 str_BR800_eos					:---
 str_BR800_liveries				:Hitachi, GWR
+str_BR755_usage					:Regional Passenger
+str_BR755_eos					:--
+str_BR755_liveries				:Greater Anglia
+str_BR755_description				:The British Rail Class 755 is a bi-mode multiple unit of the Stadler FLIRT family. The Class 755 can run off of either 25kV overhead lines or diesel engines found in the powerpack car. {RED}NOTE: For proper reversing behaviour, use only units of the same subclass, or symmetrical formations of /3+/4+/3 or /4+/3+/4. Otherwise alignment issues occur when reversed. A fix is being investigated.
 
 # # # # # # #
 # # WAGON # #

@@ -1,68 +1,142 @@
-// Choose sprites depending on car position
+// -----------------------------------------------------------------------------
+// Class 755/3 callbacks and properties
+// -----------------------------------------------------------------------------
+
+// Car order for /3:
+// 0 = leading cab, 1 = middle panto car, 2 = power pack, 3 = trailing cab.
 switch(FEAT_TRAINS, SELF, switch_br_755_3_spriteset, position_in_articulated_veh % 4) {
-	0: spriteset_br755a;
-    1: spriteset_br755pp;
-	2: spriteset_br755d;
-    3: spriteset_br755b;
+	0: spriteset_br755a_3;
+	1: spriteset_br755d_3;
+	2: spriteset_br755pp_3;
+	3: spriteset_br755b_3;
 }
 
-// Define articulations
+// Build articulated train: base vehicle + 3 extra articulated parts.
 switch(FEAT_TRAINS, SELF, switch_br_755_3_articulated, extra_callback_info1) {
 	1..3: return item_br_755_3;
-	return CB_RESULT_NO_MORE_ARTICULATED_PARTS; // Stop adding more cars
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
+// ---------------------------------------------------------------------
+// Visual effects (electric + diesel), with mirrored logic for reverse.
+// ---------------------------------------------------------------------
 
+// Forward consist: electric effect is emitted from articulated index 1.
 switch(FEAT_TRAINS, SELF, switch_br_755_3_particles_electric, position_in_articulated_veh % 4) {
-	2: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
 	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
 }
 
+// Forward consist: diesel effect is emitted from articulated index 2 (power pack).
 switch(FEAT_TRAINS, SELF, switch_br_755_3_particles_diesel, position_in_articulated_veh % 4) {
-	1: visual_effect_and_powered(VISUAL_EFFECT_DIESEL, 2, DISABLE_WAGON_POWER);
+	2: visual_effect_and_powered(VISUAL_EFFECT_DIESEL, 2, DISABLE_WAGON_POWER);
 	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
 }
 
-switch(FEAT_TRAINS, SELF, switch_br_755_3_particles, tile_powers_railtype("ELRL") || tile_powers_railtype("THIRD")) {
-	1: switch_br_755_3_particles_electric; 	
+// Reversed consist: use mirrored consist position so effect locations stay tied to car roles.
+switch(FEAT_TRAINS, SELF, switch_br_755_3_particles_electric_rev,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x000000FF, 0x41] % 4]) {
+	1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+// Reversed consist: mirrored diesel effect location.
+switch(FEAT_TRAINS, SELF, switch_br_755_3_particles_diesel_rev,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x000000FF, 0x41] % 4]) {
+	2: visual_effect_and_powered(VISUAL_EFFECT_DIESEL, 2, DISABLE_WAGON_POWER);
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+// Pick forward/reversed electric effect layout.
+switch(FEAT_TRAINS, PARENT, switch_br_755_3_particles_electric_direction, vehicle_is_reversed) {
+	1: switch_br_755_3_particles_electric_rev;
+	switch_br_755_3_particles_electric;
+}
+
+// Pick forward/reversed diesel effect layout.
+switch(FEAT_TRAINS, PARENT, switch_br_755_3_particles_diesel_direction, vehicle_is_reversed) {
+	1: switch_br_755_3_particles_diesel_rev;
 	switch_br_755_3_particles_diesel;
 }
 
-// Start/stop switch, used to limit maximum length
-switch(FEAT_TRAINS, SELF, switch_br_755_3_start_stop, num_vehs_in_consist) {	
-	return CB_RESULT_NO_TEXT;   // Allow any length
+// Use electric effect on ELRL; otherwise diesel effect.
+switch(FEAT_TRAINS, SELF, switch_br_755_3_particles, tile_powers_railtype("ELRL")) {
+	1: switch_br_755_3_particles_electric_direction;
+	switch_br_755_3_particles_diesel_direction;
 }
 
-// Only allow the same train type to be added to itself
-switch(FEAT_TRAINS, SELF, switch_br_755_3_can_attach_wagon, vehicle_type_id) {
+// Translator wagon safety mode: suppress all visual effects.
+switch(FEAT_TRAINS, SELF, switch_br_755_3_particles_with_translator, count_veh_id(item_BRMk2_Translator)) {
+	0: switch_br_755_3_particles;
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+// ---------------------------------------------------------------------
+// Attachment + operation limits.
+// ---------------------------------------------------------------------
+
+// Max 3 units total across /3 and /4 combinations:
+// 15 cars permits 3x /4 and mixed 3-unit sets, but blocks 4x /3 (16 cars).
+switch(FEAT_TRAINS, SELF, switch_br_755_3_start_stop, num_vehs_in_consist) {
+	1..15: return CB_RESULT_NO_TEXT;
+	return string(STR_BR_755_MW_LIMIT);
+}
+
+// Allow coupling to /3, /4, and translator wagon.
+switch(FEAT_TRAINS, SELF, switch_br_755_3_can_attach_wagon_type, vehicle_type_id) {
 	item_br_755_3: return CB_RESULT_ATTACH_ALLOW;
 	item_br_755_4: return CB_RESULT_ATTACH_ALLOW;
+	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
 
-switch(FEAT_TRAINS, SELF, switch_br_755_3_power, tile_powers_railtype("ELRL") || tile_powers_railtype("THIRD")) {
-	1: return 3500;	
+// ---------------------------------------------------------------------
+// Power, capacity, and vehicle length callbacks.
+// ---------------------------------------------------------------------
+
+// /3 traction power:
+// - 3500 hp on overhead
+// - 1290 hp on diesel
+switch(FEAT_TRAINS, PARENT, switch_br_755_3_power_base, tile_powers_railtype("ELRL")) {
+	1: return 3500;
 	return 1290;
 }
 
-switch(FEAT_TRAINS, SELF, switch_br_755_3_length, position_in_articulated_veh % 4) {	
-	1: return 5;
-	2: return 6;
+// Translator wagon safety mode: force no tractive output.
+switch(FEAT_TRAINS, PARENT, switch_br_755_3_power, count_veh_id(item_BRMk2_Translator)) {
+	0: switch_br_755_3_power_base;
+	return 0;
+}
+
+// Translator wagon safety mode: force passenger capacity to zero.
+switch(FEAT_TRAINS, PARENT, switch_br_755_3_capacity_with_translator, count_veh_id(item_BRMk2_Translator)) {
+	0: return (167 / 3 * param_pax);
+	return 0;
+}
+
+// Vehicle lengths by articulated index:
+// cab = 7, middle panto = 6, power pack = 5, cab = 7.
+switch(FEAT_TRAINS, SELF, switch_br_755_3_length, position_in_articulated_veh % 4) {
+	1: return 6;
+	2: return 5;
 	return 7;
 }
 
-//switch(FEAT_TRAINS, SELF, switch_br_755_3_desc, )
+// ---------------------------------------------------------------------
+// Vehicle definition.
+// ---------------------------------------------------------------------
 
-// Class 755/3 (3.5car)
 item(FEAT_TRAINS, item_br_755_3, 453) {
 	property {
-		variant_group:			header_Flirt;
+		variant_group: header_Flirt;
 		name: string(STR_BR_755_3CAR);
-		climates_available: ALL_CLIMATES; // available in all climates
+		climates_available: ALL_CLIMATES;
 		introduction_date: date(2019, 07, 29);
-		model_life: VEHICLE_NEVER_EXPIRES; // keep available forever		
-		vehicle_life: 30; // years after vehicle is deemed "old" and should be replaced
-		reliability_decay: 0; // dont reduce reliabilty, (will grow from 75% upwards over the years)
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		reliability_decay: 0;
 		refittable_cargo_classes: bitmask(CC_PASSENGERS);
 		non_refittable_cargo_classes: bitmask();
 		cost_factor: 62;
@@ -70,42 +144,43 @@ item(FEAT_TRAINS, item_br_755_3, 453) {
 		running_cost_factor: 21;
 		cargo_allow_refit: [];
 		cargo_disallow_refit: [];
-		
+
 		speed: 100 mph;
 		power: 3500 hp;
-		cargo_capacity: (167/3);
-		weight: 94.8 ton; 
-		
-		sprite_id: SPRITE_ID_NEW_TRAIN; // required
+		cargo_capacity: (167 / 3);
+		weight: 94.8 ton;
+
+		sprite_id: SPRITE_ID_NEW_TRAIN;
 		refit_cost: 0;
 		track_type: RAIL;
-		ai_special_flag: AI_FLAG_PASSENGER; // tell ai that this is a passenger train
+		ai_special_flag: AI_FLAG_PASSENGER;
 		running_cost_base: RUNNING_COST_ELECTRIC;
-		dual_headed: 0; // set to 0 otherwise limited to 2 cars only
-		engine_class: ENGINE_CLASS_DIESEL; // even if its 3rd rail, ELECTRIC would give overhead wire effects
+		dual_headed: 0;
+		engine_class: ENGINE_CLASS_DIESEL; // Keep diesel engine class so visual FX are callback-driven.
 		extra_power_per_wagon: 0 kW;
 		tractive_effort_coefficient: 0.3;
 		air_drag_coefficient: 0.06;
-		length: 7; // full tile length vehicle
-		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER); // visual fx
+		length: 7;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
 		extra_weight_per_wagon: 0 ton;
 		bitmask_vehicle_info: 0;
 	}
-	
+
 	graphics {
-		default: switch_br_755_3_spriteset;
+		default: switch_br_755_3_direction;
 		purchase: spriteset_br755_purchase;
 
 		articulated_part: switch_br_755_3_articulated;
-		start_stop: switch_br_755_3_start_stop;	
-		can_attach_wagon: switch_br_755_3_can_attach_wagon;
-		visual_effect_and_powered: switch_br_755_3_particles;
-				
+		start_stop: switch_br_755_3_start_stop;
+		can_attach_wagon: switch_br_755_3_can_attach_wagon_type;
+		visual_effect_and_powered: switch_br_755_3_particles_with_translator;
+
 		power: switch_br_755_3_power;
 		length: switch_br_755_3_length;
-		additional_text: string(STR_DSC_BR_755);
-		cargo_capacity:	return(167/3 * param_pax);
-		cost_factor:	return(GetAdjustedCost(62));
+		additional_text: return(string(str_purchase_loco_with_liveries_and_mw_and_note, string(str_purchase_type_bmu), string(str_BR755_usage), string(STR_CONCAT_2, string(str_multiple_working_within_class), string(str_multiple_working_max_3_units)), string(str_BR755_eos), string(str_BR755_liveries), string(str_BR755_description)));
+		cargo_capacity: switch_br_755_3_capacity_with_translator;
+		cost_factor: return(GetAdjustedCost(62));
 		running_cost_factor: return(GetAdjustedCost(21));
 	}
 }
+

@@ -1,20 +1,77 @@
+spriteset (spriteset_br755a_3, "gfx/BR755.png") { template_train28px_old_755_3(0,0) }
+spriteset (spriteset_br755a_3_reversed, "gfx/BR755.png") { template_train28px_old_755_3_reversed(0,46) }
+spriteset (spriteset_br755b_3, "gfx/BR755.png") { template_train28px_old_755_3(0,23) }
+spriteset (spriteset_br755b_3_reversed, "gfx/BR755.png") { template_train28px_old_755_3_reversed(0,69) }
+spriteset (spriteset_br755d_3, "gfx/BR755.png") { template_train24px_755_3(0,114) }
+spriteset (spriteset_br755d_3_reversed, "gfx/BR755.png") { template_train24px_755_3_reversed(0,114) }
+spriteset (spriteset_br755pp_3, "gfx/BR755.png") { template_train20px_755_3(0,136) }
+spriteset (spriteset_br755pp_3_reversed, "gfx/BR755.png") { template_train20px_755_3_reversed(0,136) }
 
-spriteset (spriteset_br755a, "gfx/BR755.png") { 
-	template_train28px_old(0,0)
- }
- spriteset (spriteset_br755b, "gfx/BR755.png") { 
-	template_train28px_old(0,23)
- }
- spriteset (spriteset_br755c, "gfx/BR755.png") { 
-	template_train24px(0,46)
- }
- spriteset (spriteset_br755d, "gfx/BR755.png") { 
-	template_train24px(0,68)
- } 
-spriteset (spriteset_br755pp, "gfx/BR755.png") { 
-	template_train20px(0,90)
- }
+spriteset (spriteset_br755a_4, "gfx/BR755.png") { template_train28px_old_755_4(0,0) }
+spriteset (spriteset_br755a_4_reversed, "gfx/BR755.png") { template_train28px_old_755_4_reversed(0,46) }
+spriteset (spriteset_br755b_4, "gfx/BR755.png") { template_train28px_old_755_4(0,23) }
+spriteset (spriteset_br755b_4_reversed, "gfx/BR755.png") { template_train28px_old_755_4_reversed(0,69) }
+spriteset (spriteset_br755c_4, "gfx/BR755.png") { template_train24px_755_4(0,92) }
+spriteset (spriteset_br755c_4_reversed, "gfx/BR755.png") { template_train24px_755_4_reversed(0,114) }
+spriteset (spriteset_br755d_4, "gfx/BR755.png") { template_train24px_755_4(0,114) }
+spriteset (spriteset_br755d_4_reversed, "gfx/BR755.png") { template_train24px_755_4_reversed(0,92) }
+spriteset (spriteset_br755pp_4, "gfx/BR755.png") { template_train20px_755_4(0,136) }
+spriteset (spriteset_br755pp_4_reversed, "gfx/BR755.png") { template_train20px_755_4_reversed(0,136) }
 
-spriteset (spriteset_br755_purchase, "gfx/BR755.png") {
-	template_purchase(160,0)
+// FORWARD /3 ONLY: normal car-role map for a 755/3 unit.
+// index = position_in_articulated_veh % 4 -> 0:a cab, 1:d middle panto, 2:power pack, 3:b cab.
+switch(FEAT_TRAINS, SELF, switch_br_755_fwd_role_3, position_in_articulated_veh % 4) {
+	0: spriteset_br755a_3;
+	1: spriteset_br755d_3;
+	2: spriteset_br755pp_3;
+	3: spriteset_br755b_3;
+	spriteset_br755a_3;
 }
+
+// FORWARD /4 ONLY: normal car-role map for a 755/4 unit.
+// index = position_in_articulated_veh % 5 -> 0:a cab, 1:c middle, 2:power pack, 3:d middle panto, 4:b cab.
+switch(FEAT_TRAINS, SELF, switch_br_755_fwd_role_4, position_in_articulated_veh % 5) {
+	0: spriteset_br755a_4;
+	1: spriteset_br755c_4;
+	2: spriteset_br755pp_4;
+	3: spriteset_br755d_4;
+	4: spriteset_br755b_4;
+	spriteset_br755c_4;
+}
+
+// REVERSED, SAME-SUBCLASS: /3 role map when mirrored car is also a /3.
+switch(FEAT_TRAINS, SELF, switch_br_755_rev_role_3_mirror,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x000000FF, 0x41] % 4]) {
+	0: spriteset_br755a_3_reversed;
+	1: spriteset_br755d_3_reversed;
+	2: spriteset_br755pp_3_reversed;
+	3: spriteset_br755b_3_reversed;
+	spriteset_br755a_3_reversed;
+}
+
+// REVERSED, SAME-SUBCLASS: /4 role map when mirrored car is also a /4.
+switch(FEAT_TRAINS, SELF, switch_br_755_rev_role_4_mirror,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x000000FF, 0x41] % 5]) {
+	0: spriteset_br755a_4_reversed;
+	1: spriteset_br755c_4_reversed;
+	2: spriteset_br755pp_4_reversed;
+	3: spriteset_br755d_4_reversed;
+	4: spriteset_br755b_4_reversed;
+	spriteset_br755c_4_reversed;
+}
+
+// FINAL /3 direction gate.
+switch(FEAT_TRAINS, PARENT, switch_br_755_3_direction, vehicle_is_reversed) {
+	1: switch_br_755_rev_role_3_mirror;
+	switch_br_755_fwd_role_3;
+}
+
+// FINAL /4 direction gate.
+switch(FEAT_TRAINS, PARENT, switch_br_755_4_direction, vehicle_is_reversed) {
+	1: switch_br_755_rev_role_4_mirror;
+	switch_br_755_fwd_role_4;
+}
+
+spriteset (spriteset_br755_purchase, "gfx/BR755.png") { template_purchase(160,0) }

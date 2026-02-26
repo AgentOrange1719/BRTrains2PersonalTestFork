@@ -41,6 +41,7 @@ str_sep_space                   :
 str_sep_dash                    : - 
 str_sep_dashonly                :-
 str_multiple_working_within_class :Within class
+str_multiple_working_max_3_units :, max. 3 units
 str_multiple_working_within_subclass :Within subclass
 str_multiple_working_with_class_444 :, and with Class 444
 str_multiple_working_with_class_450 :, and with Class 450
@@ -48,6 +49,7 @@ str_multiple_working_with_class_450 :, and with Class 450
 
 str_purchase_loco_with_liveries	:{BLACK}Type: {STRING}{}{BLACK}Usage: {GOLD}{STRING}{}{BLACK}Withdrawal: {GOLD}{STRING}{}{BLACK}Liveries: {GOLD}{STRING}{BLACK}
 str_purchase_loco_with_liveries_and_mw	:{BLACK}Type: {STRING}{}{BLACK}Usage: {GOLD}{STRING}{}{BLACK}Multiple Working: {GOLD}{STRING}{}{BLACK}Withdrawal: {GOLD}{STRING}{}{BLACK}Liveries: {GOLD}{STRING}{BLACK}
+str_purchase_loco_with_liveries_and_mw_and_note	:{BLACK}Type: {STRING}{}{BLACK}Usage: {GOLD}{STRING}{}{BLACK}Multiple Working: {GOLD}{STRING}{}{BLACK}Withdrawal: {GOLD}{STRING}{}{BLACK}Liveries: {GOLD}{STRING}{}{GOLD}{STRING}{BLACK}
 str_purchase_loco_with_liveries_and_capacity :{BLACK}Type: {STRING}{}{BLACK}Usage: {GOLD}{STRING}{}{BLACK}Withdrawal: {GOLD}{STRING}{}{BLACK}Capacity: {GOLD}{STRING}{}{BLACK}Liveries: {GOLD}{STRING}{BLACK}
 str_purchase_loco				:{BLACK}Type: {STRING}{}{BLACK}Usage: {GOLD}{STRING}{}{BLACK}Withdrawal: {GOLD}{STRING}{}{BLACK}
 str_purchase_steam_liveries		:{BLACK}Type: {STRING}{}{BLACK}Usage: {GOLD}{STRING}{}{BLACK}Withdrawal: {GOLD}{STRING}{}{BLACK}Liveries: {GOLD}{STRING}{BLACK}

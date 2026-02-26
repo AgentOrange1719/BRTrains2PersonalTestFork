@@ -107,6 +107,17 @@ template template_train24px(x,y){
     [ x+101, y, 25, 13, -15,  -9] //w
     [ x+127, y, 18, 17,  -5, -11] //nw
 }
+template template_train24px_reversed(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x+73,  y,  8, 21,  -3, -12] //s as n
+    [ x+82,  y, 18, 17,  -9, -12] //sw as ne
+    [ x+101, y, 25, 13, -12,  -9] //w as e
+    [ x+127, y, 18, 17,  -1,  -9] //nw as se
+    [ x,     y,  8, 21,  -3, -15] //n as s
+    [ x+9,   y, 18, 17, -13, -10] //ne as sw
+    [ x+28,  y, 25, 13, -15,  -9] //e as w
+    [ x+54,  y, 18, 17,  -5, -11] //se as nw
+}
 
 template template_train28px(x,y){
     //left_x, upper_y, width, height, offset_x, offset_y
@@ -173,6 +184,18 @@ template template_train28px_old(x,y){
     [ x+136, y, 19, 17, -4, -10] //nw
 }
 
+template template_train28px_old_reversed(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x+78,  y, 8, 22, -3, -11]   //s as n
+    [ x+87,  y, 19, 17, -11, -11] //sw as ne
+    [ x+107, y, 28, 12, -15, -8]  //w as e
+    [ x+136, y, 19, 17, -2, -9]   //nw as se
+    [ x,     y, 8, 22, -3, -16]   //n as s
+    [ x+9,   y, 19, 17, -13, -10] //ne as sw
+    [ x+29,  y, 28, 12, -14, -8]  //e as w
+    [ x+58,  y, 19, 17, -4, -10]  //se as nw
+}
+
 template template_train32px_old(x,y){
     //left_x, upper_y, width, height, offset_x, offset_y
     [ x, y, 8, 24, -3, -16,			NOANIM] //n
@@ -184,6 +207,7 @@ template template_train32px_old(x,y){
     [ x+117, y, 32, 12, -14, -8,	NOANIM] //w
     [ x+150, y, 21, 18, -5, -12,	NOANIM] //nw
 }
+
 
 // REPEAT ALIGNMENTS FROM 32px_old ABOVE
 // Like old 32px template but allows items
@@ -228,3 +252,292 @@ template template_train28px_old_pacer(x,y){
     [ x+107, y, 28, 12, -14, -7, NOANIM] //w
     [ x+136, y, 19, 15, -4, -8, NOANIM] //nw
 }
+
+// Dedicated 755/756 templates so alignment tweaks can be isolated from global templates.
+template template_train20px_755_756(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x,     y,  8, 19,  -3, -12] // n
+    [ x+9,   y, 16, 16,  -7, -12] //ne
+    [ x+26,  y, 21, 13,  -8,  -9] //e
+    [ x+48,  y, 16, 16,   1,  -8] //se
+    [ x+65,  y,  8, 19,  -3, -8] //s
+    [ x+74,  y, 16, 16, -13,  -9] //sw
+    [ x+91,  y, 21, 13, -15,  -9] //w
+    [ x+113, y, 16, 16,  -5, -11] //nw
+}
+
+template template_train20px_755_756_reversed(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x+65,  y,  8, 19,  -3, -12] //s as n
+    [ x+74,  y, 16, 16, -9,  -11] //sw as ne
+    [ x+91,  y, 21, 13, -7,  -9] //w as e
+    [ x+113, y, 16, 16,  -1, -9] //nw as se
+    [ x,     y,  8, 19,  -3, -8] //n as s
+    [ x+9,   y, 16, 16,  -11, -10] //ne as sw
+    [ x+26,  y, 21, 13,  -16,  -9] //e as w
+    [ x+48,  y, 16, 16,   -3,  -10] //se as nw
+}
+
+template template_train24px_755_756(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x,     y,  8, 21,  -3, -12] //n
+    [ x+9,   y, 18, 17,  -9, -12] //ne
+    [ x+28,  y, 25, 13, -12,  -9] //e
+    [ x+54,  y, 18, 17,  -1,  -9] //se
+    [ x+73,  y,  8, 21,  -3, -10] //s
+    [ x+82,  y, 18, 17, -13, -10] //sw
+    [ x+101, y, 25, 13, -15,  -9] //w
+    [ x+127, y, 18, 17,  -5, -11] //nw
+}
+
+template template_train24px_755_756_reversed(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x+73,  y,  8, 21,  -3, -14] //s as n
+    [ x+82,  y, 18, 17,  -9, -12] //sw as ne
+    [ x+101, y, 25, 13,  -7,  -9] //w as e
+    [ x+127, y, 18, 17,  -1,  -9] //nw as se
+    [ x,     y,  8, 21,  -3, -8] //n as s
+    [ x+9,   y, 18, 17, -13, -10] //ne as sw
+    [ x+28,  y, 25, 13, -20,  -9] //e as w
+    [ x+54,  y, 18, 17,  -5, -11] //se as nw
+}
+
+template template_train28px_old_755_756(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x, y, 8, 22, -3, -11]     //n
+    [ x+9, y, 19, 17, -11, -11] //ne
+    [ x+29, y, 28, 12, -15, -8] //e
+    [ x+58, y, 19, 17, -2, -9]  //se
+    [ x+78, y, 8, 22, -3, -11]  //s
+    [ x+87, y, 19, 17, -13, -10] //sw
+    [ x+107, y, 28, 12, -14, -8] //w
+    [ x+136, y, 19, 17, -4, -10] //nw
+}
+
+template template_train28px_old_755_756_reversed(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x+78,  y, 8, 22, -3, -11]   //s as n
+    [ x+87,  y, 19, 17, -13, -10] //sw as ne
+    [ x+107, y, 28, 12, -14, -8]  //w as e
+    [ x+136, y, 19, 17, -4, -10]   //nw as se
+    [ x,     y, 8, 22, -3, -11]   //n as s
+    [ x+9,   y, 19, 17, -11, -11] //ne as sw
+    [ x+29,  y, 28, 12, -15, -8]  //e as w
+    [ x+58,  y, 19, 17, -2, -9]  //se as nw
+}
+
+// Dedicated 755/3 templates (copied from 755_756 baseline; tune independently).
+template template_train20px_755_3(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x,     y,  8, 19,  -3, -12] // n
+    [ x+9,   y, 16, 16,  -7, -12] //ne
+    [ x+26,  y, 21, 13,  -8,  -9] //e
+    [ x+48,  y, 16, 16,   1,  -8] //se
+    [ x+65,  y,  8, 19,  -3, -8] //s
+    [ x+74,  y, 16, 16, -13,  -9] //sw
+    [ x+91,  y, 21, 13, -15,  -9] //w
+    [ x+113, y, 16, 16,  -5, -11] //nw
+}
+
+template template_train20px_755_3_reversed(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x+65,  y,  8, 19,  -3, -12] //s as n
+    [ x+74,  y, 16, 16, -9,  -11] //sw as ne
+    [ x+91,  y, 21, 13, -7,  -9] //w as e
+    [ x+113, y, 16, 16,  -1, -9] //nw as se
+    [ x,     y,  8, 19,  -3, -8] //n as s
+    [ x+9,   y, 16, 16,  -11, -10] //ne as sw
+    [ x+26,  y, 21, 13,  -16,  -9] //e as w
+    [ x+48,  y, 16, 16,   -3,  -10] //se as nw
+}
+
+template template_train24px_755_3(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x,     y,  8, 21,  -3, -12] //n
+    [ x+9,   y, 18, 17,  -9, -12] //ne
+    [ x+28,  y, 25, 13, -12,  -9] //e
+    [ x+54,  y, 18, 17,  -1,  -9] //se
+    [ x+73,  y,  8, 21,  -3, -10] //s
+    [ x+82,  y, 18, 17, -13, -10] //sw
+    [ x+101, y, 25, 13, -15,  -9] //w
+    [ x+127, y, 18, 17,  -5, -11] //nw
+}
+
+template template_train24px_755_3_reversed(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x+73,  y,  8, 21,  -3, -14] //s as n
+    [ x+82,  y, 18, 17,  -9, -12] //sw as ne
+    [ x+101, y, 25, 13,  -7,  -9] //w as e
+    [ x+127, y, 18, 17,  -1,  -9] //nw as se
+    [ x,     y,  8, 21,  -3, -8] //n as s
+    [ x+9,   y, 18, 17, -13, -10] //ne as sw
+    [ x+28,  y, 25, 13, -20,  -9] //e as w
+    [ x+54,  y, 18, 17,  -5, -11] //se as nw
+}
+
+template template_train28px_old_755_3(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x, y, 8, 22, -3, -11]     //n
+    [ x+9, y, 19, 17, -11, -11] //ne
+    [ x+29, y, 28, 12, -15, -8] //e
+    [ x+58, y, 19, 17, -2, -9]  //se
+    [ x+78, y, 8, 22, -3, -11]  //s
+    [ x+87, y, 19, 17, -13, -10] //sw
+    [ x+107, y, 28, 12, -14, -8] //w
+    [ x+136, y, 19, 17, -4, -10] //nw
+}
+
+template template_train28px_old_755_3_reversed(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x+78,  y, 8, 22, -3, -11]   //s as n
+    [ x+87,  y, 19, 17, -13, -10] //sw as ne
+    [ x+107, y, 28, 12, -14, -8]  //w as e
+    [ x+136, y, 19, 17, -4, -10]   //nw as se
+    [ x,     y, 8, 22, -3, -11]   //n as s
+    [ x+9,   y, 19, 17, -11, -11] //ne as sw
+    [ x+29,  y, 28, 12, -15, -8]  //e as w
+    [ x+58,  y, 19, 17, -2, -9]  //se as nw
+}
+
+// Dedicated 755/4 templates (copied from 755_756 baseline; tune independently).
+template template_train20px_755_4(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x,     y,  8, 19,  -3, -12] // n
+    [ x+9,   y, 16, 16,  -7, -12] //ne
+    [ x+26,  y, 21, 13,  -8,  -9] //e
+    [ x+48,  y, 16, 16,   1,  -8] //se
+    [ x+65,  y,  8, 19,  -3, -8] //s
+    [ x+74,  y, 16, 16, -13,  -9] //sw
+    [ x+91,  y, 21, 13, -15,  -9] //w
+    [ x+113, y, 16, 16,  -5, -11] //nw
+}
+
+template template_train20px_755_4_reversed(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x+65,  y,  8, 19,  -3, -12] //s as n
+    [ x+74,  y, 16, 16, -9,  -11] //sw as ne
+    [ x+91,  y, 21, 13, -7,  -9] //w as e
+    [ x+113, y, 16, 16,  -1, -9] //nw as se
+    [ x,     y,  8, 19,  -3, -8] //n as s
+    [ x+9,   y, 16, 16,  -11, -10] //ne as sw
+    [ x+26,  y, 21, 13,  -16,  -9] //e as w
+    [ x+48,  y, 16, 16,   -3,  -10] //se as nw
+}
+
+template template_train24px_755_4(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x,     y,  8, 21,  -3, -12] //n
+    [ x+9,   y, 18, 17,  -9, -12] //ne
+    [ x+28,  y, 25, 13, -12,  -9] //e
+    [ x+54,  y, 18, 17,  -1,  -9] //se
+    [ x+73,  y,  8, 21,  -3, -10] //s
+    [ x+82,  y, 18, 17, -13, -10] //sw
+    [ x+101, y, 25, 13, -15,  -9] //w
+    [ x+127, y, 18, 17,  -5, -11] //nw
+}
+
+template template_train24px_755_4_reversed(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x+73,  y,  8, 21,  -3, -12] //s as n done
+    [ x+82,  y, 18, 17,  -11, -11] //sw as ne done
+    [ x+101, y, 25, 13,  -11,  -9] //w as e
+    [ x+127, y, 18, 17,  -3, -10] //nw as se  done
+    [ x,     y,  8, 21,  -3, -10] //n as s done
+    [ x+9,   y, 18, 17, -11, -11] //ne as sw done
+    [ x+28,  y, 25, 13, -16,  -9] //e as w  done
+    [ x+54,  y, 18, 17,  -3, -10] //se as nw done
+}
+
+template template_train28px_old_755_4(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x, y, 8, 22, -3, -11]     //n
+    [ x+9, y, 19, 17, -11, -11] //ne
+    [ x+29, y, 28, 12, -15, -8] //e
+    [ x+58, y, 19, 17, -2, -9]  //se
+    [ x+78, y, 8, 22, -3, -11]  //s
+    [ x+87, y, 19, 17, -13, -10] //sw
+    [ x+107, y, 28, 12, -14, -8] //w
+    [ x+136, y, 19, 17, -4, -10] //nw
+}
+
+template template_train28px_old_755_4_reversed(x,y){
+    //left_x, upper_y, width, height, offset_x, offset_y
+    [ x+78,  y, 8, 22, -3, -11]   //s as n
+    [ x+87,  y, 19, 17, -13, -10] //sw as ne
+    [ x+107, y, 28, 12, -14, -8]  //w as e
+    [ x+136, y, 19, 17, -4, -10]   //nw as se
+    [ x,     y, 8, 22, -3, -11]   //n as s
+    [ x+9,   y, 19, 17, -11, -11] //ne as sw
+    [ x+29,  y, 28, 12, -15, -8]  //e as w
+    [ x+58,  y, 19, 17, -2, -9]  //se as nw
+}
+
+// These templates are used only when mirrored vehicle_type_id crosses /3 <-> /4.
+// Symmetric 3+4+3 and 4+3+4 consists do not use these mixed families.
+// Baseline values below are copied from current reversed /3 and /4 templates.
+
+// --------------------------------------------------------------------
+// --------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------------------------------------------------------
+// --------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------------------------------------------------------
+// Keep these separate from the primary family so 13-car and 14-car
+// --------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
