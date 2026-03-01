@@ -68,7 +68,7 @@ switch(FEAT_TRAINS, SELF, switch_br_755_3_particles, tile_powers_railtype("ELRL"
 }
 
 // Translator wagon safety mode: suppress all visual effects.
-switch(FEAT_TRAINS, SELF, switch_br_755_3_particles_with_translator, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, SELF, switch_br_755_3_particles_with_translator, (bitmask_consist_info & 0x01)) {
 	0: switch_br_755_3_particles;
 	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
 }
@@ -105,13 +105,13 @@ switch(FEAT_TRAINS, PARENT, switch_br_755_3_power_base, tile_powers_railtype("EL
 }
 
 // Translator wagon safety mode: force no tractive output.
-switch(FEAT_TRAINS, PARENT, switch_br_755_3_power, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, PARENT, switch_br_755_3_power, (bitmask_consist_info & 0x01)) {
 	0: switch_br_755_3_power_base;
 	return 0;
 }
 
 // Translator wagon safety mode: force passenger capacity to zero.
-switch(FEAT_TRAINS, PARENT, switch_br_755_3_capacity_with_translator, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, PARENT, switch_br_755_3_capacity_with_translator, (bitmask_consist_info & 0x01)) {
 	0: return (167 / 3 * param_pax);
 	return 0;
 }

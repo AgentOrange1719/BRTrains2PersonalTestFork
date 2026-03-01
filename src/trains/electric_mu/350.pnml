@@ -30,32 +30,32 @@ switch(FEAT_TRAINS, SELF, sw_BR350_can_attach_wagon, vehicle_type_id) {
 // Translator handling for Class 350:
 // Disable output if a translator wagon exists anywhere in the parent consist.
 
-switch(FEAT_TRAINS, PARENT, sw_BR350_power_with_translator, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, PARENT, sw_BR350_power_with_translator, (bitmask_consist_info & 0x01)) {
 	0: return 2682;
 	return 0;
 }
 
-switch(FEAT_TRAINS, PARENT, sw_BR350_te_with_translator, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, PARENT, sw_BR350_te_with_translator, (bitmask_consist_info & 0x01)) {
 	0: return 77; // 0.3 * 255
 	return 0;
 }
 
-switch(FEAT_TRAINS, PARENT, sw_BR350_capacity_50_with_translator, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, PARENT, sw_BR350_capacity_50_with_translator, (bitmask_consist_info & 0x01)) {
 	0: return (50 * param_pax);
 	return 0;
 }
 
-switch(FEAT_TRAINS, PARENT, sw_BR350_capacity_90_with_translator, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, PARENT, sw_BR350_capacity_90_with_translator, (bitmask_consist_info & 0x01)) {
 	0: return (90 * param_pax);
 	return 0;
 }
 
-switch(FEAT_TRAINS, PARENT, sw_BR350_capacity_62_with_translator, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, PARENT, sw_BR350_capacity_62_with_translator, (bitmask_consist_info & 0x01)) {
 	0: return (62 * param_pax);
 	return 0;
 }
 
-switch(FEAT_TRAINS, PARENT, sw_BR350_capacity_60_with_translator, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, PARENT, sw_BR350_capacity_60_with_translator, (bitmask_consist_info & 0x01)) {
 	0: return (60 * param_pax);
 	return 0;
 }
@@ -65,13 +65,13 @@ switch(FEAT_TRAINS, SELF, sw_sound_electric_350_muted, getbits(extra_callback_in
 	SOUND_EVENT_BREAKDOWN: SOUND_BREAKDOWN_TRAIN_SHIP;
 }
 
-switch(FEAT_TRAINS, PARENT, sw_sound_electric_350_with_translator, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, PARENT, sw_sound_electric_350_with_translator, (bitmask_consist_info & 0x01)) {
 	0: sw_sound_electric_350;
 	sw_sound_electric_350_muted;
 }
 
 // Disable Class 350 electric visual effects when a translator wagon is present.
-switch(FEAT_TRAINS, PARENT, sw_BR350_visual_effect_with_translator, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, PARENT, sw_BR350_visual_effect_with_translator, (bitmask_consist_info & 0x01)) {
 	0: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
 	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
 }
@@ -88,13 +88,13 @@ switch(FEAT_TRAINS, PARENT, sw_BR350_1_visual_effect_by_railtype, tile_powers_ra
 	sw_BR350_1_visual_effect_by_railtype_third;
 }
 
-switch(FEAT_TRAINS, PARENT, sw_BR350_1_visual_effect_with_translator, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, PARENT, sw_BR350_1_visual_effect_with_translator, (bitmask_consist_info & 0x01)) {
 	0: sw_BR350_1_visual_effect_by_railtype;
 	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
 }
 
 // Disable the explicit electric spark effect callback when translator is present.
-switch(FEAT_TRAINS, PARENT, sw_BR350_create_effect_with_translator, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, PARENT, sw_BR350_create_effect_with_translator, (bitmask_consist_info & 0x01)) {
 	0: electric_create_visual_effect;
 	return 0;
 }
@@ -109,7 +109,7 @@ switch(FEAT_TRAINS, PARENT, sw_BR350_1_create_effect_by_railtype, tile_powers_ra
 	sw_BR350_1_create_effect_by_railtype_third;
 }
 
-switch(FEAT_TRAINS, PARENT, sw_BR350_1_create_effect_with_translator, count_veh_id(item_BRMk2_Translator)) {
+switch(FEAT_TRAINS, PARENT, sw_BR350_1_create_effect_with_translator, (bitmask_consist_info & 0x01)) {
 	0: sw_BR350_1_create_effect_by_railtype;
 	return 0;
 }
