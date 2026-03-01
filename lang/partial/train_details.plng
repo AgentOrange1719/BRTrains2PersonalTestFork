@@ -66,6 +66,8 @@ STR_BR_755_MW_LIMIT                     :Class 755 units support multiple workin
 
 STR_BR_756_3CAR                         :BR Class 756/3 (3-Car with Power Pack)
 STR_BR_756_4CAR                         :BR Class 756/4 (4-Car with Power Pack)
+STR_BR_756_MW_LIMIT                     :Class 756 units support multiple working up to 3 units maximum.
+STR_BR_700_MW_LIMIT                     :The Class 700 does not support multiple working.
 
 STR_BR_769                              :BR Class 769/0/3/4 "Flex" (4-Car)
 STR_BR_769_9                            :BR Class 769/9 "Flex" (4-Car)
@@ -1135,9 +1137,26 @@ str_BR508_liveries				:BR Blue/Grey, MerseyRail (Classic), Southeastern Yellow, 
 STR_NAME_BR700					:BR Class 700/0 "Desiro City" (8-car)
 str_BR700_usage					:Regional Passenger
 str_BR700_eos					:---
-str_BR700_liveries				:Siemens Demonstrator, Govia Thameslink
+str_BR700_0_capacity_1x			:727
+str_BR700_0_capacity_2x			:1454
+str_BR700_0_capacity_3x			:2181
+str_BR700_0_capacity_4x			:2908
+str_BR700_0_capacity_hc_1x		:1146
+str_BR700_0_capacity_hc_2x		:2292
+str_BR700_0_capacity_hc_3x		:3438
+str_BR700_0_capacity_hc_4x		:4584
+str_BR700_0_liveries			:Govia Thameslink, Govia Thameslink (Pride)
 
-STR_NAME_BR700_2				:BR Class 700/1 "Desiro City" (10-car)
+STR_NAME_BR700_2				:BR Class 700/1 "Desiro City" (12-car)
+str_BR700_1_capacity_1x			:666
+str_BR700_1_capacity_2x			:1332
+str_BR700_1_capacity_3x			:1998
+str_BR700_1_capacity_4x			:2664
+str_BR700_1_capacity_hc_1x		:1754
+str_BR700_1_capacity_hc_2x		:3508
+str_BR700_1_capacity_hc_3x		:5262
+str_BR700_1_capacity_hc_4x		:7016
+str_BR700_1_liveries			:Govia Thameslink, Govia Thameslink (Pride)
 
 STR_NAME_BR707					:BR Class 707 "Desiro City"
 str_BR707_usage					:Regional Passenger
@@ -1170,6 +1189,10 @@ str_BR755_usage					:Regional Passenger
 str_BR755_eos					:--
 str_BR755_liveries				:Greater Anglia
 str_BR755_description				:The British Rail Class 755 is a bi-mode multiple unit of the Stadler FLIRT family. The Class 755 can run off of either 25kV overhead lines or diesel engines found in the powerpack car. {RED}NOTE: For proper reversing behaviour, use only units of the same subclass, or symmetrical formations of /3+/4+/3 or /4+/3+/4. Otherwise alignment issues occur when reversed. A fix is being investigated.
+str_BR756_usage					:Regional Passenger
+str_BR756_eos					:--
+str_BR756_liveries				:Transport for Wales
+str_BR756_description				:The British Rail Class 756 is a bi-mode multiple unit of the Stadler FLIRT family. The Class 756 can run off of either 25kV overhead lines or diesel engines found in the powerpack car. {RED}NOTE: For proper reversing behaviour, use only units of the same subclass, or symmetrical formations of /3+/4+/3 or /4+/3+/4. Otherwise alignment issues occur when reversed. A fix is being investigated.
 
 # # # # # # #
 # # WAGON # #
