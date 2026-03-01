@@ -34,9 +34,12 @@ switch(FEAT_TRAINS, SELF, switch_BR717_roles_fwd, position_in_articulated_veh % 
 	spriteset_BR717_middle_GTR;
 }
 
-// Step 4 (reversed path): mirror role selection by consist-from-end position.
-// This keeps units visually fixed when reversing, including multiple coupled units.
-switch(FEAT_TRAINS, SELF, switch_BR717_roles_rev, position_in_consist_from_end % 6) {
+// Step 4 (reversed path): mirror role selection by mirrored articulated index.
+// Using var 0x61/0x41 keeps mapping stable even when non-unit vehicles
+// (for example translators/locos) are in the consist.
+switch(FEAT_TRAINS, SELF, switch_BR717_roles_rev,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x000000FF, 0x41] % 6]) {
 	0: spriteset_BR717_front_GTR_rev;
 	1: spriteset_BR717_middle_GTR_rev;
 	2: spriteset_BR717_middle_access_GTR_rev;
@@ -67,10 +70,53 @@ switch(FEAT_TRAINS, SELF, switch_articulated_BR717, extra_callback_info1) {
 	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
-// Only the panto car (index 4) should emit electric effects.
-switch(FEAT_TRAINS, SELF, switch_BR717_particles, position_in_articulated_veh % 6) {
-	4: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
-	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+// Class 717 effect chain (single method): create_effect only.
+// Use the same forward/reverse position basis as sprites so effect emitters stay on
+// the correct car roles when the consist reverses.
+switch(FEAT_TRAINS, SELF, switch_BR717_create_effect_elrl_pos_fwd, position_in_articulated_veh % 6) {
+	4: electric_create_visual_effect; // Panto car
+	return 0;
+}
+
+switch(FEAT_TRAINS, SELF, switch_BR717_create_effect_elrl_pos_rev,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x000000FF, 0x41] % 6]) {
+	4: electric_create_visual_effect; // Panto car in reversed mapping
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_BR717_create_effect_elrl_pos, vehicle_is_reversed) {
+	1: switch_BR717_create_effect_elrl_pos_rev;
+	switch_BR717_create_effect_elrl_pos_fwd;
+}
+
+switch(FEAT_TRAINS, SELF, switch_BR717_create_effect_third_pos_fwd, position_in_articulated_veh % 6) {
+	0: electric_create_visual_effect_SAA3; // Cab car A
+	5: electric_create_visual_effect_SAA3; // Cab car F
+	return 0;
+}
+
+switch(FEAT_TRAINS, SELF, switch_BR717_create_effect_third_pos_rev,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x000000FF, 0x41] % 6]) {
+	0: electric_create_visual_effect_SAA3; // Cab car A in reversed mapping
+	5: electric_create_visual_effect_SAA3; // Cab car F in reversed mapping
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_BR717_create_effect_third_pos, vehicle_is_reversed) {
+	1: switch_BR717_create_effect_third_pos_rev;
+	switch_BR717_create_effect_third_pos_fwd;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_BR717_create_effect_by_railtype_third, tile_powers_railtype("THIRD")) {
+	1: switch_BR717_create_effect_third_pos;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_BR717_create_effect_by_railtype, tile_powers_railtype("ELRL")) {
+	1: switch_BR717_create_effect_elrl_pos;
+	switch_BR717_create_effect_by_railtype_third;
 }
 
 switch(FEAT_TRAINS, SELF, switch_BR717_start_stop, num_vehs_in_consist) {
@@ -99,9 +145,41 @@ switch(FEAT_TRAINS, SELF, switch_BR717_cargo_capacity, param_standing_capacity) 
 	switch_BR717_cargo_capacity_seated;
 }
 
+// Translator handling for Class 717:
+// Bit 0 in bitmask_vehicle_info marks translator wagons.
+switch(FEAT_TRAINS, PARENT, switch_BR717_power_with_translator, (bitmask_consist_info & 0x01)) {
+	0: return 3300;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_BR717_te_with_translator, (bitmask_consist_info & 0x01)) {
+	0: return 38; // 0.15 * 255
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_BR717_cargo_capacity_with_translator, (bitmask_consist_info & 0x01)) {
+	0: switch_BR717_cargo_capacity;
+	return 0;
+}
+
+switch(FEAT_TRAINS, SELF, switch_sound_electric_717_muted, getbits(extra_callback_info1, 0, 8)) {
+	SOUND_EVENT_BREAKDOWN: SOUND_BREAKDOWN_TRAIN_SHIP;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_sound_electric_717_with_translator, (bitmask_consist_info & 0x01)) {
+	0: sw_sound_electric_350;
+	switch_sound_electric_717_muted;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_BR717_create_effect_with_translator, (bitmask_consist_info & 0x01)) {
+	0: switch_BR717_create_effect_by_railtype;
+	return 0;
+}
+
 // Only allow Class 717 units to couple with Class 717 units.
 switch(FEAT_TRAINS, SELF, switch_BR717_can_attach_wagon, vehicle_type_id) {
 	item_BR717: return CB_RESULT_ATTACH_ALLOW;
+	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
 
@@ -113,57 +191,66 @@ switch(FEAT_TRAINS, SELF, sw_BR717_cargo_subtype_text, cargo_subtype) {
 // Purchase text helper: show exact total capacity by current mode and pax multiplier.
 // The purchase list capacity column still rounds from per-car values for articulated units.
 switch(FEAT_TRAINS, SELF, switch_BR717_additional_text, param_standing_capacity * 10 + param_pax) {
-	1: return(string(str_purchase_loco_with_liveries_and_capacity,
+	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
+			string(str_multiple_working_no),
 			string(str_BR717_eos),
 			string(str_BR717_capacity_1x),
 			string(str_BR717_liveries)));
-	2: return(string(str_purchase_loco_with_liveries_and_capacity,
+	2: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
+			string(str_multiple_working_no),
 			string(str_BR717_eos),
 			string(str_BR717_capacity_2x),
 			string(str_BR717_liveries)));
-	3: return(string(str_purchase_loco_with_liveries_and_capacity,
+	3: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
+			string(str_multiple_working_no),
 			string(str_BR717_eos),
 			string(str_BR717_capacity_3x),
 			string(str_BR717_liveries)));
-	4: return(string(str_purchase_loco_with_liveries_and_capacity,
+	4: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
+			string(str_multiple_working_no),
 			string(str_BR717_eos),
 			string(str_BR717_capacity_4x),
 			string(str_BR717_liveries)));
-	11: return(string(str_purchase_loco_with_liveries_and_capacity,
+	11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
+			string(str_multiple_working_no),
 			string(str_BR717_eos),
 			string(str_BR717_capacity_hc_1x),
 			string(str_BR717_liveries)));
-	12: return(string(str_purchase_loco_with_liveries_and_capacity,
+	12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
+			string(str_multiple_working_no),
 			string(str_BR717_eos),
 			string(str_BR717_capacity_hc_2x),
 			string(str_BR717_liveries)));
-	13: return(string(str_purchase_loco_with_liveries_and_capacity,
+	13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
+			string(str_multiple_working_no),
 			string(str_BR717_eos),
 			string(str_BR717_capacity_hc_3x),
 			string(str_BR717_liveries)));
-	14: return(string(str_purchase_loco_with_liveries_and_capacity,
+	14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
+			string(str_multiple_working_no),
 			string(str_BR717_eos),
 			string(str_BR717_capacity_hc_4x),
 			string(str_BR717_liveries)));
-	return(string(str_purchase_loco_with_liveries_and_capacity,
+	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
+			string(str_multiple_working_no),
 			string(str_BR717_eos),
 			string(str_BR717_capacity_1x),
 			string(str_BR717_liveries)));
@@ -200,7 +287,7 @@ item(FEAT_TRAINS, item_BR717, 518) {
 		tractive_effort_coefficient:	0.15;
 		air_drag_coefficient:			0.05;
 		length:							8;
-		visual_effect_and_powered:		visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+		effect_spawn_model_and_powered:	EFFECT_SPAWN_MODEL_ELECTRIC;
 		extra_weight_per_wagon:			0;
 		bitmask_vehicle_info:			0;
 	}
@@ -213,10 +300,12 @@ item(FEAT_TRAINS, item_BR717, 518) {
 		start_stop:						switch_BR717_start_stop;
 		default: 						switch_BR717_spriteset;
 		purchase:						spriteset_BR717_Purchase;
-		visual_effect_and_powered:		switch_BR717_particles;
+		create_effect:					switch_BR717_create_effect_with_translator;
 		colour_mapping: 				return PALETTE_CC_FIRST;
-		sound_effect:					sw_sound_electric_350;
-		cargo_capacity:					switch_BR717_cargo_capacity;
+		sound_effect:					switch_sound_electric_717_with_translator;
+		power:							switch_BR717_power_with_translator;
+		tractive_effort_coefficient:	switch_BR717_te_with_translator;
+		cargo_capacity:					switch_BR717_cargo_capacity_with_translator;
 		cost_factor:					return(GetAdjustedCost(123));
 		running_cost_factor:			return(GetAdjustedCost(70));
 	}
