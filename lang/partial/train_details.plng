@@ -1161,6 +1161,14 @@ str_BR700_1_liveries			:Govia Thameslink, Govia Thameslink (Pride)
 STR_NAME_BR707					:BR Class 707 "Desiro City"
 str_BR707_usage					:Regional Passenger
 str_BR707_eos					:---
+str_BR707_capacity_1x			:271
+str_BR707_capacity_2x			:542
+str_BR707_capacity_3x			:813
+str_BR707_capacity_4x			:1084
+str_BR707_capacity_hc_1x		:591
+str_BR707_capacity_hc_2x		:1182
+str_BR707_capacity_hc_3x		:1773
+str_BR707_capacity_hc_4x		:2364
 str_BR707_liveries				:South Western Trains, Southeastern
 
 STR_NAME_BR717					:BR Class 717 "Desiro City"
