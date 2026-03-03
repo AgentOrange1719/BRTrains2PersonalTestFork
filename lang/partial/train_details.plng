@@ -821,6 +821,30 @@ str_BR350_eos					:---
 str_BR350_1_liveries			:London Midland, Silverlink/Central, LNWR Transitional, LNWR, LNWR (Eurovision Ukraine)
 str_BR350_2_liveries			:London Midland, LNWR Transitional
 str_BR350_34_liveries			:London Midland, TransPennine Express, LNWR
+str_BR350_1_capacity_1x		:230
+str_BR350_1_capacity_2x		:460
+str_BR350_1_capacity_3x		:690
+str_BR350_1_capacity_4x		:920
+str_BR350_1_capacity_hc_1x	:360
+str_BR350_1_capacity_hc_2x	:720
+str_BR350_1_capacity_hc_3x	:1080
+str_BR350_1_capacity_hc_4x	:1440
+str_BR350_2_capacity_1x		:270
+str_BR350_2_capacity_2x		:540
+str_BR350_2_capacity_3x		:810
+str_BR350_2_capacity_4x		:1080
+str_BR350_2_capacity_hc_1x	:363
+str_BR350_2_capacity_hc_2x	:726
+str_BR350_2_capacity_hc_3x	:1089
+str_BR350_2_capacity_hc_4x	:1452
+str_BR350_34_capacity_1x		:238
+str_BR350_34_capacity_2x		:476
+str_BR350_34_capacity_3x		:714
+str_BR350_34_capacity_4x		:952
+str_BR350_34_capacity_hc_1x	:363
+str_BR350_34_capacity_hc_2x	:726
+str_BR350_34_capacity_hc_3x	:1089
+str_BR350_34_capacity_hc_4x	:1452
 
 STR_NAME_ElectroTest			:TEST UNIT
 str_ElectroTest_usage			:
