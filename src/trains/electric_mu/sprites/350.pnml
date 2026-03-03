@@ -1,418 +1,188 @@
-spriteset(spriteset_BR350_Purchase, "gfx/EMU/350_450.png") {
-	template_purchase(175, 25)
-}
+// ============================================================================
+// Class 350 sprite and MW switch definitions
+// ============================================================================
+//
+// HOW THE SPRITE SELECTION CHAIN WORKS
+// -------------------------------------
+// The entry point is sw_BR350_X_direction (called from graphics.default in
+// 350.pnml). It reads vehicle_is_reversed in PARENT scope and branches:
+//
+//   FORWARD path:
+//     sw_BR350_X_direction
+//       -> sw_BR350_X_fwd_role    [SELF: position_in_articulated_veh % 4]
+//         -> sw_BR350_Xy          [SELF: cargo_subtype -> forward spriteset]
+//
+//   REVERSED path:
+//     sw_BR350_X_direction
+//       -> sw_BR350_rev_mirror_type
+//            Stores (position_in_consist_from_end - position_in_consist)
+//            into temp register 0x10F, which is the signed offset from this
+//            car to the car that occupied the same geographic tile before
+//            reversal. Then reads vehicle_type_id from that mirrored car to
+//            identify which subclass (and therefore which livery set) belongs
+//            at this geographic position.
+//         -> sw_BR350_X_rev_role  [SELF: mirrored car's
+//                                  position_in_articulated_veh via
+//                                  var[0x61, ..., 0x41] % 4]
+//              Recovers the role (front/2nd/3rd/rear) that the mirrored car
+//              had within its unit.
+//           -> sw_BR350_Xy_rev    [SELF: var[0x61, ..., 0xF2] reads
+//                                  cargo_subtype from the mirrored car at
+//                                  offset 0x10F -> reversed spriteset]
+//
+// WHY THE MIRROR TRICK IS NEEDED
+// --------------------------------
+// OpenTTD physically reorders cars on the track when a consist reverses, so
+// a car's SELF cargo_subtype would show the wrong livery at each tile after
+// reversal. Reading cargo_subtype from the geographically-equivalent forward
+// car instead keeps each livery anchored to its original map position.
+//
+// CAR ROLE MAPPING (position a/b/c/d = articulated index 0/1/2/3)
+//   a (0) = front cab
+//   b (1) = 2nd car
+//   c (2) = 3rd car
+//   d (3) = rear cab
+//
+// SUBCLASS ITEM IDs (used by sw_BR350_rev_mirror_type)
+//   774 = Class 350/1
+//   775 = Class 350/2
+//   776 = Class 350/3 and 350/4
+// ============================================================================
 
-spriteset(spriteset_BR350a_LM, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 0)
-}
 
-spriteset(spriteset_BR350b_LM, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 25)
-}
+// ============================================================================
+// SPRITESETS
+// Source: gfx/EMU/350_450.png
+//
+// PNG layout convention:
+//   Forward art:        x=0   (template_train32px_old)
+//   Reversed cab ends:  x=175 (separate end-specific art for cars a and d)
+//   Reversed middles:   x=0   (cars b and c are symmetric; the reversed
+//                              template flips them without a separate sprite)
+//
+// Each livery occupies four rows (one per car), starting at the y offset
+// shown. Reversed spritesets are drawn at x=175 (end cars) or x=0 (middles).
+// ============================================================================
 
-spriteset(spriteset_BR350c_LM, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 50)
-}
+spriteset(spriteset_BR350_Purchase, "gfx/EMU/350_450.png") { template_purchase(175, 25) }
 
-spriteset(spriteset_BR350d_LM, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 75)
-}
+// London Midland (y=0)
+spriteset(spriteset_BR350a_LM,           "gfx/EMU/350_450.png") { template_train32px_old(0, 0) }
+spriteset(spriteset_BR350b_LM,           "gfx/EMU/350_450.png") { template_train32px_old(0, 25) }
+spriteset(spriteset_BR350c_LM,           "gfx/EMU/350_450.png") { template_train32px_old(0, 50) }
+spriteset(spriteset_BR350d_LM,           "gfx/EMU/350_450.png") { template_train32px_old(0, 75) }
+spriteset(spriteset_BR350a_LM_rev,       "gfx/EMU/350_450.png") { template_train32px_old_reversed(175, 0) }
+spriteset(spriteset_BR350b_LM_rev,       "gfx/EMU/350_450.png") { template_train32px_old_reversed(0, 25) }
+spriteset(spriteset_BR350c_LM_rev,       "gfx/EMU/350_450.png") { template_train32px_old_reversed(0, 50) }
+spriteset(spriteset_BR350d_LM_rev,       "gfx/EMU/350_450.png") { template_train32px_old_reversed(175, 75) }
 
-spriteset(spriteset_BR350a_LM_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(175, 0)
-}
+// Silverlink Central (y=100)
+spriteset(spriteset_BR350a_SLinkCentral,     "gfx/EMU/350_450.png") { template_train32px_old(0, 100) }
+spriteset(spriteset_BR350b_SLinkCentral,     "gfx/EMU/350_450.png") { template_train32px_old(0, 125) }
+spriteset(spriteset_BR350c_SLinkCentral,     "gfx/EMU/350_450.png") { template_train32px_old(0, 150) }
+spriteset(spriteset_BR350d_SLinkCentral,     "gfx/EMU/350_450.png") { template_train32px_old(0, 175) }
+spriteset(spriteset_BR350a_SLinkCentral_rev, "gfx/EMU/350_450.png") { template_train32px_old_reversed(175, 100) }
+spriteset(spriteset_BR350b_SLinkCentral_rev, "gfx/EMU/350_450.png") { template_train32px_old_reversed(0, 125) }
+spriteset(spriteset_BR350c_SLinkCentral_rev, "gfx/EMU/350_450.png") { template_train32px_old_reversed(0, 150) }
+spriteset(spriteset_BR350d_SLinkCentral_rev, "gfx/EMU/350_450.png") { template_train32px_old_reversed(175, 175) }
 
-spriteset(spriteset_BR350b_LM_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(0, 25)
-}
+// TransPennine Express (y=200) — 350/3+4 only
+spriteset(spriteset_BR350a_TPE,          "gfx/EMU/350_450.png") { template_train32px_old(0, 200) }
+spriteset(spriteset_BR350b_TPE,          "gfx/EMU/350_450.png") { template_train32px_old(0, 225) }
+spriteset(spriteset_BR350c_TPE,          "gfx/EMU/350_450.png") { template_train32px_old(0, 250) }
+spriteset(spriteset_BR350d_TPE,          "gfx/EMU/350_450.png") { template_train32px_old(0, 275) }
+spriteset(spriteset_BR350a_TPE_rev,      "gfx/EMU/350_450.png") { template_train32px_old_reversed(175, 200) }
+spriteset(spriteset_BR350b_TPE_rev,      "gfx/EMU/350_450.png") { template_train32px_old_reversed(0, 225) }
+spriteset(spriteset_BR350c_TPE_rev,      "gfx/EMU/350_450.png") { template_train32px_old_reversed(0, 250) }
+spriteset(spriteset_BR350d_TPE_rev,      "gfx/EMU/350_450.png") { template_train32px_old_reversed(175, 275) }
 
-spriteset(spriteset_BR350c_LM_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(0, 50)
-}
+// LNWR Transitional (y=300) — 350/1 and 350/2 only
+spriteset(spriteset_BR350a_LNWRSimple,       "gfx/EMU/350_450.png") { template_train32px_old(0, 300) }
+spriteset(spriteset_BR350b_LNWRSimple,       "gfx/EMU/350_450.png") { template_train32px_old(0, 325) }
+spriteset(spriteset_BR350c_LNWRSimple,       "gfx/EMU/350_450.png") { template_train32px_old(0, 350) }
+spriteset(spriteset_BR350d_LNWRSimple,       "gfx/EMU/350_450.png") { template_train32px_old(0, 375) }
+spriteset(spriteset_BR350a_LNWRSimple_rev,   "gfx/EMU/350_450.png") { template_train32px_old_reversed(175, 300) }
+spriteset(spriteset_BR350b_LNWRSimple_rev,   "gfx/EMU/350_450.png") { template_train32px_old_reversed(0, 325) }
+spriteset(spriteset_BR350c_LNWRSimple_rev,   "gfx/EMU/350_450.png") { template_train32px_old_reversed(0, 350) }
+spriteset(spriteset_BR350d_LNWRSimple_rev,   "gfx/EMU/350_450.png") { template_train32px_old_reversed(175, 375) }
 
-spriteset(spriteset_BR350d_LM_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(175, 75)
-}
+// LNWR Full (y=400) — 350/1 and 350/3+4 only
+spriteset(spriteset_BR350a_LNWRFull,         "gfx/EMU/350_450.png") { template_train32px_old(0, 400) }
+spriteset(spriteset_BR350b_LNWRFull,         "gfx/EMU/350_450.png") { template_train32px_old(0, 425) }
+spriteset(spriteset_BR350c_LNWRFull,         "gfx/EMU/350_450.png") { template_train32px_old(0, 450) }
+spriteset(spriteset_BR350d_LNWRFull,         "gfx/EMU/350_450.png") { template_train32px_old(0, 475) }
+spriteset(spriteset_BR350a_LNWRFull_rev,     "gfx/EMU/350_450.png") { template_train32px_old_reversed(175, 400) }
+spriteset(spriteset_BR350b_LNWRFull_rev,     "gfx/EMU/350_450.png") { template_train32px_old_reversed(0, 425) }
+spriteset(spriteset_BR350c_LNWRFull_rev,     "gfx/EMU/350_450.png") { template_train32px_old_reversed(0, 450) }
+spriteset(spriteset_BR350d_LNWRFull_rev,     "gfx/EMU/350_450.png") { template_train32px_old_reversed(175, 475) }
 
-spriteset(spriteset_BR350a_SLinkCentral, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 100)
-}
+// LNWR Ukraine (y=700) — 350/1 only
+spriteset(spriteset_BR350a_LNWRUkraine,      "gfx/EMU/350_450.png") { template_train32px_old(0, 700) }
+spriteset(spriteset_BR350b_LNWRUkraine,      "gfx/EMU/350_450.png") { template_train32px_old(0, 725) }
+spriteset(spriteset_BR350c_LNWRUkraine,      "gfx/EMU/350_450.png") { template_train32px_old(0, 750) }
+spriteset(spriteset_BR350d_LNWRUkraine,      "gfx/EMU/350_450.png") { template_train32px_old(0, 775) }
+spriteset(spriteset_BR350a_LNWRUkraine_rev,  "gfx/EMU/350_450.png") { template_train32px_old_reversed(175, 700) }
+spriteset(spriteset_BR350b_LNWRUkraine_rev,  "gfx/EMU/350_450.png") { template_train32px_old_reversed(0, 725) }
+spriteset(spriteset_BR350c_LNWRUkraine_rev,  "gfx/EMU/350_450.png") { template_train32px_old_reversed(0, 750) }
+spriteset(spriteset_BR350d_LNWRUkraine_rev,  "gfx/EMU/350_450.png") { template_train32px_old_reversed(175, 775) }
 
-spriteset(spriteset_BR350b_SLinkCentral, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 125)
-}
 
-spriteset(spriteset_BR350c_SLinkCentral, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 150)
-}
+// ============================================================================
+// CLASS 350/1  —  subtype: 0=LM  1=Silverlink  2=LNWR Trans  3=LNWR Full
+//                          4=LNWR Ukraine
+// ============================================================================
 
-spriteset(spriteset_BR350d_SLinkCentral, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 175)
-}
-
-spriteset(spriteset_BR350a_SLinkCentral_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(175, 100)
-}
-
-spriteset(spriteset_BR350b_SLinkCentral_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(0, 125)
-}
-
-spriteset(spriteset_BR350c_SLinkCentral_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(0, 150)
-}
-
-spriteset(spriteset_BR350d_SLinkCentral_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(175, 175)
-}
-
-spriteset(spriteset_BR350a_TPE, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 200)
-}
-
-spriteset(spriteset_BR350b_TPE, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 225)
-}
-
-spriteset(spriteset_BR350c_TPE, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 250)
-}
-
-spriteset(spriteset_BR350d_TPE, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 275)
-}
-
-spriteset(spriteset_BR350a_TPE_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(175, 200)
-}
-
-spriteset(spriteset_BR350b_TPE_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(0, 225)
-}
-
-spriteset(spriteset_BR350c_TPE_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(0, 250)
-}
-
-spriteset(spriteset_BR350d_TPE_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(175, 275)
-}
-
-spriteset(spriteset_BR350a_LNWRSimple, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 300)
-}
-
-spriteset(spriteset_BR350b_LNWRSimple, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 325)
-}
-
-spriteset(spriteset_BR350c_LNWRSimple, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 350)
-}
-
-spriteset(spriteset_BR350d_LNWRSimple, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 375)
-}
-
-spriteset(spriteset_BR350a_LNWRSimple_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(175, 300)
-}
-
-spriteset(spriteset_BR350b_LNWRSimple_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(0, 325)
-}
-
-spriteset(spriteset_BR350c_LNWRSimple_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(0, 350)
-}
-
-spriteset(spriteset_BR350d_LNWRSimple_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(175, 375)
-}
-
-spriteset(spriteset_BR350a_LNWRFull, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 400)
-}
-
-spriteset(spriteset_BR350b_LNWRFull, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 425)
-}
-
-spriteset(spriteset_BR350c_LNWRFull, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 450)
-}
-
-spriteset(spriteset_BR350d_LNWRFull, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 475)
-}
-
-spriteset(spriteset_BR350a_LNWRFull_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(175, 400)
-}
-
-spriteset(spriteset_BR350b_LNWRFull_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(0, 425)
-}
-
-spriteset(spriteset_BR350c_LNWRFull_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(0, 450)
-}
-
-spriteset(spriteset_BR350d_LNWRFull_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(175, 475)
-}
-
-spriteset(spriteset_BR350a_LNWRUkraine, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 700)
-}
-
-spriteset(spriteset_BR350b_LNWRUkraine, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 725)
-}
-
-spriteset(spriteset_BR350c_LNWRUkraine, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 750)
-}
-
-spriteset(spriteset_BR350d_LNWRUkraine, "gfx/EMU/350_450.png") {
-	template_train32px_old(0, 775)
-}
-
-spriteset(spriteset_BR350a_LNWRUkraine_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(175, 700)
-}
-
-spriteset(spriteset_BR350b_LNWRUkraine_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(0, 725)
-}
-
-spriteset(spriteset_BR350c_LNWRUkraine_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(0, 750)
-}
-
-spriteset(spriteset_BR350d_LNWRUkraine_rev, "gfx/EMU/350_450.png") {
-	template_train32px_old_reversed(175, 775)
-}
-
-// Subclass-specific Class 350 livery and push-pull switches.
-// Keeps each subclass on its intended livery subset while preserving mirror-based reversing.
-
-// Class 350/1: LM, Silverlink Central, LNWR Transitional, LNWR Full, LNWR Ukraine (no TPE)
+// Forward: cargo_subtype selects the livery spriteset for each car position.
 switch(FEAT_TRAINS, SELF, sw_BR350_1a, cargo_subtype) {
-	0: spriteset_BR350a_LM;
-	1: spriteset_BR350a_SLinkCentral;
-	2: spriteset_BR350a_LNWRSimple;
-	3: spriteset_BR350a_LNWRFull;
+	0: spriteset_BR350a_LM;          1: spriteset_BR350a_SLinkCentral;
+	2: spriteset_BR350a_LNWRSimple;  3: spriteset_BR350a_LNWRFull;
 	4: spriteset_BR350a_LNWRUkraine;
-	5: spriteset_BR350a_LNWRUkraine;
 	default: spriteset_BR350a_LM;
 }
-
 switch(FEAT_TRAINS, SELF, sw_BR350_1b, cargo_subtype) {
-	0: spriteset_BR350b_LM;
-	1: spriteset_BR350b_SLinkCentral;
-	2: spriteset_BR350b_LNWRSimple;
-	3: spriteset_BR350b_LNWRFull;
+	0: spriteset_BR350b_LM;          1: spriteset_BR350b_SLinkCentral;
+	2: spriteset_BR350b_LNWRSimple;  3: spriteset_BR350b_LNWRFull;
 	4: spriteset_BR350b_LNWRUkraine;
-	5: spriteset_BR350b_LNWRUkraine;
 	default: spriteset_BR350b_LM;
 }
-
 switch(FEAT_TRAINS, SELF, sw_BR350_1c, cargo_subtype) {
-	0: spriteset_BR350c_LM;
-	1: spriteset_BR350c_SLinkCentral;
-	2: spriteset_BR350c_LNWRSimple;
-	3: spriteset_BR350c_LNWRFull;
+	0: spriteset_BR350c_LM;          1: spriteset_BR350c_SLinkCentral;
+	2: spriteset_BR350c_LNWRSimple;  3: spriteset_BR350c_LNWRFull;
 	4: spriteset_BR350c_LNWRUkraine;
-	5: spriteset_BR350c_LNWRUkraine;
 	default: spriteset_BR350c_LM;
 }
-
 switch(FEAT_TRAINS, SELF, sw_BR350_1d, cargo_subtype) {
-	0: spriteset_BR350d_LM;
-	1: spriteset_BR350d_SLinkCentral;
-	2: spriteset_BR350d_LNWRSimple;
-	3: spriteset_BR350d_LNWRFull;
+	0: spriteset_BR350d_LM;          1: spriteset_BR350d_SLinkCentral;
+	2: spriteset_BR350d_LNWRSimple;  3: spriteset_BR350d_LNWRFull;
 	4: spriteset_BR350d_LNWRUkraine;
-	5: spriteset_BR350d_LNWRUkraine;
 	default: spriteset_BR350d_LM;
 }
 
+// Reversed: reads cargo_subtype from the geographically-equivalent forward car.
+// Each switch re-stores the same mirror offset into temp register 0x10F before
+// reading var[0x61, ..., 0xF2] from the mirrored vehicle.
 switch(FEAT_TRAINS, SELF, sw_BR350_1a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR350a_LM_rev;
-	1: spriteset_BR350a_SLinkCentral_rev;
-	2: spriteset_BR350a_LNWRSimple_rev;
-	3: spriteset_BR350a_LNWRFull_rev;
+	0: spriteset_BR350a_LM_rev;          1: spriteset_BR350a_SLinkCentral_rev;
+	2: spriteset_BR350a_LNWRSimple_rev;  3: spriteset_BR350a_LNWRFull_rev;
 	4: spriteset_BR350a_LNWRUkraine_rev;
-	5: spriteset_BR350a_LNWRUkraine_rev;
 	default: spriteset_BR350a_LM_rev;
 }
-
 switch(FEAT_TRAINS, SELF, sw_BR350_1b_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR350b_LM_rev;
-	1: spriteset_BR350b_SLinkCentral_rev;
-	2: spriteset_BR350b_LNWRSimple_rev;
-	3: spriteset_BR350b_LNWRFull_rev;
+	0: spriteset_BR350b_LM_rev;          1: spriteset_BR350b_SLinkCentral_rev;
+	2: spriteset_BR350b_LNWRSimple_rev;  3: spriteset_BR350b_LNWRFull_rev;
 	4: spriteset_BR350b_LNWRUkraine_rev;
-	5: spriteset_BR350b_LNWRUkraine_rev;
 	default: spriteset_BR350b_LM_rev;
 }
-
 switch(FEAT_TRAINS, SELF, sw_BR350_1c_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR350c_LM_rev;
-	1: spriteset_BR350c_SLinkCentral_rev;
-	2: spriteset_BR350c_LNWRSimple_rev;
-	3: spriteset_BR350c_LNWRFull_rev;
+	0: spriteset_BR350c_LM_rev;          1: spriteset_BR350c_SLinkCentral_rev;
+	2: spriteset_BR350c_LNWRSimple_rev;  3: spriteset_BR350c_LNWRFull_rev;
 	4: spriteset_BR350c_LNWRUkraine_rev;
-	5: spriteset_BR350c_LNWRUkraine_rev;
 	default: spriteset_BR350c_LM_rev;
 }
-
 switch(FEAT_TRAINS, SELF, sw_BR350_1d_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR350d_LM_rev;
-	1: spriteset_BR350d_SLinkCentral_rev;
-	2: spriteset_BR350d_LNWRSimple_rev;
-	3: spriteset_BR350d_LNWRFull_rev;
+	0: spriteset_BR350d_LM_rev;          1: spriteset_BR350d_SLinkCentral_rev;
+	2: spriteset_BR350d_LNWRSimple_rev;  3: spriteset_BR350d_LNWRFull_rev;
 	4: spriteset_BR350d_LNWRUkraine_rev;
-	5: spriteset_BR350d_LNWRUkraine_rev;
-	default: spriteset_BR350d_LM_rev;
-}
-
-// Class 350/2: London Midland and LNWR Transitional only
-switch(FEAT_TRAINS, SELF, sw_BR350_2a, cargo_subtype) {
-	0: spriteset_BR350a_LM;
-	1: spriteset_BR350a_LNWRSimple;
-	2: spriteset_BR350a_LNWRSimple;
-	3: spriteset_BR350a_LNWRSimple;
-	default: spriteset_BR350a_LM;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_2b, cargo_subtype) {
-	0: spriteset_BR350b_LM;
-	1: spriteset_BR350b_LNWRSimple;
-	2: spriteset_BR350b_LNWRSimple;
-	3: spriteset_BR350b_LNWRSimple;
-	default: spriteset_BR350b_LM;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_2c, cargo_subtype) {
-	0: spriteset_BR350c_LM;
-	1: spriteset_BR350c_LNWRSimple;
-	2: spriteset_BR350c_LNWRSimple;
-	3: spriteset_BR350c_LNWRSimple;
-	default: spriteset_BR350c_LM;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_2d, cargo_subtype) {
-	0: spriteset_BR350d_LM;
-	1: spriteset_BR350d_LNWRSimple;
-	2: spriteset_BR350d_LNWRSimple;
-	3: spriteset_BR350d_LNWRSimple;
-	default: spriteset_BR350d_LM;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_2a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR350a_LM_rev;
-	1: spriteset_BR350a_LNWRSimple_rev;
-	2: spriteset_BR350a_LNWRSimple_rev;
-	3: spriteset_BR350a_LNWRSimple_rev;
-	default: spriteset_BR350a_LM_rev;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_2b_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR350b_LM_rev;
-	1: spriteset_BR350b_LNWRSimple_rev;
-	2: spriteset_BR350b_LNWRSimple_rev;
-	3: spriteset_BR350b_LNWRSimple_rev;
-	default: spriteset_BR350b_LM_rev;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_2c_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR350c_LM_rev;
-	1: spriteset_BR350c_LNWRSimple_rev;
-	2: spriteset_BR350c_LNWRSimple_rev;
-	3: spriteset_BR350c_LNWRSimple_rev;
-	default: spriteset_BR350c_LM_rev;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_2d_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR350d_LM_rev;
-	1: spriteset_BR350d_LNWRSimple_rev;
-	2: spriteset_BR350d_LNWRSimple_rev;
-	3: spriteset_BR350d_LNWRSimple_rev;
-	default: spriteset_BR350d_LM_rev;
-}
-
-// Class 350/3 and 350/4: London Midland, TPE, LNWR Full
-switch(FEAT_TRAINS, SELF, sw_BR350_34a, cargo_subtype) {
-	0: spriteset_BR350a_LM;
-	1: spriteset_BR350a_TPE;
-	2: spriteset_BR350a_LNWRFull;
-	3: spriteset_BR350a_LNWRFull;
-	4: spriteset_BR350a_LNWRFull;
-	default: spriteset_BR350a_LM;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_34b, cargo_subtype) {
-	0: spriteset_BR350b_LM;
-	1: spriteset_BR350b_TPE;
-	2: spriteset_BR350b_LNWRFull;
-	3: spriteset_BR350b_LNWRFull;
-	4: spriteset_BR350b_LNWRFull;
-	default: spriteset_BR350b_LM;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_34c, cargo_subtype) {
-	0: spriteset_BR350c_LM;
-	1: spriteset_BR350c_TPE;
-	2: spriteset_BR350c_LNWRFull;
-	3: spriteset_BR350c_LNWRFull;
-	4: spriteset_BR350c_LNWRFull;
-	default: spriteset_BR350c_LM;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_34d, cargo_subtype) {
-	0: spriteset_BR350d_LM;
-	1: spriteset_BR350d_TPE;
-	2: spriteset_BR350d_LNWRFull;
-	3: spriteset_BR350d_LNWRFull;
-	4: spriteset_BR350d_LNWRFull;
-	default: spriteset_BR350d_LM;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_34a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR350a_LM_rev;
-	1: spriteset_BR350a_TPE_rev;
-	2: spriteset_BR350a_LNWRFull_rev;
-	3: spriteset_BR350a_LNWRFull_rev;
-	4: spriteset_BR350a_LNWRFull_rev;
-	default: spriteset_BR350a_LM_rev;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_34b_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR350b_LM_rev;
-	1: spriteset_BR350b_TPE_rev;
-	2: spriteset_BR350b_LNWRFull_rev;
-	3: spriteset_BR350b_LNWRFull_rev;
-	4: spriteset_BR350b_LNWRFull_rev;
-	default: spriteset_BR350b_LM_rev;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_34c_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR350c_LM_rev;
-	1: spriteset_BR350c_TPE_rev;
-	2: spriteset_BR350c_LNWRFull_rev;
-	3: spriteset_BR350c_LNWRFull_rev;
-	4: spriteset_BR350c_LNWRFull_rev;
-	default: spriteset_BR350c_LM_rev;
-}
-
-switch(FEAT_TRAINS, SELF, sw_BR350_34d_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR350d_LM_rev;
-	1: spriteset_BR350d_TPE_rev;
-	2: spriteset_BR350d_LNWRFull_rev;
-	3: spriteset_BR350d_LNWRFull_rev;
-	4: spriteset_BR350d_LNWRFull_rev;
 	default: spriteset_BR350d_LM_rev;
 }
 
@@ -425,10 +195,104 @@ switch(FEAT_TRAINS, SELF, sw_BR350_1_cargo_subtype_text, cargo_subtype) {
 	return CB_RESULT_NO_TEXT;
 }
 
+
+// ============================================================================
+// CLASS 350/2  —  subtype: 0=LM  1=LNWR Trans
+// ============================================================================
+
+switch(FEAT_TRAINS, SELF, sw_BR350_2a, cargo_subtype) {
+	0: spriteset_BR350a_LM;
+	1: spriteset_BR350a_LNWRSimple;
+	default: spriteset_BR350a_LM;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_2b, cargo_subtype) {
+	0: spriteset_BR350b_LM;
+	1: spriteset_BR350b_LNWRSimple;
+	default: spriteset_BR350b_LM;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_2c, cargo_subtype) {
+	0: spriteset_BR350c_LM;
+	1: spriteset_BR350c_LNWRSimple;
+	default: spriteset_BR350c_LM;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_2d, cargo_subtype) {
+	0: spriteset_BR350d_LM;
+	1: spriteset_BR350d_LNWRSimple;
+	default: spriteset_BR350d_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_2a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350a_LM_rev;
+	1: spriteset_BR350a_LNWRSimple_rev;
+	default: spriteset_BR350a_LM_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_2b_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350b_LM_rev;
+	1: spriteset_BR350b_LNWRSimple_rev;
+	default: spriteset_BR350b_LM_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_2c_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350c_LM_rev;
+	1: spriteset_BR350c_LNWRSimple_rev;
+	default: spriteset_BR350c_LM_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_2d_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350d_LM_rev;
+	1: spriteset_BR350d_LNWRSimple_rev;
+	default: spriteset_BR350d_LM_rev;
+}
+
 switch(FEAT_TRAINS, SELF, sw_BR350_2_cargo_subtype_text, cargo_subtype) {
 	0: return string(str_LondonMidland);
 	1: return string(str_LNWRSimple);
 	return CB_RESULT_NO_TEXT;
+}
+
+
+// ============================================================================
+// CLASS 350/3+4  —  subtype: 0=LM  1=TPE  2=LNWR Full
+// ============================================================================
+
+switch(FEAT_TRAINS, SELF, sw_BR350_34a, cargo_subtype) {
+	0: spriteset_BR350a_LM;       1: spriteset_BR350a_TPE;
+	2: spriteset_BR350a_LNWRFull;
+	default: spriteset_BR350a_LM;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_34b, cargo_subtype) {
+	0: spriteset_BR350b_LM;       1: spriteset_BR350b_TPE;
+	2: spriteset_BR350b_LNWRFull;
+	default: spriteset_BR350b_LM;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_34c, cargo_subtype) {
+	0: spriteset_BR350c_LM;       1: spriteset_BR350c_TPE;
+	2: spriteset_BR350c_LNWRFull;
+	default: spriteset_BR350c_LM;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_34d, cargo_subtype) {
+	0: spriteset_BR350d_LM;       1: spriteset_BR350d_TPE;
+	2: spriteset_BR350d_LNWRFull;
+	default: spriteset_BR350d_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_34a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350a_LM_rev;       1: spriteset_BR350a_TPE_rev;
+	2: spriteset_BR350a_LNWRFull_rev;
+	default: spriteset_BR350a_LM_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_34b_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350b_LM_rev;       1: spriteset_BR350b_TPE_rev;
+	2: spriteset_BR350b_LNWRFull_rev;
+	default: spriteset_BR350b_LM_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_34c_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350c_LM_rev;       1: spriteset_BR350c_TPE_rev;
+	2: spriteset_BR350c_LNWRFull_rev;
+	default: spriteset_BR350c_LM_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_34d_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR350d_LM_rev;       1: spriteset_BR350d_TPE_rev;
+	2: spriteset_BR350d_LNWRFull_rev;
+	default: spriteset_BR350d_LM_rev;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR350_34_cargo_subtype_text, cargo_subtype) {
@@ -438,123 +302,72 @@ switch(FEAT_TRAINS, SELF, sw_BR350_34_cargo_subtype_text, cargo_subtype) {
 	return CB_RESULT_NO_TEXT;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR350_subclass_rev_from_mirror, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
-	774: sw_BR350_1a_rev;
-	775: sw_BR350_2a_rev;
-	776: sw_BR350_34a_rev;
-	777: sw_BR350_1b_rev;
-	778: sw_BR350_1c_rev;
-	779: sw_BR350_1d_rev;
-	780: sw_BR350_2b_rev;
-	781: sw_BR350_2c_rev;
-	782: sw_BR350_2d_rev;
-	783: sw_BR350_34b_rev;
-	784: sw_BR350_34c_rev;
-	785: sw_BR350_34d_rev;
-	2774: sw_BR350_1a_rev;
-	2775: sw_BR350_2a_rev;
-	2776: sw_BR350_34a_rev;
-	2777: sw_BR350_1b_rev;
-	2778: sw_BR350_1c_rev;
-	2779: sw_BR350_1d_rev;
-	2780: sw_BR350_2b_rev;
-	2781: sw_BR350_2c_rev;
-	2782: sw_BR350_2d_rev;
-	2783: sw_BR350_34b_rev;
-	2784: sw_BR350_34c_rev;
-	2785: sw_BR350_34d_rev;
-	default: sw_BR350_1a_rev;
+
+// ============================================================================
+// MW / REVERSING ENTRY POINTS  (shared by all three subclasses)
+//
+// Call chain recap (read bottom-up, since NML requires forward-declaration):
+//   Direction gate -> mirror type -> rev role -> rev livery -> spriteset
+//                  -> fwd role   -> fwd livery -> spriteset
+// ============================================================================
+
+// FORWARD role dispatch: maps articulated index to the livery switch for
+// each car position (a=front cab, b=2nd, c=3rd, d=rear cab).
+switch(FEAT_TRAINS, SELF, sw_BR350_1_fwd_role, position_in_articulated_veh % 4) {
+	0: sw_BR350_1a; 1: sw_BR350_1b; 2: sw_BR350_1c; 3: sw_BR350_1d;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_2_fwd_role, position_in_articulated_veh % 4) {
+	0: sw_BR350_2a; 1: sw_BR350_2b; 2: sw_BR350_2c; 3: sw_BR350_2d;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_34_fwd_role, position_in_articulated_veh % 4) {
+	0: sw_BR350_34a; 1: sw_BR350_34b; 2: sw_BR350_34c; 3: sw_BR350_34d;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR350_subclass_role_from_vehicle, vehicle_type_id) {
-	774: sw_BR350_1a;
-	775: sw_BR350_2a;
-	776: sw_BR350_34a;
-	777: sw_BR350_1b;
-	778: sw_BR350_1c;
-	779: sw_BR350_1d;
-	780: sw_BR350_2b;
-	781: sw_BR350_2c;
-	782: sw_BR350_2d;
-	783: sw_BR350_34b;
-	784: sw_BR350_34c;
-	785: sw_BR350_34d;
-	2774: sw_BR350_1a;
-	2775: sw_BR350_2a;
-	2776: sw_BR350_34a;
-	2777: sw_BR350_1b;
-	2778: sw_BR350_1c;
-	2779: sw_BR350_1d;
-	2780: sw_BR350_2b;
-	2781: sw_BR350_2c;
-	2782: sw_BR350_2d;
-	2783: sw_BR350_34b;
-	2784: sw_BR350_34c;
-	2785: sw_BR350_34d;
-	default: sw_BR350_1a;
+// REVERSED role dispatch: read position_in_articulated_veh (bits 0-7 of var 0x41)
+// from the mirrored car (offset already in register 0x10F from sw_BR350_rev_mirror_type).
+// This gives the original articulated index of the car that occupied this geographic tile
+// before reversal, regardless of where in the consist the 350 unit is positioned.
+// Using fe % 4 instead would break when the unit is hauled by an external locomotive,
+// because fe is then offset by the number of vehicles ahead of the unit in the consist.
+switch(FEAT_TRAINS, SELF, sw_BR350_1_rev_role, var[0x61, 0, 0x000000FF, 0x41] % 4) {
+	0: sw_BR350_1a_rev; 1: sw_BR350_1b_rev; 2: sw_BR350_1c_rev; 3: sw_BR350_1d_rev;
+	sw_BR350_1d_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_2_rev_role, var[0x61, 0, 0x000000FF, 0x41] % 4) {
+	0: sw_BR350_2a_rev; 1: sw_BR350_2b_rev; 2: sw_BR350_2c_rev; 3: sw_BR350_2d_rev;
+	sw_BR350_2d_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_34_rev_role, var[0x61, 0, 0x000000FF, 0x41] % 4) {
+	0: sw_BR350_34a_rev; 1: sw_BR350_34b_rev; 2: sw_BR350_34c_rev; 3: sw_BR350_34d_rev;
+	sw_BR350_34d_rev;
 }
 
-switch(FEAT_TRAINS, PARENT, sw_BR350_pushpull, vehicle_is_reversed) {
-	0: sw_BR350_subclass_role_from_vehicle;
-	1: sw_BR350_subclass_rev_from_mirror;
-}
-switch(FEAT_TRAINS, PARENT, sw_BR350_1a_pushpull, vehicle_is_reversed) {
-	0: sw_BR350_1a;
-	1: sw_BR350_subclass_rev_from_mirror;
-}
-
-switch(FEAT_TRAINS, PARENT, sw_BR350_1b_pushpull, vehicle_is_reversed) {
-	0: sw_BR350_1b;
-	1: sw_BR350_subclass_rev_from_mirror;
-}
-
-switch(FEAT_TRAINS, PARENT, sw_BR350_1c_pushpull, vehicle_is_reversed) {
-	0: sw_BR350_1c;
-	1: sw_BR350_subclass_rev_from_mirror;
+// MIRROR TYPE DISPATCH: computes the signed offset to the car that was at
+// this geographic tile before reversal, stores it in temp register 0x10F,
+// then reads that car's vehicle_type_id to determine which subclass (and
+// therefore which livery set) to apply here. The _rev_role child switches
+// inherit 0x10F and use it to read cargo_subtype from the same mirrored car.
+switch(FEAT_TRAINS, SELF, sw_BR350_rev_mirror_type,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x0000FFFF, 0xC6]]) {
+	774: sw_BR350_1_rev_role;
+	775: sw_BR350_2_rev_role;
+	776: sw_BR350_34_rev_role;
+	sw_BR350_1_rev_role; // fallback for any unexpected ID
 }
 
-switch(FEAT_TRAINS, PARENT, sw_BR350_1d_pushpull, vehicle_is_reversed) {
-	0: sw_BR350_1d;
-	1: sw_BR350_subclass_rev_from_mirror;
+// DIRECTION GATES: entry points called from each item's graphics.default.
+// Must be PARENT scope so that vehicle_is_reversed reflects the consist state
+// rather than the individual car's state.
+switch(FEAT_TRAINS, PARENT, sw_BR350_1_direction, vehicle_is_reversed) {
+	1: sw_BR350_rev_mirror_type;
+	sw_BR350_1_fwd_role;
 }
-
-switch(FEAT_TRAINS, PARENT, sw_BR350_2a_pushpull, vehicle_is_reversed) {
-	0: sw_BR350_2a;
-	1: sw_BR350_subclass_rev_from_mirror;
+switch(FEAT_TRAINS, PARENT, sw_BR350_2_direction, vehicle_is_reversed) {
+	1: sw_BR350_rev_mirror_type;
+	sw_BR350_2_fwd_role;
 }
-
-switch(FEAT_TRAINS, PARENT, sw_BR350_2b_pushpull, vehicle_is_reversed) {
-	0: sw_BR350_2b;
-	1: sw_BR350_subclass_rev_from_mirror;
+switch(FEAT_TRAINS, PARENT, sw_BR350_34_direction, vehicle_is_reversed) {
+	1: sw_BR350_rev_mirror_type;
+	sw_BR350_34_fwd_role;
 }
-
-switch(FEAT_TRAINS, PARENT, sw_BR350_2c_pushpull, vehicle_is_reversed) {
-	0: sw_BR350_2c;
-	1: sw_BR350_subclass_rev_from_mirror;
-}
-
-switch(FEAT_TRAINS, PARENT, sw_BR350_2d_pushpull, vehicle_is_reversed) {
-	0: sw_BR350_2d;
-	1: sw_BR350_subclass_rev_from_mirror;
-}
-
-switch(FEAT_TRAINS, PARENT, sw_BR350_34a_pushpull, vehicle_is_reversed) {
-	0: sw_BR350_34a;
-	1: sw_BR350_subclass_rev_from_mirror;
-}
-
-switch(FEAT_TRAINS, PARENT, sw_BR350_34b_pushpull, vehicle_is_reversed) {
-	0: sw_BR350_34b;
-	1: sw_BR350_subclass_rev_from_mirror;
-}
-
-switch(FEAT_TRAINS, PARENT, sw_BR350_34c_pushpull, vehicle_is_reversed) {
-	0: sw_BR350_34c;
-	1: sw_BR350_subclass_rev_from_mirror;
-}
-
-switch(FEAT_TRAINS, PARENT, sw_BR350_34d_pushpull, vehicle_is_reversed) {
-	0: sw_BR350_34d;
-	1: sw_BR350_subclass_rev_from_mirror;
-}
-
