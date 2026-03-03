@@ -47,17 +47,20 @@ switch(FEAT_TRAINS, SELF, switch_br_720_spriteset_C2C_fwd, position_in_articulat
 	spriteset_br_720_middle_C2C;
 }
 
-// Step 5 (reversed path): pick role from mirrored consist position.
-// Using position_in_consist_from_end keeps car order visually fixed when the
-// whole consist reverses, for any number of units.
-switch(FEAT_TRAINS, SELF, switch_br_720_spriteset_GA_rev, position_in_consist_from_end % 5) {
+// Step 5 (reversed path): pick role from mirrored car's articulated index.
+// Reads position_in_articulated_veh (bits 0-7 of var 0x41) from the mirrored
+// car. The mirror offset (0x10F) is already set by switch_br_720_rev_mirror_livery
+// and persists into this child switch — do not re-store it here, for the same
+// reason sw_BR350_1_rev_role doesn't re-store it (doing so in the same expression
+// as var[0x61] can cause evaluation ordering issues in NML/OpenTTD).
+switch(FEAT_TRAINS, SELF, switch_br_720_spriteset_GA_rev, var[0x61, 0, 0x000000FF, 0x41] % 5) {
 	0: spriteset_br_720_front_GA_reversed;
 	1: spriteset_br_720_middle_panto_GA_reversed;
 	4: spriteset_br_720_rear_GA_reversed;
 	spriteset_br_720_middle_GA_reversed;
 }
 
-switch(FEAT_TRAINS, SELF, switch_br_720_spriteset_C2C_rev, position_in_consist_from_end % 5) {
+switch(FEAT_TRAINS, SELF, switch_br_720_spriteset_C2C_rev, var[0x61, 0, 0x000000FF, 0x41] % 5) {
 	0: spriteset_br_720_front_C2C_reversed;
 	1: spriteset_br_720_middle_panto_C2C_reversed;
 	4: spriteset_br_720_rear_C2C_reversed;
