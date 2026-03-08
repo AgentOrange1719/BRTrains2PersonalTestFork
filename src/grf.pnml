@@ -76,7 +76,7 @@ grf {
 				name: string(STR_PARAM_HIDE_VEHS);
 				desc: string(STR_PARAM_HIDE_VEHS_DESC);
 				min_value: 0;
-				max_value: 1;
+				max_value: 2;
 				def_value: 1;
 				names: {
 					0: string(STR_PARAM_SHOW_DEFAULT);
@@ -89,11 +89,12 @@ grf {
 				name: string(STR_PARAM_NAME_STANDING_CAPACITY);
 				desc: string(STR_PARAM_DESC_STANDING_CAPACITY);
 				min_value: 0;
-				max_value: 1;
+				max_value: 2;
 				def_value: 0;
 				names: {
 					0: string(STR_PARAM_STANDING_CAPACITY_OFF);
 					1: string(STR_PARAM_STANDING_CAPACITY_ON);
+					2: string(STR_PARAM_STANDING_CAPACITY_MORE_UNITS);
 				};
 			}
 	}
