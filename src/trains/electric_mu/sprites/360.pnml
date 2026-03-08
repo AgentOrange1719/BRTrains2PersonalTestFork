@@ -69,9 +69,7 @@ spriteset(spriteset_BR360_rear_FGE_reversed, "gfx/EMU/360.png") { template_train
 spriteset(spriteset_BR360_middle_FGE_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 728) }
 spriteset(spriteset_BR360_middlepanto_FGE_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 754) }
 
-// -----------------------------------------------------------------------------
-// Class 360/1 role + push-pull sprite selection
-// A=front cab, B=middle panto, C=middle, D=rear cab
+// Class 360/1: A=front cab, B=middle panto, C=middle, D=rear cab
 switch(FEAT_TRAINS, SELF, sw_BR360_1_a, cargo_subtype) {
 	0: spriteset_BR360_front_FGE;
 	1: spriteset_BR360_front_NXEABlue;
@@ -112,7 +110,6 @@ switch(FEAT_TRAINS, SELF, sw_BR360_1_d, cargo_subtype) {
 	default: spriteset_BR360_rear_FGE;
 }
 
-// Reversed mode uses mirrored vehicle cargo subtype (var 0xF2).
 switch(FEAT_TRAINS, SELF, sw_BR360_1_a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
 	0: spriteset_BR360_front_FGE_reversed;
 	1: spriteset_BR360_front_NXEABlue_reversed;
@@ -153,41 +150,33 @@ switch(FEAT_TRAINS, SELF, sw_BR360_1_d_rev, [STORE_TEMP(position_in_consist_from
 	default: spriteset_BR360_rear_FGE_reversed;
 }
 
-// Map each /1 vehicle_type_id to its role switch.
-switch(FEAT_TRAINS, SELF, sw_BR360_1_role_from_vehicle, vehicle_type_id) {
-	737: sw_BR360_1_a;
-	756: sw_BR360_1_b;
-	757: sw_BR360_1_c;
-	758: sw_BR360_1_d;
-	default: sw_BR360_1_a;
+switch(FEAT_TRAINS, SELF, sw_BR360_1_roles_fwd, position_in_articulated_veh % 4) {
+	0: sw_BR360_1_a;
+	1: sw_BR360_1_b;
+	2: sw_BR360_1_c;
+	3: sw_BR360_1_d;
+	sw_BR360_1_a;
 }
 
-// In reversed mode, map based on mirrored vehicle_type_id (var 0xC6).
-switch(FEAT_TRAINS, SELF, sw_BR360_1_rev_from_mirror, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
-	737: sw_BR360_1_a_rev;
-	756: sw_BR360_1_b_rev;
-	757: sw_BR360_1_c_rev;
-	758: sw_BR360_1_d_rev;
-	default: sw_BR360_1_a_rev;
+switch(FEAT_TRAINS, SELF, sw_BR360_1_rev_role_4car, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 4]) {
+	0: sw_BR360_1_a_rev;
+	1: sw_BR360_1_b_rev;
+	2: sw_BR360_1_c_rev;
+	3: sw_BR360_1_d_rev;
+	sw_BR360_1_a_rev;
 }
 
 switch(FEAT_TRAINS, PARENT, sw_BR360_1_pushpull, vehicle_is_reversed) {
-	0: sw_BR360_1_role_from_vehicle;
-	1: sw_BR360_1_rev_from_mirror;
+	1: sw_BR360_1_rev_role_4car;
+	sw_BR360_1_roles_fwd;
 }
 
-// /1-only multiple working: all /1 cars can couple only to /1 cars.
 switch(FEAT_TRAINS, SELF, sw_BR360_1_can_attach_wagon, vehicle_type_id) {
 	item_BR360_1: return CB_RESULT_ATTACH_ALLOW;
-	item_BR360_1_b: return CB_RESULT_ATTACH_ALLOW;
-	item_BR360_1_c: return CB_RESULT_ATTACH_ALLOW;
-	item_BR360_1_d: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
 
-// -----------------------------------------------------------------------------
-// Class 360/2 role + push-pull sprite selection
-// A=front cab, B=middle (reused twice in 5-car), D=middle panto, E=rear cab
+// Class 360/2: A=front cab, D=middle panto, B=middle, E=rear cab
 switch(FEAT_TRAINS, SELF, sw_BR360_2_a, cargo_subtype) {
 	0: spriteset_BR360_front_HeathrowConnect;
 	1: spriteset_BR360_front_HeathrowExpress;
@@ -211,7 +200,7 @@ switch(FEAT_TRAINS, SELF, sw_BR360_2_e, cargo_subtype) {
 	1: spriteset_BR360_rear_HeathrowExpress;
 	default: spriteset_BR360_rear_HeathrowConnect;
 }
-// Reversed mode uses mirrored vehicle cargo subtype (var 0xF2).
+
 switch(FEAT_TRAINS, SELF, sw_BR360_2_a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
 	0: spriteset_BR360_front_HeathrowConnect_reversed;
 	1: spriteset_BR360_front_HeathrowExpress_reversed;
@@ -235,38 +224,64 @@ switch(FEAT_TRAINS, SELF, sw_BR360_2_e_rev, [STORE_TEMP(position_in_consist_from
 	1: spriteset_BR360_rear_HeathrowExpress_reversed;
 	default: spriteset_BR360_rear_HeathrowConnect_reversed;
 }
-// Map each /2 vehicle_type_id to its role switch.
-switch(FEAT_TRAINS, SELF, sw_BR360_2_role_from_vehicle, vehicle_type_id) {
-	738: sw_BR360_2_a;
-	739: sw_BR360_2_a;
-	759: sw_BR360_2_b;
-	761: sw_BR360_2_d;
-	762: sw_BR360_2_e;
-	default: sw_BR360_2_a;
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_4car_roles_fwd, position_in_articulated_veh % 4) {
+	0: sw_BR360_2_a;
+	1: sw_BR360_2_d;
+	2: sw_BR360_2_b;
+	3: sw_BR360_2_e;
+	sw_BR360_2_b;
 }
 
-// In reversed mode, map based on mirrored vehicle_type_id (var 0xC6).
+switch(FEAT_TRAINS, SELF, sw_BR360_2_5car_roles_fwd, position_in_articulated_veh % 5) {
+	0: sw_BR360_2_a;
+	1: sw_BR360_2_d;
+	2: sw_BR360_2_b;
+	3: sw_BR360_2_b;
+	4: sw_BR360_2_e;
+	sw_BR360_2_b;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_rev_role_4car, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 4]) {
+	0: sw_BR360_2_a_rev;
+	1: sw_BR360_2_d_rev;
+	2: sw_BR360_2_b_rev;
+	3: sw_BR360_2_e_rev;
+	sw_BR360_2_b_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_rev_role_5car, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 5]) {
+	0: sw_BR360_2_a_rev;
+	1: sw_BR360_2_d_rev;
+	2: sw_BR360_2_b_rev;
+	3: sw_BR360_2_b_rev;
+	4: sw_BR360_2_e_rev;
+	sw_BR360_2_b_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_roles_fwd_by_type, vehicle_type_id) {
+	738: sw_BR360_2_4car_roles_fwd;
+	2738: sw_BR360_2_4car_roles_fwd;
+	739: sw_BR360_2_5car_roles_fwd;
+	2739: sw_BR360_2_5car_roles_fwd;
+	sw_BR360_2_4car_roles_fwd;
+}
+
 switch(FEAT_TRAINS, SELF, sw_BR360_2_rev_from_mirror, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
-	738: sw_BR360_2_a_rev;
-	739: sw_BR360_2_a_rev;
-	759: sw_BR360_2_b_rev;
-	761: sw_BR360_2_d_rev;
-	762: sw_BR360_2_e_rev;
-	default: sw_BR360_2_a_rev;
+	738: sw_BR360_2_rev_role_4car;
+	2738: sw_BR360_2_rev_role_4car;
+	739: sw_BR360_2_rev_role_5car;
+	2739: sw_BR360_2_rev_role_5car;
+	sw_BR360_2_rev_role_4car;
 }
 
 switch(FEAT_TRAINS, PARENT, sw_BR360_2_pushpull, vehicle_is_reversed) {
-	0: sw_BR360_2_role_from_vehicle;
 	1: sw_BR360_2_rev_from_mirror;
+	sw_BR360_2_roles_fwd_by_type;
 }
 
-// /2-only multiple working: all /2 cars can couple only to /2 cars.
 switch(FEAT_TRAINS, SELF, sw_BR360_2_can_attach_wagon, vehicle_type_id) {
 	item_BR360_2_4car: return CB_RESULT_ATTACH_ALLOW;
 	item_BR360_2_5car: return CB_RESULT_ATTACH_ALLOW;
-	item_BR360_2_b: return CB_RESULT_ATTACH_ALLOW;
-	item_BR360_2_d: return CB_RESULT_ATTACH_ALLOW;
-	item_BR360_2_e: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
-
