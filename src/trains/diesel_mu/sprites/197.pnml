@@ -1,15 +1,52 @@
-spriteset(spriteset_BR197_Purchase, "gfx/BR197.png") {
+// Unified Class 197 sprite and push-pull mappings for mixed-length (2-car + 3-car) sets.
+
+spriteset(spriteset_BR197_Purchase, "gfx/DMU/197.png") {
 	template_purchase(0, 0)
 }
 
-spriteset(spriteset_BR197_front_TFW, "gfx/BR197.png") {
-	template_train32px_old(0, 13)
+spriteset(spriteset_BR197_front_TFW, "gfx/DMU/197.png") { template_train32px_old(0, 13) }
+spriteset(spriteset_BR197_rear_TFW, "gfx/DMU/197.png") { template_train32px_old(0, 38) }
+spriteset(spriteset_BR197_middle_TFW, "gfx/DMU/197.png") { template_train32px_old(0, 63) }
+spriteset(spriteset_BR197_front_TFW_rev, "gfx/DMU/197.png") { template_train32px_old_reversed(175, 13) }
+spriteset(spriteset_BR197_rear_TFW_rev, "gfx/DMU/197.png") { template_train32px_old_reversed(175, 38) }
+spriteset(spriteset_BR197_middle_TFW_rev, "gfx/DMU/197.png") { template_train32px_old_reversed(0, 63) }
+
+switch(FEAT_TRAINS, SELF, sw_BR197_roles_fwd_2car, position_in_articulated_veh % 2) {
+	0: spriteset_BR197_front_TFW;
+	spriteset_BR197_rear_TFW;
 }
 
-spriteset(spriteset_BR197_rear_TFW, "gfx/BR197.png") {
-	template_train32px_old(0, 38)
+switch(FEAT_TRAINS, SELF, sw_BR197_roles_fwd_3car, position_in_articulated_veh % 3) {
+	0: spriteset_BR197_front_TFW;
+	2: spriteset_BR197_rear_TFW;
+	spriteset_BR197_middle_TFW;
 }
 
-spriteset(spriteset_BR197_middle_TFW, "gfx/BR197.png") {
-	template_train32px_old(0, 63)
+switch(FEAT_TRAINS, SELF, sw_BR197_rev_role_2car, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 2]) {
+	0: spriteset_BR197_front_TFW_rev;
+	spriteset_BR197_rear_TFW_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR197_rev_role_3car, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 3]) {
+	0: spriteset_BR197_front_TFW_rev;
+	2: spriteset_BR197_rear_TFW_rev;
+	spriteset_BR197_middle_TFW_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR197_rev_from_mirror, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
+	434: sw_BR197_rev_role_2car;
+	2434: sw_BR197_rev_role_2car;
+	435: sw_BR197_rev_role_3car;
+	2435: sw_BR197_rev_role_3car;
+	sw_BR197_rev_role_2car;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR197_0_direction, vehicle_is_reversed) {
+	1: sw_BR197_rev_from_mirror;
+	sw_BR197_roles_fwd_2car;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR197_1_direction, vehicle_is_reversed) {
+	1: sw_BR197_rev_from_mirror;
+	sw_BR197_roles_fwd_3car;
 }
