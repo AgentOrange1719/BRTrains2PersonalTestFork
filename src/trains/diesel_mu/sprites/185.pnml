@@ -80,30 +80,24 @@ switch(FEAT_TRAINS,SELF,sw_BR185_cargo_subtype_text,cargo_subtype){
 	return CB_RESULT_NO_TEXT;
 }
 
-// Stage 3: map every vehicle_type_id to the stationery car role (front/middle/rear).
-switch(FEAT_TRAINS, SELF, sw_BR185_role_from_vehicle, vehicle_type_id) {
-	70: sw_BR185a;
-	71: sw_BR185b;
-	72: sw_BR185c;
-	2070: sw_BR185a;
-	2071: sw_BR185b;
-	2072: sw_BR185c;
-	default: sw_BR185a;
+// Stage 3: map articulated position to role in forward direction.
+switch(FEAT_TRAINS, SELF, sw_BR185_roles_fwd, position_in_articulated_veh % 3) {
+	0: sw_BR185a;
+	1: sw_BR185b;
+	2: sw_BR185c;
+	sw_BR185a;
 }
 
-// Stage 4: use the mirrored vehicle_type_id when the parent is reversed so the mirrored car keeps its proper sprite.
-switch(FEAT_TRAINS, SELF, sw_BR185_rev_from_mirror, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
-	70: sw_BR185a_rev;
-	71: sw_BR185b_rev;
-	72: sw_BR185c_rev;
-	2070: sw_BR185a_rev;
-	2071: sw_BR185b_rev;
-	2072: sw_BR185c_rev;
-	default: sw_BR185a_rev;
+// Stage 4: when reversed, use mirrored articulated position to preserve role at each map tile.
+switch(FEAT_TRAINS, SELF, sw_BR185_rev_role_3car, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 3]) {
+	0: sw_BR185a_rev;
+	1: sw_BR185b_rev;
+	2: sw_BR185c_rev;
+	sw_BR185a_rev;
 }
 
-// Final selector: use the standard role switch unless the entire consist is reversed.
+// Final selector: use forward role chain unless the consist is reversed.
 switch(FEAT_TRAINS, PARENT, sw_BR185_pushpull, vehicle_is_reversed) {
-	0: sw_BR185_role_from_vehicle;
-	1: sw_BR185_rev_from_mirror;
+	1: sw_BR185_rev_role_3car;
+	sw_BR185_roles_fwd;
 }
