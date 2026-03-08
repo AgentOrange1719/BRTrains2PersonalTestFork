@@ -1,11 +1,9 @@
 // Class 444 (5-car)
 // Formation: A-B-B-B-C
 
+// Build fixed 5-car units by returning the same item ID for articulated cars 1..4.
 switch(FEAT_TRAINS, SELF, sw_articulated_BR444, extra_callback_info1) {
-	1: return item_444b;
-	2: return item_444b2;
-	3: return item_444b3;
-	4: return item_444c;
+	1..4: return item_BR444;
 	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
@@ -16,18 +14,16 @@ switch(FEAT_TRAINS, SELF, sw_BR444_cargo_subtype_text, cargo_subtype) {
 	return CB_RESULT_NO_TEXT;
 }
 
+switch(FEAT_TRAINS, SELF, sw_BR444_cargo_capacity, position_in_articulated_veh % 5) {
+	0: return(62 * param_pax);
+	4: return(62 * param_pax);
+	return(70 * param_pax);
+}
+
 // Class 444 can multiple-work with Class 444 and Class 450.
 switch(FEAT_TRAINS, SELF, sw_BR444_can_attach_wagon, vehicle_type_id) {
 	item_BR444: return CB_RESULT_ATTACH_ALLOW;
-	item_444b: return CB_RESULT_ATTACH_ALLOW;
-	item_444b2: return CB_RESULT_ATTACH_ALLOW;
-	item_444b3: return CB_RESULT_ATTACH_ALLOW;
-	item_444c: return CB_RESULT_ATTACH_ALLOW;
 	item_BR450: return CB_RESULT_ATTACH_ALLOW;
-	item_BR450b: return CB_RESULT_ATTACH_ALLOW;
-	item_BR450b2: return CB_RESULT_ATTACH_ALLOW;
-	item_BR450c: return CB_RESULT_ATTACH_ALLOW;
-	item_BR450d: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
 
@@ -76,188 +72,8 @@ item(FEAT_TRAINS, item_BR444, 74) {
 		colour_mapping: return PALETTE_CC_FIRST;
 		create_effect: electric_create_visual_effect_SAA3;
 		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(62 * param_pax);
+		cargo_capacity: sw_BR444_cargo_capacity;
 		cost_factor: return(GetAdjustedCost(85));
 		running_cost_factor: return(GetAdjustedCost(53));
-	}
-}
-
-item(FEAT_TRAINS, item_444b, 75) {
-	property {
-		name: string(STR_NAME_BR444);
-		climates_available: NO_CLIMATE;
-		introduction_date: date(2004, 4, 21);
-		model_life: 8;
-		retire_early: 1;
-		vehicle_life: 50;
-		reliability_decay: 7;
-		refittable_cargo_classes: CC_PASSENGERS;
-		cargo_allow_refit: [PASS, TOUR];
-		loading_speed: 14;
-		cost_factor: 1;
-		running_cost_factor: 1;
-		sprite_id: SPRITE_ID_NEW_TRAIN;
-		speed: 100 mph;
-		misc_flags: TRAIN_FLAG_NO_BREAKDOWN_SMOKE;
-		refit_cost: 0;
-		track_type: THIRD;
-		ai_special_flag: AI_FLAG_CARGO;
-		power: 0 hp;
-		running_cost_base: RUNNING_COST_ELECTRIC;
-		dual_headed: 0;
-		default_cargo_type: PASS;
-		cargo_capacity: 70;
-		weight: 0 ton;
-		engine_class: ENGINE_CLASS_ELECTRIC;
-		tractive_effort_coefficient: 0.3;
-		air_drag_coefficient: 0.1;
-		length: 8;
-		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
-		extra_weight_per_wagon: 0;
-		bitmask_vehicle_info: 0;
-		cargo_age_period: 185;
-	}
-	graphics {
-		can_attach_wagon: sw_BR444_can_attach_wagon;
-		default: sw_BR444_pushpull;
-		colour_mapping: return PALETTE_CC_FIRST;
-		create_effect: electric_create_visual_effect_SAA3;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(70 * param_pax);
-	}
-}
-
-item(FEAT_TRAINS, item_444b2, 77) {
-	property {
-		name: string(STR_NAME_BR444);
-		climates_available: NO_CLIMATE;
-		introduction_date: date(2004, 4, 21);
-		model_life: 8;
-		retire_early: 1;
-		vehicle_life: 50;
-		reliability_decay: 7;
-		refittable_cargo_classes: CC_PASSENGERS;
-		cargo_allow_refit: [PASS, TOUR];
-		loading_speed: 14;
-		cost_factor: 1;
-		running_cost_factor: 1;
-		sprite_id: SPRITE_ID_NEW_TRAIN;
-		speed: 100 mph;
-		misc_flags: TRAIN_FLAG_NO_BREAKDOWN_SMOKE;
-		refit_cost: 0;
-		track_type: THIRD;
-		ai_special_flag: AI_FLAG_CARGO;
-		power: 0 hp;
-		running_cost_base: RUNNING_COST_ELECTRIC;
-		dual_headed: 0;
-		default_cargo_type: PASS;
-		cargo_capacity: 70;
-		weight: 0 ton;
-		engine_class: ENGINE_CLASS_ELECTRIC;
-		tractive_effort_coefficient: 0.3;
-		air_drag_coefficient: 0.1;
-		length: 8;
-		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
-		extra_weight_per_wagon: 0;
-		bitmask_vehicle_info: 0;
-		cargo_age_period: 185;
-	}
-	graphics {
-		can_attach_wagon: sw_BR444_can_attach_wagon;
-		default: sw_BR444_pushpull;
-		colour_mapping: return PALETTE_CC_FIRST;
-		create_effect: electric_create_visual_effect_SAA3;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(70 * param_pax);
-	}
-}
-
-item(FEAT_TRAINS, item_444b3, 78) {
-	property {
-		name: string(STR_NAME_BR444);
-		climates_available: NO_CLIMATE;
-		introduction_date: date(2004, 4, 21);
-		model_life: 8;
-		retire_early: 1;
-		vehicle_life: 50;
-		reliability_decay: 7;
-		refittable_cargo_classes: CC_PASSENGERS;
-		cargo_allow_refit: [PASS, TOUR];
-		loading_speed: 14;
-		cost_factor: 1;
-		running_cost_factor: 1;
-		sprite_id: SPRITE_ID_NEW_TRAIN;
-		speed: 100 mph;
-		misc_flags: TRAIN_FLAG_NO_BREAKDOWN_SMOKE;
-		refit_cost: 0;
-		track_type: THIRD;
-		ai_special_flag: AI_FLAG_CARGO;
-		power: 0 hp;
-		running_cost_base: RUNNING_COST_ELECTRIC;
-		dual_headed: 0;
-		default_cargo_type: PASS;
-		cargo_capacity: 70;
-		weight: 0 ton;
-		engine_class: ENGINE_CLASS_ELECTRIC;
-		tractive_effort_coefficient: 0.3;
-		air_drag_coefficient: 0.1;
-		length: 8;
-		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
-		extra_weight_per_wagon: 0;
-		bitmask_vehicle_info: 0;
-		cargo_age_period: 185;
-	}
-	graphics {
-		can_attach_wagon: sw_BR444_can_attach_wagon;
-		default: sw_BR444_pushpull;
-		colour_mapping: return PALETTE_CC_FIRST;
-		create_effect: electric_create_visual_effect_SAA3;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(70 * param_pax);
-	}
-}
-
-item(FEAT_TRAINS, item_444c, 76) {
-	property {
-		name: string(STR_NAME_BR444);
-		climates_available: NO_CLIMATE;
-		introduction_date: date(2004, 4, 21);
-		model_life: 8;
-		retire_early: 1;
-		vehicle_life: 50;
-		reliability_decay: 7;
-		refittable_cargo_classes: CC_PASSENGERS;
-		cargo_allow_refit: [PASS, TOUR];
-		loading_speed: 14;
-		cost_factor: 1;
-		running_cost_factor: 1;
-		sprite_id: SPRITE_ID_NEW_TRAIN;
-		speed: 100 mph;
-		misc_flags: TRAIN_FLAG_NO_BREAKDOWN_SMOKE;
-		refit_cost: 0;
-		track_type: THIRD;
-		ai_special_flag: AI_FLAG_CARGO;
-		power: 0 hp;
-		running_cost_base: RUNNING_COST_ELECTRIC;
-		dual_headed: 0;
-		default_cargo_type: PASS;
-		cargo_capacity: 62;
-		weight: 0 ton;
-		engine_class: ENGINE_CLASS_ELECTRIC;
-		tractive_effort_coefficient: 0.3;
-		air_drag_coefficient: 0.1;
-		length: 8;
-		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
-		extra_weight_per_wagon: 0;
-		bitmask_vehicle_info: 0;
-		cargo_age_period: 185;
-	}
-	graphics {
-		can_attach_wagon: sw_BR444_can_attach_wagon;
-		default: sw_BR444_pushpull;
-		colour_mapping: return PALETTE_CC_FIRST;
-		create_effect: electric_create_visual_effect_SAA3;
-		sound_effect: sw_sound_electric_350;
-		cargo_capacity: return(62 * param_pax);
 	}
 }
