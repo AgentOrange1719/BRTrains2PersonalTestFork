@@ -694,7 +694,7 @@ str_BR175_liveries				:Arriva "Ghost", First North Western, Arriva Trains, Trans
 STR_NAME_BR180					:BR Class 180 "Adelante" (5-car)
 str_BR180_usage					:Express Passenger
 str_BR180_eos					:---
-str_BR180_liveries				:First Great Western, First Great Western - Dynamic Lines, Grand Central, Northern Rail
+str_BR180_liveries				:First Great Western, First Great Western - Dynamic Lines, Grand Central, Grand Central - Lined, Northern Rail, EMR - Maroon and White
 
 STR_NAME_BR185					:BR Class 185 "Desiro" (3-car)
 str_BR185_usage					:Express Passenger
