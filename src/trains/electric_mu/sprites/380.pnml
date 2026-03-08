@@ -1,44 +1,101 @@
 spriteset(spriteset_BR380_Purchase, "gfx/EMU/380.png") {
-    template_purchase(0, 0)
+	template_purchase(0, 0)
 }
-spriteset (spriteset_BR380_front_ScotRail_Saltire, "gfx/EMU/380.png") {         template_train32px(0, 13) }
-spriteset (spriteset_BR380_middle_ScotRail_Saltire, "gfx/EMU/380.png") {        template_train32px(0, 65) }
-spriteset (spriteset_BR380_middle_panto_ScotRail_Saltire, "gfx/EMU/380.png") {  template_train32px(0, 91) }
-spriteset (spriteset_BR380_rear_ScotRail_Saltire, "gfx/EMU/380.png") {          template_train32px(0, 39) }
-spriteset (spriteset_BR380_front_ScotRail_Saltire_reversed, "gfx/EMU/380.png") {         template_train32px_reversed(0, 117) }
-spriteset (spriteset_BR380_middle_panto_ScotRail_Saltire_reversed, "gfx/EMU/380.png") {  template_train32px_reversed(0, 91) }
-spriteset (spriteset_BR380_rear_ScotRail_Saltire_reversed, "gfx/EMU/380.png") {          template_train32px_reversed(0, 143) }
+spriteset(spriteset_BR380_front_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 13) }
+spriteset(spriteset_BR380_middle_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 65) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 91) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 39) }
+spriteset(spriteset_BR380_front_ScotRail_Saltire_reversed, "gfx/EMU/380.png") { template_train32px_reversed(0, 117) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire_reversed, "gfx/EMU/380.png") { template_train32px_reversed(0, 91) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire_reversed, "gfx/EMU/380.png") { template_train32px_reversed(0, 143) }
 
-switch(FEAT_TRAINS, SELF, sw_BR380_cargo_subtype_text, cargo_subtype){
-    0:  return string(str_ScotRailSaltire);
-    return CB_RESULT_NO_TEXT;
-}
-
-// Normal-role mapper based on current vehicle type.
-switch(FEAT_TRAINS, SELF, sw_BR380_role_from_vehicle, vehicle_type_id) {
-    767:  spriteset_BR380_front_ScotRail_Saltire;
-    768:  spriteset_BR380_front_ScotRail_Saltire;
-    769:  spriteset_BR380_middle_panto_ScotRail_Saltire;
-    770:  spriteset_BR380_rear_ScotRail_Saltire;
-    771:  spriteset_BR380_middle_ScotRail_Saltire;
-    772:  spriteset_BR380_middle_panto_ScotRail_Saltire;
-    773:  spriteset_BR380_rear_ScotRail_Saltire;
-    default: spriteset_BR380_front_ScotRail_Saltire;
+switch(FEAT_TRAINS, SELF, sw_BR380_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_ScotRailSaltire);
+	return CB_RESULT_NO_TEXT;
 }
 
-// Reversed-role mapper based on mirrored consist vehicle type.
+switch(FEAT_TRAINS, SELF, sw_BR380_front, cargo_subtype) {
+	0: spriteset_BR380_front_ScotRail_Saltire;
+	spriteset_BR380_front_ScotRail_Saltire;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_middle, cargo_subtype) {
+	0: spriteset_BR380_middle_ScotRail_Saltire;
+	spriteset_BR380_middle_ScotRail_Saltire;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_middle_panto, cargo_subtype) {
+	0: spriteset_BR380_middle_panto_ScotRail_Saltire;
+	spriteset_BR380_middle_panto_ScotRail_Saltire;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_rear, cargo_subtype) {
+	0: spriteset_BR380_rear_ScotRail_Saltire;
+	spriteset_BR380_rear_ScotRail_Saltire;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_front_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR380_front_ScotRail_Saltire_reversed;
+	spriteset_BR380_front_ScotRail_Saltire_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_middle_panto_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR380_middle_panto_ScotRail_Saltire_reversed;
+	spriteset_BR380_middle_panto_ScotRail_Saltire_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_rear_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR380_rear_ScotRail_Saltire_reversed;
+	spriteset_BR380_rear_ScotRail_Saltire_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_3car_roles_fwd, position_in_articulated_veh % 3) {
+	0: sw_BR380_front;
+	1: sw_BR380_middle_panto;
+	2: sw_BR380_rear;
+	sw_BR380_middle_panto;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_4car_roles_fwd, position_in_articulated_veh % 4) {
+	0: sw_BR380_front;
+	1: sw_BR380_middle;
+	2: sw_BR380_middle_panto;
+	3: sw_BR380_rear;
+	sw_BR380_middle;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_rev_role_3car, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 3]) {
+	0: sw_BR380_front_rev;
+	1: sw_BR380_middle_panto_rev;
+	2: sw_BR380_rear_rev;
+	sw_BR380_middle_panto_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_rev_role_4car, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 4]) {
+	0: sw_BR380_front_rev;
+	1: sw_BR380_middle;
+	2: sw_BR380_middle_panto_rev;
+	3: sw_BR380_rear_rev;
+	sw_BR380_middle;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_roles_fwd_by_type, vehicle_type_id) {
+	767: sw_BR380_3car_roles_fwd;
+	2767: sw_BR380_3car_roles_fwd;
+	768: sw_BR380_4car_roles_fwd;
+	2768: sw_BR380_4car_roles_fwd;
+	sw_BR380_3car_roles_fwd;
+}
+
 switch(FEAT_TRAINS, SELF, sw_BR380_rev_from_mirror, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
-    767:  spriteset_BR380_front_ScotRail_Saltire_reversed;
-    768:  spriteset_BR380_front_ScotRail_Saltire_reversed;
-    769:  spriteset_BR380_middle_panto_ScotRail_Saltire_reversed;
-    770:  spriteset_BR380_rear_ScotRail_Saltire_reversed;
-    771:  spriteset_BR380_middle_ScotRail_Saltire;
-    772:  spriteset_BR380_middle_panto_ScotRail_Saltire_reversed;
-    773:  spriteset_BR380_rear_ScotRail_Saltire_reversed;
-    default: spriteset_BR380_front_ScotRail_Saltire_reversed;
+	767: sw_BR380_rev_role_3car;
+	2767: sw_BR380_rev_role_3car;
+	768: sw_BR380_rev_role_4car;
+	2768: sw_BR380_rev_role_4car;
+	sw_BR380_rev_role_3car;
 }
 
 switch(FEAT_TRAINS, PARENT, sw_BR380_pushpull, vehicle_is_reversed) {
-    0: sw_BR380_role_from_vehicle;
-    1: sw_BR380_rev_from_mirror;
+	1: sw_BR380_rev_from_mirror;
+	sw_BR380_roles_fwd_by_type;
 }
