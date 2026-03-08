@@ -1,16 +1,30 @@
-spriteset (spriteset_br_397_purchase, "gfx/emu/397.png") {
-	template_purchase(0,0)
+spriteset (spriteset_br_397_purchase, "gfx/emu/397.png") {template_purchase(0,0)}
+
+spriteset (spriteset_br_397_front, "gfx/emu/397.png") {template_train32px(0, 13)}
+spriteset (spriteset_br_397_rear, "gfx/emu/397.png") {template_train32px(0, 39)}
+spriteset (spriteset_br_397_middle, "gfx/emu/397.png") {template_train32px(0, 65)}
+spriteset (spriteset_br_397_middle_panto, "gfx/emu/397.png") {template_train32px(0, 91)}
+
+spriteset (spriteset_br_397_front_rev, "gfx/emu/397.png") {template_train32px_reversed(200, 13)}
+spriteset (spriteset_br_397_rear_rev, "gfx/emu/397.png") {template_train32px_reversed(200, 39)}
+spriteset (spriteset_br_397_middle_rev, "gfx/emu/397.png") {template_train32px_reversed(0, 65)}
+spriteset (spriteset_br_397_middle_panto_rev, "gfx/emu/397.png") {template_train32px_reversed(0, 91)}
+
+switch(FEAT_TRAINS, SELF, sw_BR397_roles_fwd, position_in_articulated_veh % 5) {
+	0: spriteset_br_397_front;
+	3: spriteset_br_397_middle_panto;
+	4: spriteset_br_397_rear;
+	spriteset_br_397_middle;
 }
 
-spriteset (spriteset_br_397_front, "gfx/emu/397.png") {
-	template_train32px(0, 13)
+switch(FEAT_TRAINS, SELF, sw_BR397_rev_role_5car, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 5]) {
+	0: spriteset_br_397_front_rev;
+	3: spriteset_br_397_middle_panto_rev;
+	4: spriteset_br_397_rear_rev;
+	spriteset_br_397_middle_rev;
 }
-spriteset (spriteset_br_397_rear, "gfx/emu/397.png") {
-	template_train32px(0, 39)
-}
-spriteset (spriteset_br_397_middle, "gfx/emu/397.png") {
-	template_train32px(0, 65)
-}
-spriteset (spriteset_br_397_middle_panto, "gfx/emu/397.png") {
-	template_train32px(0, 91)
+
+switch(FEAT_TRAINS, PARENT, sw_BR397_direction, vehicle_is_reversed) {
+	1: sw_BR397_rev_role_5car;
+	sw_BR397_roles_fwd;
 }
