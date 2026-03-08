@@ -21,13 +21,89 @@ STR_BR_68_6Mk3                         :BR Class 68 + Mk3 set (6-Car +  DVT + lo
 
 STR_BR_195_2CAR							:BR Class 195/0 "Civity" (2-Car)
 STR_BR_195_3CAR							:BR Class 195/1 "Civity" (3-Car)
+str_BR195_usage                         :Suburban Passenger
+str_BR195_eos                           :---
+str_BR195_liveries                      :Northern
+str_BR195_0_capacity_1x                 :124
+str_BR195_0_capacity_2x                 :248
+str_BR195_0_capacity_3x                 :372
+str_BR195_0_capacity_4x                 :496
+str_BR195_0_capacity_hc_1x              :221
+str_BR195_0_capacity_hc_2x              :442
+str_BR195_0_capacity_hc_3x              :663
+str_BR195_0_capacity_hc_4x              :884
+str_BR195_1_capacity_1x                 :204
+str_BR195_1_capacity_2x                 :408
+str_BR195_1_capacity_3x                 :612
+str_BR195_1_capacity_4x                 :816
+str_BR195_1_capacity_hc_1x              :345
+str_BR195_1_capacity_hc_2x              :690
+str_BR195_1_capacity_hc_3x              :1035
+str_BR195_1_capacity_hc_4x              :1380
 STR_BR_196_2CAR							:BR Class 196/0 "Civity" (2-Car)
 STR_BR_196_4CAR							:BR Class 196/1 "Civity" (4-Car)
 STR_BR_197_2CAR							:BR Class 197/0 "Civity" (2-Car)
 STR_BR_197_3CAR							:BR Class 197/1 "Civity" (3-Car)
+str_BR196_usage                         :Suburban Passenger
+str_BR196_eos                           :---
+str_BR196_liveries                      :West Midlands Railway, Chiltern Railways
+str_BR196_0_capacity_1x                 :143
+str_BR196_0_capacity_2x                 :286
+str_BR196_0_capacity_3x                 :429
+str_BR196_0_capacity_4x                 :572
+str_BR196_0_capacity_hc_1x              :219
+str_BR196_0_capacity_hc_2x              :438
+str_BR196_0_capacity_hc_3x              :657
+str_BR196_0_capacity_hc_4x              :876
+str_BR196_1_capacity_1x                 :313
+str_BR196_1_capacity_2x                 :626
+str_BR196_1_capacity_3x                 :939
+str_BR196_1_capacity_4x                 :1252
+str_BR196_1_capacity_hc_1x              :466
+str_BR196_1_capacity_hc_2x              :932
+str_BR196_1_capacity_hc_3x              :1398
+str_BR196_1_capacity_hc_4x              :1864
+str_BR197_usage                         :Suburban Passenger
+str_BR197_eos                           :---
+str_BR197_liveries                      :Transport for Wales
+str_BR197_0_capacity_1x                 :121
+str_BR197_0_capacity_2x                 :242
+str_BR197_0_capacity_3x                 :363
+str_BR197_0_capacity_4x                 :484
+str_BR197_0_capacity_hc_1x              :200
+str_BR197_0_capacity_hc_2x              :400
+str_BR197_0_capacity_hc_3x              :600
+str_BR197_0_capacity_hc_4x              :800
+str_BR197_1_capacity_1x                 :194
+str_BR197_1_capacity_2x                 :388
+str_BR197_1_capacity_3x                 :582
+str_BR197_1_capacity_4x                 :776
+str_BR197_1_capacity_hc_1x              :312
+str_BR197_1_capacity_hc_2x              :624
+str_BR197_1_capacity_hc_3x              :936
+str_BR197_1_capacity_hc_4x              :1248
 STR_BR_231_4CAR							:BR Class 231/0 "FLIRT" (4-Car)
 STR_BR_331_3CAR                         :BR Class 331/0 "Civity" (3-Car)
 STR_BR_331_4CAR                         :BR Class 331/1 "Civity" (4-Car)
+str_BR331_usage                         :Suburban Passenger
+str_BR331_eos                           :---
+str_BR331_liveries                      :Northern
+str_BR331_0_capacity_1x                 :204
+str_BR331_0_capacity_2x                 :408
+str_BR331_0_capacity_3x                 :612
+str_BR331_0_capacity_4x                 :816
+str_BR331_0_capacity_hc_1x              :345
+str_BR331_0_capacity_hc_2x              :690
+str_BR331_0_capacity_hc_3x              :1035
+str_BR331_0_capacity_hc_4x              :1380
+str_BR331_1_capacity_1x                 :284
+str_BR331_1_capacity_2x                 :568
+str_BR331_1_capacity_3x                 :852
+str_BR331_1_capacity_4x                 :1136
+str_BR331_1_capacity_hc_1x              :469
+str_BR331_1_capacity_hc_2x              :938
+str_BR331_1_capacity_hc_3x              :1407
+str_BR331_1_capacity_hc_4x              :1876
 
 STR_BR320_0                             :BR Class 320/0 (3-Car)
 STR_BR320_X                             :BR Class 320/1/3/4 (3-Car)
@@ -41,6 +117,9 @@ STR_BR_345_7CAR                         :BR Class 345 "Aventra" (7-Car)
 STR_BR_345_9CAR                         :BR Class 345 "Aventra" (9-Car)
 
 STR_BR_397                              :BR Class 397 "Civity" (5-Car)
+str_BR397_usage                         :Express Passenger
+str_BR397_eos                           :---
+str_BR397_liveries                      :Transpennine Express
 
 STR_BR555                              :BR Class 555 "METRO" (5-Car)
 
