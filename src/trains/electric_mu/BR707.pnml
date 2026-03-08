@@ -181,9 +181,8 @@ switch(FEAT_TRAINS, SELF, switch_BR707_cargo_capacity_high, position_in_consist 
 	4: return(119 * param_pax);
 	return(118 * param_pax);
 }
-
 switch(FEAT_TRAINS, SELF, switch_BR707_cargo_capacity, param_standing_capacity) {
-	1: switch_BR707_cargo_capacity_high;
+	1..2: switch_BR707_cargo_capacity_high;
 	switch_BR707_cargo_capacity_seated;
 }
 
@@ -218,7 +217,7 @@ switch(FEAT_TRAINS, PARENT, switch_BR707_create_effect_with_translator, (bitmask
 	return 0;
 }
 
-switch(FEAT_TRAINS, SELF, switch_BR707_additional_text, param_standing_capacity * 10 + param_pax) {
+switch(FEAT_TRAINS, SELF, switch_BR707_additional_text, (param_standing_capacity != 0) * 10 + param_pax) {
 	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR707_usage),
@@ -247,28 +246,28 @@ switch(FEAT_TRAINS, SELF, switch_BR707_additional_text, param_standing_capacity 
 			string(str_BR707_eos),
 			string(str_BR707_capacity_4x),
 			string(str_BR707_liveries)));
-	11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR707_usage),
 			string(str_multiple_working_within_class),
 			string(str_BR707_eos),
 			string(str_BR707_capacity_hc_1x),
 			string(str_BR707_liveries)));
-	12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR707_usage),
 			string(str_multiple_working_within_class),
 			string(str_BR707_eos),
 			string(str_BR707_capacity_hc_2x),
 			string(str_BR707_liveries)));
-	13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR707_usage),
 			string(str_multiple_working_within_class),
 			string(str_BR707_eos),
 			string(str_BR707_capacity_hc_3x),
 			string(str_BR707_liveries)));
-	14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR707_usage),
 			string(str_multiple_working_within_class),

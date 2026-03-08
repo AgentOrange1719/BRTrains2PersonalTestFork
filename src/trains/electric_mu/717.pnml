@@ -141,7 +141,7 @@ switch(FEAT_TRAINS, SELF, switch_BR717_cargo_capacity_high, position_in_consist 
 // Select seated or high-capacity split from GRF-wide parameter.
 // This happens before the global param_pax multiplier used in each branch.
 switch(FEAT_TRAINS, SELF, switch_BR717_cargo_capacity, param_standing_capacity) {
-	1: switch_BR717_cargo_capacity_high;
+	1..2: switch_BR717_cargo_capacity_high;
 	switch_BR717_cargo_capacity_seated;
 }
 
@@ -190,7 +190,7 @@ switch(FEAT_TRAINS, SELF, sw_BR717_cargo_subtype_text, cargo_subtype) {
 
 // Purchase text helper: show exact total capacity by current mode and pax multiplier.
 // The purchase list capacity column still rounds from per-car values for articulated units.
-switch(FEAT_TRAINS, SELF, switch_BR717_additional_text, param_standing_capacity * 10 + param_pax) {
+switch(FEAT_TRAINS, SELF, switch_BR717_additional_text, (param_standing_capacity != 0) * 10 + param_pax) {
 	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
@@ -219,28 +219,28 @@ switch(FEAT_TRAINS, SELF, switch_BR717_additional_text, param_standing_capacity 
 			string(str_BR717_eos),
 			string(str_BR717_capacity_4x),
 			string(str_BR717_liveries)));
-	11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
 			string(str_multiple_working_no),
 			string(str_BR717_eos),
 			string(str_BR717_capacity_hc_1x),
 			string(str_BR717_liveries)));
-	12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
 			string(str_multiple_working_no),
 			string(str_BR717_eos),
 			string(str_BR717_capacity_hc_2x),
 			string(str_BR717_liveries)));
-	13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
 			string(str_multiple_working_no),
 			string(str_BR717_eos),
 			string(str_BR717_capacity_hc_3x),
 			string(str_BR717_liveries)));
-	14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
 			string(str_multiple_working_no),
