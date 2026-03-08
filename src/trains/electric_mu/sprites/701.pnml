@@ -5,3 +5,54 @@ spriteset (spriteset_br_701_rear, "gfx/Aventra.png") { template_train32px_old(0,
 spriteset (spriteset_br_701_purchase, "gfx/Aventra.png") {
 	template_purchase(400, 13)
 }
+
+// Reversed cab cars are drawn at x=200 on the same role rows.
+spriteset (spriteset_br_701_front_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(200, 100) }
+spriteset (spriteset_br_701_middle_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(0, 125) }
+spriteset (spriteset_br_701_rear_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(200, 175) }
+
+switch(FEAT_TRAINS, SELF, switch_br_701_rev_role_10car,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x000000FF, 0x41] % 10]) {
+	0: spriteset_br_701_front_reversed;
+	9: spriteset_br_701_rear_reversed;
+	spriteset_br_701_middle_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_701_rev_role_5car,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x000000FF, 0x41] % 5]) {
+	0: spriteset_br_701_front_reversed;
+	4: spriteset_br_701_rear_reversed;
+	spriteset_br_701_middle_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_701_rev_mirror_type,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x0000FFFF, 0xC6]]) {
+	428: switch_br_701_rev_role_10car;
+	429: switch_br_701_rev_role_5car;
+	switch_br_701_rev_role_10car;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_701_0_spriteset, position_in_articulated_veh % 10) {
+	0: spriteset_br_701_front;
+	9: spriteset_br_701_rear;
+	spriteset_br_701_middle;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_701_5_spriteset, position_in_articulated_veh % 5) {
+	0: spriteset_br_701_front;
+	4: spriteset_br_701_rear;
+	spriteset_br_701_middle;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_701_0_direction, vehicle_is_reversed) {
+	1: switch_br_701_rev_mirror_type;
+	switch_br_701_0_spriteset;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_701_5_direction, vehicle_is_reversed) {
+	1: switch_br_701_rev_mirror_type;
+	switch_br_701_5_spriteset;
+}
