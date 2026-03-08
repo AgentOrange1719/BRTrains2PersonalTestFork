@@ -1,13 +1,21 @@
-spriteset (spriteset_br730_front_LNWR, "gfx/BR730.png") { template_train32px_old(0, 100) }
-spriteset (spriteset_br730_rear_LNWR, "gfx/BR730.png") { template_train32px_old(0, 125) }
-spriteset (spriteset_br730_middle_LNWR, "gfx/BR730.png") { template_train32px_old(0, 150) }
-spriteset (spriteset_br730_middlepanto_LNWR, "gfx/BR730.png") { template_train32px_old(0, 175) }
+spriteset (spriteset_br730_front_LNWR, "gfx/BR730.png") { template_train32px_old(0, 150) }
+spriteset (spriteset_br730_rear_LNWR, "gfx/BR730.png") { template_train32px_old(0, 200) }
+spriteset (spriteset_br730_middle_LNWR, "gfx/BR730.png") { template_train32px_old(0, 250) }
+spriteset (spriteset_br730_middlepanto_LNWR, "gfx/BR730.png") { template_train32px_old(0, 275) }
+spriteset (spriteset_br730_front_LNWR_rev, "gfx/BR730.png") { template_train32px_old_reversed(0, 175) }
+spriteset (spriteset_br730_rear_LNWR_rev, "gfx/BR730.png") { template_train32px_old_reversed(0, 225) }
+spriteset (spriteset_br730_middle_LNWR_rev, "gfx/BR730.png") { template_train32px_old_reversed(0, 250) }
+spriteset (spriteset_br730_middlepanto_LNWR_rev, "gfx/BR730.png") { template_train32px_old_reversed(0, 275) }
 
 
 spriteset (spriteset_br730_front_WMR, "gfx/BR730.png") { template_train32px_old(0, 0) }
-spriteset (spriteset_br730_rear_WMR, "gfx/BR730.png") { template_train32px_old(0, 25) }
-spriteset (spriteset_br730_middle_WMR, "gfx/BR730.png") { template_train32px_old(0, 50) }
-spriteset (spriteset_br730_middlepanto_WMR, "gfx/BR730.png") { template_train32px_old(0, 75) }
+spriteset (spriteset_br730_rear_WMR, "gfx/BR730.png") { template_train32px_old(0, 50) }
+spriteset (spriteset_br730_middle_WMR, "gfx/BR730.png") { template_train32px_old(0, 100) }
+spriteset (spriteset_br730_middlepanto_WMR, "gfx/BR730.png") { template_train32px_old(0, 125) }
+spriteset (spriteset_br730_front_WMR_rev, "gfx/BR730.png") { template_train32px_old_reversed(0, 25) }
+spriteset (spriteset_br730_rear_WMR_rev, "gfx/BR730.png") { template_train32px_old_reversed(0, 75) }
+spriteset (spriteset_br730_middle_WMR_rev, "gfx/BR730.png") { template_train32px_old_reversed(0, 100) }
+spriteset (spriteset_br730_middlepanto_WMR_rev, "gfx/BR730.png") { template_train32px_old_reversed(0, 125) }
 
 
 spriteset (spriteset_br730_0_purchase, "gfx/BR730.png") {
@@ -15,4 +23,139 @@ spriteset (spriteset_br730_0_purchase, "gfx/BR730.png") {
 }
 spriteset (spriteset_br730_2_purchase, "gfx/BR730.png") {
 	template_purchase(200, 13)
+}
+
+// ----------------------------------------------------------------------------
+// Class 730/0 (3-car) sprite role selection
+// ----------------------------------------------------------------------------
+switch(FEAT_TRAINS, SELF, switch_br730_0_front, cargo_subtype) {
+	0: spriteset_br730_front_WMR;
+	default: spriteset_br730_front_WMR;
+}
+switch(FEAT_TRAINS, SELF, switch_br730_0_middlepanto, cargo_subtype) {
+	0: spriteset_br730_middlepanto_WMR;
+	default: spriteset_br730_middlepanto_WMR;
+}
+switch(FEAT_TRAINS, SELF, switch_br730_0_rear, cargo_subtype) {
+	0: spriteset_br730_rear_WMR;
+	default: spriteset_br730_rear_WMR;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br730_0_front_rev,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_br730_front_WMR_rev;
+	default: spriteset_br730_front_WMR_rev;
+}
+switch(FEAT_TRAINS, SELF, switch_br730_0_middlepanto_rev,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_br730_middlepanto_WMR_rev;
+	default: spriteset_br730_middlepanto_WMR_rev;
+}
+switch(FEAT_TRAINS, SELF, switch_br730_0_rear_rev,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_br730_rear_WMR_rev;
+	default: spriteset_br730_rear_WMR_rev;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br730_0_roles_fwd, position_in_articulated_veh % 3) {
+	0: switch_br730_0_front;
+	1: switch_br730_0_middlepanto;
+	2: switch_br730_0_rear;
+	switch_br730_0_middlepanto;
+}
+switch(FEAT_TRAINS, SELF, switch_br730_rev_role_3car,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 3]) {
+	0: switch_br730_0_front_rev;
+	1: switch_br730_0_middlepanto_rev;
+	2: switch_br730_0_rear_rev;
+	switch_br730_0_middlepanto_rev;
+}
+
+// ----------------------------------------------------------------------------
+// Class 730/2 (5-car) sprite role selection
+// ----------------------------------------------------------------------------
+switch(FEAT_TRAINS, SELF, switch_br730_2_front, cargo_subtype) {
+	0: spriteset_br730_front_LNWR;
+	default: spriteset_br730_front_LNWR;
+}
+switch(FEAT_TRAINS, SELF, switch_br730_2_middle, cargo_subtype) {
+	0: spriteset_br730_middle_LNWR;
+	default: spriteset_br730_middle_LNWR;
+}
+switch(FEAT_TRAINS, SELF, switch_br730_2_middlepanto, cargo_subtype) {
+	0: spriteset_br730_middlepanto_LNWR;
+	default: spriteset_br730_middlepanto_LNWR;
+}
+switch(FEAT_TRAINS, SELF, switch_br730_2_rear, cargo_subtype) {
+	0: spriteset_br730_rear_LNWR;
+	default: spriteset_br730_rear_LNWR;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br730_2_front_rev,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_br730_front_LNWR_rev;
+	default: spriteset_br730_front_LNWR_rev;
+}
+switch(FEAT_TRAINS, SELF, switch_br730_2_middle_rev,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_br730_middle_LNWR_rev;
+	default: spriteset_br730_middle_LNWR_rev;
+}
+switch(FEAT_TRAINS, SELF, switch_br730_2_middlepanto_rev,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_br730_middlepanto_LNWR_rev;
+	default: spriteset_br730_middlepanto_LNWR_rev;
+}
+switch(FEAT_TRAINS, SELF, switch_br730_2_rear_rev,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_br730_rear_LNWR_rev;
+	default: spriteset_br730_rear_LNWR_rev;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br730_2_roles_fwd, position_in_articulated_veh % 5) {
+	0: switch_br730_2_front;
+	1: switch_br730_2_middle;
+	2: switch_br730_2_middlepanto;
+	3: switch_br730_2_middle;
+	4: switch_br730_2_rear;
+	switch_br730_2_middle;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br730_rev_role_5car,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 5]) {
+	0: switch_br730_2_front_rev;
+	1: switch_br730_2_middle_rev;
+	2: switch_br730_2_middlepanto_rev;
+	3: switch_br730_2_middle_rev;
+	4: switch_br730_2_rear_rev;
+	switch_br730_2_middle_rev;
+}
+
+// Mixed-length MW reverse support:
+// choose mirrored role chain from mirrored vehicle_type_id.
+switch(FEAT_TRAINS, SELF, switch_br730_rev_mirror_type,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
+	575: switch_br730_rev_role_3car;
+	576: switch_br730_rev_role_5car;
+	2575: switch_br730_rev_role_3car;
+	2576: switch_br730_rev_role_5car;
+	switch_br730_rev_role_3car;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br730_0_direction, vehicle_is_reversed) {
+	1: switch_br730_rev_mirror_type;
+	switch_br730_0_roles_fwd;
+}
+switch(FEAT_TRAINS, SELF, switch_br730_0_spriteset, cargo_subtype) {
+	0: switch_br730_0_direction;
+	switch_br730_0_direction;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br730_2_direction, vehicle_is_reversed) {
+	1: switch_br730_rev_mirror_type;
+	switch_br730_2_roles_fwd;
+}
+switch(FEAT_TRAINS, SELF, switch_br730_2_spriteset, cargo_subtype) {
+	0: switch_br730_2_direction;
+	switch_br730_2_direction;
 }
