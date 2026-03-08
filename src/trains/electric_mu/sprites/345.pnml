@@ -1,20 +1,91 @@
 spriteset (spriteset_br_345_front, "gfx/Aventra.png") { template_train32px_old(0, 300) }
 spriteset (spriteset_br_345_middle, "gfx/Aventra.png") { template_train32px_old(0, 325) }
 spriteset (spriteset_br_345_middle_panto, "gfx/Aventra.png") { template_train32px_old(0, 350) }
+spriteset (spriteset_br_345_middle_panto_second, "gfx/Aventra.png") { template_train32px_old(200, 350) }
 spriteset (spriteset_br_345_rear, "gfx/Aventra.png") { template_train32px_old(0, 375) }
 
 spriteset (spriteset_br_345_purchase, "gfx/Aventra.png") {
 	template_purchase(400, 39)
 }
 
-// Start/stop switch, used to limit maximum length
-switch(FEAT_TRAINS, SELF, switch_br_345_start_stop, num_vehs_in_consist) {	
-	return CB_RESULT_NO_TEXT;   // Allow any length
+// Reversed spritesets.
+// Middle cars use mirrored forward art; front/rear use x=200 for end-specific reversed art.
+spriteset (spriteset_br_345_front_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(200, 300) }
+spriteset (spriteset_br_345_middle_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(0, 325) }
+spriteset (spriteset_br_345_middle_panto_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(0, 350) }
+spriteset (spriteset_br_345_middle_panto_second_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(200, 350) }
+spriteset (spriteset_br_345_rear_reversed, "gfx/Aventra.png") { template_train32px_old_reversed(200, 375) }
+
+// Step 5 (reversed path): role selection for mirrored 7-car units.
+// Use var 0x41 so mixed 7-car + 9-car consists still reverse by unit role.
+switch(FEAT_TRAINS, SELF, switch_br_345_rev_role_7car,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x000000FF, 0x41] % 7]) {
+	0: spriteset_br_345_front_reversed;
+	1: spriteset_br_345_middle_panto_reversed;
+	5: spriteset_br_345_middle_panto_second_reversed;
+	6: spriteset_br_345_rear_reversed;
+	spriteset_br_345_middle_reversed;
 }
 
-// Only allow the same train type to be added to itself
+// Step 5 (reversed path): role selection for mirrored 9-car units.
+switch(FEAT_TRAINS, SELF, switch_br_345_rev_role_9car,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x000000FF, 0x41] % 9]) {
+	0: spriteset_br_345_front_reversed;
+	1: spriteset_br_345_middle_panto_reversed;
+	7: spriteset_br_345_middle_panto_second_reversed;
+	8: spriteset_br_345_rear_reversed;
+	spriteset_br_345_middle_reversed;
+}
+
+// Step 3 and step 4 (reversed path): determine mirrored unit length.
+switch(FEAT_TRAINS, SELF, switch_br_345_rev_mirror_type,
+		[STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F),
+		 var[0x61, 0, 0x0000FFFF, 0xC6]]) {
+	426: switch_br_345_rev_role_9car;
+	599: switch_br_345_rev_role_7car;
+	switch_br_345_rev_role_7car;
+}
+
+// Forward path role selection.
+switch(FEAT_TRAINS, SELF, switch_br_345_7car_spriteset, position_in_articulated_veh % 7) {
+	0: spriteset_br_345_front;
+	1: spriteset_br_345_middle_panto;
+	5: spriteset_br_345_middle_panto_second;
+	6: spriteset_br_345_rear;
+	spriteset_br_345_middle;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_345_9car_spriteset, position_in_articulated_veh % 9) {
+	0: spriteset_br_345_front;
+	1: spriteset_br_345_middle_panto;
+	7: spriteset_br_345_middle_panto_second;
+	8: spriteset_br_345_rear;
+	spriteset_br_345_middle;
+}
+
+// Direction gates.
+switch(FEAT_TRAINS, PARENT, switch_br_345_7car_direction, vehicle_is_reversed) {
+	1: switch_br_345_rev_mirror_type;
+	switch_br_345_7car_spriteset;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_345_9car_direction, vehicle_is_reversed) {
+	1: switch_br_345_rev_mirror_type;
+	switch_br_345_9car_spriteset;
+}
+
+// Start/stop switch, used to limit maximum length.
+switch(FEAT_TRAINS, SELF, switch_br_345_start_stop, num_vehs_in_consist) {
+	1..10: return CB_RESULT_NO_TEXT;
+	return string(STR_BR_345_MW_LIMIT);
+}
+
+// Allow coupling between both 345 lengths, plus translator wagons.
 switch(FEAT_TRAINS, SELF, switch_br_345_can_attach_wagon, vehicle_type_id) {
 	item_br_345_7car: return CB_RESULT_ATTACH_ALLOW;
 	item_br_345_9car: return CB_RESULT_ATTACH_ALLOW;
+	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }

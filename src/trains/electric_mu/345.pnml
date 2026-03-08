@@ -1,0 +1,270 @@
+// Choose sprites depending on direction and car position
+switch(FEAT_TRAINS, SELF, switch_br_345_7car_articulated, extra_callback_info1) {
+	// extra_callback_info1 returns the car number, so 1 is the second car, 2 the third, .. so on
+	// The callback runs this switch until it returns NO_MORE_ARTICULATED_PARTS, which ends the growth
+	1..6: return item_br_345_7car;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS; // Stop adding more cars
+}
+
+// Power pickup is on the second and second-to-last cars.
+switch(FEAT_TRAINS, SELF, switch_br_345_7car_particles, position_in_articulated_veh % 7) {
+	1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	5: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+// Translator handling: bit 0 in bitmask_consist_info marks translator wagons.
+switch(FEAT_TRAINS, PARENT, switch_br_345_7car_power_with_translator, (bitmask_consist_info & 0x01)) {
+	0: return 3100;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_345_7car_te_with_translator, (bitmask_consist_info & 0x01)) {
+	0: return 76; // 0.30 * 255
+	return 0;
+}
+
+// Exact 7-car total:
+// 5 cars at 166 + 2 cars at 165 = 1160.
+switch(FEAT_TRAINS, SELF, switch_br_345_7car_capacity, position_in_consist % 7) {
+	0: return(165 * param_pax);
+	6: return(165 * param_pax);
+	return(166 * param_pax);
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_345_7car_capacity_with_translator, (bitmask_consist_info & 0x01)) {
+	0: switch_br_345_7car_capacity;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_345_7car_effect_with_translator, (bitmask_consist_info & 0x01)) {
+	0: switch_br_345_7car_particles;
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_345_7car_additional_text, param_pax) {
+	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR345_usage),
+			string(str_multiple_working_no),
+			string(str_BR345_eos),
+			string(str_BR345_7_capacity_1x),
+			string(str_BR345_liveries)));
+	2: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR345_usage),
+			string(str_multiple_working_no),
+			string(str_BR345_eos),
+			string(str_BR345_7_capacity_2x),
+			string(str_BR345_liveries)));
+	3: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR345_usage),
+			string(str_multiple_working_no),
+			string(str_BR345_eos),
+			string(str_BR345_7_capacity_3x),
+			string(str_BR345_liveries)));
+	4: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR345_usage),
+			string(str_multiple_working_no),
+			string(str_BR345_eos),
+			string(str_BR345_7_capacity_4x),
+			string(str_BR345_liveries)));
+	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR345_usage),
+			string(str_multiple_working_no),
+			string(str_BR345_eos),
+			string(str_BR345_7_capacity_1x),
+			string(str_BR345_liveries)));
+}
+
+item(FEAT_TRAINS, item_br_345_7car, 599) {
+	property {
+		variant_group:                    header_Aventra;
+		name: string(STR_BR_345_7CAR);
+		climates_available: ALL_CLIMATES; // available in all climates
+		introduction_date: date(2017, 06, 02);
+		model_life: 5; // replaced by 9 car after a few years
+		vehicle_life: 30; // years after vehicle is deemed "old" and should be replaced
+		reliability_decay: 0; // dont reduce reliabilty, (will grow from 75% upwards over the years)
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		cost_factor: 105;
+		loading_speed: 25;
+		running_cost_factor: 80;
+		cargo_allow_refit: [];
+		cargo_disallow_refit: [];
+		speed: 90 mph;
+		power: 3100 hp;
+		cargo_capacity: (1160/7);
+		weight: 264.21 ton;
+		sprite_id: SPRITE_ID_NEW_TRAIN; // required
+		refit_cost: 0;
+		track_type: railtype("ELRL");
+		ai_special_flag: AI_FLAG_PASSENGER; // tell ai that this is a passenger train
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		misc_flags: TRAIN_FLAG_MU;
+		dual_headed: 0;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		extra_power_per_wagon: 0 kW;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.06;
+		length: 8; // full tile length vehicle
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER); // visual fx
+		extra_weight_per_wagon: 0 ton;
+		bitmask_vehicle_info: 0;
+	}
+
+	graphics {
+		default: switch_br_345_7car_direction;
+		purchase: spriteset_br_345_purchase;
+		articulated_part: switch_br_345_7car_articulated;
+		start_stop: switch_br_345_start_stop;
+		can_attach_wagon: switch_br_345_can_attach_wagon;
+		visual_effect_and_powered: switch_br_345_7car_effect_with_translator;
+		additional_text: switch_br_345_7car_additional_text;
+		power: switch_br_345_7car_power_with_translator;
+		tractive_effort_coefficient: switch_br_345_7car_te_with_translator;
+		cargo_capacity: switch_br_345_7car_capacity_with_translator;
+		cost_factor: return(GetAdjustedCost(105));
+		running_cost_factor: return(GetAdjustedCost(80));
+	}
+}
+
+// 9-car variant
+switch(FEAT_TRAINS, SELF, switch_br_345_9car_articulated, extra_callback_info1) {
+	// extra_callback_info1 returns the car number, so 1 is the second car, 2 the third, .. so on
+	// The callback runs this switch until it returns NO_MORE_ARTICULATED_PARTS, which ends the growth
+	1..8: return item_br_345_9car;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS; // Stop adding more cars
+}
+
+// Power pickup is on the second and second-to-last cars.
+switch(FEAT_TRAINS, SELF, switch_br_345_9car_particles, position_in_articulated_veh % 9) {
+	1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	7: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+// Translator handling: bit 0 in bitmask_consist_info marks translator wagons.
+switch(FEAT_TRAINS, PARENT, switch_br_345_9car_power_with_translator, (bitmask_consist_info & 0x01)) {
+	0: return 4000;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_345_9car_te_with_translator, (bitmask_consist_info & 0x01)) {
+	0: return 76; // 0.30 * 255
+	return 0;
+}
+
+// Exact 9-car total:
+// 6 cars at 167 + 3 cars at 166 = 1500.
+switch(FEAT_TRAINS, SELF, switch_br_345_9car_capacity, position_in_consist % 9) {
+	0: return(166 * param_pax);
+	4: return(166 * param_pax);
+	8: return(166 * param_pax);
+	return(167 * param_pax);
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_345_9car_capacity_with_translator, (bitmask_consist_info & 0x01)) {
+	0: switch_br_345_9car_capacity;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_345_9car_effect_with_translator, (bitmask_consist_info & 0x01)) {
+	0: switch_br_345_9car_particles;
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_345_9car_additional_text, param_pax) {
+	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR345_usage),
+			string(str_multiple_working_no),
+			string(str_BR345_eos),
+			string(str_BR345_9_capacity_1x),
+			string(str_BR345_liveries)));
+	2: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR345_usage),
+			string(str_multiple_working_no),
+			string(str_BR345_eos),
+			string(str_BR345_9_capacity_2x),
+			string(str_BR345_liveries)));
+	3: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR345_usage),
+			string(str_multiple_working_no),
+			string(str_BR345_eos),
+			string(str_BR345_9_capacity_3x),
+			string(str_BR345_liveries)));
+	4: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR345_usage),
+			string(str_multiple_working_no),
+			string(str_BR345_eos),
+			string(str_BR345_9_capacity_4x),
+			string(str_BR345_liveries)));
+	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR345_usage),
+			string(str_multiple_working_no),
+			string(str_BR345_eos),
+			string(str_BR345_9_capacity_1x),
+			string(str_BR345_liveries)));
+}
+
+item(FEAT_TRAINS, item_br_345_9car, 426) {
+	property {
+		variant_group:                    header_Aventra;
+		name: string(STR_BR_345_9CAR);
+		climates_available: ALL_CLIMATES; // available in all climates
+		introduction_date: date(2021, 06, 02);
+		model_life: VEHICLE_NEVER_EXPIRES; // keep available forever
+		vehicle_life: 30; // years after vehicle is deemed "old" and should be replaced
+		reliability_decay: 0; // dont reduce reliabilty, (will grow from 75% upwards over the years)
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		cost_factor: 110;
+		loading_speed: 25;
+		running_cost_factor: 85;
+		cargo_allow_refit: [];
+		cargo_disallow_refit: [];
+		speed: 90 mph;
+		power: 4000 hp;
+		cargo_capacity: (1500/9);
+		weight: 264.21 ton;
+		sprite_id: SPRITE_ID_NEW_TRAIN; // required
+		refit_cost: 0;
+		track_type: railtype("ELRL");
+		ai_special_flag: AI_FLAG_PASSENGER; // tell ai that this is a passenger train
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		misc_flags: TRAIN_FLAG_MU;
+		dual_headed: 0; // set to 0 otherwise limited to 2 cars only
+		engine_class: ENGINE_CLASS_ELECTRIC; // even if its 3rd rail, ELECTRIC would give overhead wire effects
+		extra_power_per_wagon: 0 kW;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.06;
+		length: 8; // full tile length vehicle
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER); // visual fx
+		extra_weight_per_wagon: 0 ton;
+		bitmask_vehicle_info: 0;
+	}
+
+	graphics {
+		default: switch_br_345_9car_direction;
+		purchase: spriteset_br_345_purchase;
+		articulated_part: switch_br_345_9car_articulated;
+		start_stop: switch_br_345_start_stop;
+		can_attach_wagon: switch_br_345_can_attach_wagon;
+		visual_effect_and_powered: switch_br_345_9car_effect_with_translator;
+		additional_text: switch_br_345_9car_additional_text;
+		power: switch_br_345_9car_power_with_translator;
+		tractive_effort_coefficient: switch_br_345_9car_te_with_translator;
+		cargo_capacity: switch_br_345_9car_capacity_with_translator;
+		cost_factor: return(GetAdjustedCost(110));
+		running_cost_factor: return(GetAdjustedCost(85));
+	}
+}
