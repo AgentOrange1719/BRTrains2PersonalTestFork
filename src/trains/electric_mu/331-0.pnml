@@ -1,38 +1,158 @@
-// Choose sprites depending on car position
-switch(FEAT_TRAINS, SELF, switch_br_331_0_spriteset, position_in_articulated_veh % 3) {
-	// 0 is first car, 1 is second car, 2 is third car, so on...
-	// % 3 means that the graphics will repeat properly if another train is added to the end
-	// so that we get: (front,middle,end);(front,middle,end)...
+// Define articulations
+switch(FEAT_TRAINS, SELF, switch_br_331_0_articulated, extra_callback_info1) {
+	1..2: return item_br_331_0;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_331_0_roles_fwd_local, position_in_articulated_veh % 3) {
 	0: spriteset_br_195_331_front;
 	2: spriteset_br_195_331_rear;
 	spriteset_br_331_middle_panto;
 }
 
-// Define articulations
-switch(FEAT_TRAINS, SELF, switch_br_331_0_articulated, extra_callback_info1) {
-	// extra_callback_info1 returns the car number, so 1 is the second car, 2 the third, .. so on
-	// The callback runs this switch until it returns NO_MORE_ARTICULATED_PARTS, which ends the growth
-	1..2: return item_br_331_0;
-	return CB_RESULT_NO_MORE_ARTICULATED_PARTS; // Stop adding more cars
+switch(FEAT_TRAINS, SELF, switch_br_331_0_rev_role_3car_local, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 3]) {
+	0: spriteset_br_195_331_front_rev;
+	2: spriteset_br_195_331_rear_rev;
+	spriteset_br_331_middle_panto_rev;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_331_0_rev_role_4car_local, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 4]) {
+	0: spriteset_br_195_331_front_rev;
+	1: spriteset_br_331_middle_panto_rev;
+	2: spriteset_br_195_331_middle_rev;
+	3: spriteset_br_195_331_rear_rev;
+	spriteset_br_195_331_middle_rev;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_331_0_rev_from_mirror_local, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
+	424: switch_br_331_0_rev_role_3car_local;
+	2424: switch_br_331_0_rev_role_3car_local;
+	425: switch_br_331_0_rev_role_4car_local;
+	2425: switch_br_331_0_rev_role_4car_local;
+	switch_br_331_0_rev_role_3car_local;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_331_0_direction_local, vehicle_is_reversed) {
+	1: switch_br_331_0_rev_from_mirror_local;
+	switch_br_331_0_roles_fwd_local;
 }
 
 // Only give particle effects to middle/pantograph car
 switch(FEAT_TRAINS, SELF, switch_br_331_0_particles, position_in_articulated_veh % 3) {
-	// 0 is first car, 1 is second car, 2 is third car, so on...
 	1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
 	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
 }
 
 // Start/stop switch, used to limit maximum length
-switch(FEAT_TRAINS, SELF, switch_br_331_0_start_stop, num_vehs_in_consist) {	
-	return CB_RESULT_NO_TEXT;   // Allow any length
+switch(FEAT_TRAINS, SELF, switch_br_331_0_start_stop, num_vehs_in_consist) {
+	return CB_RESULT_NO_TEXT;
 }
 
 // Only allow the same train type to be added to itself
 switch(FEAT_TRAINS, SELF, switch_br_331_0_can_attach_wagon, vehicle_type_id) {
 	item_br_331_0: return CB_RESULT_ATTACH_ALLOW;
 	item_br_331_1: return CB_RESULT_ATTACH_ALLOW;
+	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_331_0_power_with_translator, (bitmask_consist_info & 0x01)) {
+	0: return 2360;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_331_0_te_with_translator, (bitmask_consist_info & 0x01)) {
+	0: return 76; // 0.30 * 255
+	return 0;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_331_0_capacity_seated, position_in_articulated_veh % 3) {
+	return(68 * param_pax);
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_331_0_capacity_high, position_in_articulated_veh % 3) {
+	return(115 * param_pax);
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_331_0_capacity_by_mode, param_standing_capacity) {
+	2: switch_br_331_0_capacity_high;
+	switch_br_331_0_capacity_seated;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_331_0_capacity_with_translator, (bitmask_consist_info & 0x01)) {
+	0: switch_br_331_0_capacity_by_mode;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_331_0_particles_with_translator, (bitmask_consist_info & 0x01)) {
+	0: switch_br_331_0_particles;
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_331_0_additional_text, (param_standing_capacity == 2) * 10 + param_pax) {
+	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR331_usage),
+			string(str_multiple_working_within_class),
+			string(str_BR331_eos),
+			string(str_BR331_0_capacity_1x),
+			string(str_BR331_liveries)));
+	2: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR331_usage),
+			string(str_multiple_working_within_class),
+			string(str_BR331_eos),
+			string(str_BR331_0_capacity_2x),
+			string(str_BR331_liveries)));
+	3: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR331_usage),
+			string(str_multiple_working_within_class),
+			string(str_BR331_eos),
+			string(str_BR331_0_capacity_3x),
+			string(str_BR331_liveries)));
+	4: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR331_usage),
+			string(str_multiple_working_within_class),
+			string(str_BR331_eos),
+			string(str_BR331_0_capacity_4x),
+			string(str_BR331_liveries)));
+	11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR331_usage),
+			string(str_multiple_working_within_class),
+			string(str_BR331_eos),
+			string(str_BR331_0_capacity_hc_1x),
+			string(str_BR331_liveries)));
+	12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR331_usage),
+			string(str_multiple_working_within_class),
+			string(str_BR331_eos),
+			string(str_BR331_0_capacity_hc_2x),
+			string(str_BR331_liveries)));
+	13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR331_usage),
+			string(str_multiple_working_within_class),
+			string(str_BR331_eos),
+			string(str_BR331_0_capacity_hc_3x),
+			string(str_BR331_liveries)));
+	14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR331_usage),
+			string(str_multiple_working_within_class),
+			string(str_BR331_eos),
+			string(str_BR331_0_capacity_hc_4x),
+			string(str_BR331_liveries)));
+	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
+			string(str_purchase_type_emu),
+			string(str_BR331_usage),
+			string(str_multiple_working_within_class),
+			string(str_BR331_eos),
+			string(str_BR331_0_capacity_1x),
+			string(str_BR331_liveries)));
 }
 
 // Class 331/0 (3car)
@@ -40,11 +160,11 @@ item(FEAT_TRAINS, item_br_331_0, 424) {
 	property {
 		variant_group:					header_Civity;
 		name: string(STR_BR_331_3CAR);
-		climates_available: ALL_CLIMATES; // available in all climates
+		climates_available: ALL_CLIMATES;
 		introduction_date: date(2019, 07, 01);
-		model_life: VEHICLE_NEVER_EXPIRES; // keep available forever		
-		vehicle_life: 35; // years after vehicle is deemed "old" and should be replaced
-		reliability_decay: 0; // dont reduce reliabilty, (will grow from 75% upwards over the years)
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 35;
+		reliability_decay: 0;
 		refittable_cargo_classes: bitmask(CC_PASSENGERS);
 		non_refittable_cargo_classes: bitmask();
 		cost_factor: 62;
@@ -52,41 +172,41 @@ item(FEAT_TRAINS, item_br_331_0, 424) {
 		running_cost_factor: 33;
 		cargo_allow_refit: [];
 		cargo_disallow_refit: [];
-		
+
 		speed: 100 mph;
 		power: 2360 hp;
-		cargo_capacity: (204/3);
-		weight: 128.0 ton; 
-		
-		sprite_id: SPRITE_ID_NEW_TRAIN; // required
+		cargo_capacity: 68;
+		weight: 128.0 ton;
+
+		sprite_id: SPRITE_ID_NEW_TRAIN;
 		refit_cost: 0;
 		track_type: ELRL;
-		ai_special_flag: AI_FLAG_PASSENGER; // tell ai that this is a passenger train
+		ai_special_flag: AI_FLAG_PASSENGER;
 		running_cost_base: RUNNING_COST_ELECTRIC;
-		dual_headed: 0; // set to 0 otherwise limited to 2 cars only
-		engine_class: ENGINE_CLASS_ELECTRIC; // even if its 3rd rail, ELECTRIC would give overhead wire effects
+		dual_headed: 0;
+		engine_class: ENGINE_CLASS_ELECTRIC;
 		extra_power_per_wagon: 0 kW;
 		tractive_effort_coefficient: 0.3;
 		air_drag_coefficient: 0.06;
-		length: 8; // full tile length vehicle
-		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER); // visual fx
+		length: 8;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
 		extra_weight_per_wagon: 0 ton;
 		bitmask_vehicle_info: 0;
 	}
-	
+
 	graphics {
-		default: switch_br_331_0_spriteset;
+		default: switch_br_331_0_direction_local;
 		purchase: spriteset_br_331_purchase;
-		
+
 		articulated_part: switch_br_331_0_articulated;
-		start_stop: switch_br_331_0_start_stop;	
+		start_stop: switch_br_331_0_start_stop;
 		can_attach_wagon: switch_br_331_0_can_attach_wagon;
-		visual_effect_and_powered: switch_br_331_0_particles;
-				
-		cargo_capacity: return (204/3);
-		additional_text: string(STR_DSC_BR_331);	
-		cost_factor:	return(GetAdjustedCost(62));
+		visual_effect_and_powered: switch_br_331_0_particles_with_translator;
+		power: switch_br_331_0_power_with_translator;
+		tractive_effort_coefficient: switch_br_331_0_te_with_translator;
+		cargo_capacity: switch_br_331_0_capacity_with_translator;
+		additional_text: switch_br_331_0_additional_text;
+		cost_factor: return(GetAdjustedCost(62));
 		running_cost_factor: return(GetAdjustedCost(33));
-				
 	}
 }
