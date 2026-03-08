@@ -3,6 +3,13 @@ switch (FEAT_TRAINS, SELF, switch_articulated_BR175_2car, extra_callback_info1) 
     return CB_RESULT_NO_MORE_ARTICULATED_PARTS; //stop adding vehicle parts
 }
 
+switch(FEAT_TRAINS, SELF, switch_BR175_2car_can_attach_wagon, vehicle_type_id) {
+	item_BR175_2car: return CB_RESULT_ATTACH_ALLOW;
+	item_BR175_3car: return CB_RESULT_ATTACH_ALLOW;
+	item_BR180: return CB_RESULT_ATTACH_ALLOW;
+	return string(STR_CANNOT_ATTACH);
+}
+
 item (FEAT_TRAINS, item_BR175_2car, 339) {
 	property {
 		name: 							string(STR_NAME_BR175_2car);
@@ -36,11 +43,11 @@ item (FEAT_TRAINS, item_BR175_2car, 339) {
 		cargo_age_period:				185;
 	}
 	graphics {
-	additional_text:					return(string(str_purchase_loco_with_liveries,string(str_purchase_type_dmu),string(str_BR175_usage),string(str_BR175_eos),string(str_BR175_liveries)));
-	can_attach_wagon:					CB_RESULT_ATTACH_ALLOW;
+	additional_text:					return(string(str_purchase_loco_with_liveries_and_mw,string(str_purchase_type_dmu),string(str_BR175_usage),string(str_multiple_working_within_class),string(str_BR175_eos),string(str_BR175_liveries)));
+	can_attach_wagon:					switch_BR175_2car_can_attach_wagon;
 	cargo_subtype_text:					sw_BR175_cargo_subtype_text;
 	articulated_part:        			switch_articulated_BR175_2car;
-	default: 							sw_BR175;
+	default: 							sw_BR175_2car_pushpull;
 	purchase:							spriteset_BR175_Purchase;
 	colour_mapping: 					return PALETTE_CC_FIRST;
 	create_effect:						diesel_create_visual_effect;

@@ -1,0 +1,276 @@
+// Unified Class 175 / 180 sprite and push-pull mappings.
+// Shared approach:
+// 1) choose local role sprites from articulated position and local cargo_subtype
+// 2) choose reversed role sprites from mirrored articulated position and mirrored cargo_subtype
+// 3) choose the reversed role chain from the mirrored unit type in mixed 175/180 formations
+
+// --------------------
+// Class 175 sprites
+// --------------------
+spriteset(spriteset_BR175_Purchase, "gfx/DMU/175.png") { template_purchase(0, 0) }
+
+spriteset(spriteset_BR175_front_TfW, "gfx/DMU/175.png") { template_train32px(0, 13) }
+spriteset(spriteset_BR175_rear_TfW, "gfx/DMU/175.png") { template_train32px(0, 39) }
+spriteset(spriteset_BR175_middle_TfW, "gfx/DMU/175.png") { template_train32px(0, 65) }
+spriteset(spriteset_BR175_front_TfW_rev, "gfx/DMU/175.png") { template_train32px_reversed(200, 13) }
+spriteset(spriteset_BR175_rear_TfW_rev, "gfx/DMU/175.png") { template_train32px_reversed(200, 39) }
+spriteset(spriteset_BR175_middle_TfW_rev, "gfx/DMU/175.png") { template_train32px_reversed(0, 65) }
+spriteset(spriteset_BR175_front_ATW, "gfx/DMU/175.png") { template_train32px(0, 91) }
+spriteset(spriteset_BR175_rear_ATW, "gfx/DMU/175.png") { template_train32px(0, 117) }
+spriteset(spriteset_BR175_middle_ATW, "gfx/DMU/175.png") { template_train32px(0, 143) }
+spriteset(spriteset_BR175_front_ATW_rev, "gfx/DMU/175.png") { template_train32px_reversed(200, 91) }
+spriteset(spriteset_BR175_rear_ATW_rev, "gfx/DMU/175.png") { template_train32px_reversed(200, 117) }
+spriteset(spriteset_BR175_middle_ATW_rev, "gfx/DMU/175.png") { template_train32px_reversed(0, 143) }
+spriteset(spriteset_BR175_front_FNW, "gfx/DMU/175.png") { template_train32px(0, 169) }
+spriteset(spriteset_BR175_rear_FNW, "gfx/DMU/175.png") { template_train32px(0, 195) }
+spriteset(spriteset_BR175_middle_FNW, "gfx/DMU/175.png") { template_train32px(0, 221) }
+spriteset(spriteset_BR175_front_FNW_rev, "gfx/DMU/175.png") { template_train32px_reversed(200, 169) }
+spriteset(spriteset_BR175_rear_FNW_rev, "gfx/DMU/175.png") { template_train32px_reversed(200, 195) }
+spriteset(spriteset_BR175_middle_FNW_rev, "gfx/DMU/175.png") { template_train32px_reversed(0, 221) }
+spriteset(spriteset_BR175_front_ATWGhost, "gfx/DMU/175.png") { template_train32px(0, 247) }
+spriteset(spriteset_BR175_rear_ATWGhost, "gfx/DMU/175.png") { template_train32px(0, 273) }
+spriteset(spriteset_BR175_middle_ATWGhost, "gfx/DMU/175.png") { template_train32px(0, 299) }
+spriteset(spriteset_BR175_front_ATWGhost_rev, "gfx/DMU/175.png") { template_train32px_reversed(200, 247) }
+spriteset(spriteset_BR175_rear_ATWGhost_rev, "gfx/DMU/175.png") { template_train32px_reversed(200, 273) }
+spriteset(spriteset_BR175_middle_ATWGhost_rev, "gfx/DMU/175.png") { template_train32px_reversed(0, 299) }
+
+switch(FEAT_TRAINS, SELF, sw_BR175_front, cargo_subtype) {
+	0: spriteset_BR175_front_ATWGhost;
+	1: spriteset_BR175_front_FNW;
+	2: spriteset_BR175_front_ATW;
+	3: spriteset_BR175_front_TfW;
+	default: spriteset_BR175_front_ATWGhost;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR175_middle, cargo_subtype) {
+	0: spriteset_BR175_middle_ATWGhost;
+	1: spriteset_BR175_middle_FNW;
+	2: spriteset_BR175_middle_ATW;
+	3: spriteset_BR175_middle_TfW;
+	default: spriteset_BR175_middle_ATWGhost;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR175_rear, cargo_subtype) {
+	0: spriteset_BR175_rear_ATWGhost;
+	1: spriteset_BR175_rear_FNW;
+	2: spriteset_BR175_rear_ATW;
+	3: spriteset_BR175_rear_TfW;
+	default: spriteset_BR175_rear_ATWGhost;
+}
+
+// Class 175 reversed sprites use dedicated reverse-cab artwork.
+switch(FEAT_TRAINS, SELF, sw_BR175_front_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR175_front_ATWGhost_rev;
+	1: spriteset_BR175_front_FNW_rev;
+	2: spriteset_BR175_front_ATW_rev;
+	3: spriteset_BR175_front_TfW_rev;
+	default: spriteset_BR175_front_ATWGhost_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR175_middle_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR175_middle_ATWGhost_rev;
+	1: spriteset_BR175_middle_FNW_rev;
+	2: spriteset_BR175_middle_ATW_rev;
+	3: spriteset_BR175_middle_TfW_rev;
+	default: spriteset_BR175_middle_ATWGhost_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR175_rear_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR175_rear_ATWGhost_rev;
+	1: spriteset_BR175_rear_FNW_rev;
+	2: spriteset_BR175_rear_ATW_rev;
+	3: spriteset_BR175_rear_TfW_rev;
+	default: spriteset_BR175_rear_ATWGhost_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR175_2car_roles_fwd, position_in_articulated_veh % 2) {
+	0: sw_BR175_front;
+	sw_BR175_rear;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR175_3car_roles_fwd, position_in_articulated_veh % 3) {
+	0: sw_BR175_front;
+	2: sw_BR175_rear;
+	sw_BR175_middle;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR175_rev_role_2car, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 2]) {
+	0: sw_BR175_front_rev_mirror_subtype;
+	sw_BR175_rear_rev_mirror_subtype;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR175_rev_role_3car, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 3]) {
+	0: sw_BR175_front_rev_mirror_subtype;
+	2: sw_BR175_rear_rev_mirror_subtype;
+	sw_BR175_middle_rev_mirror_subtype;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR175_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_ArrivaGhost);
+	1: return string(str_FirstNorthWestern);
+	2: return string(str_ArrivaWales);
+	3: return string(str_TfW);
+	return CB_RESULT_NO_TEXT;
+}
+
+// --------------------
+// Class 180 sprites
+// --------------------
+spriteset(spriteset_BR180_Purchase, "gfx/DMU/180.png") { template_purchase(0, 0) }
+
+spriteset(spriteset_BR180a_FGW, "gfx/DMU/180.png") { template_train32px_old(0, 13) }
+spriteset(spriteset_BR180b_FGW, "gfx/DMU/180.png") { template_train32px_old(0, 38) }
+spriteset(spriteset_BR180c_FGW, "gfx/DMU/180.png") { template_train32px_old(0, 63) }
+spriteset(spriteset_BR180a_FGW_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(175, 13) }
+spriteset(spriteset_BR180b_FGW_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(0, 38) }
+spriteset(spriteset_BR180c_FGW_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(175, 63) }
+
+spriteset(spriteset_BR180a_FGWDL, "gfx/DMU/180.png") { template_train32px_old(0, 88) }
+spriteset(spriteset_BR180b_FGWDL, "gfx/DMU/180.png") { template_train32px_old(0, 113) }
+spriteset(spriteset_BR180c_FGWDL, "gfx/DMU/180.png") { template_train32px_old(0, 138) }
+spriteset(spriteset_BR180a_FGWDL_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(175, 88) }
+spriteset(spriteset_BR180b_FGWDL_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(0, 113) }
+spriteset(spriteset_BR180c_FGWDL_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(175, 138) }
+
+spriteset(spriteset_BR180a_GC, "gfx/DMU/180.png") { template_train32px_old(0, 163) }
+spriteset(spriteset_BR180b_GC, "gfx/DMU/180.png") { template_train32px_old(0, 188) }
+spriteset(spriteset_BR180c_GC, "gfx/DMU/180.png") { template_train32px_old(0, 213) }
+spriteset(spriteset_BR180a_GC_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(175, 163) }
+spriteset(spriteset_BR180b_GC_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(0, 188) }
+spriteset(spriteset_BR180c_GC_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(175, 213) }
+
+spriteset(spriteset_BR180a_GCLined, "gfx/DMU/180.png") { template_train32px_old(0, 238) }
+spriteset(spriteset_BR180b_GCLined, "gfx/DMU/180.png") { template_train32px_old(0, 263) }
+spriteset(spriteset_BR180c_GCLined, "gfx/DMU/180.png") { template_train32px_old(0, 288) }
+spriteset(spriteset_BR180a_GCLined_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(175, 238) }
+spriteset(spriteset_BR180b_GCLined_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(0, 263) }
+spriteset(spriteset_BR180c_GCLined_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(175, 288) }
+
+spriteset(spriteset_BR180a_NorthernRail, "gfx/DMU/180.png") { template_train32px_old(0, 313) }
+spriteset(spriteset_BR180b_NorthernRail, "gfx/DMU/180.png") { template_train32px_old(0, 338) }
+spriteset(spriteset_BR180c_NorthernRail, "gfx/DMU/180.png") { template_train32px_old(0, 363) }
+spriteset(spriteset_BR180a_NorthernRail_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(175, 313) }
+spriteset(spriteset_BR180b_NorthernRail_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(0, 338) }
+spriteset(spriteset_BR180c_NorthernRail_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(175, 363) }
+
+spriteset(spriteset_BR180a_EMRMaroonWhite, "gfx/DMU/180.png") { template_train32px_old(0, 388) }
+spriteset(spriteset_BR180b_EMRMaroonWhite, "gfx/DMU/180.png") { template_train32px_old(0, 413) }
+spriteset(spriteset_BR180c_EMRMaroonWhite, "gfx/DMU/180.png") { template_train32px_old(0, 438) }
+spriteset(spriteset_BR180a_EMRMaroonWhite_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(175, 388) }
+spriteset(spriteset_BR180b_EMRMaroonWhite_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(0, 413) }
+spriteset(spriteset_BR180c_EMRMaroonWhite_rev, "gfx/DMU/180.png") { template_train32px_old_reversed(175, 438) }
+
+switch(FEAT_TRAINS, SELF, sw_BR180a, cargo_subtype) {
+	0: spriteset_BR180a_FGW;
+	1: spriteset_BR180a_FGWDL;
+	2: spriteset_BR180a_GC;
+	3: spriteset_BR180a_GCLined;
+	4: spriteset_BR180a_NorthernRail;
+	5: spriteset_BR180a_EMRMaroonWhite;
+	default: spriteset_BR180a_FGW;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR180b, cargo_subtype) {
+	0: spriteset_BR180b_FGW;
+	1: spriteset_BR180b_FGWDL;
+	2: spriteset_BR180b_GC;
+	3: spriteset_BR180b_GCLined;
+	4: spriteset_BR180b_NorthernRail;
+	5: spriteset_BR180b_EMRMaroonWhite;
+	default: spriteset_BR180b_FGW;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR180c, cargo_subtype) {
+	0: spriteset_BR180c_FGW;
+	1: spriteset_BR180c_FGWDL;
+	2: spriteset_BR180c_GC;
+	3: spriteset_BR180c_GCLined;
+	4: spriteset_BR180c_NorthernRail;
+	5: spriteset_BR180c_EMRMaroonWhite;
+	default: spriteset_BR180c_FGW;
+}
+
+// Class 180 reversed sprites use dedicated reverse-cab artwork.
+switch(FEAT_TRAINS, SELF, sw_BR180a_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR180a_FGW_rev;
+	1: spriteset_BR180a_FGWDL_rev;
+	2: spriteset_BR180a_GC_rev;
+	3: spriteset_BR180a_GCLined_rev;
+	4: spriteset_BR180a_NorthernRail_rev;
+	5: spriteset_BR180a_EMRMaroonWhite_rev;
+	default: spriteset_BR180a_FGW_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR180b_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR180b_FGW_rev;
+	1: spriteset_BR180b_FGWDL_rev;
+	2: spriteset_BR180b_GC_rev;
+	3: spriteset_BR180b_GCLined_rev;
+	4: spriteset_BR180b_NorthernRail_rev;
+	5: spriteset_BR180b_EMRMaroonWhite_rev;
+	default: spriteset_BR180b_FGW_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR180c_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR180c_FGW_rev;
+	1: spriteset_BR180c_FGWDL_rev;
+	2: spriteset_BR180c_GC_rev;
+	3: spriteset_BR180c_GCLined_rev;
+	4: spriteset_BR180c_NorthernRail_rev;
+	5: spriteset_BR180c_EMRMaroonWhite_rev;
+	default: spriteset_BR180c_FGW_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR180_roles_fwd, position_in_articulated_veh % 5) {
+	0: sw_BR180a;
+	4: sw_BR180c;
+	sw_BR180b;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR180_rev_role_5car, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 5]) {
+	0: sw_BR180a_rev_mirror_subtype;
+	4: sw_BR180c_rev_mirror_subtype;
+	sw_BR180b_rev_mirror_subtype;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR180_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_FGW);
+	1: return string(str_FGWDL);
+	2: return string(str_GC);
+	3: return string(str_GCLined);
+	4: return string(str_NorthernRail);
+	5: return string(str_EMRMaroonWhite);
+	return CB_RESULT_NO_TEXT;
+}
+
+// Shared reverse-role resolver for mixed 175/180 formations.
+switch(FEAT_TRAINS, SELF, sw_BR175_180_rev_from_mirror, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
+	339: sw_BR175_rev_role_2car;
+	2339: sw_BR175_rev_role_2car;
+	340: sw_BR175_rev_role_3car;
+	2340: sw_BR175_rev_role_3car;
+	67: sw_BR180_rev_role_5car;
+	2067: sw_BR180_rev_role_5car;
+	68: sw_BR180_rev_role_5car;
+	69: sw_BR180_rev_role_5car;
+	230: sw_BR180_rev_role_5car;
+	2068: sw_BR180_rev_role_5car;
+	2069: sw_BR180_rev_role_5car;
+	2230: sw_BR180_rev_role_5car;
+	sw_BR175_rev_role_2car;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR175_2car_pushpull, vehicle_is_reversed) {
+	1: sw_BR175_180_rev_from_mirror;
+	sw_BR175_2car_roles_fwd;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR175_3car_pushpull, vehicle_is_reversed) {
+	1: sw_BR175_180_rev_from_mirror;
+	sw_BR175_3car_roles_fwd;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR180_pushpull, vehicle_is_reversed) {
+	1: sw_BR175_180_rev_from_mirror;
+	sw_BR180_roles_fwd;
+}
