@@ -1,0 +1,275 @@
+// Unified Class 220 / 221 sprite and push-pull mappings.
+// Shared approach:
+// 1) choose local role sprites from articulated position and local cargo_subtype
+// 2) choose reversed role sprites from mirrored articulated position and mirrored cargo_subtype
+// 3) choose the reversed role chain from the mirrored unit type in mixed 220/221 formations
+
+spriteset(spriteset_BR220_Purchase, "gfx/DMU/220.png") { template_purchase(0, 0) }
+spriteset(spriteset_BR221_Purchase, "gfx/DMU/220.png") { template_purchase(0, 0) }
+spriteset(spriteset_BR221_4_Purchase, "gfx/DMU/220.png") { template_purchase(0, 0) }
+
+// Livery 0: Virgin
+spriteset(spriteset_BR220_221a_Virgin, "gfx/DMU/220.png") { template_train32px_old(0, 13) }
+spriteset(spriteset_BR220_221b_Virgin, "gfx/DMU/220.png") { template_train32px_old(0, 38) }
+spriteset(spriteset_BR220_221c_Virgin, "gfx/DMU/220.png") { template_train32px_old(0, 63) }
+spriteset(spriteset_BR220_221a_Virgin_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(175, 13) }
+spriteset(spriteset_BR220_221b_Virgin_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(0, 38) }
+spriteset(spriteset_BR220_221c_Virgin_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(175, 63) }
+
+// Livery 1: CrossCountry - Maroon
+spriteset(spriteset_BR220_221a_XC, "gfx/DMU/220.png") { template_train32px_old(0, 88) }
+spriteset(spriteset_BR220_221b_XC, "gfx/DMU/220.png") { template_train32px_old(0, 113) }
+spriteset(spriteset_BR220_221c_XC, "gfx/DMU/220.png") { template_train32px_old(0, 138) }
+spriteset(spriteset_BR220_221a_XC_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(175, 88) }
+spriteset(spriteset_BR220_221b_XC_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(0, 113) }
+spriteset(spriteset_BR220_221c_XC_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(175, 138) }
+
+// Livery 2: Avanti West Coast (221 only)
+spriteset(spriteset_BR220_221a_Avanti, "gfx/DMU/220.png") { template_train32px_old(0, 163) }
+spriteset(spriteset_BR220_221b_Avanti, "gfx/DMU/220.png") { template_train32px_old(0, 188) }
+spriteset(spriteset_BR220_221c_Avanti, "gfx/DMU/220.png") { template_train32px_old(0, 213) }
+spriteset(spriteset_BR220_221a_Avanti_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(175, 163) }
+spriteset(spriteset_BR220_221b_Avanti_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(0, 188) }
+spriteset(spriteset_BR220_221c_Avanti_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(175, 213) }
+
+// Livery 3: Grand Central (221 only)
+spriteset(spriteset_BR220_221a_GC, "gfx/DMU/220.png") { template_train32px_old(0, 238) }
+spriteset(spriteset_BR220_221b_GC, "gfx/DMU/220.png") { template_train32px_old(0, 263) }
+spriteset(spriteset_BR220_221c_GC, "gfx/DMU/220.png") { template_train32px_old(0, 288) }
+spriteset(spriteset_BR220_221a_GC_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(175, 238) }
+spriteset(spriteset_BR220_221b_GC_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(0, 263) }
+spriteset(spriteset_BR220_221c_GC_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(175, 288) }
+
+// Livery 4: CrossCountry - Red
+spriteset(spriteset_BR220_221a_XCRed, "gfx/DMU/220.png") { template_train32px_old(0, 313) }
+spriteset(spriteset_BR220_221b_XCRed, "gfx/DMU/220.png") { template_train32px_old(0, 338) }
+spriteset(spriteset_BR220_221c_XCRed, "gfx/DMU/220.png") { template_train32px_old(0, 363) }
+spriteset(spriteset_BR220_221a_XCRed_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(175, 313) }
+spriteset(spriteset_BR220_221b_XCRed_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(0, 338) }
+spriteset(spriteset_BR220_221c_XCRed_rev, "gfx/DMU/220.png") { template_train32px_old_reversed(175, 363) }
+
+// Class 220 subtype mapping: 0 Virgin, 1 XC-Maroon, 2 XC-Red
+switch(FEAT_TRAINS, SELF, sw_BR220a, cargo_subtype) {
+	0: spriteset_BR220_221a_Virgin;
+	1: spriteset_BR220_221a_XC;
+	2: spriteset_BR220_221a_XCRed;
+	default: spriteset_BR220_221a_Virgin;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR220b, cargo_subtype) {
+	0: spriteset_BR220_221b_Virgin;
+	1: spriteset_BR220_221b_XC;
+	2: spriteset_BR220_221b_XCRed;
+	default: spriteset_BR220_221b_Virgin;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR220c, cargo_subtype) {
+	0: spriteset_BR220_221c_Virgin;
+	1: spriteset_BR220_221c_XC;
+	2: spriteset_BR220_221c_XCRed;
+	default: spriteset_BR220_221c_Virgin;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR220a_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR220_221a_Virgin_rev;
+	1: spriteset_BR220_221a_XC_rev;
+	2: spriteset_BR220_221a_XCRed_rev;
+	default: spriteset_BR220_221a_Virgin_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR220b_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR220_221b_Virgin_rev;
+	1: spriteset_BR220_221b_XC_rev;
+	2: spriteset_BR220_221b_XCRed_rev;
+	default: spriteset_BR220_221b_Virgin_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR220c_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR220_221c_Virgin_rev;
+	1: spriteset_BR220_221c_XC_rev;
+	2: spriteset_BR220_221c_XCRed_rev;
+	default: spriteset_BR220_221c_Virgin_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR220_roles_fwd_4car, position_in_articulated_veh % 4) {
+	0: sw_BR220a;
+	3: sw_BR220c;
+	sw_BR220b;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR220_rev_role_4car, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 4]) {
+	0: sw_BR220a_rev_mirror_subtype;
+	3: sw_BR220c_rev_mirror_subtype;
+	sw_BR220b_rev_mirror_subtype;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR220_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_Virgin);
+	1: return string(STR_CONCAT_2d, string(str_comp_XC), string(str_col_Maroon));
+	2: return string(STR_CONCAT_2d, string(str_comp_XC), string(str_col_Red));
+	return CB_RESULT_NO_TEXT;
+}
+
+// Class 221 subtype mapping: 0 Virgin, 1 XC-Maroon, 2 Avanti, 3 Grand Central, 4 XC-Red
+switch(FEAT_TRAINS, SELF, sw_BR221a, cargo_subtype) {
+	0: spriteset_BR220_221a_Virgin;
+	1: spriteset_BR220_221a_XC;
+	2: spriteset_BR220_221a_Avanti;
+	3: spriteset_BR220_221a_GC;
+	4: spriteset_BR220_221a_XCRed;
+	default: spriteset_BR220_221a_Virgin;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221b, cargo_subtype) {
+	0: spriteset_BR220_221b_Virgin;
+	1: spriteset_BR220_221b_XC;
+	2: spriteset_BR220_221b_Avanti;
+	3: spriteset_BR220_221b_GC;
+	4: spriteset_BR220_221b_XCRed;
+	default: spriteset_BR220_221b_Virgin;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221c, cargo_subtype) {
+	0: spriteset_BR220_221c_Virgin;
+	1: spriteset_BR220_221c_XC;
+	2: spriteset_BR220_221c_Avanti;
+	3: spriteset_BR220_221c_GC;
+	4: spriteset_BR220_221c_XCRed;
+	default: spriteset_BR220_221c_Virgin;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221a_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR220_221a_Virgin_rev;
+	1: spriteset_BR220_221a_XC_rev;
+	2: spriteset_BR220_221a_Avanti_rev;
+	3: spriteset_BR220_221a_GC_rev;
+	4: spriteset_BR220_221a_XCRed_rev;
+	default: spriteset_BR220_221a_Virgin_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221b_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR220_221b_Virgin_rev;
+	1: spriteset_BR220_221b_XC_rev;
+	2: spriteset_BR220_221b_Avanti_rev;
+	3: spriteset_BR220_221b_GC_rev;
+	4: spriteset_BR220_221b_XCRed_rev;
+	default: spriteset_BR220_221b_Virgin_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221c_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR220_221c_Virgin_rev;
+	1: spriteset_BR220_221c_XC_rev;
+	2: spriteset_BR220_221c_Avanti_rev;
+	3: spriteset_BR220_221c_GC_rev;
+	4: spriteset_BR220_221c_XCRed_rev;
+	default: spriteset_BR220_221c_Virgin_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221_roles_fwd_5car, position_in_articulated_veh % 5) {
+	0: sw_BR221a;
+	4: sw_BR221c;
+	sw_BR221b;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221_rev_role_5car, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 5]) {
+	0: sw_BR221a_rev_mirror_subtype;
+	4: sw_BR221c_rev_mirror_subtype;
+	sw_BR221b_rev_mirror_subtype;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_Virgin);
+	1: return string(STR_CONCAT_2d, string(str_comp_XC), string(str_col_Maroon));
+	2: return string(str_AvantiWestCoast);
+	3: return string(str_GC);
+	4: return string(STR_CONCAT_2d, string(str_comp_XC), string(str_col_Red));
+	return CB_RESULT_NO_TEXT;
+}
+
+// Class 221/4 subtype mapping: 0 Virgin, 1 XC-Maroon, 2 XC-Red
+switch(FEAT_TRAINS, SELF, sw_BR221_4a, cargo_subtype) {
+	0: spriteset_BR220_221a_Virgin;
+	1: spriteset_BR220_221a_XC;
+	2: spriteset_BR220_221a_XCRed;
+	default: spriteset_BR220_221a_Virgin;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221_4b, cargo_subtype) {
+	0: spriteset_BR220_221b_Virgin;
+	1: spriteset_BR220_221b_XC;
+	2: spriteset_BR220_221b_XCRed;
+	default: spriteset_BR220_221b_Virgin;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221_4c, cargo_subtype) {
+	0: spriteset_BR220_221c_Virgin;
+	1: spriteset_BR220_221c_XC;
+	2: spriteset_BR220_221c_XCRed;
+	default: spriteset_BR220_221c_Virgin;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221_4a_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR220_221a_Virgin_rev;
+	1: spriteset_BR220_221a_XC_rev;
+	2: spriteset_BR220_221a_XCRed_rev;
+	default: spriteset_BR220_221a_Virgin_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221_4b_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR220_221b_Virgin_rev;
+	1: spriteset_BR220_221b_XC_rev;
+	2: spriteset_BR220_221b_XCRed_rev;
+	default: spriteset_BR220_221b_Virgin_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221_4c_rev_mirror_subtype, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR220_221c_Virgin_rev;
+	1: spriteset_BR220_221c_XC_rev;
+	2: spriteset_BR220_221c_XCRed_rev;
+	default: spriteset_BR220_221c_Virgin_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221_4_roles_fwd_4car, position_in_articulated_veh % 4) {
+	0: sw_BR221_4a;
+	3: sw_BR221_4c;
+	sw_BR221_4b;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221_4_rev_role_4car, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 4]) {
+	0: sw_BR221_4a_rev_mirror_subtype;
+	3: sw_BR221_4c_rev_mirror_subtype;
+	sw_BR221_4b_rev_mirror_subtype;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR221_4_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_Virgin);
+	1: return string(STR_CONCAT_2d, string(str_comp_XC), string(str_col_Maroon));
+	2: return string(STR_CONCAT_2d, string(str_comp_XC), string(str_col_Red));
+	return CB_RESULT_NO_TEXT;
+}
+
+// Shared reverse-role resolver for mixed 220/221 formations.
+switch(FEAT_TRAINS, SELF, sw_BR220_221_rev_from_mirror, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
+	185: sw_BR220_rev_role_4car;
+	2185: sw_BR220_rev_role_4car;
+	188: sw_BR221_rev_role_5car;
+	2188: sw_BR221_rev_role_5car;
+	192: sw_BR221_4_rev_role_4car;
+	2192: sw_BR221_4_rev_role_4car;
+	sw_BR220_rev_role_4car;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR220_pushpull, vehicle_is_reversed) {
+	1: sw_BR220_221_rev_from_mirror;
+	sw_BR220_roles_fwd_4car;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR221_pushpull, vehicle_is_reversed) {
+	1: sw_BR220_221_rev_from_mirror;
+	sw_BR221_roles_fwd_5car;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR221_4_pushpull, vehicle_is_reversed) {
+	1: sw_BR220_221_rev_from_mirror;
+	sw_BR221_4_roles_fwd_4car;
+}
