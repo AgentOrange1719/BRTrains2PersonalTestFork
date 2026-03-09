@@ -783,17 +783,17 @@ str_BR185_liveries				:First Group, First TransPennine
 STR_NAME_BR220					:BR Class 220 "Voyager" (4-car)
 str_BR220_usage					:Express Passenger
 str_BR220_eos					:---
-str_BR220_liveries				:Virgin Trains, CrossCountry
+str_BR220_liveries				:Virgin Trains, CrossCountry Maroon, CrossCountry Red
 
 STR_NAME_BR221					:BR Class 221 "Super Voyager" (5-Car)
 str_BR221_usage					:Express Passenger
 str_BR221_eos					:---
-str_BR221_liveries				:Virgin Trains, CrossCountry
+str_BR221_liveries				:Virgin Trains, CrossCountry Maroon, Avanti West Coast, Grand Central, CrossCountry Red
 
 STR_NAME_BR221_4				:BR Class 221 "Super Voyager" (4-Car)
 str_BR221_4_usage				:Express Passenger
 str_BR221_4_eos					:---
-str_BR221_4_liveries			:Cross Country, Virgin Trains
+str_BR221_4_liveries			:Virgin Trains, CrossCountry Maroon, CrossCountry Red
 
 STR_NAME_BR222					:BR Class 222 "Meridian" (7-Car)
 str_BR222_usage					:Express Passenger
