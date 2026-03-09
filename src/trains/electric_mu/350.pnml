@@ -12,9 +12,8 @@
 //
 // High-level runtime behavior in this file:
 //   1) Build each 4-car unit as a single item ID via articulated callbacks.
-//   2) Apply translator-wagon gating (power/TE/capacity/effects/sound).
-//   3) Apply seated vs standing capacity distribution by subclass.
-//   4) Apply visual/effect callbacks for overhead and third-rail sparks.
+//   2) Apply seated capacity distribution by subclass.
+//   3) Apply visual/effect callbacks for overhead and third-rail sparks.
 // ============================================================================
 
 // ============================================================================
@@ -40,139 +39,42 @@ switch(FEAT_TRAINS, SELF, sw_BR350_can_attach_wagon, vehicle_type_id) {
 	item_BR350_1:         return CB_RESULT_ATTACH_ALLOW;
 	item_BR350_2:         return CB_RESULT_ATTACH_ALLOW;
 	item_BR350_34:        return CB_RESULT_ATTACH_ALLOW;
-	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
 
 // ============================================================================
-// Translator-Wagon Runtime Gating
+// Capacity Chains (Seated only)
 // ============================================================================
-// Bit 0 in bitmask_consist_info means a translator wagon is present.
-// When present, the 350 is treated as hauled stock:
-//   - power -> 0
-//   - tractive effort -> 0
-//   - capacity -> 0
-//   - effects/sound -> disabled or muted
-
-switch(FEAT_TRAINS, PARENT, sw_BR350_power_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 2682;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, sw_BR350_te_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 77; // 0.3 * 255
-	return 0;
-}
-
-// ============================================================================
-// Capacity Chains (Seated + Standing Parameter)
-// ============================================================================
-// param_standing_capacity:
-//   0 -> seated layout
-//   1 -> seated + standing layout
-//
-// Each subclass has:
-//   - per-car seated split
-//   - per-car high-capacity split
-//   - selector switch by param_standing_capacity
-//   - translator gate in PARENT scope
-//
-// Start from bottom. sw_BR350_X_capacity detects if translator wagon is in consist. If yes, set capacity to 0
-// If no, go to sw_BR350_X_cap_by_pos. Detects if standing room parameter is enabled. 
-// If yes, go to sw_BR350_X_cap_by_pos_high. In no, go to sw_BR350_X_cap_by_pos_seated.
-// Replace X with subclass (1, 2, or 34)
-//
 // Numbers are sourced from 2021 National Rail contract with West Midlands Trains, page 76
 
 
 // Class 350/1 capacity splits.
-switch(FEAT_TRAINS, SELF, sw_BR350_1_cap_by_pos_seated, position_in_articulated_veh % 4) {
+switch(FEAT_TRAINS, SELF, sw_BR350_1_capacity, position_in_articulated_veh % 4) {
 	0: return(57 * param_pax);
 	1: return(58 * param_pax);
 	2: return(57 * param_pax);
 	3: return(58 * param_pax);
 }
-// Class 350/1 total with standing room: 360.
-switch(FEAT_TRAINS, SELF, sw_BR350_1_cap_by_pos_high, position_in_articulated_veh % 4) {
-	return(90 * param_pax);
-}
-switch(FEAT_TRAINS, SELF, sw_BR350_1_cap_by_pos, param_standing_capacity) {
-	1: sw_BR350_1_cap_by_pos_high;
-	sw_BR350_1_cap_by_pos_seated;
-}
-switch(FEAT_TRAINS, PARENT, sw_BR350_1_capacity, (bitmask_consist_info & 0x01)) {
-	0: sw_BR350_1_cap_by_pos;
-	return 0;
-}
 
 // Class 350/2 capacity splits.
-switch(FEAT_TRAINS, SELF, sw_BR350_2_cap_by_pos_seated, position_in_articulated_veh % 4) {
+switch(FEAT_TRAINS, SELF, sw_BR350_2_capacity, position_in_articulated_veh % 4) {
 	0: return(68 * param_pax);
 	1: return(67 * param_pax);
 	2: return(68 * param_pax);
 	3: return(67 * param_pax);
 }
-// Class 350/2 total with standing room: 363.
-switch(FEAT_TRAINS, SELF, sw_BR350_2_cap_by_pos_high, position_in_articulated_veh % 4) {
-	0: return(91 * param_pax);
-	1: return(91 * param_pax);
-	2: return(91 * param_pax);
-	3: return(90 * param_pax);
-}
-switch(FEAT_TRAINS, SELF, sw_BR350_2_cap_by_pos, param_standing_capacity) {
-	1: sw_BR350_2_cap_by_pos_high;
-	sw_BR350_2_cap_by_pos_seated;
-}
-switch(FEAT_TRAINS, PARENT, sw_BR350_2_capacity, (bitmask_consist_info & 0x01)) {
-	0: sw_BR350_2_cap_by_pos;
-	return 0;
-}
 
 // Class 350/3+4 capacity splits.
-switch(FEAT_TRAINS, SELF, sw_BR350_34_cap_by_pos_seated, position_in_articulated_veh % 4) {
+switch(FEAT_TRAINS, SELF, sw_BR350_34_capacity, position_in_articulated_veh % 4) {
 	0: return(60 * param_pax);
 	1: return(59 * param_pax);
 	2: return(60 * param_pax);
 	3: return(59 * param_pax);
 }
-// Class 350/3+4 total with standing room: 363.
-switch(FEAT_TRAINS, SELF, sw_BR350_34_cap_by_pos_high, position_in_articulated_veh % 4) {
-	0: return(91 * param_pax);
-	1: return(91 * param_pax);
-	2: return(91 * param_pax);
-	3: return(90 * param_pax);
-}
-switch(FEAT_TRAINS, SELF, sw_BR350_34_cap_by_pos, param_standing_capacity) {
-	1: sw_BR350_34_cap_by_pos_high;
-	sw_BR350_34_cap_by_pos_seated;
-}
-switch(FEAT_TRAINS, PARENT, sw_BR350_34_capacity, (bitmask_consist_info & 0x01)) {
-	0: sw_BR350_34_cap_by_pos;
-	return 0;
-}
 
 // ============================================================================
-// Sound + Visual Effect Gating
+// Sound + Visual Effects
 // ============================================================================
-// Sounds:
-//   - normal electric sound when self-powered
-//   - muted when translator wagon is present
-switch(FEAT_TRAINS, SELF, sw_sound_electric_350_muted, getbits(extra_callback_info1, 0, 8)) {
-	SOUND_EVENT_BREAKDOWN: SOUND_BREAKDOWN_TRAIN_SHIP;
-}
-
-switch(FEAT_TRAINS, PARENT, sw_sound_electric_350_with_translator, (bitmask_consist_info & 0x01)) {
-	0: sw_sound_electric_350;
-	sw_sound_electric_350_muted;
-}
-
-// visual_effect_and_powered:
-// Keep a lightweight electric/no-electric state for compatibility.
-switch(FEAT_TRAINS, PARENT, sw_BR350_visual_effect_with_translator, (bitmask_consist_info & 0x01)) {
-	0: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
-	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
-}
-
 // create_effect chain:
 // Detailed per-car spark placement. If both THIRD and ELRL are present, ELRL wins.
 //
@@ -187,11 +89,6 @@ switch(FEAT_TRAINS, PARENT, sw_BR350_1_visual_effect_by_railtype_third, tile_pow
 switch(FEAT_TRAINS, PARENT, sw_BR350_1_visual_effect_by_railtype, tile_powers_railtype("ELRL")) {
 	1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
 	sw_BR350_1_visual_effect_by_railtype_third;
-}
-
-switch(FEAT_TRAINS, PARENT, sw_BR350_1_visual_effect_with_translator, (bitmask_consist_info & 0x01)) {
-	0: sw_BR350_1_visual_effect_by_railtype;
-	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
 }
 
 // Overhead position mapping for all 350 subclasses. Panto is on 3rd car when moving forward, 2nd when reversed
@@ -224,11 +121,6 @@ switch(FEAT_TRAINS, PARENT, sw_BR350_1_create_effect_by_railtype, tile_powers_ra
 	sw_BR350_1_create_effect_by_railtype_third;
 }
 
-switch(FEAT_TRAINS, PARENT, sw_BR350_1_create_effect_with_translator, (bitmask_consist_info & 0x01)) {
-	0: sw_BR350_1_create_effect_by_railtype;
-	return 0;
-}
-
 // Class 350/2 and /3+4 are overhead-only in this set.
 // Uses the same panto car positions as /1.
 switch(FEAT_TRAINS, SELF, sw_BR350_2_create_effect_elrl_pos_fwd, position_in_articulated_veh % 4) {
@@ -243,22 +135,18 @@ switch(FEAT_TRAINS, PARENT, sw_BR350_2_create_effect_elrl_pos, vehicle_is_revers
 	1: sw_BR350_2_create_effect_elrl_pos_rev;
 	sw_BR350_2_create_effect_elrl_pos_fwd;
 }
-switch(FEAT_TRAINS, PARENT, sw_BR350_2_create_effect_with_translator, (bitmask_consist_info & 0x01)) {
-	0: sw_BR350_2_create_effect_elrl_pos;
-	return 0;
-}
 
 switch(FEAT_TRAINS, SELF, sw_BR350_1_create_effect_by_pos, position_in_articulated_veh % 4) {
-	sw_BR350_1_create_effect_with_translator;
+	sw_BR350_1_create_effect_by_railtype;
 }
 switch(FEAT_TRAINS, SELF, sw_BR350_2_create_effect_by_pos, position_in_articulated_veh % 4) {
-	sw_BR350_2_create_effect_with_translator;
+	sw_BR350_2_create_effect_elrl_pos;
 }
 
-// Purchase text helpers: show exact total capacity by current standing/pax params.
+// Purchase text helpers: show exact total seated capacity by current pax parameter.
 // The purchase list's default capacity column rounds articulated values, so this
 // keeps the true totals visible for each subclass.
-switch(FEAT_TRAINS, SELF, sw_BR350_1_additional_text, param_standing_capacity * 10 + param_pax) {
+switch(FEAT_TRAINS, SELF, sw_BR350_1_additional_text, param_pax) {
 	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR350_usage),
@@ -287,34 +175,6 @@ switch(FEAT_TRAINS, SELF, sw_BR350_1_additional_text, param_standing_capacity * 
 			string(str_BR350_eos),
 			string(str_BR350_1_capacity_4x),
 			string(str_BR350_1_liveries)));
-	11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR350_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR350_eos),
-			string(str_BR350_1_capacity_hc_1x),
-			string(str_BR350_1_liveries)));
-	12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR350_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR350_eos),
-			string(str_BR350_1_capacity_hc_2x),
-			string(str_BR350_1_liveries)));
-	13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR350_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR350_eos),
-			string(str_BR350_1_capacity_hc_3x),
-			string(str_BR350_1_liveries)));
-	14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR350_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR350_eos),
-			string(str_BR350_1_capacity_hc_4x),
-			string(str_BR350_1_liveries)));
 	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR350_usage),
@@ -324,7 +184,7 @@ switch(FEAT_TRAINS, SELF, sw_BR350_1_additional_text, param_standing_capacity * 
 			string(str_BR350_1_liveries)));
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR350_2_additional_text, param_standing_capacity * 10 + param_pax) {
+switch(FEAT_TRAINS, SELF, sw_BR350_2_additional_text, param_pax) {
 	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR350_usage),
@@ -353,34 +213,6 @@ switch(FEAT_TRAINS, SELF, sw_BR350_2_additional_text, param_standing_capacity * 
 			string(str_BR350_eos),
 			string(str_BR350_2_capacity_4x),
 			string(str_BR350_2_liveries)));
-	11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR350_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR350_eos),
-			string(str_BR350_2_capacity_hc_1x),
-			string(str_BR350_2_liveries)));
-	12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR350_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR350_eos),
-			string(str_BR350_2_capacity_hc_2x),
-			string(str_BR350_2_liveries)));
-	13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR350_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR350_eos),
-			string(str_BR350_2_capacity_hc_3x),
-			string(str_BR350_2_liveries)));
-	14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR350_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR350_eos),
-			string(str_BR350_2_capacity_hc_4x),
-			string(str_BR350_2_liveries)));
 	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR350_usage),
@@ -390,7 +222,7 @@ switch(FEAT_TRAINS, SELF, sw_BR350_2_additional_text, param_standing_capacity * 
 			string(str_BR350_2_liveries)));
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR350_34_additional_text, param_standing_capacity * 10 + param_pax) {
+switch(FEAT_TRAINS, SELF, sw_BR350_34_additional_text, param_pax) {
 	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR350_usage),
@@ -419,34 +251,6 @@ switch(FEAT_TRAINS, SELF, sw_BR350_34_additional_text, param_standing_capacity *
 			string(str_BR350_eos),
 			string(str_BR350_34_capacity_4x),
 			string(str_BR350_34_liveries)));
-	11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR350_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR350_eos),
-			string(str_BR350_34_capacity_hc_1x),
-			string(str_BR350_34_liveries)));
-	12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR350_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR350_eos),
-			string(str_BR350_34_capacity_hc_2x),
-			string(str_BR350_34_liveries)));
-	13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR350_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR350_eos),
-			string(str_BR350_34_capacity_hc_3x),
-			string(str_BR350_34_liveries)));
-	14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR350_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR350_eos),
-			string(str_BR350_34_capacity_hc_4x),
-			string(str_BR350_34_liveries)));
 	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR350_usage),
@@ -463,7 +267,7 @@ switch(FEAT_TRAINS, SELF, sw_BR350_34_additional_text, param_standing_capacity *
 // Each item uses:
 //   - articulated_part switch from the articulation block
 //   - default sprite chain from sprites/350.pnml
-//   - translator-aware power/TE/capacity/effect/sound switches from this file
+//   - capacity/effect switches from this file
 
 // Class 350/1
 item(FEAT_TRAINS, item_BR350_1, 774) {
@@ -511,9 +315,7 @@ item(FEAT_TRAINS, item_BR350_1, 774) {
 		purchase: spriteset_BR350_Purchase;
 		colour_mapping: return PALETTE_CC_FIRST;
 		create_effect: sw_BR350_1_create_effect_by_pos;
-		sound_effect: sw_sound_electric_350_with_translator;
-		power: sw_BR350_power_with_translator;
-		tractive_effort_coefficient: sw_BR350_te_with_translator;
+		sound_effect: sw_sound_electric_350;
 		cargo_capacity: sw_BR350_1_capacity;
 		cost_factor: return(GetAdjustedCost(42));
 		running_cost_factor: return(GetAdjustedCost(38));
@@ -563,13 +365,11 @@ item(FEAT_TRAINS, item_BR350_2, 775) {
 		cargo_subtype_text: sw_BR350_2_cargo_subtype_text;
 		articulated_part: sw_articulated_BR350_2;
 		default: sw_BR350_2_direction;
-		visual_effect_and_powered: sw_BR350_1_visual_effect_with_translator;
+		visual_effect_and_powered: sw_BR350_1_visual_effect_by_railtype;
 		purchase: spriteset_BR350_Purchase;
 		colour_mapping: return PALETTE_CC_FIRST;
 		create_effect: sw_BR350_2_create_effect_by_pos;
-		sound_effect: sw_sound_electric_350_with_translator;
-		power: sw_BR350_power_with_translator;
-		tractive_effort_coefficient: sw_BR350_te_with_translator;
+		sound_effect: sw_sound_electric_350;
 		cargo_capacity: sw_BR350_2_capacity;
 		cost_factor: return(GetAdjustedCost(42));
 		running_cost_factor: return(GetAdjustedCost(38));
@@ -619,13 +419,11 @@ item(FEAT_TRAINS, item_BR350_34, 776) {
 		cargo_subtype_text: sw_BR350_34_cargo_subtype_text;
 		articulated_part: sw_articulated_BR350_34;
 		default: sw_BR350_34_direction;
-		visual_effect_and_powered: sw_BR350_1_visual_effect_with_translator;
+		visual_effect_and_powered: sw_BR350_1_visual_effect_by_railtype;
 		purchase: spriteset_BR350_Purchase;
 		colour_mapping: return PALETTE_CC_FIRST;
 		create_effect: sw_BR350_2_create_effect_by_pos;
-		sound_effect: sw_sound_electric_350_with_translator;
-		power: sw_BR350_power_with_translator;
-		tractive_effort_coefficient: sw_BR350_te_with_translator;
+		sound_effect: sw_sound_electric_350;
 		cargo_capacity: sw_BR350_34_capacity;
 		cost_factor: return(GetAdjustedCost(42));
 		running_cost_factor: return(GetAdjustedCost(38));
