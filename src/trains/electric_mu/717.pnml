@@ -125,61 +125,15 @@ switch(FEAT_TRAINS, SELF, switch_BR717_start_stop, num_vehs_in_consist) {
 
 // Per-car capacity split for seat-based mode.
 // Total base seats = 61 + 60 + 60 + 60 + 60 + 61 = 362.
-switch(FEAT_TRAINS, SELF, switch_BR717_cargo_capacity_seated, position_in_consist % 6) {
+switch(FEAT_TRAINS, SELF, switch_BR717_cargo_capacity, position_in_consist % 6) {
 	0: return(61 * param_pax);
 	5: return(61 * param_pax);
 	return(60 * param_pax);
 }
 
-// Per-car capacity split for high-capacity mode (seat + standing room).
-// Total base capacity = 157 + 157 + 157 + 157 + 157 + 158 = 943.
-switch(FEAT_TRAINS, SELF, switch_BR717_cargo_capacity_high, position_in_consist % 6) {
-	5: return(158 * param_pax);
-	return(157 * param_pax);
-}
-
-// Select seated or high-capacity split from GRF-wide parameter.
-// This happens before the global param_pax multiplier used in each branch.
-switch(FEAT_TRAINS, SELF, switch_BR717_cargo_capacity, param_standing_capacity) {
-	1..2: switch_BR717_cargo_capacity_high;
-	switch_BR717_cargo_capacity_seated;
-}
-
-// Translator handling for Class 717:
-// Bit 0 in bitmask_vehicle_info marks translator wagons.
-switch(FEAT_TRAINS, PARENT, switch_BR717_power_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 3300;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR717_te_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 38; // 0.15 * 255
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR717_cargo_capacity_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_BR717_cargo_capacity;
-	return 0;
-}
-
-switch(FEAT_TRAINS, SELF, switch_sound_electric_717_muted, getbits(extra_callback_info1, 0, 8)) {
-	SOUND_EVENT_BREAKDOWN: SOUND_BREAKDOWN_TRAIN_SHIP;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_sound_electric_717_with_translator, (bitmask_consist_info & 0x01)) {
-	0: sw_sound_electric_350;
-	switch_sound_electric_717_muted;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR717_create_effect_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_BR717_create_effect_by_railtype;
-	return 0;
-}
-
 // Only allow Class 717 units to couple with Class 717 units.
 switch(FEAT_TRAINS, SELF, switch_BR717_can_attach_wagon, vehicle_type_id) {
 	item_BR717: return CB_RESULT_ATTACH_ALLOW;
-	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
 
@@ -190,7 +144,7 @@ switch(FEAT_TRAINS, SELF, sw_BR717_cargo_subtype_text, cargo_subtype) {
 
 // Purchase text helper: show exact total capacity by current mode and pax multiplier.
 // The purchase list capacity column still rounds from per-car values for articulated units.
-switch(FEAT_TRAINS, SELF, switch_BR717_additional_text, (param_standing_capacity != 0) * 10 + param_pax) {
+switch(FEAT_TRAINS, SELF, switch_BR717_additional_text, param_pax) {
 	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR717_usage),
@@ -218,34 +172,6 @@ switch(FEAT_TRAINS, SELF, switch_BR717_additional_text, (param_standing_capacity
 			string(str_multiple_working_no),
 			string(str_BR717_eos),
 			string(str_BR717_capacity_4x),
-			string(str_BR717_liveries)));
-11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR717_usage),
-			string(str_multiple_working_no),
-			string(str_BR717_eos),
-			string(str_BR717_capacity_hc_1x),
-			string(str_BR717_liveries)));
-12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR717_usage),
-			string(str_multiple_working_no),
-			string(str_BR717_eos),
-			string(str_BR717_capacity_hc_2x),
-			string(str_BR717_liveries)));
-13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR717_usage),
-			string(str_multiple_working_no),
-			string(str_BR717_eos),
-			string(str_BR717_capacity_hc_3x),
-			string(str_BR717_liveries)));
-14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR717_usage),
-			string(str_multiple_working_no),
-			string(str_BR717_eos),
-			string(str_BR717_capacity_hc_4x),
 			string(str_BR717_liveries)));
 	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
@@ -300,12 +226,10 @@ item(FEAT_TRAINS, item_BR717, 518) {
 		start_stop:						switch_BR717_start_stop;
 		default: 						switch_BR717_spriteset;
 		purchase:						spriteset_BR717_Purchase;
-		create_effect:					switch_BR717_create_effect_with_translator;
+		create_effect:					switch_BR717_create_effect_by_railtype;
 		colour_mapping: 				return PALETTE_CC_FIRST;
-		sound_effect:					switch_sound_electric_717_with_translator;
-		power:							switch_BR717_power_with_translator;
-		tractive_effort_coefficient:	switch_BR717_te_with_translator;
-		cargo_capacity:					switch_BR717_cargo_capacity_with_translator;
+		sound_effect:					sw_sound_electric_350;
+		cargo_capacity:					switch_BR717_cargo_capacity;
 		cost_factor:					return(GetAdjustedCost(123));
 		running_cost_factor:			return(GetAdjustedCost(70));
 	}
