@@ -238,13 +238,11 @@ switch(FEAT_TRAINS, SELF, sw_BR700_cargo_subtype_text, cargo_subtype) {
 
 switch(FEAT_TRAINS, SELF, switch_BR700_can_attach_wagon_8, vehicle_type_id) {
 	item_BR700: return CB_RESULT_ATTACH_ALLOW;
-	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
 
 switch(FEAT_TRAINS, SELF, switch_BR700_can_attach_wagon_12, vehicle_type_id) {
 	item_BR700_2: return CB_RESULT_ATTACH_ALLOW;
-	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
 
@@ -301,46 +299,9 @@ switch(FEAT_TRAINS, PARENT, switch_BR700_create_effect_12_by_railtype, tile_powe
 	switch_BR700_create_effect_12_by_railtype_third;
 }
 
-// Translator handling for Class 700:
-// Bit 0 in bitmask_vehicle_info marks translator wagons.
-switch(FEAT_TRAINS, PARENT, switch_BR700_power_8_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 4425;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR700_power_12_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 6705;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR700_te_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 38; // 0.15 * 255
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR700_create_effect_8_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_BR700_create_effect_8_by_railtype;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR700_create_effect_12_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_BR700_create_effect_12_by_railtype;
-	return 0;
-}
-
-switch(FEAT_TRAINS, SELF, switch_sound_electric_700_muted, getbits(extra_callback_info1, 0, 8)) {
-	SOUND_EVENT_BREAKDOWN: SOUND_BREAKDOWN_TRAIN_SHIP;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_sound_electric_700_with_translator, (bitmask_consist_info & 0x01)) {
-	0: sw_sound_electric_350;
-	switch_sound_electric_700_muted;
-}
-
 // 700/0 per-car capacity split (8 cars).
 // Seated total: 727
-// High-capacity total (standing mode): 1146
-switch(FEAT_TRAINS, SELF, switch_BR700_cargo_capacity_8_seated, position_in_consist % 8) {
+switch(FEAT_TRAINS, SELF, switch_BR700_cargo_capacity_8, position_in_consist % 8) {
 	0: return(92 * param_pax);
 	1: return(91 * param_pax);
 	2: return(91 * param_pax);
@@ -352,26 +313,9 @@ switch(FEAT_TRAINS, SELF, switch_BR700_cargo_capacity_8_seated, position_in_cons
 	return(90 * param_pax);
 }
 
-switch(FEAT_TRAINS, SELF, switch_BR700_cargo_capacity_8_high, position_in_consist % 8) {
-	0: return(144 * param_pax);
-	7: return(144 * param_pax);
-	return(143 * param_pax);
-}
-
-switch(FEAT_TRAINS, SELF, switch_BR700_cargo_capacity_8, param_standing_capacity) {
-	1..2: switch_BR700_cargo_capacity_8_high;
-	switch_BR700_cargo_capacity_8_seated;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR700_cargo_capacity_8_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_BR700_cargo_capacity_8;
-	return 0;
-}
-
 // 700/1 per-car capacity split (12 cars).
 // Seated total: 666
-// High-capacity total (standing mode): 1754
-switch(FEAT_TRAINS, SELF, switch_BR700_cargo_capacity_12_seated, position_in_consist % 12) {
+switch(FEAT_TRAINS, SELF, switch_BR700_cargo_capacity_12, position_in_consist % 12) {
 	0: return(56 * param_pax);
 	1: return(56 * param_pax);
 	2: return(56 * param_pax);
@@ -387,24 +331,8 @@ switch(FEAT_TRAINS, SELF, switch_BR700_cargo_capacity_12_seated, position_in_con
 	return(55 * param_pax);
 }
 
-switch(FEAT_TRAINS, SELF, switch_BR700_cargo_capacity_12_high, position_in_consist % 12) {
-	0: return(147 * param_pax);
-11: return(147 * param_pax);
-	return(146 * param_pax);
-}
-
-switch(FEAT_TRAINS, SELF, switch_BR700_cargo_capacity_12, param_standing_capacity) {
-	1..2: switch_BR700_cargo_capacity_12_high;
-	switch_BR700_cargo_capacity_12_seated;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR700_cargo_capacity_12_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_BR700_cargo_capacity_12;
-	return 0;
-}
-
 // Purchase text helper for 700/0 with exact total capacity by current params.
-switch(FEAT_TRAINS, SELF, switch_BR700_8_additional_text, (param_standing_capacity != 0) * 10 + param_pax) {
+switch(FEAT_TRAINS, SELF, switch_BR700_8_additional_text, param_pax) {
 	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR700_usage),
@@ -433,34 +361,6 @@ switch(FEAT_TRAINS, SELF, switch_BR700_8_additional_text, (param_standing_capaci
 			string(str_BR700_eos),
 			string(str_BR700_0_capacity_4x),
 			string(str_BR700_0_liveries)));
-11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR700_usage),
-			string(str_multiple_working_no),
-			string(str_BR700_eos),
-			string(str_BR700_0_capacity_hc_1x),
-			string(str_BR700_0_liveries)));
-12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR700_usage),
-			string(str_multiple_working_no),
-			string(str_BR700_eos),
-			string(str_BR700_0_capacity_hc_2x),
-			string(str_BR700_0_liveries)));
-13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR700_usage),
-			string(str_multiple_working_no),
-			string(str_BR700_eos),
-			string(str_BR700_0_capacity_hc_3x),
-			string(str_BR700_0_liveries)));
-14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR700_usage),
-			string(str_multiple_working_no),
-			string(str_BR700_eos),
-			string(str_BR700_0_capacity_hc_4x),
-			string(str_BR700_0_liveries)));
 	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR700_usage),
@@ -471,7 +371,7 @@ switch(FEAT_TRAINS, SELF, switch_BR700_8_additional_text, (param_standing_capaci
 }
 
 // Purchase text helper for 700/1 with exact total capacity by current params.
-switch(FEAT_TRAINS, SELF, switch_BR700_12_additional_text, (param_standing_capacity != 0) * 10 + param_pax) {
+switch(FEAT_TRAINS, SELF, switch_BR700_12_additional_text, param_pax) {
 	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR700_usage),
@@ -499,34 +399,6 @@ switch(FEAT_TRAINS, SELF, switch_BR700_12_additional_text, (param_standing_capac
 			string(str_multiple_working_no),
 			string(str_BR700_eos),
 			string(str_BR700_1_capacity_4x),
-			string(str_BR700_1_liveries)));
-11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR700_usage),
-			string(str_multiple_working_no),
-			string(str_BR700_eos),
-			string(str_BR700_1_capacity_hc_1x),
-			string(str_BR700_1_liveries)));
-12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR700_usage),
-			string(str_multiple_working_no),
-			string(str_BR700_eos),
-			string(str_BR700_1_capacity_hc_2x),
-			string(str_BR700_1_liveries)));
-13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR700_usage),
-			string(str_multiple_working_no),
-			string(str_BR700_eos),
-			string(str_BR700_1_capacity_hc_3x),
-			string(str_BR700_1_liveries)));
-14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR700_usage),
-			string(str_multiple_working_no),
-			string(str_BR700_eos),
-			string(str_BR700_1_capacity_hc_4x),
 			string(str_BR700_1_liveries)));
 	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
@@ -579,12 +451,10 @@ item (FEAT_TRAINS, item_BR700, 255) {
 		articulated_part:				switch_articulated_BR700;
 		default: 						switch_BR700_8_direction;
 		purchase:						spriteset_BR700_Purchase;
-		create_effect:					switch_BR700_create_effect_8_with_translator;
+		create_effect:					switch_BR700_create_effect_8_by_railtype;
 		colour_mapping: 				return PALETTE_CC_FIRST;
-		sound_effect:					switch_sound_electric_700_with_translator;
-		power:							switch_BR700_power_8_with_translator;
-		tractive_effort_coefficient:	switch_BR700_te_with_translator;
-		cargo_capacity:					switch_BR700_cargo_capacity_8_with_translator;
+		sound_effect:					sw_sound_electric_350;
+		cargo_capacity:					switch_BR700_cargo_capacity_8;
 		cost_factor:					return(GetAdjustedCost(123));
 		running_cost_factor:			return(GetAdjustedCost(70));
 	}
@@ -632,12 +502,10 @@ item (FEAT_TRAINS, item_BR700_2, 256) {
 		articulated_part:				switch_articulated_BR700_2;
 		default: 						switch_BR700_12_direction;
 		purchase:						spriteset_BR700_Purchase;
-		create_effect:					switch_BR700_create_effect_12_with_translator;
+		create_effect:					switch_BR700_create_effect_12_by_railtype;
 		colour_mapping: 				return PALETTE_CC_FIRST;
-		sound_effect:					switch_sound_electric_700_with_translator;
-		power:							switch_BR700_power_12_with_translator;
-		tractive_effort_coefficient:	switch_BR700_te_with_translator;
-		cargo_capacity:					switch_BR700_cargo_capacity_12_with_translator;
+		sound_effect:					sw_sound_electric_350;
+		cargo_capacity:					switch_BR700_cargo_capacity_12;
 		cost_factor:					return(GetAdjustedCost(164));
 		running_cost_factor:			return(GetAdjustedCost(94));
 	}
