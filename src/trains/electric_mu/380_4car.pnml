@@ -3,9 +3,19 @@ switch(FEAT_TRAINS, SELF, sw_BR380_4car_articulated, extra_callback_info1) {
 	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR380_4car_visual_effect, position_in_articulated_veh % 4) {
+switch(FEAT_TRAINS, SELF, sw_BR380_4car_visual_effect_fwd, position_in_articulated_veh % 4) {
 	2: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
 	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_4car_visual_effect_rev, position_in_articulated_veh % 4) {
+	1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR380_4car_visual_effect, vehicle_is_reversed) {
+	1: sw_BR380_4car_visual_effect_rev;
+	sw_BR380_4car_visual_effect_fwd;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR380_4car_start_stop, num_vehs_in_consist) {
