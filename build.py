@@ -172,7 +172,7 @@ def main(grf_name):
     # Variant Headers
     variantheader_directory = Path()
 
-    train_directories = {
+    train_directories = [
         "multimode_mu",
         "electric_mu",
         "diesel_mu",
@@ -183,12 +183,12 @@ def main(grf_name):
         "altfuel_loco",
         "steam_loco",
         "rolling_stock",
-        "freight_wagon", 
-        "metro",      
+        "freight_wagon",
+        "metro",
         "departmental",
         "utility_and_debug",
-        "deprecated"
-    }
+        "deprecated",
+    ]
 
     nml_file = ""
 
@@ -202,9 +202,10 @@ def main(grf_name):
     file_list.update(handle_folder(trains_directory))
 
 
-    for directory in train_directories:
-        filepath = trains_directory / directory / "sprites"
-        file_list.update(handle_folder(filepath, False))
+    # Do not pre-load all sprites directories globally.
+    # Each train directory is handled below in one pass, which keeps related
+    # sprite/switch/item files closer together in output order and helps keep
+    # peak concurrent spritegroup usage lower.
 
     file_list.update(handle_folder(trains_directory / "variantheader", True))
 
@@ -212,10 +213,9 @@ def main(grf_name):
 
     for directory in train_directories:
         filepath = trains_directory / directory
-        file_list.update(handle_folder(filepath, True))
+        file_list.update(handle_folder(filepath, True))        
 
     file_list.update(handle_folder(trams_directory, True))
-    
 
     file_list.update(handle_folder(src_directory / "grf_append"))
     
