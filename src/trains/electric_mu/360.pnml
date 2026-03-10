@@ -56,20 +56,52 @@ switch(FEAT_TRAINS, SELF, sw_BR360_2_5car_capacity, position_in_articulated_veh 
 	return(67 * param_pax);
 }
 
-// Preserve legacy behavior where only the lead car emits pickup effects.
-switch(FEAT_TRAINS, SELF, sw_BR360_1_create_effect, position_in_articulated_veh % 4) {
-	0: electric_create_visual_effect;
+// Pantograph pickup effects:
+// - Forward: panto is on 2nd car for all Class 360 subclasses.
+// - Reversed: panto is on 3rd car for 4-car units, 4th car for 5-car units.
+switch(FEAT_TRAINS, SELF, sw_BR360_1_create_effect_pos_fwd, position_in_articulated_veh % 4) {
+	1: electric_create_visual_effect;
 	return 0;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_2_4car_create_effect, position_in_articulated_veh % 4) {
-	0: electric_create_visual_effect;
+switch(FEAT_TRAINS, SELF, sw_BR360_1_create_effect_pos_rev, position_in_articulated_veh % 4) {
+	2: electric_create_visual_effect;
 	return 0;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_2_5car_create_effect, position_in_articulated_veh % 5) {
-	0: electric_create_visual_effect;
+switch(FEAT_TRAINS, PARENT, sw_BR360_1_create_effect, vehicle_is_reversed) {
+	1: sw_BR360_1_create_effect_pos_rev;
+	sw_BR360_1_create_effect_pos_fwd;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_4car_create_effect_pos_fwd, position_in_articulated_veh % 4) {
+	1: electric_create_visual_effect;
 	return 0;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_4car_create_effect_pos_rev, position_in_articulated_veh % 4) {
+	2: electric_create_visual_effect;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR360_2_4car_create_effect, vehicle_is_reversed) {
+	1: sw_BR360_2_4car_create_effect_pos_rev;
+	sw_BR360_2_4car_create_effect_pos_fwd;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_5car_create_effect_pos_fwd, position_in_articulated_veh % 5) {
+	1: electric_create_visual_effect;
+	return 0;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_5car_create_effect_pos_rev, position_in_articulated_veh % 5) {
+	3: electric_create_visual_effect;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR360_2_5car_create_effect, vehicle_is_reversed) {
+	1: sw_BR360_2_5car_create_effect_pos_rev;
+	sw_BR360_2_5car_create_effect_pos_fwd;
 }
 
 item(FEAT_TRAINS, item_BR360_1, 737) {
