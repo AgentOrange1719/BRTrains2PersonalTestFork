@@ -16,39 +16,11 @@ switch(FEAT_TRAINS, SELF, switch_BR220_can_attach_wagon, vehicle_type_id) {
 	item_BR220: return CB_RESULT_ATTACH_ALLOW;
 	item_BR221: return CB_RESULT_ATTACH_ALLOW;
 	item_BR221_4: return CB_RESULT_ATTACH_ALLOW;
-	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
-
-switch(FEAT_TRAINS, PARENT, switch_BR220_power_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 3000;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR220_te_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 76; // 0.30 * 255
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR220_capacity_with_translator, (bitmask_consist_info & 0x01)) {
-	0: sw_BR220_capacity;
-	return 0;
-}
-
 switch(FEAT_TRAINS, SELF, switch_BR220_sound_muted, getbits(extra_callback_info1, 0, 8)) {
 	SOUND_EVENT_BREAKDOWN: SOUND_BREAKDOWN_TRAIN_SHIP;
 }
-
-switch(FEAT_TRAINS, PARENT, switch_BR220_sound_with_translator, (bitmask_consist_info & 0x01)) {
-	0: sw_sound_diesel_220;
-	switch_BR220_sound_muted;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR220_create_effect_with_translator, (bitmask_consist_info & 0x01)) {
-	0: diesel_create_visual_effect;
-	return 0;
-}
-
 item(FEAT_TRAINS, item_BR220, 185) {
 	property {
 		variant_group:					header_Voyager;
@@ -92,11 +64,11 @@ item(FEAT_TRAINS, item_BR220, 185) {
 		default: 						sw_BR220_pushpull;
 		purchase:						spriteset_BR220_Purchase;
 		colour_mapping: 				return PALETTE_CC_FIRST;
-		create_effect:					switch_BR220_create_effect_with_translator;
-		sound_effect:					switch_BR220_sound_with_translator;
-		power:							switch_BR220_power_with_translator;
-		tractive_effort_coefficient:	switch_BR220_te_with_translator;
-		cargo_capacity:					switch_BR220_capacity_with_translator;
+		create_effect:					diesel_create_visual_effect;
+		sound_effect:					sw_sound_diesel_220;
+		power:							return 3000;
+		tractive_effort_coefficient:	return 76;
+		cargo_capacity:					sw_BR220_capacity;
 		cost_factor:					return(GetAdjustedCost(78));
 		running_cost_factor: 			return(GetAdjustedCost(55));
 	}

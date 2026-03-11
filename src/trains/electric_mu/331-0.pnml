@@ -52,44 +52,14 @@ switch(FEAT_TRAINS, SELF, switch_br_331_0_start_stop, num_vehs_in_consist) {
 switch(FEAT_TRAINS, SELF, switch_br_331_0_can_attach_wagon, vehicle_type_id) {
 	item_br_331_0: return CB_RESULT_ATTACH_ALLOW;
 	item_br_331_1: return CB_RESULT_ATTACH_ALLOW;
-	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
-
-switch(FEAT_TRAINS, PARENT, switch_br_331_0_power_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 2360;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_br_331_0_te_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 76; // 0.30 * 255
-	return 0;
-}
-
-switch(FEAT_TRAINS, SELF, switch_br_331_0_capacity_seated, position_in_articulated_veh % 3) {
+switch(FEAT_TRAINS, SELF, switch_br_331_0_capacity, position_in_articulated_veh % 3) {
 	return(68 * param_pax);
 }
 
-switch(FEAT_TRAINS, SELF, switch_br_331_0_capacity_high, position_in_articulated_veh % 3) {
-	return(115 * param_pax);
-}
 
-switch(FEAT_TRAINS, SELF, switch_br_331_0_capacity_by_mode, param_standing_capacity) {
-	2: switch_br_331_0_capacity_high;
-	switch_br_331_0_capacity_seated;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_br_331_0_capacity_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_br_331_0_capacity_by_mode;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_br_331_0_particles_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_br_331_0_particles;
-	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
-}
-
-switch(FEAT_TRAINS, SELF, switch_br_331_0_additional_text, (param_standing_capacity == 2) * 10 + param_pax) {
+switch(FEAT_TRAINS, SELF, switch_br_331_0_additional_text, param_pax) {
 	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR331_usage),
@@ -117,34 +87,6 @@ switch(FEAT_TRAINS, SELF, switch_br_331_0_additional_text, (param_standing_capac
 			string(str_multiple_working_within_class),
 			string(str_BR331_eos),
 			string(str_BR331_0_capacity_4x),
-			string(str_BR331_liveries)));
-	11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR331_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR331_eos),
-			string(str_BR331_0_capacity_hc_1x),
-			string(str_BR331_liveries)));
-	12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR331_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR331_eos),
-			string(str_BR331_0_capacity_hc_2x),
-			string(str_BR331_liveries)));
-	13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR331_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR331_eos),
-			string(str_BR331_0_capacity_hc_3x),
-			string(str_BR331_liveries)));
-	14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR331_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR331_eos),
-			string(str_BR331_0_capacity_hc_4x),
 			string(str_BR331_liveries)));
 	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
@@ -201,10 +143,10 @@ item(FEAT_TRAINS, item_br_331_0, 424) {
 		articulated_part: switch_br_331_0_articulated;
 		start_stop: switch_br_331_0_start_stop;
 		can_attach_wagon: switch_br_331_0_can_attach_wagon;
-		visual_effect_and_powered: switch_br_331_0_particles_with_translator;
-		power: switch_br_331_0_power_with_translator;
-		tractive_effort_coefficient: switch_br_331_0_te_with_translator;
-		cargo_capacity: switch_br_331_0_capacity_with_translator;
+		visual_effect_and_powered: switch_br_331_0_particles;
+		power: return 2360;
+		tractive_effort_coefficient: return 76;
+		cargo_capacity: switch_br_331_0_capacity;
 		additional_text: switch_br_331_0_additional_text;
 		cost_factor: return(GetAdjustedCost(62));
 		running_cost_factor: return(GetAdjustedCost(33));

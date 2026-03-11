@@ -18,34 +18,11 @@ switch(FEAT_TRAINS, SELF, switch_br_397_start_stop, num_vehs_in_consist) {
 // Only allow the same train type to be added to itself
 switch(FEAT_TRAINS, SELF, switch_br_397_can_attach_wagon, vehicle_type_id) {
 	item_br_397: return CB_RESULT_ATTACH_ALLOW;
-	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
-
-switch(FEAT_TRAINS, PARENT, switch_br_397_power_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 3400;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_br_397_te_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 76; // 0.30 * 255
-	return 0;
-}
-
 switch(FEAT_TRAINS, SELF, switch_br_397_capacity, position_in_articulated_veh % 5) {
 	return ((286 / 5) * param_pax);
 }
-
-switch(FEAT_TRAINS, PARENT, switch_br_397_capacity_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_br_397_capacity;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_br_397_particles_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_br_397_particles;
-	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
-}
-
 switch(FEAT_TRAINS, SELF, switch_br_397_additional_text, cargo_subtype) {
 	return(string(str_purchase_loco_with_liveries_and_mw,
 			string(str_purchase_type_emu),
@@ -101,10 +78,10 @@ item(FEAT_TRAINS, item_br_397, 427) {
 		articulated_part: switch_br_397_articulated;
 		start_stop: switch_br_397_start_stop;
 		can_attach_wagon: switch_br_397_can_attach_wagon;
-		visual_effect_and_powered: switch_br_397_particles_with_translator;
-		power: switch_br_397_power_with_translator;
-		tractive_effort_coefficient: switch_br_397_te_with_translator;
-		cargo_capacity: switch_br_397_capacity_with_translator;
+		visual_effect_and_powered: switch_br_397_particles;
+		power: return 3400;
+		tractive_effort_coefficient: return 76;
+		cargo_capacity: switch_br_397_capacity;
 		additional_text: switch_br_397_additional_text;
 		cost_factor: return(GetAdjustedCost(76));
 		running_cost_factor: return(GetAdjustedCost(40));

@@ -67,12 +67,6 @@ switch(FEAT_TRAINS, SELF, switch_br_755_3_particles, tile_powers_railtype("ELRL"
 	switch_br_755_3_particles_diesel_direction;
 }
 
-// Translator wagon safety mode: suppress all visual effects.
-switch(FEAT_TRAINS, SELF, switch_br_755_3_particles_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_br_755_3_particles;
-	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
-}
-
 // ---------------------------------------------------------------------
 // Attachment + operation limits.
 // ---------------------------------------------------------------------
@@ -84,11 +78,10 @@ switch(FEAT_TRAINS, SELF, switch_br_755_3_start_stop, num_vehs_in_consist) {
 	return string(STR_BR_755_MW_LIMIT);
 }
 
-// Allow coupling to /3, /4, and translator wagon.
+// Allow coupling to /3 and /4.
 switch(FEAT_TRAINS, SELF, switch_br_755_3_can_attach_wagon_type, vehicle_type_id) {
 	item_br_755_3: return CB_RESULT_ATTACH_ALLOW;
 	item_br_755_4: return CB_RESULT_ATTACH_ALLOW;
-	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
 
@@ -102,18 +95,6 @@ switch(FEAT_TRAINS, SELF, switch_br_755_3_can_attach_wagon_type, vehicle_type_id
 switch(FEAT_TRAINS, PARENT, switch_br_755_3_power_base, tile_powers_railtype("ELRL")) {
 	1: return 3500;
 	return 1290;
-}
-
-// Translator wagon safety mode: force no tractive output.
-switch(FEAT_TRAINS, PARENT, switch_br_755_3_power, (bitmask_consist_info & 0x01)) {
-	0: switch_br_755_3_power_base;
-	return 0;
-}
-
-// Translator wagon safety mode: force passenger capacity to zero.
-switch(FEAT_TRAINS, PARENT, switch_br_755_3_capacity_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return (167 / 3 * param_pax);
-	return 0;
 }
 
 // Vehicle lengths by articulated index:
@@ -173,12 +154,12 @@ item(FEAT_TRAINS, item_br_755_3, 453) {
 		articulated_part: switch_br_755_3_articulated;
 		start_stop: switch_br_755_3_start_stop;
 		can_attach_wagon: switch_br_755_3_can_attach_wagon_type;
-		visual_effect_and_powered: switch_br_755_3_particles_with_translator;
+		visual_effect_and_powered: switch_br_755_3_particles;
 
-		power: switch_br_755_3_power;
+		power: switch_br_755_3_power_base;
 		length: switch_br_755_3_length;
 		additional_text: return(string(str_purchase_loco_with_liveries_and_mw_and_note, string(str_purchase_type_bmu), string(str_BR755_usage), string(STR_CONCAT_2, string(str_multiple_working_within_class), string(str_multiple_working_max_3_units)), string(str_BR755_eos), string(str_BR755_liveries), string(str_BR755_description)));
-		cargo_capacity: switch_br_755_3_capacity_with_translator;
+		cargo_capacity: return (167 / 3 * param_pax);
 		cost_factor: return(GetAdjustedCost(62));
 		running_cost_factor: return(GetAdjustedCost(21));
 	}

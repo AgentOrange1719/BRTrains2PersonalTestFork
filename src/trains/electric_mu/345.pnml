@@ -13,17 +13,6 @@ switch(FEAT_TRAINS, SELF, switch_br_345_7car_particles, position_in_articulated_
 	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
 }
 
-// Translator handling: bit 0 in bitmask_consist_info marks translator wagons.
-switch(FEAT_TRAINS, PARENT, switch_br_345_7car_power_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 3100;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_br_345_7car_te_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 76; // 0.30 * 255
-	return 0;
-}
-
 // Exact 7-car total:
 // 5 cars at 166 + 2 cars at 165 = 1160.
 switch(FEAT_TRAINS, SELF, switch_br_345_7car_capacity, position_in_consist % 7) {
@@ -31,17 +20,6 @@ switch(FEAT_TRAINS, SELF, switch_br_345_7car_capacity, position_in_consist % 7) 
 	6: return(165 * param_pax);
 	return(166 * param_pax);
 }
-
-switch(FEAT_TRAINS, PARENT, switch_br_345_7car_capacity_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_br_345_7car_capacity;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_br_345_7car_effect_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_br_345_7car_particles;
-	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
-}
-
 switch(FEAT_TRAINS, SELF, switch_br_345_7car_additional_text, param_pax) {
 	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
@@ -123,11 +101,11 @@ item(FEAT_TRAINS, item_br_345_7car, 599) {
 		articulated_part: switch_br_345_7car_articulated;
 		start_stop: switch_br_345_start_stop;
 		can_attach_wagon: switch_br_345_can_attach_wagon;
-		visual_effect_and_powered: switch_br_345_7car_effect_with_translator;
+		visual_effect_and_powered: switch_br_345_7car_particles;
 		additional_text: switch_br_345_7car_additional_text;
-		power: switch_br_345_7car_power_with_translator;
-		tractive_effort_coefficient: switch_br_345_7car_te_with_translator;
-		cargo_capacity: switch_br_345_7car_capacity_with_translator;
+		power: return 3100;
+		tractive_effort_coefficient: return 76;
+		cargo_capacity: switch_br_345_7car_capacity;
 		cost_factor: return(GetAdjustedCost(105));
 		running_cost_factor: return(GetAdjustedCost(80));
 	}
@@ -148,17 +126,6 @@ switch(FEAT_TRAINS, SELF, switch_br_345_9car_particles, position_in_articulated_
 	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
 }
 
-// Translator handling: bit 0 in bitmask_consist_info marks translator wagons.
-switch(FEAT_TRAINS, PARENT, switch_br_345_9car_power_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 4000;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_br_345_9car_te_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 76; // 0.30 * 255
-	return 0;
-}
-
 // Exact 9-car total:
 // 6 cars at 167 + 3 cars at 166 = 1500.
 switch(FEAT_TRAINS, SELF, switch_br_345_9car_capacity, position_in_consist % 9) {
@@ -167,17 +134,6 @@ switch(FEAT_TRAINS, SELF, switch_br_345_9car_capacity, position_in_consist % 9) 
 	8: return(166 * param_pax);
 	return(167 * param_pax);
 }
-
-switch(FEAT_TRAINS, PARENT, switch_br_345_9car_capacity_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_br_345_9car_capacity;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_br_345_9car_effect_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_br_345_9car_particles;
-	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
-}
-
 switch(FEAT_TRAINS, SELF, switch_br_345_9car_additional_text, param_pax) {
 	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
@@ -259,11 +215,11 @@ item(FEAT_TRAINS, item_br_345_9car, 426) {
 		articulated_part: switch_br_345_9car_articulated;
 		start_stop: switch_br_345_start_stop;
 		can_attach_wagon: switch_br_345_can_attach_wagon;
-		visual_effect_and_powered: switch_br_345_9car_effect_with_translator;
+		visual_effect_and_powered: switch_br_345_9car_particles;
 		additional_text: switch_br_345_9car_additional_text;
-		power: switch_br_345_9car_power_with_translator;
-		tractive_effort_coefficient: switch_br_345_9car_te_with_translator;
-		cargo_capacity: switch_br_345_9car_capacity_with_translator;
+		power: return 4000;
+		tractive_effort_coefficient: return 76;
+		cargo_capacity: switch_br_345_9car_capacity;
 		cost_factor: return(GetAdjustedCost(110));
 		running_cost_factor: return(GetAdjustedCost(85));
 	}

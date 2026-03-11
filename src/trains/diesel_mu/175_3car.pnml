@@ -7,39 +7,11 @@ switch(FEAT_TRAINS, SELF, switch_BR175_3car_can_attach_wagon, vehicle_type_id) {
 	item_BR175_3car: return CB_RESULT_ATTACH_ALLOW;
 	item_BR175_2car: return CB_RESULT_ATTACH_ALLOW;
 	item_BR180: return CB_RESULT_ATTACH_ALLOW;
-	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
-
-switch(FEAT_TRAINS, PARENT, switch_BR175_3car_power_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 1350;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR175_3car_te_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 13; // 0.05 * 255
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR175_3car_capacity_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return(186 * param_pax / 3);
-	return 0;
-}
-
 switch(FEAT_TRAINS, SELF, switch_BR175_3car_sound_muted, getbits(extra_callback_info1, 0, 8)) {
 	SOUND_EVENT_BREAKDOWN: SOUND_BREAKDOWN_TRAIN_SHIP;
 }
-
-switch(FEAT_TRAINS, PARENT, switch_BR175_3car_sound_with_translator, (bitmask_consist_info & 0x01)) {
-	0: sw_sound_diesel_dmu_gen2;
-	switch_BR175_3car_sound_muted;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_BR175_3car_create_effect_with_translator, (bitmask_consist_info & 0x01)) {
-	0: diesel_create_visual_effect;
-	return 0;
-}
-
 item (FEAT_TRAINS, item_BR175_3car, 340) {
 	property {
 		name: 							string(STR_NAME_BR175_3car);
@@ -81,11 +53,11 @@ item (FEAT_TRAINS, item_BR175_3car, 340) {
 	default: 							sw_BR175_3car_pushpull;
 	purchase:							spriteset_BR175_Purchase;
 	colour_mapping: 					return PALETTE_CC_FIRST;
-	create_effect:						switch_BR175_3car_create_effect_with_translator;
-	sound_effect:						switch_BR175_3car_sound_with_translator;
-	power:								switch_BR175_3car_power_with_translator;
-	tractive_effort_coefficient:		switch_BR175_3car_te_with_translator;
-	cargo_capacity:						switch_BR175_3car_capacity_with_translator;
+	create_effect:						diesel_create_visual_effect;
+	sound_effect:						sw_sound_diesel_dmu_gen2;
+	power:								return 1350;
+	tractive_effort_coefficient:		return 13;
+	cargo_capacity:						return(186 * param_pax / 3);
 	cost_factor:	return(GetAdjustedCost(46));
 	running_cost_factor: return(GetAdjustedCost(49));
 }

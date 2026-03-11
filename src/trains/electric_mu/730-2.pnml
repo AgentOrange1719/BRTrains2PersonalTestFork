@@ -19,72 +19,34 @@ switch(FEAT_TRAINS, SELF, switch_br730_2_effect_pos, position_in_articulated_veh
 	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
 }
 
-// Translator handling:
-// Bit 0 in bitmask_vehicle_info marks translator wagons.
-switch(FEAT_TRAINS, PARENT, switch_br730_2_power_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 4200;
-	return 0;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_br730_2_te_with_translator, (bitmask_consist_info & 0x01)) {
-	0: return 76; // 0.30 * 255
-	return 0;
-}
-
 // Capacity split for Class 730/2:
-// seated total = 369
-// expanded-unit standing mode total = 571 (param_standing_capacity == 2 only)
-switch(FEAT_TRAINS, SELF, switch_br730_2_capacity_seated, position_in_articulated_veh % 5) {
+// Total capacity = 369
+// expanded-unit standing mode total = 571 (0 == 2 only)
+switch(FEAT_TRAINS, SELF, switch_br730_2_capacity, position_in_articulated_veh % 5) {
 	2: return(73 * param_pax);
 	return(74 * param_pax);
 }
 
-switch(FEAT_TRAINS, SELF, switch_br730_2_capacity_high_expanded, position_in_articulated_veh % 5) {
-	2: return(115 * param_pax);
-	return(114 * param_pax);
-}
-
-switch(FEAT_TRAINS, SELF, switch_br730_2_capacity_by_mode, param_standing_capacity) {
-	2: switch_br730_2_capacity_high_expanded;
-	switch_br730_2_capacity_seated;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_br730_2_capacity_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_br730_2_capacity_by_mode;
-	return 0;
-}
 
 switch(FEAT_TRAINS, SELF, switch_sound_electric_730_2_muted, getbits(extra_callback_info1, 0, 8)) {
 	SOUND_EVENT_BREAKDOWN: SOUND_BREAKDOWN_TRAIN_SHIP;
 }
-
-switch(FEAT_TRAINS, PARENT, switch_sound_electric_730_2_with_translator, (bitmask_consist_info & 0x01)) {
-	0: sw_sound_electric_350;
-	switch_sound_electric_730_2_muted;
-}
-
-switch(FEAT_TRAINS, PARENT, switch_br730_2_effect_with_translator, (bitmask_consist_info & 0x01)) {
-	0: switch_br730_2_effect_pos;
-	visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 0, DISABLE_WAGON_POWER);
-}
-
 // Multiple working limit: maximum 10 cars in the complete consist.
 switch(FEAT_TRAINS, SELF, switch_br730_2_start_stop, num_vehs_in_consist) {	
 	1..10: return CB_RESULT_NO_TEXT;
 	return string(STR_BR_730_MW_LIMIT);
 }
 
-// Allow coupling between 730/0 and 730/2 units, plus translator wagons.
+// Allow coupling between 730/0 and 730/2 units.
 switch(FEAT_TRAINS, SELF, switch_br730_2_can_attach_wagon, vehicle_type_id) {
 	item_br730_0: return CB_RESULT_ATTACH_ALLOW;
 	item_br730_2: return CB_RESULT_ATTACH_ALLOW;
-	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
 
 // Purchase text helper:
 // Class 730/2 only uses high-capacity values in expanded standing-room mode.
-switch(FEAT_TRAINS, SELF, switch_br730_2_additional_text, (param_standing_capacity == 2) * 10 + param_pax) {
+switch(FEAT_TRAINS, SELF, switch_br730_2_additional_text, param_pax) {
 	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR730_usage),
@@ -113,34 +75,6 @@ switch(FEAT_TRAINS, SELF, switch_br730_2_additional_text, (param_standing_capaci
 			string(str_BR730_eos),
 			string(str_BR730_2_capacity_4x),
 			string(str_BR730_2_liveries)));
-	11: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR730_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR730_eos),
-			string(str_BR730_2_capacity_hc_1x),
-			string(str_BR730_2_liveries)));
-	12: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR730_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR730_eos),
-			string(str_BR730_2_capacity_hc_2x),
-			string(str_BR730_2_liveries)));
-	13: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR730_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR730_eos),
-			string(str_BR730_2_capacity_hc_3x),
-			string(str_BR730_2_liveries)));
-	14: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
-			string(str_purchase_type_emu),
-			string(str_BR730_usage),
-			string(str_multiple_working_within_class),
-			string(str_BR730_eos),
-			string(str_BR730_2_capacity_hc_4x),
-			string(str_BR730_2_liveries)));
 	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw,
 			string(str_purchase_type_emu),
 			string(str_BR730_usage),
@@ -149,7 +83,6 @@ switch(FEAT_TRAINS, SELF, switch_br730_2_additional_text, (param_standing_capaci
 			string(str_BR730_2_capacity_1x),
 			string(str_BR730_2_liveries)));
 }
-
 
 item(FEAT_TRAINS, item_br730_2, 576) {
 	property {
@@ -198,12 +131,12 @@ item(FEAT_TRAINS, item_br730_2, 576) {
 		articulated_part: switch_br730_2_articulated;
 		start_stop: switch_br730_2_start_stop;	
 		can_attach_wagon: switch_br730_2_can_attach_wagon;
-		visual_effect_and_powered: switch_br730_2_effect_with_translator;
+		visual_effect_and_powered: switch_br730_2_effect_pos;
 		additional_text: switch_br730_2_additional_text;
-		sound_effect: switch_sound_electric_730_2_with_translator;
-		power: switch_br730_2_power_with_translator;
-		tractive_effort_coefficient: switch_br730_2_te_with_translator;
-		cargo_capacity: switch_br730_2_capacity_with_translator;
+		sound_effect: sw_sound_electric_350;
+		power: return 4200;
+		tractive_effort_coefficient: return 76;
+		cargo_capacity: switch_br730_2_capacity;
 		cost_factor:	return(GetAdjustedCost(170));
 		running_cost_factor: return(GetAdjustedCost(100));
 	}
