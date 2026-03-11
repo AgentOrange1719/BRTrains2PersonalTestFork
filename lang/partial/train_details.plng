@@ -1490,7 +1490,6 @@ STR_NAME_BRMk2_Late_SO			:BR Mark 2 Coach (D-F Standard Class)
 STR_NAME_BRMk2_Late_FO			:BR Mark 2 Coach (D-F First Class)
 STR_NAME_BRMk2_BSO				:BR Mark 2 Guard (Brake Standard Class)
 STR_NAME_BRMk2_BFO				:BR Mark 2 Guard Coach (Brake First Class)
-STR_NAME_BRMk2_Translator		:BR Mark 2 Translator Wagon (Prototype)
 STR_NAME_BRMk2_Buffet			:BR Mark 2 Buffet Coach (First Class)
 STR_NAME_BRMk2_Pullaman			:BR Mark 2 Pullman Coach (First Class)
 STR_NAME_BRMk2_Sleeper			:BR Mark 2 Sleeper Coach
