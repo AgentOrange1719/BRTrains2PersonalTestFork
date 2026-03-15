@@ -22,6 +22,7 @@ STR_Eurostar_Header             :British Rail "Eurostar"/TGV
 STR_IEP_Header                  :British Rail "Intercity Express Program"
 STR_Departmental_Header         :National Rail Maintenance Vehicles
 STR_Civity_Header               :British Rail "Civity" family
+STR_BR319_Header               :British Rail Class 319 family
 STR_Debug_Header                :BRTrains DEBUG units (see description)
 STR_Debug_AdditionalText        :Units for BRTrains debugging - Not intended for gameplay{}Disable these using the BRTrains "Developer Mode" parameter
 STR_CoveredVan_Header           :British Rail VGA/VKA Covered Vans
