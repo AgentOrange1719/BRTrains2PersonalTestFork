@@ -147,6 +147,8 @@ STR_BR_756_3CAR                         :BR Class 756/3 (3-Car with Power Pack)
 STR_BR_756_4CAR                         :BR Class 756/4 (4-Car with Power Pack)
 STR_BR_756_MW_LIMIT                     :Class 756 units support multiple working up to 3 units maximum.
 STR_BR_700_MW_LIMIT                     :The Class 700 does not support multiple working.
+STR_BR_319_MW_LIMIT                     :Class 319 units support multiple working up to 3 units maximum.
+STR_BR_769_MW_LIMIT                     :Class 769 units support multiple working up to 3 units maximum.
 STR_BR_730_MW_LIMIT                     :Class 730 units support multiple working up to 10 cars maximum.
 STR_BR_345_MW_LIMIT                     :The Class 345 does not support multiple working.
 STR_BR_701_0_MW_LIMIT                   :The Class 701/0 does not support multiple working.
@@ -154,6 +156,10 @@ STR_BR_701_5_MW_LIMIT                   :The Class 701/5 does not support multip
 
 STR_BR_769                              :BR Class 769/0/3/4 "Flex" (4-Car)
 STR_BR_769_9                            :BR Class 769/9 "Flex" (4-Car)
+str_BR769_usage                         :Suburban Passenger
+str_BR769_eos                           :---
+str_BR769_liveries                      :Transport for London, Northern, Rail Operations Group
+str_BR769_9_liveries                    :Great Western Railway
 
 STR_br777                              :BR Class 777 "METRO" (4-Car)
 
@@ -865,10 +871,35 @@ str_BR315_usage					:Commuter Passenger
 str_BR315_eos					:---
 str_BR315_liveries				:BR Blue/Grey, Network SouthEast, Network SouthEast Alternative Scheme, WAGN, One, First Great Eastern, National Express East Anglia, Abellio Greater Anglia, TfL Rail, London Overground
 
-STR_NAME_BR319					:BR Class 319 (4-car)
+STR_NAME_BR319					:BR Class 319/0 (4-car)
+STR_NAME_BR319_0				:BR Class 319/0 (4-car)
+STR_NAME_BR319_1				:BR Class 319/1 (4-car)
+STR_NAME_BR319_2				:BR Class 319/2 (4-car)
+STR_NAME_BR319_3				:BR Class 319/3 (4-car)
+STR_NAME_BR319_4				:BR Class 319/4 (4-car)
 str_BR319_usage					:Regional Passenger
 str_BR319_eos					:---
 str_BR319_liveries				:Network SouthEast, Network SouthEast Grey, BR Thameslink, Connex, First Capital Connect, Southern, Govia Thameslink Blue, Govia Thameslink Pink, Transitional, London Midland, Northern
+str_BR319_0_capacity_1x			:319
+str_BR319_0_capacity_2x			:638
+str_BR319_0_capacity_3x			:957
+str_BR319_0_capacity_4x			:1276
+str_BR319_1_capacity_1x			:311
+str_BR319_1_capacity_2x			:622
+str_BR319_1_capacity_3x			:933
+str_BR319_1_capacity_4x			:1244
+str_BR319_2_capacity_1x			:230
+str_BR319_2_capacity_2x			:460
+str_BR319_2_capacity_3x			:690
+str_BR319_2_capacity_4x			:920
+str_BR319_3_capacity_1x			:308
+str_BR319_3_capacity_2x			:616
+str_BR319_3_capacity_3x			:924
+str_BR319_3_capacity_4x			:1232
+str_BR319_4_capacity_1x			:289
+str_BR319_4_capacity_2x			:578
+str_BR319_4_capacity_3x			:867
+str_BR319_4_capacity_4x			:1156
 
 STR_NAME_BR323					:BR Class 323 (3-car)
 str_BR323_usage					:Suburban Passenger
