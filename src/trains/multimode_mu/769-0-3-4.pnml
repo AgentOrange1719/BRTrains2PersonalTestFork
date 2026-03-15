@@ -1,55 +1,50 @@
-
-switch(FEAT_TRAINS, SELF, switch_br_769_spriteset_rog, position_in_articulated_veh % 4) {
-	0: spriteset_BR769a_Orion;
-	3: spriteset_BR769d_Orion;
-	spriteset_BR769b_Orion;
-}
-
-switch(FEAT_TRAINS, SELF, switch_br_769_spriteset_northern, position_in_articulated_veh % 4) {
-	0: spriteset_BR769a_Northern;
-	3: spriteset_BR769d_Northern;
-	spriteset_BR769b_Northern;
-}
-
-switch(FEAT_TRAINS, SELF, switch_br_769_spriteset_tfw, position_in_articulated_veh % 4) {
-	0: spriteset_BR769a_TfW;
-	3: spriteset_BR769d_TfW;
-	spriteset_BR769b_TfW;
-}
-
-switch(FEAT_TRAINS, SELF, switch_br_769_spriteset, cargo_subtype) {
-	0: switch_br_769_spriteset_tfw;
-	1: switch_br_769_spriteset_rog;
-	2: switch_br_769_spriteset_northern;
-}
-
 // Define articulations
 switch(FEAT_TRAINS, SELF, switch_br_769_articulated, extra_callback_info1) {
 	1..3: return item_br_769;
-	return CB_RESULT_NO_MORE_ARTICULATED_PARTS; // Stop adding more cars
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
-switch(FEAT_TRAINS, SELF, switch_br_769_particles_ohle, position_in_articulated_veh % 4) {
-    1: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
-    visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 2, DISABLE_WAGON_POWER);
+switch(FEAT_TRAINS, SELF, switch_br_769_create_effect_elrl_pos_fwd, position_in_articulated_veh % 4) {
+	2: electric_create_visual_effect;
+	return 0;
 }
 
-switch(FEAT_TRAINS, SELF, switch_br_769_particles_diesel, position_in_articulated_veh % 4) {
-    0: visual_effect_and_powered(VISUAL_EFFECT_DIESEL, 2, DISABLE_WAGON_POWER);
-    3: visual_effect_and_powered(VISUAL_EFFECT_DIESEL, 2, DISABLE_WAGON_POWER);
-    visual_effect_and_powered(VISUAL_EFFECT_DISABLE, 2, DISABLE_WAGON_POWER);
+switch(FEAT_TRAINS, SELF, switch_br_769_create_effect_elrl_pos_rev, position_in_articulated_veh % 4) {
+	1: electric_create_visual_effect;
+	return 0;
 }
 
-// Only give particle effects to middle/pantograph car on OHLE
-switch(FEAT_TRAINS, SELF, switch_br_769_particles, tile_powers_railtype("ELRL") || tile_powers_railtype("THIRD")) {
-	// 0 is first car, 1 is second car, 2 is third car, so on...
-	1: switch_br_769_particles_ohle; 
-	switch_br_769_particles_diesel;
+switch(FEAT_TRAINS, PARENT, switch_br_769_create_effect_elrl_pos, vehicle_is_reversed) {
+	1: switch_br_769_create_effect_elrl_pos_rev;
+	switch_br_769_create_effect_elrl_pos_fwd;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_769_create_effect_third_pos, position_in_articulated_veh % 4) {
+	0: electric_create_visual_effect_SAA3;
+	3: electric_create_visual_effect_SAA3;
+	return 0;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_769_create_effect_diesel_pos, position_in_articulated_veh % 4) {
+	0: diesel_create_visual_effect;
+	3: diesel_create_visual_effect;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_769_create_effect_by_railtype_third, tile_powers_railtype("THIRD")) {
+	1: switch_br_769_create_effect_third_pos;
+	switch_br_769_create_effect_diesel_pos;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_769_create_effect, tile_powers_railtype("ELRL")) {
+	1: switch_br_769_create_effect_elrl_pos;
+	switch_br_769_create_effect_by_railtype_third;
 }
 
 // Start/stop switch, used to limit maximum length
-switch(FEAT_TRAINS, SELF, switch_br_769_start_stop, num_vehs_in_consist) {	
-	return CB_RESULT_NO_TEXT;   // Allow any length
+switch(FEAT_TRAINS, SELF, switch_br_769_start_stop, num_vehs_in_consist) {
+	1..12: return CB_RESULT_NO_TEXT;
+	return string(STR_BR_769_MW_LIMIT);
 }
 
 // Only allow the same train type to be added to itself
@@ -71,15 +66,14 @@ switch(FEAT_TRAINS, SELF, switch_br_769_power, tile_powers_railtype("ELRL") || t
 	return 1040;
 }
 
-// Class 331/0 (3car)
 item(FEAT_TRAINS, item_br_769, 457) {
 	property {
 		name: string(STR_BR_769);
-		climates_available: ALL_CLIMATES; // available in all climates
+		climates_available: ALL_CLIMATES;
 		introduction_date: date(2020, 08, 01);
-		model_life: VEHICLE_NEVER_EXPIRES; // keep available forever		
-		vehicle_life: 35; // years after vehicle is deemed "old" and should be replaced
-		reliability_decay: 0; // dont reduce reliabilty, (will grow from 75% upwards over the years)
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 35;
+		reliability_decay: 0;
 		refittable_cargo_classes: bitmask(CC_PASSENGERS);
 		non_refittable_cargo_classes: bitmask();
 		cost_factor: 41;
@@ -87,40 +81,37 @@ item(FEAT_TRAINS, item_br_769, 457) {
 		running_cost_factor: 40;
 		cargo_allow_refit: [];
 		cargo_disallow_refit: [];
-		
 		speed: 100 mph;
 		power: 1 hp;
-		cargo_capacity: (304/4);
-		weight: 147.8 ton; 
-		sprite_id:						SPRITE_ID_NEW_TRAIN;		
+		cargo_capacity: (304 / 4);
+		weight: 147.8 ton;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
 		refit_cost: 0;
 		track_type: RAIL;
-		ai_special_flag: AI_FLAG_PASSENGER; // tell ai that this is a passenger train
+		ai_special_flag: AI_FLAG_PASSENGER;
 		running_cost_base: RUNNING_COST_ELECTRIC;
-		dual_headed: 0; // set to 0 otherwise limited to 2 cars only
-		engine_class: ENGINE_CLASS_DIESEL; // even if its 3rd rail, ELECTRIC would give overhead wire effects
+		dual_headed: 0;
+		engine_class: ENGINE_CLASS_DIESEL;
 		tractive_effort_coefficient: 0.3;
 		air_drag_coefficient: 0.06;
-		length: 8; // full tile length vehicle
-		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER); // visual fx
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_DIESEL;
 		extra_weight_per_wagon: 0 ton;
 		bitmask_vehicle_info: 0;
 	}
-	
+
 	graphics {
 		default: switch_br_769_spriteset;
 		purchase: spriteset_BR769_Purchase;
 		cargo_subtype_text: switch_br_769_subtype_text;
 		power: switch_br_769_power;
-		
 		articulated_part: switch_br_769_articulated;
-		start_stop: switch_br_769_start_stop;	
+		start_stop: switch_br_769_start_stop;
 		can_attach_wagon: switch_br_769_can_attach_wagon;
-		visual_effect_and_powered: switch_br_769_particles;
-				
-		cargo_capacity: return (300/4);	
-		additional_text: string(STR_DSC_BR_769);	
-		cost_factor:	return(GetAdjustedCost(41));
-		running_cost_factor: return(GetAdjustedCost(40));	
+		create_effect: switch_br_769_create_effect;
+		cargo_capacity: return (300 / 4);
+		additional_text: return(string(str_purchase_loco_with_liveries_and_mw, string(str_purchase_type_bmu), string(str_BR769_usage), string(str_multiple_working_within_class), string(str_BR769_eos), string(str_BR769_liveries)));
+		cost_factor: return(GetAdjustedCost(41));
+		running_cost_factor: return(GetAdjustedCost(40));
 	}
 }

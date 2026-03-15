@@ -1,59 +1,160 @@
-spriteset(spriteset_BR769_Purchase, "gfx/BR319_v2.png") {
-	template_purchase(200, 13)
+spriteset(spriteset_BR769_Purchase, "gfx/BR319_v2.png") { template_purchase(400, 13) }
+spriteset(spriteset_BR769_9_Purchase, "gfx/BR319_v2.png") { template_purchase(400, 26) }
+
+// Northern
+spriteset(spriteset_BR769a_Northern, "gfx/BR319_v2.png") { template_train32px_old(0, 0) }
+spriteset(spriteset_BR769b_Northern, "gfx/BR319_v2.png") { template_train32px_old(0, 25) }
+spriteset(spriteset_BR769c_Northern, "gfx/BR319_v2.png") { template_train32px_old(0, 50) }
+spriteset(spriteset_BR769d_Northern, "gfx/BR319_v2.png") { template_train32px_old(0, 75) }
+spriteset(spriteset_BR769a_Northern_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 0) }
+spriteset(spriteset_BR769b_Northern_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 25) }
+spriteset(spriteset_BR769c_Northern_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 50) }
+spriteset(spriteset_BR769d_Northern_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 75) }
+
+// Transport for Wales
+spriteset(spriteset_BR769a_TfW, "gfx/BR319_v2.png") { template_train32px_old(0, 900) }
+spriteset(spriteset_BR769b_TfW, "gfx/BR319_v2.png") { template_train32px_old(0, 925) }
+spriteset(spriteset_BR769c_TfW, "gfx/BR319_v2.png") { template_train32px_old(0, 950) }
+spriteset(spriteset_BR769d_TfW, "gfx/BR319_v2.png") { template_train32px_old(0, 975) }
+spriteset(spriteset_BR769a_TfW_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 900) }
+spriteset(spriteset_BR769b_TfW_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 925) }
+spriteset(spriteset_BR769c_TfW_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 950) }
+spriteset(spriteset_BR769d_TfW_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 975) }
+
+// Rail Operations Group
+spriteset(spriteset_BR769a_Orion, "gfx/BR319_v2.png") { template_train32px_old(0, 1000) }
+spriteset(spriteset_BR769b_Orion, "gfx/BR319_v2.png") { template_train32px_old(0, 1025) }
+spriteset(spriteset_BR769c_Orion, "gfx/BR319_v2.png") { template_train32px_old(0, 1050) }
+spriteset(spriteset_BR769d_Orion, "gfx/BR319_v2.png") { template_train32px_old(0, 1075) }
+spriteset(spriteset_BR769a_Orion_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 1000) }
+spriteset(spriteset_BR769b_Orion_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 1025) }
+spriteset(spriteset_BR769c_Orion_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 1050) }
+spriteset(spriteset_BR769d_Orion_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 1075) }
+
+// Great Western Railway
+spriteset(spriteset_BR769a_GWR, "gfx/BR319_v2.png") { template_train32px_old(0, 800) }
+spriteset(spriteset_BR769b_GWR, "gfx/BR319_v2.png") { template_train32px_old(0, 825) }
+spriteset(spriteset_BR769c_GWR, "gfx/BR319_v2.png") { template_train32px_old(0, 850) }
+spriteset(spriteset_BR769d_GWR, "gfx/BR319_v2.png") { template_train32px_old(0, 875) }
+spriteset(spriteset_BR769a_GWR_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 800) }
+spriteset(spriteset_BR769b_GWR_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 825) }
+spriteset(spriteset_BR769c_GWR_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 850) }
+spriteset(spriteset_BR769d_GWR_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 875) }
+
+switch(FEAT_TRAINS, SELF, switch_br_769a, cargo_subtype) {
+	0: spriteset_BR769a_TfW;
+	1: spriteset_BR769a_Orion;
+	2: spriteset_BR769a_Northern;
+	spriteset_BR769a_TfW;
 }
 
-spriteset(spriteset_BR769_9_Purchase, "gfx/BR319_v2.png") {
-	template_purchase(200, 26)
+switch(FEAT_TRAINS, SELF, switch_br_769b, cargo_subtype) {
+	0: spriteset_BR769b_TfW;
+	1: spriteset_BR769b_Orion;
+	2: spriteset_BR769b_Northern;
+	spriteset_BR769b_TfW;
 }
 
-spriteset(spriteset_BR769a_Northern, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 0)
-}
-spriteset(spriteset_BR769b_Northern, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 25)
-}
-spriteset(spriteset_BR769c_Northern, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 50)
-}
-spriteset(spriteset_BR769d_Northern, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 75)
+switch(FEAT_TRAINS, SELF, switch_br_769c, cargo_subtype) {
+	0: spriteset_BR769c_TfW;
+	1: spriteset_BR769c_Orion;
+	2: spriteset_BR769c_Northern;
+	spriteset_BR769c_TfW;
 }
 
-spriteset(spriteset_BR769a_TfW, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 900)
-}
-spriteset(spriteset_BR769b_TfW, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 925)
-}
-spriteset(spriteset_BR769c_TfW, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 950)
-}
-spriteset(spriteset_BR769d_TfW, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 975)
+switch(FEAT_TRAINS, SELF, switch_br_769d, cargo_subtype) {
+	0: spriteset_BR769d_TfW;
+	1: spriteset_BR769d_Orion;
+	2: spriteset_BR769d_Northern;
+	spriteset_BR769d_TfW;
 }
 
-spriteset(spriteset_BR769a_Orion, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 1000)
-}
-spriteset(spriteset_BR769b_Orion, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 1025)
-}
-spriteset(spriteset_BR769c_Orion, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 1050)
-}
-spriteset(spriteset_BR769d_Orion, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 1075)
+switch(FEAT_TRAINS, SELF, switch_br_769a_rev, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR769a_TfW_rev;
+	1: spriteset_BR769a_Orion_rev;
+	2: spriteset_BR769a_Northern_rev;
+	spriteset_BR769a_TfW_rev;
 }
 
-spriteset(spriteset_BR769a_GWR, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 800)
+switch(FEAT_TRAINS, SELF, switch_br_769b_rev, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR769b_TfW_rev;
+	1: spriteset_BR769b_Orion_rev;
+	2: spriteset_BR769b_Northern_rev;
+	spriteset_BR769b_TfW_rev;
 }
-spriteset(spriteset_BR769b_GWR, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 825)
+
+switch(FEAT_TRAINS, SELF, switch_br_769c_rev, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR769c_TfW_rev;
+	1: spriteset_BR769c_Orion_rev;
+	2: spriteset_BR769c_Northern_rev;
+	spriteset_BR769c_TfW_rev;
 }
-spriteset(spriteset_BR769c_GWR, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 850)
+
+switch(FEAT_TRAINS, SELF, switch_br_769d_rev, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR769d_TfW_rev;
+	1: spriteset_BR769d_Orion_rev;
+	2: spriteset_BR769d_Northern_rev;
+	spriteset_BR769d_TfW_rev;
 }
-spriteset(spriteset_BR769d_GWR, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 875)
+
+switch(FEAT_TRAINS, SELF, switch_br_769_fwd_role_by_pos, position_in_articulated_veh % 4) {
+	0: switch_br_769a;
+	1: switch_br_769b;
+	2: switch_br_769c;
+	3: switch_br_769d;
+	switch_br_769a;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_769_rev_role_by_pos, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 4]) {
+	0: switch_br_769a_rev;
+	1: switch_br_769b_rev;
+	2: switch_br_769c_rev;
+	3: switch_br_769d_rev;
+	switch_br_769a_rev;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_769_9_rev_role_by_pos, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 4]) {
+	0: spriteset_BR769a_GWR_rev;
+	1: spriteset_BR769b_GWR_rev;
+	2: spriteset_BR769c_GWR_rev;
+	3: spriteset_BR769d_GWR_rev;
+	spriteset_BR769a_GWR_rev;
+}
+
+// Shared reverse-role resolver for mixed 769/769-9 formations.
+switch(FEAT_TRAINS, SELF, switch_br_769_rev_from_mirror, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
+	457: switch_br_769_rev_role_by_pos;
+	2457: switch_br_769_rev_role_by_pos;
+	458: switch_br_769_9_rev_role_by_pos;
+	2458: switch_br_769_9_rev_role_by_pos;
+	switch_br_769_rev_role_by_pos;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_769_direction, vehicle_is_reversed) {
+	1: switch_br_769_rev_from_mirror;
+	switch_br_769_fwd_role_by_pos;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_769_spriteset, cargo_subtype) {
+	0: switch_br_769_direction;
+	1: switch_br_769_direction;
+	2: switch_br_769_direction;
+	switch_br_769_direction;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_769_9_fwd_role_by_pos, position_in_articulated_veh % 4) {
+	0: spriteset_BR769a_GWR;
+	1: spriteset_BR769b_GWR;
+	2: spriteset_BR769c_GWR;
+	3: spriteset_BR769d_GWR;
+	spriteset_BR769a_GWR;
+}
+
+switch(FEAT_TRAINS, PARENT, switch_br_769_9_direction, vehicle_is_reversed) {
+	1: switch_br_769_rev_from_mirror;
+	switch_br_769_9_fwd_role_by_pos;
+}
+
+switch(FEAT_TRAINS, SELF, switch_br_769_9_spriteset, cargo_subtype) {
+	switch_br_769_9_direction;
 }
