@@ -1,0 +1,162 @@
+spriteset(spriteset_BR319_Purchase, "gfx/BR319_v2.png") { template_purchase(400, 0) }
+
+// Network SouthEast
+spriteset(spriteset_BR319a_NSE, "gfx/BR319_v2.png") { template_train32px_old(0, 700) }
+spriteset(spriteset_BR319b_NSE, "gfx/BR319_v2.png") { template_train32px_old(0, 725) }
+spriteset(spriteset_BR319c_NSE, "gfx/BR319_v2.png") { template_train32px_old(0, 750) }
+spriteset(spriteset_BR319d_NSE, "gfx/BR319_v2.png") { template_train32px_old(0, 775) }
+spriteset(spriteset_BR319a_NSE_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 700) }
+spriteset(spriteset_BR319b_NSE_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 725) }
+spriteset(spriteset_BR319c_NSE_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 750) }
+spriteset(spriteset_BR319d_NSE_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 775) }
+
+// BR Thameslink
+spriteset(spriteset_BR319a_BRTL, "gfx/BR319_v2.png") { template_train32px_old(0, 100) }
+spriteset(spriteset_BR319b_BRTL, "gfx/BR319_v2.png") { template_train32px_old(0, 125) }
+spriteset(spriteset_BR319c_BRTL, "gfx/BR319_v2.png") { template_train32px_old(0, 150) }
+spriteset(spriteset_BR319d_BRTL, "gfx/BR319_v2.png") { template_train32px_old(0, 175) }
+spriteset(spriteset_BR319a_BRTL_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 100) }
+spriteset(spriteset_BR319b_BRTL_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 125) }
+spriteset(spriteset_BR319c_BRTL_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 150) }
+spriteset(spriteset_BR319d_BRTL_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 175) }
+
+// Connex
+spriteset(spriteset_BR319a_Connex, "gfx/BR319_v2.png") { template_train32px_old(0, 200) }
+spriteset(spriteset_BR319b_Connex, "gfx/BR319_v2.png") { template_train32px_old(0, 225) }
+spriteset(spriteset_BR319c_Connex, "gfx/BR319_v2.png") { template_train32px_old(0, 250) }
+spriteset(spriteset_BR319d_Connex, "gfx/BR319_v2.png") { template_train32px_old(0, 275) }
+spriteset(spriteset_BR319a_Connex_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 200) }
+spriteset(spriteset_BR319b_Connex_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 225) }
+spriteset(spriteset_BR319c_Connex_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 250) }
+spriteset(spriteset_BR319d_Connex_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 275) }
+
+// First Capital Connect
+spriteset(spriteset_BR319a_FCC, "gfx/BR319_v2.png") { template_train32px_old(0, 300) }
+spriteset(spriteset_BR319b_FCC, "gfx/BR319_v2.png") { template_train32px_old(0, 325) }
+spriteset(spriteset_BR319c_FCC, "gfx/BR319_v2.png") { template_train32px_old(0, 350) }
+spriteset(spriteset_BR319d_FCC, "gfx/BR319_v2.png") { template_train32px_old(0, 375) }
+spriteset(spriteset_BR319a_FCC_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 300) }
+spriteset(spriteset_BR319b_FCC_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 325) }
+spriteset(spriteset_BR319c_FCC_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 350) }
+spriteset(spriteset_BR319d_FCC_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 375) }
+
+// Govia Thameslink Pink
+spriteset(spriteset_BR319a_GTRP, "gfx/BR319_v2.png") { template_train32px_old(0, 400) }
+spriteset(spriteset_BR319b_GTRP, "gfx/BR319_v2.png") { template_train32px_old(0, 425) }
+spriteset(spriteset_BR319c_GTRP, "gfx/BR319_v2.png") { template_train32px_old(0, 450) }
+spriteset(spriteset_BR319d_GTRP, "gfx/BR319_v2.png") { template_train32px_old(0, 475) }
+spriteset(spriteset_BR319a_GTRP_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 400) }
+spriteset(spriteset_BR319b_GTRP_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 425) }
+spriteset(spriteset_BR319c_GTRP_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 450) }
+spriteset(spriteset_BR319d_GTRP_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 475) }
+
+// Govia Thameslink Blue
+spriteset(spriteset_BR319a_GTRB, "gfx/BR319_v2.png") { template_train32px_old(0, 500) }
+spriteset(spriteset_BR319b_GTRB, "gfx/BR319_v2.png") { template_train32px_old(0, 525) }
+spriteset(spriteset_BR319c_GTRB, "gfx/BR319_v2.png") { template_train32px_old(0, 550) }
+spriteset(spriteset_BR319d_GTRB, "gfx/BR319_v2.png") { template_train32px_old(0, 575) }
+spriteset(spriteset_BR319a_GTRB_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 500) }
+spriteset(spriteset_BR319b_GTRB_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 525) }
+spriteset(spriteset_BR319c_GTRB_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 550) }
+spriteset(spriteset_BR319d_GTRB_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 575) }
+
+// Southern
+spriteset(spriteset_BR319a_Southern, "gfx/BR319_v2.png") { template_train32px_old(0, 600) }
+spriteset(spriteset_BR319b_Southern, "gfx/BR319_v2.png") { template_train32px_old(0, 625) }
+spriteset(spriteset_BR319c_Southern, "gfx/BR319_v2.png") { template_train32px_old(0, 650) }
+spriteset(spriteset_BR319d_Southern, "gfx/BR319_v2.png") { template_train32px_old(0, 675) }
+spriteset(spriteset_BR319a_Southern_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 600) }
+spriteset(spriteset_BR319b_Southern_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 625) }
+spriteset(spriteset_BR319c_Southern_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 650) }
+spriteset(spriteset_BR319d_Southern_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 675) }
+
+// Northern
+spriteset(spriteset_BR319a_Northern, "gfx/BR319_v2.png") { template_train32px_old(0, 0) }
+spriteset(spriteset_BR319b_Northern, "gfx/BR319_v2.png") { template_train32px_old(0, 25) }
+spriteset(spriteset_BR319c_Northern, "gfx/BR319_v2.png") { template_train32px_old(0, 50) }
+spriteset(spriteset_BR319d_Northern, "gfx/BR319_v2.png") { template_train32px_old(0, 75) }
+spriteset(spriteset_BR319a_Northern_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 0) }
+spriteset(spriteset_BR319b_Northern_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 25) }
+spriteset(spriteset_BR319c_Northern_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 50) }
+spriteset(spriteset_BR319d_Northern_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 75) }
+
+// London Midland
+spriteset(spriteset_BR319a_LondonMidland, "gfx/BR319_v2.png") { template_train32px_old(0, 1100) }
+spriteset(spriteset_BR319b_LondonMidland, "gfx/BR319_v2.png") { template_train32px_old(0, 1125) }
+spriteset(spriteset_BR319c_LondonMidland, "gfx/BR319_v2.png") { template_train32px_old(0, 1150) }
+spriteset(spriteset_BR319d_LondonMidland, "gfx/BR319_v2.png") { template_train32px_old(0, 1175) }
+spriteset(spriteset_BR319a_LondonMidland_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 1100) }
+spriteset(spriteset_BR319b_LondonMidland_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 1125) }
+spriteset(spriteset_BR319c_LondonMidland_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(0, 1150) }
+spriteset(spriteset_BR319d_LondonMidland_rev, "gfx/BR319_v2.png") { template_train32px_old_reversed(200, 1175) }
+
+switch(FEAT_TRAINS, SELF, sw_BR319a, cargo_subtype) {
+	0: spriteset_BR319a_NSE; 1: spriteset_BR319a_BRTL; 2: spriteset_BR319a_Connex;
+	3: spriteset_BR319a_FCC; 4: spriteset_BR319a_GTRP; 5: spriteset_BR319a_GTRB;
+	6: spriteset_BR319a_Southern; 7: spriteset_BR319a_Northern; 8: spriteset_BR319a_LondonMidland;
+	spriteset_BR319a_NSE;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR319b, cargo_subtype) {
+	0: spriteset_BR319b_NSE; 1: spriteset_BR319b_BRTL; 2: spriteset_BR319b_Connex;
+	3: spriteset_BR319b_FCC; 4: spriteset_BR319b_GTRP; 5: spriteset_BR319b_GTRB;
+	6: spriteset_BR319b_Southern; 7: spriteset_BR319b_Northern; 8: spriteset_BR319b_LondonMidland;
+	spriteset_BR319b_NSE;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR319c, cargo_subtype) {
+	0: spriteset_BR319c_NSE; 1: spriteset_BR319c_BRTL; 2: spriteset_BR319c_Connex;
+	3: spriteset_BR319c_FCC; 4: spriteset_BR319c_GTRP; 5: spriteset_BR319c_GTRB;
+	6: spriteset_BR319c_Southern; 7: spriteset_BR319c_Northern; 8: spriteset_BR319c_LondonMidland;
+	spriteset_BR319c_NSE;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR319d, cargo_subtype) {
+	0: spriteset_BR319d_NSE; 1: spriteset_BR319d_BRTL; 2: spriteset_BR319d_Connex;
+	3: spriteset_BR319d_FCC; 4: spriteset_BR319d_GTRP; 5: spriteset_BR319d_GTRB;
+	6: spriteset_BR319d_Southern; 7: spriteset_BR319d_Northern; 8: spriteset_BR319d_LondonMidland;
+	spriteset_BR319d_NSE;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR319a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR319a_NSE_rev; 1: spriteset_BR319a_BRTL_rev; 2: spriteset_BR319a_Connex_rev;
+	3: spriteset_BR319a_FCC_rev; 4: spriteset_BR319a_GTRP_rev; 5: spriteset_BR319a_GTRB_rev;
+	6: spriteset_BR319a_Southern_rev; 7: spriteset_BR319a_Northern_rev; 8: spriteset_BR319a_LondonMidland_rev;
+	spriteset_BR319a_NSE_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR319b_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR319b_NSE_rev; 1: spriteset_BR319b_BRTL_rev; 2: spriteset_BR319b_Connex_rev;
+	3: spriteset_BR319b_FCC_rev; 4: spriteset_BR319b_GTRP_rev; 5: spriteset_BR319b_GTRB_rev;
+	6: spriteset_BR319b_Southern_rev; 7: spriteset_BR319b_Northern_rev; 8: spriteset_BR319b_LondonMidland_rev;
+	spriteset_BR319b_NSE_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR319c_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR319c_NSE_rev; 1: spriteset_BR319c_BRTL_rev; 2: spriteset_BR319c_Connex_rev;
+	3: spriteset_BR319c_FCC_rev; 4: spriteset_BR319c_GTRP_rev; 5: spriteset_BR319c_GTRB_rev;
+	6: spriteset_BR319c_Southern_rev; 7: spriteset_BR319c_Northern_rev; 8: spriteset_BR319c_LondonMidland_rev;
+	spriteset_BR319c_NSE_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR319d_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spriteset_BR319d_NSE_rev; 1: spriteset_BR319d_BRTL_rev; 2: spriteset_BR319d_Connex_rev;
+	3: spriteset_BR319d_FCC_rev; 4: spriteset_BR319d_GTRP_rev; 5: spriteset_BR319d_GTRB_rev;
+	6: spriteset_BR319d_Southern_rev; 7: spriteset_BR319d_Northern_rev; 8: spriteset_BR319d_LondonMidland_rev;
+	spriteset_BR319d_NSE_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR319_fwd_role_by_pos, position_in_articulated_veh % 4) {
+	0: sw_BR319a; 1: sw_BR319b; 2: sw_BR319c; 3: sw_BR319d;
+	sw_BR319a;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR319_rev_role_by_pos, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 4]) {
+	0: sw_BR319a_rev; 1: sw_BR319b_rev; 2: sw_BR319c_rev; 3: sw_BR319d_rev;
+	sw_BR319a_rev;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR319_direction, vehicle_is_reversed) {
+	1: sw_BR319_rev_role_by_pos;
+	sw_BR319_fwd_role_by_pos;
+}

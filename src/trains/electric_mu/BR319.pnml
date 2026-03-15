@@ -1,376 +1,439 @@
-spriteset(spriteset_BR319_Purchase, "gfx/BR319_v2.png") {
-	template_purchase(200, 0)
+//This file defines the Class 319 EMU, including all subclasses.
+
+//Build the vehicles: These vehicles are defined as a single vehicle-id per subclass articulated vehicle. These switches build the vehicle, stopping at 4 total cars.
+switch(FEAT_TRAINS, SELF, sw_articulated_BR319_0, extra_callback_info1) {
+	1..3: return item_BR319;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
-spriteset(spriteset_BR319a_Northern, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 0)
-}
-spriteset(spriteset_BR319b_Northern, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 25)
-}
-spriteset(spriteset_BR319c_Northern, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 50)
-}
-spriteset(spriteset_BR319d_Northern, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 75)
+switch(FEAT_TRAINS, SELF, sw_articulated_BR319_1, extra_callback_info1) {
+	1..3: return item_BR319_1;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
-spriteset(spriteset_BR319a_BRTL, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 100)
-}
-spriteset(spriteset_BR319b_BRTL, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 125)
-}
-spriteset(spriteset_BR319c_BRTL, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 150)
-}
-spriteset(spriteset_BR319d_BRTL, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 175)
+switch(FEAT_TRAINS, SELF, sw_articulated_BR319_2, extra_callback_info1) {
+	1..3: return item_BR319_2;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
-spriteset(spriteset_BR319a_Connex, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 200)
-}
-spriteset(spriteset_BR319b_Connex, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 225)
-}
-spriteset(spriteset_BR319c_Connex, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 250)
-}
-spriteset(spriteset_BR319d_Connex, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 275)
+switch(FEAT_TRAINS, SELF, sw_articulated_BR319_3, extra_callback_info1) {
+	1..3: return item_BR319_3;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
-spriteset(spriteset_BR319a_FCC, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 300)
-}
-spriteset(spriteset_BR319b_FCC, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 325)
-}
-spriteset(spriteset_BR319c_FCC, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 350)
-}
-spriteset(spriteset_BR319d_FCC, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 375)
+switch(FEAT_TRAINS, SELF, sw_articulated_BR319_4, extra_callback_info1) {
+	1..3: return item_BR319_4;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
-spriteset(spriteset_BR319a_GTRP, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 400)
-}
-spriteset(spriteset_BR319b_GTRP, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 425)
-}
-spriteset(spriteset_BR319c_GTRP, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 450)
-}
-spriteset(spriteset_BR319d_GTRP, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 475)
-}
-
-spriteset(spriteset_BR319a_GTRB, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 500)
-}
-spriteset(spriteset_BR319b_GTRB, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 525)
-}
-spriteset(spriteset_BR319c_GTRB, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 550)
-}
-spriteset(spriteset_BR319d_GTRB, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 575)
-}
-
-spriteset(spriteset_BR319a_Southern, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 600)
-}
-spriteset(spriteset_BR319b_Southern, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 625)
-}
-spriteset(spriteset_BR319c_Southern, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 650)
-}
-spriteset(spriteset_BR319d_Southern, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 675)
-}
-
-spriteset(spriteset_BR319a_NSE, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 700)
-}
-spriteset(spriteset_BR319b_NSE, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 725)
-}
-spriteset(spriteset_BR319c_NSE, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 750)
-}
-spriteset(spriteset_BR319d_NSE, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 775)
-}
-
-spriteset(spriteset_BR319a_LondonMidland, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 1100)
-}
-spriteset(spriteset_BR319b_LondonMidland, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 1125)
-}
-spriteset(spriteset_BR319c_LondonMidland, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 1150)
-}
-spriteset(spriteset_BR319d_LondonMidland, "gfx/BR319_v2.png") {
-	template_train32px_old(0, 1175)
-}
-
-
-switch(FEAT_TRAINS,SELF, sw_BR319a,cargo_subtype){
-	0:spriteset_BR319a_NSE;	
-	1:spriteset_BR319a_BRTL;
-	2:spriteset_BR319a_Connex;
-	3:spriteset_BR319a_FCC;
-	4:spriteset_BR319a_GTRP;
-	5:spriteset_BR319a_GTRB;
-	6:spriteset_BR319a_Southern;
-	7:spriteset_BR319a_Northern;
-	8:spriteset_BR319a_LondonMidland;
-	spriteset_BR319a_NSE;
-}
-
-switch(FEAT_TRAINS,SELF, sw_BR319b,cargo_subtype){
-	0:spriteset_BR319b_NSE;	
-	1:spriteset_BR319b_BRTL;
-	2:spriteset_BR319b_Connex;
-	3:spriteset_BR319b_FCC;
-	4:spriteset_BR319b_GTRP;
-	5:spriteset_BR319b_GTRB;
-	6:spriteset_BR319b_Southern;
-	7:spriteset_BR319b_Northern;
-	8:spriteset_BR319b_LondonMidland;
-	spriteset_BR319b_NSE;
-}
-
-switch(FEAT_TRAINS,SELF, sw_BR319c,cargo_subtype){
-	0:spriteset_BR319c_NSE;	
-	1:spriteset_BR319c_BRTL;
-	2:spriteset_BR319c_Connex;
-	3:spriteset_BR319c_FCC;
-	4:spriteset_BR319c_GTRP;
-	5:spriteset_BR319c_GTRB;
-	6:spriteset_BR319c_Southern;
-	7:spriteset_BR319c_Northern;
-	8:spriteset_BR319c_LondonMidland;
-	spriteset_BR319c_NSE;
-}
-
-switch(FEAT_TRAINS,SELF, sw_BR319d,cargo_subtype){
-	0:spriteset_BR319d_NSE;	
-	1:spriteset_BR319d_BRTL;
-	2:spriteset_BR319d_Connex;
-	3:spriteset_BR319d_FCC;
-	4:spriteset_BR319d_GTRP;
-	5:spriteset_BR319d_GTRB;
-	6:spriteset_BR319d_Southern;
-	7:spriteset_BR319d_Northern;
-	8:spriteset_BR319d_LondonMidland;
-	spriteset_BR319d_NSE;
-}
-
-switch (FEAT_TRAINS, SELF, switch_articulated_BR319, extra_callback_info1) {
-	1: return item_BR319b;
-	2: return item_BR319c;
-	3: return item_BR319d;
-    return CB_RESULT_NO_MORE_ARTICULATED_PARTS; //stop adding vehicle parts
-}
-
-switch(FEAT_TRAINS,SELF,sw_BR319_cargo_subtype_text,cargo_subtype){
-    0:	return string(str_NSE);    
-    1:	return string(str_thameslink);
-	2:	return string(str_Connex);
-    3:	return string(str_fcc);    
-    4:	return string(str_gtrp);
-    5:	return string(str_gtrb);    
-	6:	return string(str_Southern);    
+//Choose liveries (cargo_subtype). Currently all liveries are avalivle to all subclasses pending verification of exactly which liveries each class actually wore at some point. 
+//Each subclass will need a decicated chain then, but for now can share one.
+switch(FEAT_TRAINS, SELF, sw_BR319_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_NSE);
+	1: return string(str_thameslink);
+	2: return string(str_Connex);
+	3: return string(str_fcc);
+	4: return string(str_gtrp);
+	5: return string(str_gtrb);
+	6: return string(str_Southern);
 	7: return string(str_Northern);
 	8: return string(str_LondonMidland);
-       return CB_RESULT_NO_TEXT;
+	return CB_RESULT_NO_TEXT;
 }
 
-item (FEAT_TRAINS, item_BR319, 248) {
-	property {
-		name: 							string(STR_NAME_BR319);
-		climates_available: 			ALL_CLIMATES;
-		introduction_date:				date(1987,4,21);
-		model_life:						15;
-		retire_early:					1;
-		vehicle_life:					50;
-		reliability_decay:				7;
-		refittable_cargo_classes:		CC_PASSENGERS;
-		cargo_allow_refit:				[PASS, TOUR];
-		loading_speed:					25;
-		cost_factor:					61;
-		running_cost_factor:			37;
-		sprite_id:						SPRITE_ID_NEW_TRAIN;
-		speed:							100 mph;
-		refit_cost:						0;
-		track_type:						[THIRD, THIRD, ELRL];
-		ai_special_flag:				AI_FLAG_CARGO;
-		power:							1438 hp;
-		running_cost_base:				RUNNING_COST_ELECTRIC;
-		dual_headed:					0;
-		default_cargo_type:				PASS;
-		cargo_capacity:					82;
-		weight:							168 ton;
-		engine_class:					ENGINE_CLASS_ELECTRIC;
-		tractive_effort_coefficient:	0.08;
-		air_drag_coefficient:			0.05;
-		length:							8;
-		effect_spawn_model_and_powered:	EFFECT_SPAWN_MODEL_ELECTRIC;
-		extra_weight_per_wagon:			0;
-		bitmask_vehicle_info:			0;
-		cargo_age_period:				185;
-	}
-	graphics {
-	additional_text:					return(string(str_purchase_loco_with_liveries,string(str_purchase_type_emu),string(str_BR319_usage),string(str_BR319_eos),string(str_BR319_liveries)));
-	can_attach_wagon:					CB_RESULT_ATTACH_ALLOW;
-	cargo_subtype_text:					sw_BR319_cargo_subtype_text;
-	articulated_part:        			switch_articulated_BR319;
-	default: 							sw_BR319a;
-	purchase:							spriteset_BR319_Purchase;
-	colour_mapping: 					return PALETTE_CC_FIRST;
-	create_effect:						electric_create_visual_effect;
-	sound_effect:						sw_sound_electric_GEC;
-	cargo_capacity: return(82 * param_pax);
-		 cost_factor:	return(GetAdjustedCost(61));
-	running_cost_factor: return(GetAdjustedCost(37));
+//Set total cargo capacity. These switches are needed because by default the game will set the capacity of an articulated vehicle by multiplying the capacity of the first car by the number of wagons, so the total can only be a multiple of the number of cars, unless these switches are present.
+//Numbers are seats only, sourced from https://web.archive.org/web/20070927210506/http://www.therailwaycentre.com/Recognition%20Tech%20Data%20EMU/EMU_319.html
+// 319/0 subclass
+switch(FEAT_TRAINS, SELF, sw_BR319_0_capacity, position_in_articulated_veh % 4) {
+	0: return(80 * param_pax);
+	1: return(80 * param_pax);
+	2: return(80 * param_pax);
+	3: return(79 * param_pax);
+	return(80 * param_pax);
 }
+// 319/1 subclass
+switch(FEAT_TRAINS, SELF, sw_BR319_1_capacity, position_in_articulated_veh % 4) {
+	0: return(78 * param_pax);
+	1: return(78 * param_pax);
+	2: return(78 * param_pax);
+	3: return(77 * param_pax);
+	return(78 * param_pax);
+}
+// 319/2 subclass
+switch(FEAT_TRAINS, SELF, sw_BR319_2_capacity, position_in_articulated_veh % 4) {
+	0: return(58 * param_pax);
+	1: return(58 * param_pax);
+	2: return(57 * param_pax);
+	3: return(57 * param_pax);
+	return(58 * param_pax);
+}
+// 319/3 subclass
+switch(FEAT_TRAINS, SELF, sw_BR319_3_capacity, position_in_articulated_veh % 4) {
+	0: return(77 * param_pax);
+	1: return(77 * param_pax);
+	2: return(77 * param_pax);
+	3: return(77 * param_pax);
+	return(77 * param_pax);
+}
+// 319/4 subclass
+switch(FEAT_TRAINS, SELF, sw_BR319_4_capacity, position_in_articulated_veh % 4) {
+	0: return(72 * param_pax);
+	1: return(73 * param_pax);
+	2: return(72 * param_pax);
+	3: return(72 * param_pax);
+	return(72 * param_pax);
 }
 
-item (FEAT_TRAINS, item_BR319b, 249) {
-	property {
-		name: 							string(STR_NAME_BR319);
-		climates_available: 			NO_CLIMATE;
-		introduction_date:				date(1987,4,21);
-		model_life:						15;
-		retire_early:					1;
-		vehicle_life:					50;
-		reliability_decay:				7;
-		refittable_cargo_classes:		CC_PASSENGERS;
-		cargo_allow_refit:				[PASS, TOUR];
-		loading_speed:					25;
-		cost_factor:					1;
-		running_cost_factor:			1;
-		sprite_id:						SPRITE_ID_NEW_TRAIN;
-		speed:							100 mph;
-		misc_flags:		 TRAIN_FLAG_NO_BREAKDOWN_SMOKE;
-		refit_cost:						0;
-		track_type:						[THIRD, THIRD, ELRL];
-		ai_special_flag:				AI_FLAG_CARGO;
-		power:							0 hp;
-		running_cost_base:				RUNNING_COST_ELECTRIC;
-		dual_headed:					0;
-		default_cargo_type:				PASS;
-		cargo_capacity:					82;
-		weight:							0 ton;
-		engine_class:					ENGINE_CLASS_ELECTRIC;
-		tractive_effort_coefficient:	0.08;
-		air_drag_coefficient:			0.05;
-		length:							8;
-		effect_spawn_model_and_powered:	EFFECT_SPAWN_MODEL_ELECTRIC;
-		extra_weight_per_wagon:			0;
-		bitmask_vehicle_info:			0;
-		cargo_age_period:				185;
-	}
-	graphics {
-	can_attach_wagon:					CB_RESULT_ATTACH_ALLOW;
-	default: 							sw_BR319b;
-	colour_mapping: 					return PALETTE_CC_FIRST;
-	sound_effect:						sw_sound_electric_GEC;
-	cargo_capacity: return(82 * param_pax);
-}
+//Additional text for purchase menu, showing actual capacity since the default capacity line will only display the first car's capacity multiplies by the number of cars.
+switch(FEAT_TRAINS, SELF, sw_BR319_0_additional_text, param_pax) {
+	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_0_capacity_1x), string(str_BR319_liveries)));
+	2: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_0_capacity_2x), string(str_BR319_liveries)));
+	3: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_0_capacity_3x), string(str_BR319_liveries)));
+	4: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_0_capacity_4x), string(str_BR319_liveries)));
+	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_0_capacity_1x), string(str_BR319_liveries)));
 }
 
-item (FEAT_TRAINS, item_BR319c, 250) {
-	property {
-		name: 							string(STR_NAME_BR319);
-		climates_available: 			NO_CLIMATE;
-		introduction_date:				date(1987,4,21);
-		model_life:						15;
-		retire_early:					1;
-		vehicle_life:					50;
-		reliability_decay:				7;
-		refittable_cargo_classes:		CC_PASSENGERS;
-		cargo_allow_refit:				[PASS, TOUR];
-		loading_speed:					25;
-		cost_factor:					1;
-		running_cost_factor:			1;
-		sprite_id:						SPRITE_ID_NEW_TRAIN;
-		speed:							100 mph;
-		misc_flags:		 TRAIN_FLAG_NO_BREAKDOWN_SMOKE;
-		refit_cost:						0;
-		track_type:						[THIRD, THIRD, ELRL];
-		ai_special_flag:				AI_FLAG_CARGO;
-		power:							0 hp;
-		running_cost_base:				RUNNING_COST_ELECTRIC;
-		dual_headed:					0;
-		default_cargo_type:				PASS;
-		cargo_capacity:					77;
-		weight:							0 ton;
-		engine_class:					ENGINE_CLASS_ELECTRIC;
-		tractive_effort_coefficient:	0.08;
-		air_drag_coefficient:			0.05;
-		length:							8;
-		effect_spawn_model_and_powered:	EFFECT_SPAWN_MODEL_ELECTRIC;
-		extra_weight_per_wagon:			0;
-		bitmask_vehicle_info:			0;
-		cargo_age_period:				185;
-	}
-	graphics {
-	can_attach_wagon:					CB_RESULT_ATTACH_ALLOW;
-	default: 							sw_BR319c;
-	colour_mapping: 					return PALETTE_CC_FIRST;
-	sound_effect:						sw_sound_electric_GEC;
-	cargo_capacity: return(77 * param_pax);
-}
+switch(FEAT_TRAINS, SELF, sw_BR319_1_additional_text, param_pax) {
+	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_1_capacity_1x), string(str_BR319_liveries)));
+	2: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_1_capacity_2x), string(str_BR319_liveries)));
+	3: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_1_capacity_3x), string(str_BR319_liveries)));
+	4: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_1_capacity_4x), string(str_BR319_liveries)));
+	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_1_capacity_1x), string(str_BR319_liveries)));
 }
 
-item (FEAT_TRAINS, item_BR319d, 251) {
+switch(FEAT_TRAINS, SELF, sw_BR319_2_additional_text, param_pax) {
+	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_2_capacity_1x), string(str_BR319_liveries)));
+	2: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_2_capacity_2x), string(str_BR319_liveries)));
+	3: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_2_capacity_3x), string(str_BR319_liveries)));
+	4: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_2_capacity_4x), string(str_BR319_liveries)));
+	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_2_capacity_1x), string(str_BR319_liveries)));
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR319_3_additional_text, param_pax) {
+	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_3_capacity_1x), string(str_BR319_liveries)));
+	2: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_3_capacity_2x), string(str_BR319_liveries)));
+	3: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_3_capacity_3x), string(str_BR319_liveries)));
+	4: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_3_capacity_4x), string(str_BR319_liveries)));
+	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_3_capacity_1x), string(str_BR319_liveries)));
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR319_4_additional_text, param_pax) {
+	1: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_4_capacity_1x), string(str_BR319_liveries)));
+	2: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_4_capacity_2x), string(str_BR319_liveries)));
+	3: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_4_capacity_3x), string(str_BR319_liveries)));
+	4: return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_4_capacity_4x), string(str_BR319_liveries)));
+	return(string(str_purchase_loco_with_liveries_and_capacity_and_mw, string(str_purchase_type_emu), string(str_BR319_usage), string(str_multiple_working_within_class), string(str_BR319_eos), string(str_BR319_4_capacity_1x), string(str_BR319_liveries)));
+}
+
+//This block of switches chooses which visual effects to show and from which cars. OHLE effects preferred if both OHL and 3rd rail are present.
+switch(FEAT_TRAINS, SELF, sw_BR319_create_effect_elrl_pos_fwd, position_in_articulated_veh % 4) {
+	2: electric_create_visual_effect;
+	return 0;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR319_create_effect_elrl_pos_rev, position_in_articulated_veh % 4) {
+	1: electric_create_visual_effect;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR319_create_effect_elrl_pos, vehicle_is_reversed) {
+	1: sw_BR319_create_effect_elrl_pos_rev;
+	sw_BR319_create_effect_elrl_pos_fwd;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR319_create_effect_third_pos, position_in_articulated_veh % 4) {
+	0: electric_create_visual_effect_SAA3;
+	3: electric_create_visual_effect_SAA3;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR319_create_effect_by_railtype_third, tile_powers_railtype("THIRD")) {
+	1: sw_BR319_create_effect_third_pos;
+	return 0;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR319_create_effect, tile_powers_railtype("ELRL")) {
+	1: sw_BR319_create_effect_elrl_pos;
+	sw_BR319_create_effect_by_railtype_third;
+}
+
+//Limit of 3 units (3 units x 4 cars each) attatched
+switch(FEAT_TRAINS, SELF, sw_BR319_start_stop, num_vehs_in_consist) {
+	1..12: return CB_RESULT_NO_TEXT;
+	return string(STR_BR_319_MW_LIMIT);
+}
+
+//Only allow the Class 319 to couple to other Class 319s, regardless of subclass
+switch(FEAT_TRAINS, SELF, sw_BR319_can_attach_wagon, vehicle_type_id) {
+	item_BR319: return CB_RESULT_ATTACH_ALLOW;
+	item_BR319_1: return CB_RESULT_ATTACH_ALLOW;
+	item_BR319_2: return CB_RESULT_ATTACH_ALLOW;
+	item_BR319_3: return CB_RESULT_ATTACH_ALLOW;
+	item_BR319_4: return CB_RESULT_ATTACH_ALLOW;
+	return string(STR_CANNOT_ATTACH);
+}
+
+//Class 319/0 item block
+item(FEAT_TRAINS, item_BR319, 248) {
 	property {
-		name: 							string(STR_NAME_BR319);
-		climates_available: 			NO_CLIMATE;
-		introduction_date:				date(1987,4,21);
-		model_life:						15;
-		retire_early:					1;
-		vehicle_life:					50;
-		reliability_decay:				7;
-		refittable_cargo_classes:		CC_PASSENGERS;
-		cargo_allow_refit:				[PASS, TOUR];
-		loading_speed:					25;
-		cost_factor:					1;
-		running_cost_factor:			1;
-		sprite_id:						SPRITE_ID_NEW_TRAIN;
-		speed:							100 mph;
-		refit_cost:						0;
-		track_type:						[THIRD, THIRD, ELRL];
-		ai_special_flag:				AI_FLAG_CARGO;
-		power:							0 hp;
-		running_cost_base:				RUNNING_COST_ELECTRIC;
-		dual_headed:					0;
-		default_cargo_type:				PASS;
-		cargo_capacity:					78;
-		weight:							0 ton;
-		engine_class:					ENGINE_CLASS_ELECTRIC;
-		tractive_effort_coefficient:	0.08;
-		air_drag_coefficient:			0.05;
-		length:							8;
-		effect_spawn_model_and_powered:	EFFECT_SPAWN_MODEL_ELECTRIC;
-		extra_weight_per_wagon:			0;
-		bitmask_vehicle_info:			0;
-		cargo_age_period:				185;
+		name: string(STR_NAME_BR319_0);
+		variant_group: header_BR319;
+		climates_available: ALL_CLIMATES;
+		introduction_date: date(1987, 4, 21);
+		model_life: 15;
+		retire_early: 1;
+		vehicle_life: 50;
+		reliability_decay: 7;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 25;
+		cost_factor: 61;
+		running_cost_factor: 37;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: [THIRD, THIRD, ELRL];
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 1438 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 80;
+		weight: 168 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.08;
+		air_drag_coefficient: 0.05;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 185;
 	}
 	graphics {
-	additional_text:					return(string(str_purchase_loco_with_liveries,string(str_purchase_type_emu),string(str_BR319_usage),string(str_BR319_eos),string(str_BR319_liveries)));
-	can_attach_wagon:					CB_RESULT_ATTACH_ALLOW;
-	cargo_subtype_text:					sw_BR319_cargo_subtype_text;
-	default: 							sw_BR319d;
-	colour_mapping: 					return PALETTE_CC_FIRST;
-	sound_effect:						sw_sound_electric_GEC;
-	cargo_capacity: return(78 * param_pax);
+		additional_text: sw_BR319_0_additional_text;
+		can_attach_wagon: sw_BR319_can_attach_wagon;
+		start_stop: sw_BR319_start_stop;
+		cargo_subtype_text: sw_BR319_cargo_subtype_text;
+		articulated_part: sw_articulated_BR319_0;
+		default: sw_BR319_direction;
+		purchase: spriteset_BR319_Purchase;
+		colour_mapping: return PALETTE_CC_FIRST;
+		create_effect: sw_BR319_create_effect;
+		sound_effect: sw_sound_electric_GEC;
+		cargo_capacity: sw_BR319_0_capacity;
+		cost_factor: return(GetAdjustedCost(61));
+		running_cost_factor: return(GetAdjustedCost(37));
+	}
 }
+
+//Class 319/1 item block
+item(FEAT_TRAINS, item_BR319_1, 249) {
+	property {
+		name: string(STR_NAME_BR319_1);
+		variant_group: header_BR319;
+		climates_available: ALL_CLIMATES;
+		introduction_date: date(1990, 4, 21);
+		model_life: 15;
+		retire_early: 1;
+		vehicle_life: 50;
+		reliability_decay: 7;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 25;
+		cost_factor: 61;
+		running_cost_factor: 37;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: [THIRD, THIRD, ELRL];
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 1438 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 78;
+		weight: 168 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.08;
+		air_drag_coefficient: 0.05;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 185;
+	}
+	graphics {
+		additional_text: sw_BR319_1_additional_text;
+		can_attach_wagon: sw_BR319_can_attach_wagon;
+		start_stop: sw_BR319_start_stop;
+		cargo_subtype_text: sw_BR319_cargo_subtype_text;
+		articulated_part: sw_articulated_BR319_1;
+		default: sw_BR319_direction;
+		purchase: spriteset_BR319_Purchase;
+		colour_mapping: return PALETTE_CC_FIRST;
+		create_effect: sw_BR319_create_effect;
+		sound_effect: sw_sound_electric_GEC;
+		cargo_capacity: sw_BR319_1_capacity;
+		cost_factor: return(GetAdjustedCost(61));
+		running_cost_factor: return(GetAdjustedCost(37));
+	}
+}
+
+//Class 319/2 item block
+item(FEAT_TRAINS, item_BR319_2, 250) {
+	property {
+		name: string(STR_NAME_BR319_2);
+		variant_group: header_BR319;
+		climates_available: ALL_CLIMATES;
+		introduction_date: date(1996, 4, 21);
+		model_life: 15;
+		retire_early: 1;
+		vehicle_life: 50;
+		reliability_decay: 7;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 25;
+		cost_factor: 61;
+		running_cost_factor: 37;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: [THIRD, THIRD, ELRL];
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 1438 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 58;
+		weight: 168 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.08;
+		air_drag_coefficient: 0.05;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 185;
+	}
+	graphics {
+		additional_text: sw_BR319_2_additional_text;
+		can_attach_wagon: sw_BR319_can_attach_wagon;
+		start_stop: sw_BR319_start_stop;
+		cargo_subtype_text: sw_BR319_cargo_subtype_text;
+		articulated_part: sw_articulated_BR319_2;
+		default: sw_BR319_direction;
+		purchase: spriteset_BR319_Purchase;
+		colour_mapping: return PALETTE_CC_FIRST;
+		create_effect: sw_BR319_create_effect;
+		sound_effect: sw_sound_electric_GEC;
+		cargo_capacity: sw_BR319_2_capacity;
+		cost_factor: return(GetAdjustedCost(61));
+		running_cost_factor: return(GetAdjustedCost(37));
+	}
+}
+
+//Class 319/3 item block
+item(FEAT_TRAINS, item_BR319_3, 251) {
+	property {
+		name: string(STR_NAME_BR319_3);
+		variant_group: header_BR319;
+		climates_available: ALL_CLIMATES;
+		introduction_date: date(1997, 4, 21);
+		model_life: 15;
+		retire_early: 1;
+		vehicle_life: 50;
+		reliability_decay: 7;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 25;
+		cost_factor: 61;
+		running_cost_factor: 37;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: [THIRD, THIRD, ELRL];
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 1438 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 77;
+		weight: 168 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.08;
+		air_drag_coefficient: 0.05;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 185;
+	}
+	graphics {
+		additional_text: sw_BR319_3_additional_text;
+		can_attach_wagon: sw_BR319_can_attach_wagon;
+		start_stop: sw_BR319_start_stop;
+		cargo_subtype_text: sw_BR319_cargo_subtype_text;
+		articulated_part: sw_articulated_BR319_3;
+		default: sw_BR319_direction;
+		purchase: spriteset_BR319_Purchase;
+		colour_mapping: return PALETTE_CC_FIRST;
+		create_effect: sw_BR319_create_effect;
+		sound_effect: sw_sound_electric_GEC;
+		cargo_capacity: sw_BR319_3_capacity;
+		cost_factor: return(GetAdjustedCost(61));
+		running_cost_factor: return(GetAdjustedCost(37));
+	}
+}
+
+//Class 319/4 item block
+item(FEAT_TRAINS, item_BR319_4, 254) {
+	property {
+		name: string(STR_NAME_BR319_4);
+		variant_group: header_BR319;
+		climates_available: ALL_CLIMATES;
+		introduction_date: date(1997, 4, 21);
+		model_life: 15;
+		retire_early: 1;
+		vehicle_life: 50;
+		reliability_decay: 7;
+		refittable_cargo_classes: CC_PASSENGERS;
+		cargo_allow_refit: [PASS, TOUR];
+		loading_speed: 25;
+		cost_factor: 61;
+		running_cost_factor: 37;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 100 mph;
+		refit_cost: 0;
+		track_type: [THIRD, THIRD, ELRL];
+		ai_special_flag: AI_FLAG_CARGO;
+		power: 1438 hp;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		default_cargo_type: PASS;
+		cargo_capacity: 72;
+		weight: 168 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.08;
+		air_drag_coefficient: 0.05;
+		length: 8;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC;
+		extra_weight_per_wagon: 0;
+		bitmask_vehicle_info: 0;
+		cargo_age_period: 185;
+	}
+	graphics {
+		additional_text: sw_BR319_4_additional_text;
+		can_attach_wagon: sw_BR319_can_attach_wagon;
+		start_stop: sw_BR319_start_stop;
+		cargo_subtype_text: sw_BR319_cargo_subtype_text;
+		articulated_part: sw_articulated_BR319_4;
+		default: sw_BR319_direction;
+		purchase: spriteset_BR319_Purchase;
+		colour_mapping: return PALETTE_CC_FIRST;
+		create_effect: sw_BR319_create_effect;
+		sound_effect: sw_sound_electric_GEC;
+		cargo_capacity: sw_BR319_4_capacity;
+		cost_factor: return(GetAdjustedCost(61));
+		running_cost_factor: return(GetAdjustedCost(37));
+	}
 }
