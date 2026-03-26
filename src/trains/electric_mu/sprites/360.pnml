@@ -1,76 +1,302 @@
+// Class 360 sprites and push-pull mappings.
+// Loading-door sprites are controlled by param_loading_sprites.
+
 spriteset(spriteset_BR360_1_Purchase, "gfx/EMU/360.png") { template_purchase(400, 0) }
 spriteset(spriteset_BR360_2_4car_Purchase, "gfx/EMU/360.png") { template_purchase(400, 13) }
 spriteset(spriteset_BR360_2_5car_Purchase, "gfx/EMU/360.png") { template_purchase(400, 26) }
 
+// PNG row order per livery block:
+// front, front_rev, rear, rear_rev, middle, middlepanto
+// Loading-door variants are at x=200 with the same y as the base row.
+
+// NXEA Grey (y=0)
 spriteset(spriteset_BR360_front_NXEAGrey, "gfx/EMU/360.png") { template_train32px(0, 0) }
-spriteset(spriteset_BR360_rear_NXEAGrey, "gfx/EMU/360.png") { template_train32px(0, 26) }
-spriteset(spriteset_BR360_middle_NXEAGrey, "gfx/EMU/360.png") { template_train32px(0, 52) }
-spriteset(spriteset_BR360_middlepanto_NXEAGrey, "gfx/EMU/360.png") { template_train32px(0, 78) }
-spriteset(spriteset_BR360_front_NXEAGrey_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 0) }
-spriteset(spriteset_BR360_rear_NXEAGrey_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 26) }
-spriteset(spriteset_BR360_middle_NXEAGrey_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 52) }
-spriteset(spriteset_BR360_middlepanto_NXEAGrey_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 78) }
+spriteset(spriteset_BR360_front_NXEAGrey_loading, "gfx/EMU/360.png") { template_train32px(200, 0) }
+spriteset(spriteset_BR360_front_NXEAGrey_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 26) }
+spriteset(spriteset_BR360_front_NXEAGrey_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 26) }
+spriteset(spriteset_BR360_rear_NXEAGrey, "gfx/EMU/360.png") { template_train32px(0, 52) }
+spriteset(spriteset_BR360_rear_NXEAGrey_loading, "gfx/EMU/360.png") { template_train32px(200, 52) }
+spriteset(spriteset_BR360_rear_NXEAGrey_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 78) }
+spriteset(spriteset_BR360_rear_NXEAGrey_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 78) }
+spriteset(spriteset_BR360_middle_NXEAGrey, "gfx/EMU/360.png") { template_train32px(0, 104) }
+spriteset(spriteset_BR360_middle_NXEAGrey_loading, "gfx/EMU/360.png") { template_train32px(200, 104) }
+spriteset(spriteset_BR360_middle_NXEAGrey_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 104) }
+spriteset(spriteset_BR360_middle_NXEAGrey_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 104) }
+spriteset(spriteset_BR360_middlepanto_NXEAGrey, "gfx/EMU/360.png") { template_train32px(0, 130) }
+spriteset(spriteset_BR360_middlepanto_NXEAGrey_loading, "gfx/EMU/360.png") { template_train32px(200, 130) }
+spriteset(spriteset_BR360_middlepanto_NXEAGrey_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 130) }
+spriteset(spriteset_BR360_middlepanto_NXEAGrey_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 130) }
 
-spriteset(spriteset_BR360_front_NXEABlue, "gfx/EMU/360.png") { template_train32px(0, 104) }
-spriteset(spriteset_BR360_rear_NXEABlue, "gfx/EMU/360.png") { template_train32px(0, 130) }
-spriteset(spriteset_BR360_middle_NXEABlue, "gfx/EMU/360.png") { template_train32px(0, 156) }
-spriteset(spriteset_BR360_middlepanto_NXEABlue, "gfx/EMU/360.png") { template_train32px(0, 182) }
-spriteset(spriteset_BR360_front_NXEABlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 104) }
-spriteset(spriteset_BR360_rear_NXEABlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 130) }
-spriteset(spriteset_BR360_middle_NXEABlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 156) }
-spriteset(spriteset_BR360_middlepanto_NXEABlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 182) }
+// NXEA Blue (y=156)
+spriteset(spriteset_BR360_front_NXEABlue, "gfx/EMU/360.png") { template_train32px(0, 156) }
+spriteset(spriteset_BR360_front_NXEABlue_loading, "gfx/EMU/360.png") { template_train32px(200, 156) }
+spriteset(spriteset_BR360_front_NXEABlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 182) }
+spriteset(spriteset_BR360_front_NXEABlue_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 182) }
+spriteset(spriteset_BR360_rear_NXEABlue, "gfx/EMU/360.png") { template_train32px(0, 208) }
+spriteset(spriteset_BR360_rear_NXEABlue_loading, "gfx/EMU/360.png") { template_train32px(200, 208) }
+spriteset(spriteset_BR360_rear_NXEABlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 234) }
+spriteset(spriteset_BR360_rear_NXEABlue_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 234) }
+spriteset(spriteset_BR360_middle_NXEABlue, "gfx/EMU/360.png") { template_train32px(0, 260) }
+spriteset(spriteset_BR360_middle_NXEABlue_loading, "gfx/EMU/360.png") { template_train32px(200, 260) }
+spriteset(spriteset_BR360_middle_NXEABlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 260) }
+spriteset(spriteset_BR360_middle_NXEABlue_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 260) }
+spriteset(spriteset_BR360_middlepanto_NXEABlue, "gfx/EMU/360.png") { template_train32px(0, 286) }
+spriteset(spriteset_BR360_middlepanto_NXEABlue_loading, "gfx/EMU/360.png") { template_train32px(200, 286) }
+spriteset(spriteset_BR360_middlepanto_NXEABlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 286) }
+spriteset(spriteset_BR360_middlepanto_NXEABlue_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 286) }
 
-spriteset(spriteset_BR360_front_EMRBlue, "gfx/EMU/360.png") { template_train32px(0, 208) }
-spriteset(spriteset_BR360_rear_EMRBlue, "gfx/EMU/360.png") { template_train32px(0, 234) }
-spriteset(spriteset_BR360_middle_EMRBlue, "gfx/EMU/360.png") { template_train32px(0, 260) }
-spriteset(spriteset_BR360_middlepanto_EMRBlue, "gfx/EMU/360.png") { template_train32px(0, 286) }
-spriteset(spriteset_BR360_front_EMRBlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 208) }
-spriteset(spriteset_BR360_rear_EMRBlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 234) }
-spriteset(spriteset_BR360_middle_EMRBlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 260) }
-spriteset(spriteset_BR360_middlepanto_EMRBlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 286) }
+// EMR Blue (y=312)
+spriteset(spriteset_BR360_front_EMRBlue, "gfx/EMU/360.png") { template_train32px(0, 312) }
+spriteset(spriteset_BR360_front_EMRBlue_loading, "gfx/EMU/360.png") { template_train32px(200, 312) }
+spriteset(spriteset_BR360_front_EMRBlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 338) }
+spriteset(spriteset_BR360_front_EMRBlue_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 338) }
+spriteset(spriteset_BR360_rear_EMRBlue, "gfx/EMU/360.png") { template_train32px(0, 364) }
+spriteset(spriteset_BR360_rear_EMRBlue_loading, "gfx/EMU/360.png") { template_train32px(200, 364) }
+spriteset(spriteset_BR360_rear_EMRBlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 390) }
+spriteset(spriteset_BR360_rear_EMRBlue_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 390) }
+spriteset(spriteset_BR360_middle_EMRBlue, "gfx/EMU/360.png") { template_train32px(0, 416) }
+spriteset(spriteset_BR360_middle_EMRBlue_loading, "gfx/EMU/360.png") { template_train32px(200, 416) }
+spriteset(spriteset_BR360_middle_EMRBlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 416) }
+spriteset(spriteset_BR360_middle_EMRBlue_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 416) }
+spriteset(spriteset_BR360_middlepanto_EMRBlue, "gfx/EMU/360.png") { template_train32px(0, 442) }
+spriteset(spriteset_BR360_middlepanto_EMRBlue_loading, "gfx/EMU/360.png") { template_train32px(200, 442) }
+spriteset(spriteset_BR360_middlepanto_EMRBlue_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 442) }
+spriteset(spriteset_BR360_middlepanto_EMRBlue_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 442) }
 
-spriteset(spriteset_BR360_front1_EMRMaroon, "gfx/EMU/360.png") { template_train32px(0, 312) }
-spriteset(spriteset_BR360_rear1_EMRMaroon, "gfx/EMU/360.png") { template_train32px(0, 338) }
-spriteset(spriteset_BR360_front2_EMRMaroon, "gfx/EMU/360.png") { template_train32px(0, 364) }
-spriteset(spriteset_BR360_rear2_EMRMaroon, "gfx/EMU/360.png") { template_train32px(0, 390) }
-spriteset(spriteset_BR360_middle_EMRMaroon, "gfx/EMU/360.png") { template_train32px(0, 416) }
-spriteset(spriteset_BR360_middlepanto_EMRMaroon, "gfx/EMU/360.png") { template_train32px(0, 442) }
-spriteset(spriteset_BR360_front1_EMRMaroon_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 312) }
-spriteset(spriteset_BR360_rear1_EMRMaroon_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 338) }
-spriteset(spriteset_BR360_front2_EMRMaroon_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 364) }
-spriteset(spriteset_BR360_rear2_EMRMaroon_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 390) }
-spriteset(spriteset_BR360_middle_EMRMaroon_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 416) }
-spriteset(spriteset_BR360_middlepanto_EMRMaroon_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 442) }
+// EMR Maroon (y=468)
+// Two front/rear variants are laid out as:
+// front1, front1_rev, rear1, rear1_rev, front2, front2_rev, rear2, rear2_rev, middle, middlepanto
+spriteset(spriteset_BR360_front1_EMRMaroon, "gfx/EMU/360.png") { template_train32px(0, 468) }
+spriteset(spriteset_BR360_front1_EMRMaroon_loading, "gfx/EMU/360.png") { template_train32px(200, 468) }
+spriteset(spriteset_BR360_front1_EMRMaroon_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 494) }
+spriteset(spriteset_BR360_front1_EMRMaroon_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 494) }
+spriteset(spriteset_BR360_rear1_EMRMaroon, "gfx/EMU/360.png") { template_train32px(0, 520) }
+spriteset(spriteset_BR360_rear1_EMRMaroon_loading, "gfx/EMU/360.png") { template_train32px(200, 520) }
+spriteset(spriteset_BR360_rear1_EMRMaroon_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 546) }
+spriteset(spriteset_BR360_rear1_EMRMaroon_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 546) }
+spriteset(spriteset_BR360_front2_EMRMaroon, "gfx/EMU/360.png") { template_train32px(0, 572) }
+spriteset(spriteset_BR360_front2_EMRMaroon_loading, "gfx/EMU/360.png") { template_train32px(200, 572) }
+spriteset(spriteset_BR360_front2_EMRMaroon_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 598) }
+spriteset(spriteset_BR360_front2_EMRMaroon_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 598) }
+spriteset(spriteset_BR360_rear2_EMRMaroon, "gfx/EMU/360.png") { template_train32px(0, 624) }
+spriteset(spriteset_BR360_rear2_EMRMaroon_loading, "gfx/EMU/360.png") { template_train32px(200, 624) }
+spriteset(spriteset_BR360_rear2_EMRMaroon_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 650) }
+spriteset(spriteset_BR360_rear2_EMRMaroon_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 650) }
+spriteset(spriteset_BR360_middle_EMRMaroon, "gfx/EMU/360.png") { template_train32px(0, 676) }
+spriteset(spriteset_BR360_middle_EMRMaroon_loading, "gfx/EMU/360.png") { template_train32px(200, 676) }
+spriteset(spriteset_BR360_middle_EMRMaroon_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 676) }
+spriteset(spriteset_BR360_middle_EMRMaroon_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 676) }
+spriteset(spriteset_BR360_middlepanto_EMRMaroon, "gfx/EMU/360.png") { template_train32px(0, 702) }
+spriteset(spriteset_BR360_middlepanto_EMRMaroon_loading, "gfx/EMU/360.png") { template_train32px(200, 702) }
+spriteset(spriteset_BR360_middlepanto_EMRMaroon_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 702) }
+spriteset(spriteset_BR360_middlepanto_EMRMaroon_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 702) }
 
-spriteset(spriteset_BR360_front_HeathrowConnect, "gfx/EMU/360.png") { template_train32px(0, 468) }
-spriteset(spriteset_BR360_rear_HeathrowConnect, "gfx/EMU/360.png") { template_train32px(0, 494) }
-spriteset(spriteset_BR360_middle_HeathrowConnect, "gfx/EMU/360.png") { template_train32px(0, 520) }
-spriteset(spriteset_BR360_middlepanto_HeathrowConnect, "gfx/EMU/360.png") { template_train32px(0, 546) }
-spriteset(spriteset_BR360_front_HeathrowConnect_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 468) }
-spriteset(spriteset_BR360_rear_HeathrowConnect_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 494) }
-spriteset(spriteset_BR360_middle_HeathrowConnect_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 520) }
-spriteset(spriteset_BR360_middlepanto_HeathrowConnect_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 546) }
+// Heathrow Connect (y=728)
+spriteset(spriteset_BR360_front_HeathrowConnect, "gfx/EMU/360.png") { template_train32px(0, 728) }
+spriteset(spriteset_BR360_front_HeathrowConnect_loading, "gfx/EMU/360.png") { template_train32px(200, 728) }
+spriteset(spriteset_BR360_front_HeathrowConnect_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 754) }
+spriteset(spriteset_BR360_front_HeathrowConnect_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 754) }
+spriteset(spriteset_BR360_rear_HeathrowConnect, "gfx/EMU/360.png") { template_train32px(0, 780) }
+spriteset(spriteset_BR360_rear_HeathrowConnect_loading, "gfx/EMU/360.png") { template_train32px(200, 780) }
+spriteset(spriteset_BR360_rear_HeathrowConnect_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 806) }
+spriteset(spriteset_BR360_rear_HeathrowConnect_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 806) }
+spriteset(spriteset_BR360_middle_HeathrowConnect, "gfx/EMU/360.png") { template_train32px(0, 832) }
+spriteset(spriteset_BR360_middle_HeathrowConnect_loading, "gfx/EMU/360.png") { template_train32px(200, 832) }
+spriteset(spriteset_BR360_middle_HeathrowConnect_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 832) }
+spriteset(spriteset_BR360_middle_HeathrowConnect_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 832) }
+spriteset(spriteset_BR360_middlepanto_HeathrowConnect, "gfx/EMU/360.png") { template_train32px(0, 858) }
+spriteset(spriteset_BR360_middlepanto_HeathrowConnect_loading, "gfx/EMU/360.png") { template_train32px(200, 858) }
+spriteset(spriteset_BR360_middlepanto_HeathrowConnect_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 858) }
+spriteset(spriteset_BR360_middlepanto_HeathrowConnect_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 858) }
 
-spriteset(spriteset_BR360_front_HeathrowExpress, "gfx/EMU/360.png") { template_train32px(0, 572) }
-spriteset(spriteset_BR360_rear_HeathrowExpress, "gfx/EMU/360.png") { template_train32px(0, 598) }
-spriteset(spriteset_BR360_middle_HeathrowExpress, "gfx/EMU/360.png") { template_train32px(0, 624) }
-spriteset(spriteset_BR360_middlepanto_HeathrowExpress, "gfx/EMU/360.png") { template_train32px(0, 650) }
-spriteset(spriteset_BR360_front_HeathrowExpress_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 572) }
-spriteset(spriteset_BR360_rear_HeathrowExpress_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 598) }
-spriteset(spriteset_BR360_middle_HeathrowExpress_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 624) }
-spriteset(spriteset_BR360_middlepanto_HeathrowExpress_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 650) }
+// Heathrow Express (y=884)
+spriteset(spriteset_BR360_front_HeathrowExpress, "gfx/EMU/360.png") { template_train32px(0, 884) }
+spriteset(spriteset_BR360_front_HeathrowExpress_loading, "gfx/EMU/360.png") { template_train32px(200, 884) }
+spriteset(spriteset_BR360_front_HeathrowExpress_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 910) }
+spriteset(spriteset_BR360_front_HeathrowExpress_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 910) }
+spriteset(spriteset_BR360_rear_HeathrowExpress, "gfx/EMU/360.png") { template_train32px(0, 936) }
+spriteset(spriteset_BR360_rear_HeathrowExpress_loading, "gfx/EMU/360.png") { template_train32px(200, 936) }
+spriteset(spriteset_BR360_rear_HeathrowExpress_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 962) }
+spriteset(spriteset_BR360_rear_HeathrowExpress_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 962) }
+spriteset(spriteset_BR360_middle_HeathrowExpress, "gfx/EMU/360.png") { template_train32px(0, 988) }
+spriteset(spriteset_BR360_middle_HeathrowExpress_loading, "gfx/EMU/360.png") { template_train32px(200, 988) }
+spriteset(spriteset_BR360_middle_HeathrowExpress_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 988) }
+spriteset(spriteset_BR360_middle_HeathrowExpress_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 988) }
+spriteset(spriteset_BR360_middlepanto_HeathrowExpress, "gfx/EMU/360.png") { template_train32px(0, 1014) }
+spriteset(spriteset_BR360_middlepanto_HeathrowExpress_loading, "gfx/EMU/360.png") { template_train32px(200, 1014) }
+spriteset(spriteset_BR360_middlepanto_HeathrowExpress_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 1014) }
+spriteset(spriteset_BR360_middlepanto_HeathrowExpress_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 1014) }
 
-spriteset(spriteset_BR360_front_FGE, "gfx/EMU/360.png") { template_train32px(0, 676) }
-spriteset(spriteset_BR360_rear_FGE, "gfx/EMU/360.png") { template_train32px(0, 702) }
-spriteset(spriteset_BR360_middle_FGE, "gfx/EMU/360.png") { template_train32px(0, 728) }
-spriteset(spriteset_BR360_middlepanto_FGE, "gfx/EMU/360.png") { template_train32px(0, 754) }
-spriteset(spriteset_BR360_front_FGE_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 676) }
-spriteset(spriteset_BR360_rear_FGE_reversed, "gfx/EMU/360.png") { template_train32px_reversed(200, 702) }
-spriteset(spriteset_BR360_middle_FGE_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 728) }
-spriteset(spriteset_BR360_middlepanto_FGE_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 754) }
+// FGE (y=1040)
+spriteset(spriteset_BR360_front_FGE, "gfx/EMU/360.png") { template_train32px(0, 1040) }
+spriteset(spriteset_BR360_front_FGE_loading, "gfx/EMU/360.png") { template_train32px(200, 1040) }
+spriteset(spriteset_BR360_front_FGE_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 1066) }
+spriteset(spriteset_BR360_front_FGE_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 1066) }
+spriteset(spriteset_BR360_rear_FGE, "gfx/EMU/360.png") { template_train32px(0, 1092) }
+spriteset(spriteset_BR360_rear_FGE_loading, "gfx/EMU/360.png") { template_train32px(200, 1092) }
+spriteset(spriteset_BR360_rear_FGE_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 1118) }
+spriteset(spriteset_BR360_rear_FGE_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 1118) }
+spriteset(spriteset_BR360_middle_FGE, "gfx/EMU/360.png") { template_train32px(0, 1144) }
+spriteset(spriteset_BR360_middle_FGE_loading, "gfx/EMU/360.png") { template_train32px(200, 1144) }
+spriteset(spriteset_BR360_middle_FGE_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 1144) }
+spriteset(spriteset_BR360_middle_FGE_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 1144) }
+spriteset(spriteset_BR360_middlepanto_FGE, "gfx/EMU/360.png") { template_train32px(0, 1170) }
+spriteset(spriteset_BR360_middlepanto_FGE_loading, "gfx/EMU/360.png") { template_train32px(200, 1170) }
+spriteset(spriteset_BR360_middlepanto_FGE_reversed, "gfx/EMU/360.png") { template_train32px_reversed(0, 1170) }
+spriteset(spriteset_BR360_middlepanto_FGE_reversed_loading, "gfx/EMU/360.png") { template_train32px_reversed(200, 1170) }
+
+// Loading spritegroups
+spritegroup spritegroup_BR360_front_NXEAGrey { loading: spriteset_BR360_front_NXEAGrey_loading; loaded: spriteset_BR360_front_NXEAGrey; }
+spritegroup spritegroup_BR360_rear_NXEAGrey { loading: spriteset_BR360_rear_NXEAGrey_loading; loaded: spriteset_BR360_rear_NXEAGrey; }
+spritegroup spritegroup_BR360_middle_NXEAGrey { loading: spriteset_BR360_middle_NXEAGrey_loading; loaded: spriteset_BR360_middle_NXEAGrey; }
+spritegroup spritegroup_BR360_middlepanto_NXEAGrey { loading: spriteset_BR360_middlepanto_NXEAGrey_loading; loaded: spriteset_BR360_middlepanto_NXEAGrey; }
+spritegroup spritegroup_BR360_front_NXEAGrey_reversed { loading: spriteset_BR360_front_NXEAGrey_reversed_loading; loaded: spriteset_BR360_front_NXEAGrey_reversed; }
+spritegroup spritegroup_BR360_rear_NXEAGrey_reversed { loading: spriteset_BR360_rear_NXEAGrey_reversed_loading; loaded: spriteset_BR360_rear_NXEAGrey_reversed; }
+spritegroup spritegroup_BR360_middle_NXEAGrey_reversed { loading: spriteset_BR360_middle_NXEAGrey_reversed_loading; loaded: spriteset_BR360_middle_NXEAGrey_reversed; }
+spritegroup spritegroup_BR360_middlepanto_NXEAGrey_reversed { loading: spriteset_BR360_middlepanto_NXEAGrey_reversed_loading; loaded: spriteset_BR360_middlepanto_NXEAGrey_reversed; }
+
+spritegroup spritegroup_BR360_front_NXEABlue { loading: spriteset_BR360_front_NXEABlue_loading; loaded: spriteset_BR360_front_NXEABlue; }
+spritegroup spritegroup_BR360_rear_NXEABlue { loading: spriteset_BR360_rear_NXEABlue_loading; loaded: spriteset_BR360_rear_NXEABlue; }
+spritegroup spritegroup_BR360_middle_NXEABlue { loading: spriteset_BR360_middle_NXEABlue_loading; loaded: spriteset_BR360_middle_NXEABlue; }
+spritegroup spritegroup_BR360_middlepanto_NXEABlue { loading: spriteset_BR360_middlepanto_NXEABlue_loading; loaded: spriteset_BR360_middlepanto_NXEABlue; }
+spritegroup spritegroup_BR360_front_NXEABlue_reversed { loading: spriteset_BR360_front_NXEABlue_reversed_loading; loaded: spriteset_BR360_front_NXEABlue_reversed; }
+spritegroup spritegroup_BR360_rear_NXEABlue_reversed { loading: spriteset_BR360_rear_NXEABlue_reversed_loading; loaded: spriteset_BR360_rear_NXEABlue_reversed; }
+spritegroup spritegroup_BR360_middle_NXEABlue_reversed { loading: spriteset_BR360_middle_NXEABlue_reversed_loading; loaded: spriteset_BR360_middle_NXEABlue_reversed; }
+spritegroup spritegroup_BR360_middlepanto_NXEABlue_reversed { loading: spriteset_BR360_middlepanto_NXEABlue_reversed_loading; loaded: spriteset_BR360_middlepanto_NXEABlue_reversed; }
+
+spritegroup spritegroup_BR360_front_EMRBlue { loading: spriteset_BR360_front_EMRBlue_loading; loaded: spriteset_BR360_front_EMRBlue; }
+spritegroup spritegroup_BR360_rear_EMRBlue { loading: spriteset_BR360_rear_EMRBlue_loading; loaded: spriteset_BR360_rear_EMRBlue; }
+spritegroup spritegroup_BR360_middle_EMRBlue { loading: spriteset_BR360_middle_EMRBlue_loading; loaded: spriteset_BR360_middle_EMRBlue; }
+spritegroup spritegroup_BR360_middlepanto_EMRBlue { loading: spriteset_BR360_middlepanto_EMRBlue_loading; loaded: spriteset_BR360_middlepanto_EMRBlue; }
+spritegroup spritegroup_BR360_front_EMRBlue_reversed { loading: spriteset_BR360_front_EMRBlue_reversed_loading; loaded: spriteset_BR360_front_EMRBlue_reversed; }
+spritegroup spritegroup_BR360_rear_EMRBlue_reversed { loading: spriteset_BR360_rear_EMRBlue_reversed_loading; loaded: spriteset_BR360_rear_EMRBlue_reversed; }
+spritegroup spritegroup_BR360_middle_EMRBlue_reversed { loading: spriteset_BR360_middle_EMRBlue_reversed_loading; loaded: spriteset_BR360_middle_EMRBlue_reversed; }
+spritegroup spritegroup_BR360_middlepanto_EMRBlue_reversed { loading: spriteset_BR360_middlepanto_EMRBlue_reversed_loading; loaded: spriteset_BR360_middlepanto_EMRBlue_reversed; }
+
+spritegroup spritegroup_BR360_front1_EMRMaroon { loading: spriteset_BR360_front1_EMRMaroon_loading; loaded: spriteset_BR360_front1_EMRMaroon; }
+spritegroup spritegroup_BR360_rear1_EMRMaroon { loading: spriteset_BR360_rear1_EMRMaroon_loading; loaded: spriteset_BR360_rear1_EMRMaroon; }
+spritegroup spritegroup_BR360_front2_EMRMaroon { loading: spriteset_BR360_front2_EMRMaroon_loading; loaded: spriteset_BR360_front2_EMRMaroon; }
+spritegroup spritegroup_BR360_rear2_EMRMaroon { loading: spriteset_BR360_rear2_EMRMaroon_loading; loaded: spriteset_BR360_rear2_EMRMaroon; }
+spritegroup spritegroup_BR360_middle_EMRMaroon { loading: spriteset_BR360_middle_EMRMaroon_loading; loaded: spriteset_BR360_middle_EMRMaroon; }
+spritegroup spritegroup_BR360_middlepanto_EMRMaroon { loading: spriteset_BR360_middlepanto_EMRMaroon_loading; loaded: spriteset_BR360_middlepanto_EMRMaroon; }
+spritegroup spritegroup_BR360_front1_EMRMaroon_reversed { loading: spriteset_BR360_front1_EMRMaroon_reversed_loading; loaded: spriteset_BR360_front1_EMRMaroon_reversed; }
+spritegroup spritegroup_BR360_rear1_EMRMaroon_reversed { loading: spriteset_BR360_rear1_EMRMaroon_reversed_loading; loaded: spriteset_BR360_rear1_EMRMaroon_reversed; }
+spritegroup spritegroup_BR360_front2_EMRMaroon_reversed { loading: spriteset_BR360_front2_EMRMaroon_reversed_loading; loaded: spriteset_BR360_front2_EMRMaroon_reversed; }
+spritegroup spritegroup_BR360_rear2_EMRMaroon_reversed { loading: spriteset_BR360_rear2_EMRMaroon_reversed_loading; loaded: spriteset_BR360_rear2_EMRMaroon_reversed; }
+spritegroup spritegroup_BR360_middle_EMRMaroon_reversed { loading: spriteset_BR360_middle_EMRMaroon_reversed_loading; loaded: spriteset_BR360_middle_EMRMaroon_reversed; }
+spritegroup spritegroup_BR360_middlepanto_EMRMaroon_reversed { loading: spriteset_BR360_middlepanto_EMRMaroon_reversed_loading; loaded: spriteset_BR360_middlepanto_EMRMaroon_reversed; }
+
+spritegroup spritegroup_BR360_front_HeathrowConnect { loading: spriteset_BR360_front_HeathrowConnect_loading; loaded: spriteset_BR360_front_HeathrowConnect; }
+spritegroup spritegroup_BR360_rear_HeathrowConnect { loading: spriteset_BR360_rear_HeathrowConnect_loading; loaded: spriteset_BR360_rear_HeathrowConnect; }
+spritegroup spritegroup_BR360_middle_HeathrowConnect { loading: spriteset_BR360_middle_HeathrowConnect_loading; loaded: spriteset_BR360_middle_HeathrowConnect; }
+spritegroup spritegroup_BR360_middlepanto_HeathrowConnect { loading: spriteset_BR360_middlepanto_HeathrowConnect_loading; loaded: spriteset_BR360_middlepanto_HeathrowConnect; }
+spritegroup spritegroup_BR360_front_HeathrowConnect_reversed { loading: spriteset_BR360_front_HeathrowConnect_reversed_loading; loaded: spriteset_BR360_front_HeathrowConnect_reversed; }
+spritegroup spritegroup_BR360_rear_HeathrowConnect_reversed { loading: spriteset_BR360_rear_HeathrowConnect_reversed_loading; loaded: spriteset_BR360_rear_HeathrowConnect_reversed; }
+spritegroup spritegroup_BR360_middle_HeathrowConnect_reversed { loading: spriteset_BR360_middle_HeathrowConnect_reversed_loading; loaded: spriteset_BR360_middle_HeathrowConnect_reversed; }
+spritegroup spritegroup_BR360_middlepanto_HeathrowConnect_reversed { loading: spriteset_BR360_middlepanto_HeathrowConnect_reversed_loading; loaded: spriteset_BR360_middlepanto_HeathrowConnect_reversed; }
+
+spritegroup spritegroup_BR360_front_HeathrowExpress { loading: spriteset_BR360_front_HeathrowExpress_loading; loaded: spriteset_BR360_front_HeathrowExpress; }
+spritegroup spritegroup_BR360_rear_HeathrowExpress { loading: spriteset_BR360_rear_HeathrowExpress_loading; loaded: spriteset_BR360_rear_HeathrowExpress; }
+spritegroup spritegroup_BR360_middle_HeathrowExpress { loading: spriteset_BR360_middle_HeathrowExpress_loading; loaded: spriteset_BR360_middle_HeathrowExpress; }
+spritegroup spritegroup_BR360_middlepanto_HeathrowExpress { loading: spriteset_BR360_middlepanto_HeathrowExpress_loading; loaded: spriteset_BR360_middlepanto_HeathrowExpress; }
+spritegroup spritegroup_BR360_front_HeathrowExpress_reversed { loading: spriteset_BR360_front_HeathrowExpress_reversed_loading; loaded: spriteset_BR360_front_HeathrowExpress_reversed; }
+spritegroup spritegroup_BR360_rear_HeathrowExpress_reversed { loading: spriteset_BR360_rear_HeathrowExpress_reversed_loading; loaded: spriteset_BR360_rear_HeathrowExpress_reversed; }
+spritegroup spritegroup_BR360_middle_HeathrowExpress_reversed { loading: spriteset_BR360_middle_HeathrowExpress_reversed_loading; loaded: spriteset_BR360_middle_HeathrowExpress_reversed; }
+spritegroup spritegroup_BR360_middlepanto_HeathrowExpress_reversed { loading: spriteset_BR360_middlepanto_HeathrowExpress_reversed_loading; loaded: spriteset_BR360_middlepanto_HeathrowExpress_reversed; }
+
+spritegroup spritegroup_BR360_front_FGE { loading: spriteset_BR360_front_FGE_loading; loaded: spriteset_BR360_front_FGE; }
+spritegroup spritegroup_BR360_rear_FGE { loading: spriteset_BR360_rear_FGE_loading; loaded: spriteset_BR360_rear_FGE; }
+spritegroup spritegroup_BR360_middle_FGE { loading: spriteset_BR360_middle_FGE_loading; loaded: spriteset_BR360_middle_FGE; }
+spritegroup spritegroup_BR360_middlepanto_FGE { loading: spriteset_BR360_middlepanto_FGE_loading; loaded: spriteset_BR360_middlepanto_FGE; }
+spritegroup spritegroup_BR360_front_FGE_reversed { loading: spriteset_BR360_front_FGE_reversed_loading; loaded: spriteset_BR360_front_FGE_reversed; }
+spritegroup spritegroup_BR360_rear_FGE_reversed { loading: spriteset_BR360_rear_FGE_reversed_loading; loaded: spriteset_BR360_rear_FGE_reversed; }
+spritegroup spritegroup_BR360_middle_FGE_reversed { loading: spriteset_BR360_middle_FGE_reversed_loading; loaded: spriteset_BR360_middle_FGE_reversed; }
+spritegroup spritegroup_BR360_middlepanto_FGE_reversed { loading: spriteset_BR360_middlepanto_FGE_reversed_loading; loaded: spriteset_BR360_middlepanto_FGE_reversed; }
 
 // Class 360/1: A=front cab, B=middle panto, C=middle, D=rear cab
-switch(FEAT_TRAINS, SELF, sw_BR360_1_a, cargo_subtype) {
+// Loading-enabled selectors
+switch(FEAT_TRAINS, SELF, sw_BR360_1_a_loading, cargo_subtype) {
+	0: spritegroup_BR360_front_FGE;
+	1: spritegroup_BR360_front_NXEABlue;
+	2: spritegroup_BR360_front_NXEAGrey;
+	3: spritegroup_BR360_front_EMRBlue;
+	4: spritegroup_BR360_front1_EMRMaroon;
+	5: spritegroup_BR360_front2_EMRMaroon;
+	default: spritegroup_BR360_front_FGE;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_b_loading, cargo_subtype) {
+	0: spritegroup_BR360_middlepanto_FGE;
+	1: spritegroup_BR360_middlepanto_NXEABlue;
+	2: spritegroup_BR360_middlepanto_NXEAGrey;
+	3: spritegroup_BR360_middlepanto_EMRBlue;
+	4: spritegroup_BR360_middlepanto_EMRMaroon;
+	5: spritegroup_BR360_middlepanto_EMRMaroon;
+	default: spritegroup_BR360_middlepanto_FGE;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_c_loading, cargo_subtype) {
+	0: spritegroup_BR360_middle_FGE;
+	1: spritegroup_BR360_middle_NXEABlue;
+	2: spritegroup_BR360_middle_NXEAGrey;
+	3: spritegroup_BR360_middle_EMRBlue;
+	4: spritegroup_BR360_middle_EMRMaroon;
+	5: spritegroup_BR360_middle_EMRMaroon;
+	default: spritegroup_BR360_middle_FGE;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_d_loading, cargo_subtype) {
+	0: spritegroup_BR360_rear_FGE;
+	1: spritegroup_BR360_rear_NXEABlue;
+	2: spritegroup_BR360_rear_NXEAGrey;
+	3: spritegroup_BR360_rear_EMRBlue;
+	4: spritegroup_BR360_rear1_EMRMaroon;
+	5: spritegroup_BR360_rear2_EMRMaroon;
+	default: spritegroup_BR360_rear_FGE;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_a_rev_loading, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spritegroup_BR360_front_FGE_reversed;
+	1: spritegroup_BR360_front_NXEABlue_reversed;
+	2: spritegroup_BR360_front_NXEAGrey_reversed;
+	3: spritegroup_BR360_front_EMRBlue_reversed;
+	4: spritegroup_BR360_front1_EMRMaroon_reversed;
+	5: spritegroup_BR360_front2_EMRMaroon_reversed;
+	default: spritegroup_BR360_front_FGE_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_b_rev_loading, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spritegroup_BR360_middlepanto_FGE_reversed;
+	1: spritegroup_BR360_middlepanto_NXEABlue_reversed;
+	2: spritegroup_BR360_middlepanto_NXEAGrey_reversed;
+	3: spritegroup_BR360_middlepanto_EMRBlue_reversed;
+	4: spritegroup_BR360_middlepanto_EMRMaroon_reversed;
+	5: spritegroup_BR360_middlepanto_EMRMaroon_reversed;
+	default: spritegroup_BR360_middlepanto_FGE_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_c_rev_loading, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spritegroup_BR360_middle_FGE_reversed;
+	1: spritegroup_BR360_middle_NXEABlue_reversed;
+	2: spritegroup_BR360_middle_NXEAGrey_reversed;
+	3: spritegroup_BR360_middle_EMRBlue_reversed;
+	4: spritegroup_BR360_middle_EMRMaroon_reversed;
+	5: spritegroup_BR360_middle_EMRMaroon_reversed;
+	default: spritegroup_BR360_middle_FGE_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_d_rev_loading, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spritegroup_BR360_rear_FGE_reversed;
+	1: spritegroup_BR360_rear_NXEABlue_reversed;
+	2: spritegroup_BR360_rear_NXEAGrey_reversed;
+	3: spritegroup_BR360_rear_EMRBlue_reversed;
+	4: spritegroup_BR360_rear1_EMRMaroon_reversed;
+	5: spritegroup_BR360_rear2_EMRMaroon_reversed;
+	default: spritegroup_BR360_rear_FGE_reversed;
+}
+
+// Loading-disabled selectors (closed-door spritesets only)
+switch(FEAT_TRAINS, SELF, sw_BR360_1_a_loaded, cargo_subtype) {
 	0: spriteset_BR360_front_FGE;
 	1: spriteset_BR360_front_NXEABlue;
 	2: spriteset_BR360_front_NXEAGrey;
@@ -80,7 +306,7 @@ switch(FEAT_TRAINS, SELF, sw_BR360_1_a, cargo_subtype) {
 	default: spriteset_BR360_front_FGE;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_1_b, cargo_subtype) {
+switch(FEAT_TRAINS, SELF, sw_BR360_1_b_loaded, cargo_subtype) {
 	0: spriteset_BR360_middlepanto_FGE;
 	1: spriteset_BR360_middlepanto_NXEABlue;
 	2: spriteset_BR360_middlepanto_NXEAGrey;
@@ -90,7 +316,7 @@ switch(FEAT_TRAINS, SELF, sw_BR360_1_b, cargo_subtype) {
 	default: spriteset_BR360_middlepanto_FGE;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_1_c, cargo_subtype) {
+switch(FEAT_TRAINS, SELF, sw_BR360_1_c_loaded, cargo_subtype) {
 	0: spriteset_BR360_middle_FGE;
 	1: spriteset_BR360_middle_NXEABlue;
 	2: spriteset_BR360_middle_NXEAGrey;
@@ -100,7 +326,7 @@ switch(FEAT_TRAINS, SELF, sw_BR360_1_c, cargo_subtype) {
 	default: spriteset_BR360_middle_FGE;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_1_d, cargo_subtype) {
+switch(FEAT_TRAINS, SELF, sw_BR360_1_d_loaded, cargo_subtype) {
 	0: spriteset_BR360_rear_FGE;
 	1: spriteset_BR360_rear_NXEABlue;
 	2: spriteset_BR360_rear_NXEAGrey;
@@ -110,7 +336,7 @@ switch(FEAT_TRAINS, SELF, sw_BR360_1_d, cargo_subtype) {
 	default: spriteset_BR360_rear_FGE;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_1_a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+switch(FEAT_TRAINS, SELF, sw_BR360_1_a_rev_loaded, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
 	0: spriteset_BR360_front_FGE_reversed;
 	1: spriteset_BR360_front_NXEABlue_reversed;
 	2: spriteset_BR360_front_NXEAGrey_reversed;
@@ -120,7 +346,7 @@ switch(FEAT_TRAINS, SELF, sw_BR360_1_a_rev, [STORE_TEMP(position_in_consist_from
 	default: spriteset_BR360_front_FGE_reversed;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_1_b_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+switch(FEAT_TRAINS, SELF, sw_BR360_1_b_rev_loaded, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
 	0: spriteset_BR360_middlepanto_FGE_reversed;
 	1: spriteset_BR360_middlepanto_NXEABlue_reversed;
 	2: spriteset_BR360_middlepanto_NXEAGrey_reversed;
@@ -130,7 +356,7 @@ switch(FEAT_TRAINS, SELF, sw_BR360_1_b_rev, [STORE_TEMP(position_in_consist_from
 	default: spriteset_BR360_middlepanto_FGE_reversed;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_1_c_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+switch(FEAT_TRAINS, SELF, sw_BR360_1_c_rev_loaded, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
 	0: spriteset_BR360_middle_FGE_reversed;
 	1: spriteset_BR360_middle_NXEABlue_reversed;
 	2: spriteset_BR360_middle_NXEAGrey_reversed;
@@ -140,7 +366,7 @@ switch(FEAT_TRAINS, SELF, sw_BR360_1_c_rev, [STORE_TEMP(position_in_consist_from
 	default: spriteset_BR360_middle_FGE_reversed;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_1_d_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+switch(FEAT_TRAINS, SELF, sw_BR360_1_d_rev_loaded, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
 	0: spriteset_BR360_rear_FGE_reversed;
 	1: spriteset_BR360_rear_NXEABlue_reversed;
 	2: spriteset_BR360_rear_NXEAGrey_reversed;
@@ -148,6 +374,47 @@ switch(FEAT_TRAINS, SELF, sw_BR360_1_d_rev, [STORE_TEMP(position_in_consist_from
 	4: spriteset_BR360_rear1_EMRMaroon_reversed;
 	5: spriteset_BR360_rear2_EMRMaroon_reversed;
 	default: spriteset_BR360_rear_FGE_reversed;
+}
+
+// Parameter gates
+switch(FEAT_TRAINS, SELF, sw_BR360_1_a, param_loading_sprites) {
+	0: sw_BR360_1_a_loaded;
+	sw_BR360_1_a_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_b, param_loading_sprites) {
+	0: sw_BR360_1_b_loaded;
+	sw_BR360_1_b_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_c, param_loading_sprites) {
+	0: sw_BR360_1_c_loaded;
+	sw_BR360_1_c_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_d, param_loading_sprites) {
+	0: sw_BR360_1_d_loaded;
+	sw_BR360_1_d_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_a_rev, param_loading_sprites) {
+	0: sw_BR360_1_a_rev_loaded;
+	sw_BR360_1_a_rev_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_b_rev, param_loading_sprites) {
+	0: sw_BR360_1_b_rev_loaded;
+	sw_BR360_1_b_rev_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_c_rev, param_loading_sprites) {
+	0: sw_BR360_1_c_rev_loaded;
+	sw_BR360_1_c_rev_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_1_d_rev, param_loading_sprites) {
+	0: sw_BR360_1_d_rev_loaded;
+	sw_BR360_1_d_rev_loading;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR360_1_roles_fwd, position_in_articulated_veh % 4) {
@@ -177,52 +444,143 @@ switch(FEAT_TRAINS, SELF, sw_BR360_1_can_attach_wagon, vehicle_type_id) {
 }
 
 // Class 360/2: A=front cab, D=middle panto, B=middle, E=rear cab
-switch(FEAT_TRAINS, SELF, sw_BR360_2_a, cargo_subtype) {
+// Loading-enabled selectors
+switch(FEAT_TRAINS, SELF, sw_BR360_2_a_loading, cargo_subtype) {
+	0: spritegroup_BR360_front_HeathrowConnect;
+	1: spritegroup_BR360_front_HeathrowExpress;
+	default: spritegroup_BR360_front_HeathrowConnect;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_b_loading, cargo_subtype) {
+	0: spritegroup_BR360_middle_HeathrowConnect;
+	1: spritegroup_BR360_middle_HeathrowExpress;
+	default: spritegroup_BR360_middle_HeathrowConnect;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_d_loading, cargo_subtype) {
+	0: spritegroup_BR360_middlepanto_HeathrowConnect;
+	1: spritegroup_BR360_middlepanto_HeathrowExpress;
+	default: spritegroup_BR360_middlepanto_HeathrowConnect;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_e_loading, cargo_subtype) {
+	0: spritegroup_BR360_rear_HeathrowConnect;
+	1: spritegroup_BR360_rear_HeathrowExpress;
+	default: spritegroup_BR360_rear_HeathrowConnect;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_a_rev_loading, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spritegroup_BR360_front_HeathrowConnect_reversed;
+	1: spritegroup_BR360_front_HeathrowExpress_reversed;
+	default: spritegroup_BR360_front_HeathrowConnect_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_b_rev_loading, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spritegroup_BR360_middle_HeathrowConnect_reversed;
+	1: spritegroup_BR360_middle_HeathrowExpress_reversed;
+	default: spritegroup_BR360_middle_HeathrowConnect_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_d_rev_loading, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spritegroup_BR360_middlepanto_HeathrowConnect_reversed;
+	1: spritegroup_BR360_middlepanto_HeathrowExpress_reversed;
+	default: spritegroup_BR360_middlepanto_HeathrowConnect_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_e_rev_loading, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+	0: spritegroup_BR360_rear_HeathrowConnect_reversed;
+	1: spritegroup_BR360_rear_HeathrowExpress_reversed;
+	default: spritegroup_BR360_rear_HeathrowConnect_reversed;
+}
+
+// Loading-disabled selectors (closed-door spritesets only)
+switch(FEAT_TRAINS, SELF, sw_BR360_2_a_loaded, cargo_subtype) {
 	0: spriteset_BR360_front_HeathrowConnect;
 	1: spriteset_BR360_front_HeathrowExpress;
 	default: spriteset_BR360_front_HeathrowConnect;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_2_b, cargo_subtype) {
+switch(FEAT_TRAINS, SELF, sw_BR360_2_b_loaded, cargo_subtype) {
 	0: spriteset_BR360_middle_HeathrowConnect;
 	1: spriteset_BR360_middle_HeathrowExpress;
 	default: spriteset_BR360_middle_HeathrowConnect;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_2_d, cargo_subtype) {
+switch(FEAT_TRAINS, SELF, sw_BR360_2_d_loaded, cargo_subtype) {
 	0: spriteset_BR360_middlepanto_HeathrowConnect;
 	1: spriteset_BR360_middlepanto_HeathrowExpress;
 	default: spriteset_BR360_middlepanto_HeathrowConnect;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_2_e, cargo_subtype) {
+switch(FEAT_TRAINS, SELF, sw_BR360_2_e_loaded, cargo_subtype) {
 	0: spriteset_BR360_rear_HeathrowConnect;
 	1: spriteset_BR360_rear_HeathrowExpress;
 	default: spriteset_BR360_rear_HeathrowConnect;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_2_a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+switch(FEAT_TRAINS, SELF, sw_BR360_2_a_rev_loaded, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
 	0: spriteset_BR360_front_HeathrowConnect_reversed;
 	1: spriteset_BR360_front_HeathrowExpress_reversed;
 	default: spriteset_BR360_front_HeathrowConnect_reversed;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_2_b_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+switch(FEAT_TRAINS, SELF, sw_BR360_2_b_rev_loaded, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
 	0: spriteset_BR360_middle_HeathrowConnect_reversed;
 	1: spriteset_BR360_middle_HeathrowExpress_reversed;
 	default: spriteset_BR360_middle_HeathrowConnect_reversed;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_2_d_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+switch(FEAT_TRAINS, SELF, sw_BR360_2_d_rev_loaded, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
 	0: spriteset_BR360_middlepanto_HeathrowConnect_reversed;
 	1: spriteset_BR360_middlepanto_HeathrowExpress_reversed;
 	default: spriteset_BR360_middlepanto_HeathrowConnect_reversed;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR360_2_e_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
+switch(FEAT_TRAINS, SELF, sw_BR360_2_e_rev_loaded, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
 	0: spriteset_BR360_rear_HeathrowConnect_reversed;
 	1: spriteset_BR360_rear_HeathrowExpress_reversed;
 	default: spriteset_BR360_rear_HeathrowConnect_reversed;
+}
+
+// Parameter gates
+switch(FEAT_TRAINS, SELF, sw_BR360_2_a, param_loading_sprites) {
+	0: sw_BR360_2_a_loaded;
+	sw_BR360_2_a_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_b, param_loading_sprites) {
+	0: sw_BR360_2_b_loaded;
+	sw_BR360_2_b_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_d, param_loading_sprites) {
+	0: sw_BR360_2_d_loaded;
+	sw_BR360_2_d_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_e, param_loading_sprites) {
+	0: sw_BR360_2_e_loaded;
+	sw_BR360_2_e_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_a_rev, param_loading_sprites) {
+	0: sw_BR360_2_a_rev_loaded;
+	sw_BR360_2_a_rev_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_b_rev, param_loading_sprites) {
+	0: sw_BR360_2_b_rev_loaded;
+	sw_BR360_2_b_rev_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_d_rev, param_loading_sprites) {
+	0: sw_BR360_2_d_rev_loaded;
+	sw_BR360_2_d_rev_loading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR360_2_e_rev, param_loading_sprites) {
+	0: sw_BR360_2_e_rev_loaded;
+	sw_BR360_2_e_rev_loading;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR360_2_4car_roles_fwd, position_in_articulated_veh % 4) {
