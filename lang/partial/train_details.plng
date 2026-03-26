@@ -1063,7 +1063,7 @@ STR_NAME_BR380_3car				:BR Class 380/0 "Desiro" (3-car)
 STR_NAME_BR380_4car				:BR Class 380/1 "Desiro" (4-car)
 str_BR380_usage     			:Urban Passenger
 str_BR380_eos		    		:---
-str_BR380_liveries		    	:ScotRail Saltire
+str_BR380_liveries		    	:ScotRail Saltire, Scotrail-Saltire (Decals)
 
 STR_NAME_BR378_4dc				:BR Class 378/1 "Electrostar" (4-Car)
 
