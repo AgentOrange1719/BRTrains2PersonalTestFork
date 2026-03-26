@@ -1,54 +1,285 @@
-spriteset(spriteset_BR380_Purchase, "gfx/EMU/380.png") {
-	template_purchase(0, 0)
-}
-spriteset(spriteset_BR380_front_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 13) }
-spriteset(spriteset_BR380_middle_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 65) }
-spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 91) }
-spriteset(spriteset_BR380_rear_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 39) }
-spriteset(spriteset_BR380_front_ScotRail_Saltire_reversed, "gfx/EMU/380.png") { template_train32px_reversed(0, 117) }
-spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire_reversed, "gfx/EMU/380.png") { template_train32px_reversed(0, 91) }
-spriteset(spriteset_BR380_rear_ScotRail_Saltire_reversed, "gfx/EMU/380.png") { template_train32px_reversed(0, 143) }
+// Class 380 sprite routing
+//
+// High-level callback chain:
+// 1) sw_BR380_pushpull chooses forward vs reversed path.
+// 2) Forward path chooses role by consist type (3-car / 4-car), then chooses livery.
+// 3) Reversed path reads mirrored vehicle metadata so each map position keeps the
+//    same visual livery/role after reversal.
+// 4) Livery switch then applies loading-door gating via param_loading_sprites.
+//
+// Notes:
+// - cargo_subtype is used as the livery selector.
+// - param_loading_sprites controls whether loading spritegroups are used.
+// - Every switch has a fallback return for robustness if an unexpected value appears.
 
+spriteset(spriteset_BR380_Purchase, "gfx/EMU/380.png") {template_purchase(0, 0)}
+
+// -----------------------------------------------------------------------------
+// Source sprites (forward + reversed templates)
+// -----------------------------------------------------------------------------
+// Livery 0: ScotRail Saltire
+spriteset(spriteset_BR380_front_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 13) }
+spriteset(spriteset_BR380_middle_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 117) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 143) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 65) }
+spriteset(spriteset_BR380_front_ScotRail_Saltire_reversed, "gfx/EMU/380.png") { template_train32px_reversed(0, 39) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire_reversed, "gfx/EMU/380.png") { template_train32px_reversed(0, 143) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire_reversed, "gfx/EMU/380.png") { template_train32px_reversed(0, 91) }
+
+// Livery 0 loading variants (doors open)
+spriteset(spriteset_BR380_front_ScotRail_Saltire_loading, "gfx/EMU/380.png") { template_train32px(200, 13) }
+spriteset(spriteset_BR380_middle_ScotRail_Saltire_loading, "gfx/EMU/380.png") { template_train32px(200, 117) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire_loading, "gfx/EMU/380.png") { template_train32px(200, 143) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire_loading, "gfx/EMU/380.png") { template_train32px(200, 65) }
+spriteset(spriteset_BR380_front_ScotRail_Saltire_reversed_loading, "gfx/EMU/380.png") { template_train32px_reversed(200, 39) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire_reversed_loading, "gfx/EMU/380.png") { template_train32px_reversed(200, 143) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire_reversed_loading, "gfx/EMU/380.png") { template_train32px_reversed(200, 91) }
+
+// Livery 1: Scotrail-Saltire (Decals)
+spriteset(spriteset_BR380_front_ScotRail_Saltire_Decals, "gfx/EMU/380.png") { template_train32px(0, 169) }
+spriteset(spriteset_BR380_middle_ScotRail_Saltire_Decals, "gfx/EMU/380.png") { template_train32px(0, 273) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire_Decals, "gfx/EMU/380.png") { template_train32px(0, 299) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire_Decals, "gfx/EMU/380.png") { template_train32px(0, 221) }
+spriteset(spriteset_BR380_front_ScotRail_Saltire_Decals_reversed, "gfx/EMU/380.png") { template_train32px_reversed(0, 195) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire_Decals_reversed, "gfx/EMU/380.png") { template_train32px_reversed(0, 299) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire_Decals_reversed, "gfx/EMU/380.png") { template_train32px_reversed(0, 247) }
+
+// Livery 1 loading variants (doors open)
+spriteset(spriteset_BR380_front_ScotRail_Saltire_Decals_loading, "gfx/EMU/380.png") { template_train32px(200, 169) }
+spriteset(spriteset_BR380_middle_ScotRail_Saltire_Decals_loading, "gfx/EMU/380.png") { template_train32px(200, 273) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire_Decals_loading, "gfx/EMU/380.png") { template_train32px(200, 299) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire_Decals_loading, "gfx/EMU/380.png") { template_train32px(200, 221) }
+spriteset(spriteset_BR380_front_ScotRail_Saltire_Decals_reversed_loading, "gfx/EMU/380.png") { template_train32px_reversed(200, 195) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire_Decals_reversed_loading, "gfx/EMU/380.png") { template_train32px_reversed(200, 299) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire_Decals_reversed_loading, "gfx/EMU/380.png") { template_train32px_reversed(200, 247) }
+
+// -----------------------------------------------------------------------------
+// Spritegroups: each pair maps loaded (doors closed) vs loading (doors open) art for one role/livery.
+// The switches below decide whether to use the plain spriteset (param off) or
+// this spritegroup (param on).
+// -----------------------------------------------------------------------------
+
+// Livery 0 spritegroups
+spritegroup spritegroup_BR380_front_ScotRail_Saltire {
+	loading: spriteset_BR380_front_ScotRail_Saltire_loading;
+	loaded: spriteset_BR380_front_ScotRail_Saltire;
+}
+
+spritegroup spritegroup_BR380_middle_ScotRail_Saltire {
+	loading: spriteset_BR380_middle_ScotRail_Saltire_loading;
+	loaded: spriteset_BR380_middle_ScotRail_Saltire;
+}
+
+spritegroup spritegroup_BR380_middle_panto_ScotRail_Saltire {
+	loading: spriteset_BR380_middle_panto_ScotRail_Saltire_loading;
+	loaded: spriteset_BR380_middle_panto_ScotRail_Saltire;
+}
+
+spritegroup spritegroup_BR380_rear_ScotRail_Saltire {
+	loading: spriteset_BR380_rear_ScotRail_Saltire_loading;
+	loaded: spriteset_BR380_rear_ScotRail_Saltire;
+}
+
+spritegroup spritegroup_BR380_front_ScotRail_Saltire_reversed {
+	loading: spriteset_BR380_front_ScotRail_Saltire_reversed_loading;
+	loaded: spriteset_BR380_front_ScotRail_Saltire_reversed;
+}
+
+spritegroup spritegroup_BR380_middle_panto_ScotRail_Saltire_reversed {
+	loading: spriteset_BR380_middle_panto_ScotRail_Saltire_reversed_loading;
+	loaded: spriteset_BR380_middle_panto_ScotRail_Saltire_reversed;
+}
+
+spritegroup spritegroup_BR380_rear_ScotRail_Saltire_reversed {
+	loading: spriteset_BR380_rear_ScotRail_Saltire_reversed_loading;
+	loaded: spriteset_BR380_rear_ScotRail_Saltire_reversed;
+}
+
+// Livery 1 spritegroups
+spritegroup spritegroup_BR380_front_ScotRail_Saltire_Decals {
+	loading: spriteset_BR380_front_ScotRail_Saltire_Decals_loading;
+	loaded: spriteset_BR380_front_ScotRail_Saltire_Decals;
+}
+
+spritegroup spritegroup_BR380_middle_ScotRail_Saltire_Decals {
+	loading: spriteset_BR380_middle_ScotRail_Saltire_Decals_loading;
+	loaded: spriteset_BR380_middle_ScotRail_Saltire_Decals;
+}
+
+spritegroup spritegroup_BR380_middle_panto_ScotRail_Saltire_Decals {
+	loading: spriteset_BR380_middle_panto_ScotRail_Saltire_Decals_loading;
+	loaded: spriteset_BR380_middle_panto_ScotRail_Saltire_Decals;
+}
+
+spritegroup spritegroup_BR380_rear_ScotRail_Saltire_Decals {
+	loading: spriteset_BR380_rear_ScotRail_Saltire_Decals_loading;
+	loaded: spriteset_BR380_rear_ScotRail_Saltire_Decals;
+}
+
+spritegroup spritegroup_BR380_front_ScotRail_Saltire_Decals_reversed {
+	loading: spriteset_BR380_front_ScotRail_Saltire_Decals_reversed_loading;
+	loaded: spriteset_BR380_front_ScotRail_Saltire_Decals_reversed;
+}
+
+spritegroup spritegroup_BR380_middle_panto_ScotRail_Saltire_Decals_reversed {
+	loading: spriteset_BR380_middle_panto_ScotRail_Saltire_Decals_reversed_loading;
+	loaded: spriteset_BR380_middle_panto_ScotRail_Saltire_Decals_reversed;
+}
+
+spritegroup spritegroup_BR380_rear_ScotRail_Saltire_Decals_reversed {
+	loading: spriteset_BR380_rear_ScotRail_Saltire_Decals_reversed_loading;
+	loaded: spriteset_BR380_rear_ScotRail_Saltire_Decals_reversed;
+}
+
+// -----------------------------------------------------------------------------
+// Loading-sprite parameter gates
+// -----------------------------------------------------------------------------
+// param_loading_sprites:
+// - 0: always show loaded/closed-door sprites
+// - non-zero: allow loading state to use the spritegroup's loading art
+//
+// These switches isolate loading behavior from livery/role logic so livery
+// selectors only need to choose one switch per role.
+switch(FEAT_TRAINS, SELF, sw_BR380_front_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_front_ScotRail_Saltire;
+	spritegroup_BR380_front_ScotRail_Saltire;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_middle_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_middle_ScotRail_Saltire;
+	spritegroup_BR380_middle_ScotRail_Saltire;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_middle_panto_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_middle_panto_ScotRail_Saltire;
+	spritegroup_BR380_middle_panto_ScotRail_Saltire;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_rear_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_rear_ScotRail_Saltire;
+	spritegroup_BR380_rear_ScotRail_Saltire;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_front_reversed_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_front_ScotRail_Saltire_reversed;
+	spritegroup_BR380_front_ScotRail_Saltire_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_middle_panto_reversed_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_middle_panto_ScotRail_Saltire_reversed;
+	spritegroup_BR380_middle_panto_ScotRail_Saltire_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_rear_reversed_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_rear_ScotRail_Saltire_reversed;
+	spritegroup_BR380_rear_ScotRail_Saltire_reversed;
+}
+
+// Livery 1 loading gates
+switch(FEAT_TRAINS, SELF, sw_BR380_front_decals_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_front_ScotRail_Saltire_Decals;
+	spritegroup_BR380_front_ScotRail_Saltire_Decals;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_middle_decals_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_middle_ScotRail_Saltire_Decals;
+	spritegroup_BR380_middle_ScotRail_Saltire_Decals;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_middle_panto_decals_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_middle_panto_ScotRail_Saltire_Decals;
+	spritegroup_BR380_middle_panto_ScotRail_Saltire_Decals;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_rear_decals_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_rear_ScotRail_Saltire_Decals;
+	spritegroup_BR380_rear_ScotRail_Saltire_Decals;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_front_decals_reversed_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_front_ScotRail_Saltire_Decals_reversed;
+	spritegroup_BR380_front_ScotRail_Saltire_Decals_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_middle_panto_decals_reversed_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_middle_panto_ScotRail_Saltire_Decals_reversed;
+	spritegroup_BR380_middle_panto_ScotRail_Saltire_Decals_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_rear_decals_reversed_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_rear_ScotRail_Saltire_Decals_reversed;
+	spritegroup_BR380_rear_ScotRail_Saltire_Decals_reversed;
+}
+
+// -----------------------------------------------------------------------------
+// Livery label text (refit cargo subtype caption)
+// -----------------------------------------------------------------------------
 switch(FEAT_TRAINS, SELF, sw_BR380_cargo_subtype_text, cargo_subtype) {
 	0: return string(str_ScotRailSaltire);
+	1: return string(str_ScotRailSaltireDecals);
 	return CB_RESULT_NO_TEXT;
 }
 
+// -----------------------------------------------------------------------------
+// Forward role-by-livery selectors
+// -----------------------------------------------------------------------------
+// cargo_subtype chooses livery:
+// - 0: Saltire
+// - 1: Saltire (Decals)
+// Each branch returns the role-specific loading-gated switch.
 switch(FEAT_TRAINS, SELF, sw_BR380_front, cargo_subtype) {
-	0: spriteset_BR380_front_ScotRail_Saltire;
-	spriteset_BR380_front_ScotRail_Saltire;
+	0: sw_BR380_front_loading_mode;
+	1: sw_BR380_front_decals_loading_mode;
+	sw_BR380_front_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR380_middle, cargo_subtype) {
-	0: spriteset_BR380_middle_ScotRail_Saltire;
-	spriteset_BR380_middle_ScotRail_Saltire;
+	0: sw_BR380_middle_loading_mode;
+	1: sw_BR380_middle_decals_loading_mode;
+	sw_BR380_middle_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR380_middle_panto, cargo_subtype) {
-	0: spriteset_BR380_middle_panto_ScotRail_Saltire;
-	spriteset_BR380_middle_panto_ScotRail_Saltire;
+	0: sw_BR380_middle_panto_loading_mode;
+	1: sw_BR380_middle_panto_decals_loading_mode;
+	sw_BR380_middle_panto_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR380_rear, cargo_subtype) {
-	0: spriteset_BR380_rear_ScotRail_Saltire;
-	spriteset_BR380_rear_ScotRail_Saltire;
+	0: sw_BR380_rear_loading_mode;
+	1: sw_BR380_rear_decals_loading_mode;
+	sw_BR380_rear_loading_mode;
 }
 
+// -----------------------------------------------------------------------------
+// Reversed role-by-livery selectors
+// -----------------------------------------------------------------------------
+// Reversed consists must read mirrored cargo_subtype from the corresponding car
+// so each map position keeps its expected livery when direction flips.
+// STORE_TEMP(..., 0x10F) stores the mirror offset used by the subsequent var lookup.
+// var 0xF2 reads the mirrored vehicle's cargo_subtype.
 switch(FEAT_TRAINS, SELF, sw_BR380_front_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR380_front_ScotRail_Saltire_reversed;
-	spriteset_BR380_front_ScotRail_Saltire_reversed;
+	0: sw_BR380_front_reversed_loading_mode;
+	1: sw_BR380_front_decals_reversed_loading_mode;
+	sw_BR380_front_reversed_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR380_middle_panto_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR380_middle_panto_ScotRail_Saltire_reversed;
-	spriteset_BR380_middle_panto_ScotRail_Saltire_reversed;
+	0: sw_BR380_middle_panto_reversed_loading_mode;
+	1: sw_BR380_middle_panto_decals_reversed_loading_mode;
+	sw_BR380_middle_panto_reversed_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR380_rear_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR380_rear_ScotRail_Saltire_reversed;
-	spriteset_BR380_rear_ScotRail_Saltire_reversed;
+	0: sw_BR380_rear_reversed_loading_mode;
+	1: sw_BR380_rear_decals_reversed_loading_mode;
+	sw_BR380_rear_reversed_loading_mode;
 }
 
+// -----------------------------------------------------------------------------
+// Forward role dispatch by consist length
+// -----------------------------------------------------------------------------
+// Maps articulated index to the car role switch.
 switch(FEAT_TRAINS, SELF, sw_BR380_3car_roles_fwd, position_in_articulated_veh % 3) {
 	0: sw_BR380_front;
 	1: sw_BR380_middle_panto;
@@ -58,12 +289,17 @@ switch(FEAT_TRAINS, SELF, sw_BR380_3car_roles_fwd, position_in_articulated_veh %
 
 switch(FEAT_TRAINS, SELF, sw_BR380_4car_roles_fwd, position_in_articulated_veh % 4) {
 	0: sw_BR380_front;
-	1: sw_BR380_middle;
-	2: sw_BR380_middle_panto;
+	1: sw_BR380_middle_panto;
+	2: sw_BR380_middle;
 	3: sw_BR380_rear;
 	sw_BR380_middle;
 }
 
+// -----------------------------------------------------------------------------
+// Reversed role dispatch by mirrored articulated position
+// -----------------------------------------------------------------------------
+// var 0x41 provides articulated position from the mirrored car.
+// We modulo by consist length to map to the matching role selector.
 switch(FEAT_TRAINS, SELF, sw_BR380_rev_role_3car, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 3]) {
 	0: sw_BR380_front_rev;
 	1: sw_BR380_middle_panto_rev;
@@ -73,12 +309,16 @@ switch(FEAT_TRAINS, SELF, sw_BR380_rev_role_3car, [STORE_TEMP(position_in_consis
 
 switch(FEAT_TRAINS, SELF, sw_BR380_rev_role_4car, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x000000FF, 0x41] % 4]) {
 	0: sw_BR380_front_rev;
-	1: sw_BR380_middle;
-	2: sw_BR380_middle_panto_rev;
+	1: sw_BR380_middle_panto_rev;
+	2: sw_BR380_middle;
 	3: sw_BR380_rear_rev;
 	sw_BR380_middle;
 }
 
+// -----------------------------------------------------------------------------
+// Consist type routing (3-car vs 4-car)
+// -----------------------------------------------------------------------------
+// Routes both main IDs and related variant IDs to the same role map.
 switch(FEAT_TRAINS, SELF, sw_BR380_roles_fwd_by_type, vehicle_type_id) {
 	767: sw_BR380_3car_roles_fwd;
 	2767: sw_BR380_3car_roles_fwd;
@@ -87,6 +327,8 @@ switch(FEAT_TRAINS, SELF, sw_BR380_roles_fwd_by_type, vehicle_type_id) {
 	sw_BR380_3car_roles_fwd;
 }
 
+// Reversed equivalent of type routing.
+// var 0xC6 reads mirrored vehicle_type_id after 0x10F is set.
 switch(FEAT_TRAINS, SELF, sw_BR380_rev_from_mirror, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xC6]]) {
 	767: sw_BR380_rev_role_3car;
 	2767: sw_BR380_rev_role_3car;
@@ -95,6 +337,9 @@ switch(FEAT_TRAINS, SELF, sw_BR380_rev_from_mirror, [STORE_TEMP(position_in_cons
 	sw_BR380_rev_role_3car;
 }
 
+// -----------------------------------------------------------------------------
+// Final entry point used by item definitions (both 3-car and 4-car subclasses)
+// -----------------------------------------------------------------------------
 switch(FEAT_TRAINS, PARENT, sw_BR380_pushpull, vehicle_is_reversed) {
 	1: sw_BR380_rev_from_mirror;
 	sw_BR380_roles_fwd_by_type;
