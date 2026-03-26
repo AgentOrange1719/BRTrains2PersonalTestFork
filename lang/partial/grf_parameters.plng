@@ -57,6 +57,11 @@ STR_PARAM_STANDING_CAPACITY_OFF     :Disabled (seat-based)
 STR_PARAM_STANDING_CAPACITY_ON      :Enabled (seat + standing)
 STR_PARAM_STANDING_CAPACITY_MORE_UNITS:Enabled (More Units)
 
+STR_PARAM_NAME_LOADING_SPRITES      :Loading Door Sprites
+STR_PARAM_DESC_LOADING_SPRITES      :Use alternate open-door sprites while trains are loading at stations
+STR_PARAM_LOADING_SPRITES_OFF       :Disabled
+STR_PARAM_LOADING_SPRITES_ON        :Enabled
+
 # Warning: these are used for multiple parameters, if you need to modify them, maybe add different strings?
 STR_PARAM_1X                    :1x (Default)
 STR_PARAM_2X                    :2x
