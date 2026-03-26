@@ -39,4 +39,15 @@ docs/BR liveries and logos.gif
 docs/power calculations.ods
 .DS_Store
 lang/english.lng
+<<<<<<< Updated upstream
 /reports
+=======
+*.cacheindex
+*.cache
+/.nmlcache
+*.cache
+/.nmlcache
+*.cache
+*.cache
+*.cacheindex
+>>>>>>> Stashed changes
