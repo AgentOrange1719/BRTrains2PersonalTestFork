@@ -1,94 +1,206 @@
 spriteset(spriteset_BR707_Purchase, "gfx/EMU/Desiro_City_WIP.png") {
-	template_purchase(200, 26)
+	template_purchase(400, 26)
 }
 
 // Forward sprites by role/livery. A:A-cab, B:B-Cab, C:panto car (not used) D:middle trailer E:Middle trailer SE var2
-spriteset(spriteset_BR707a_SWT, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 400) }
-spriteset(spriteset_BR707b_SWT, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 500) }
-spriteset(spriteset_BR707c_SWT, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 475) }
-spriteset(spriteset_BR707d_SWT, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 450) }
+spriteset(spriteset_BR707a_SWT, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 500) }
+spriteset(spriteset_BR707b_SWT, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 600) }
+spriteset(spriteset_BR707c_SWT, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 575) }
+spriteset(spriteset_BR707d_SWT, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 550) }
 
-spriteset(spriteset_BR707a_SE, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 550) }
-spriteset(spriteset_BR707b_SE, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 675) }
-spriteset(spriteset_BR707c_SE, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 350) }
-spriteset(spriteset_BR707d_SE, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 600) }
-spriteset(spriteset_BR707e_SE, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 625) }
+spriteset(spriteset_BR707a_SE, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 650) }
+spriteset(spriteset_BR707b_SE, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 775) }
+spriteset(spriteset_BR707c_SE, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 750) }
+spriteset(spriteset_BR707d_SE, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 700) }
+spriteset(spriteset_BR707e_SE, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 725) }
 
 // Reversed-template sprites by role/livery.
-spriteset(spriteset_BR707a_SWT_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 425) }
-spriteset(spriteset_BR707b_SWT_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 525) }
-spriteset(spriteset_BR707c_SWT_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 650) }
-spriteset(spriteset_BR707d_SWT_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 450) }
+spriteset(spriteset_BR707a_SWT_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 525) }
+spriteset(spriteset_BR707b_SWT_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 625) }
+spriteset(spriteset_BR707c_SWT_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 575) }
+spriteset(spriteset_BR707d_SWT_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 550) }
 
-spriteset(spriteset_BR707a_SE_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 575) }
-spriteset(spriteset_BR707b_SE_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 700) }
-spriteset(spriteset_BR707c_SE_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 650) }
-spriteset(spriteset_BR707d_SE_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 600) }
-spriteset(spriteset_BR707e_SE_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 625) }
+spriteset(spriteset_BR707a_SE_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 675) }
+spriteset(spriteset_BR707b_SE_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 800) }
+spriteset(spriteset_BR707c_SE_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 750) }
+spriteset(spriteset_BR707d_SE_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 700) }
+spriteset(spriteset_BR707e_SE_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 725) }
+
+// Loading sprites (doors open) at x=200, same y coordinates as base sprites.
+spriteset(spriteset_BR707a_SWT_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 500) }
+spriteset(spriteset_BR707b_SWT_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 600) }
+spriteset(spriteset_BR707c_SWT_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 575) }
+spriteset(spriteset_BR707d_SWT_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 550) }
+spriteset(spriteset_BR707a_SE_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 650) }
+spriteset(spriteset_BR707b_SE_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 775) }
+spriteset(spriteset_BR707c_SE_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 750) }
+spriteset(spriteset_BR707d_SE_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 700) }
+spriteset(spriteset_BR707e_SE_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 725) }
+spriteset(spriteset_BR707a_SWT_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 525) }
+spriteset(spriteset_BR707b_SWT_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 625) }
+spriteset(spriteset_BR707c_SWT_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 575) }
+spriteset(spriteset_BR707d_SWT_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 550) }
+spriteset(spriteset_BR707a_SE_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 675) }
+spriteset(spriteset_BR707b_SE_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 800) }
+spriteset(spriteset_BR707c_SE_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 750) }
+spriteset(spriteset_BR707d_SE_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 700) }
+spriteset(spriteset_BR707e_SE_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 725) }
+
+spritegroup spritegroup_BR707a_SWT { loading: spriteset_BR707a_SWT_loading; loaded: spriteset_BR707a_SWT; }
+spritegroup spritegroup_BR707b_SWT { loading: spriteset_BR707b_SWT_loading; loaded: spriteset_BR707b_SWT; }
+spritegroup spritegroup_BR707c_SWT { loading: spriteset_BR707c_SWT_loading; loaded: spriteset_BR707c_SWT; }
+spritegroup spritegroup_BR707d_SWT { loading: spriteset_BR707d_SWT_loading; loaded: spriteset_BR707d_SWT; }
+spritegroup spritegroup_BR707a_SE { loading: spriteset_BR707a_SE_loading; loaded: spriteset_BR707a_SE; }
+spritegroup spritegroup_BR707b_SE { loading: spriteset_BR707b_SE_loading; loaded: spriteset_BR707b_SE; }
+spritegroup spritegroup_BR707c_SE { loading: spriteset_BR707c_SE_loading; loaded: spriteset_BR707c_SE; }
+spritegroup spritegroup_BR707d_SE { loading: spriteset_BR707d_SE_loading; loaded: spriteset_BR707d_SE; }
+spritegroup spritegroup_BR707e_SE { loading: spriteset_BR707e_SE_loading; loaded: spriteset_BR707e_SE; }
+spritegroup spritegroup_BR707a_SWT_rev { loading: spriteset_BR707a_SWT_rev_loading; loaded: spriteset_BR707a_SWT_rev; }
+spritegroup spritegroup_BR707b_SWT_rev { loading: spriteset_BR707b_SWT_rev_loading; loaded: spriteset_BR707b_SWT_rev; }
+spritegroup spritegroup_BR707c_SWT_rev { loading: spriteset_BR707c_SWT_rev_loading; loaded: spriteset_BR707c_SWT_rev; }
+spritegroup spritegroup_BR707d_SWT_rev { loading: spriteset_BR707d_SWT_rev_loading; loaded: spriteset_BR707d_SWT_rev; }
+spritegroup spritegroup_BR707a_SE_rev { loading: spriteset_BR707a_SE_rev_loading; loaded: spriteset_BR707a_SE_rev; }
+spritegroup spritegroup_BR707b_SE_rev { loading: spriteset_BR707b_SE_rev_loading; loaded: spriteset_BR707b_SE_rev; }
+spritegroup spritegroup_BR707c_SE_rev { loading: spriteset_BR707c_SE_rev_loading; loaded: spriteset_BR707c_SE_rev; }
+spritegroup spritegroup_BR707d_SE_rev { loading: spriteset_BR707d_SE_rev_loading; loaded: spriteset_BR707d_SE_rev; }
+spritegroup spritegroup_BR707e_SE_rev { loading: spriteset_BR707e_SE_rev_loading; loaded: spriteset_BR707e_SE_rev; }
+
+switch(FEAT_TRAINS, SELF, sw_BR707a_SWT_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707a_SWT;
+	spritegroup_BR707a_SWT;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707b_SWT_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707b_SWT;
+	spritegroup_BR707b_SWT;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707c_SWT_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707c_SWT;
+	spritegroup_BR707c_SWT;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707d_SWT_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707d_SWT;
+	spritegroup_BR707d_SWT;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707a_SE_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707a_SE;
+	spritegroup_BR707a_SE;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707b_SE_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707b_SE;
+	spritegroup_BR707b_SE;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707c_SE_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707c_SE;
+	spritegroup_BR707c_SE;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707d_SE_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707d_SE;
+	spritegroup_BR707d_SE;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707e_SE_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707e_SE;
+	spritegroup_BR707e_SE;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707a_SWT_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707a_SWT_rev;
+	spritegroup_BR707a_SWT_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707b_SWT_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707b_SWT_rev;
+	spritegroup_BR707b_SWT_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707c_SWT_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707c_SWT_rev;
+	spritegroup_BR707c_SWT_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707d_SWT_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707d_SWT_rev;
+	spritegroup_BR707d_SWT_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707a_SE_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707a_SE_rev;
+	spritegroup_BR707a_SE_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707b_SE_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707b_SE_rev;
+	spritegroup_BR707b_SE_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707c_SE_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707c_SE_rev;
+	spritegroup_BR707c_SE_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707d_SE_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707d_SE_rev;
+	spritegroup_BR707d_SE_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR707e_SE_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR707e_SE_rev;
+	spritegroup_BR707e_SE_rev;
+}
 
 // Role selectors (forward, by local cargo_subtype/livery).
 switch(FEAT_TRAINS, SELF, sw_BR707a, cargo_subtype) {
-	0: spriteset_BR707a_SWT;
-	1: spriteset_BR707a_SE;
-	default: spriteset_BR707a_SWT;
+	0: sw_BR707a_SWT_loading_mode;
+	1: sw_BR707a_SE_loading_mode;
+	default: sw_BR707a_SWT_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR707b, cargo_subtype) {
-	0: spriteset_BR707b_SWT;
-	1: spriteset_BR707b_SE;
-	default: spriteset_BR707b_SWT;
+	0: sw_BR707b_SWT_loading_mode;
+	1: sw_BR707b_SE_loading_mode;
+	default: sw_BR707b_SWT_loading_mode;
 }
 
 //C car switch is set to d sprites, as panto is not currently used. May be used in future if converted to dual-voltage
 switch(FEAT_TRAINS, SELF, sw_BR707c, cargo_subtype) {
-	0: spriteset_BR707d_SWT;
-	1: spriteset_BR707d_SE;
-	default: spriteset_BR707c_SWT;
+	0: sw_BR707d_SWT_loading_mode;
+	1: sw_BR707d_SE_loading_mode;
+	default: sw_BR707c_SWT_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR707d, cargo_subtype) {
-	0: spriteset_BR707d_SWT;
-	1: spriteset_BR707d_SE;
-	default: spriteset_BR707d_SWT;
+	0: sw_BR707d_SWT_loading_mode;
+	1: sw_BR707d_SE_loading_mode;
+	default: sw_BR707d_SWT_loading_mode;
 }
 
 // SE has a second middle-car variant here; SWT keeps the regular middle car.
 switch(FEAT_TRAINS, SELF, sw_BR707e, cargo_subtype) {
-	0: spriteset_BR707d_SWT;
-	1: spriteset_BR707e_SE;
-	default: spriteset_BR707d_SWT;
+	0: sw_BR707d_SWT_loading_mode;
+	1: sw_BR707e_SE_loading_mode;
+	default: sw_BR707d_SWT_loading_mode;
 }
 
 // Role selectors (reversed-template, using mirrored cargo_subtype from the opposite car).
 switch(FEAT_TRAINS, SELF, sw_BR707a_rev, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR707a_SWT_rev;
-	1: spriteset_BR707a_SE_rev;
-	default: spriteset_BR707a_SWT_rev;
+	0: sw_BR707a_SWT_rev_loading_mode;
+	1: sw_BR707a_SE_rev_loading_mode;
+	default: sw_BR707a_SWT_rev_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR707b_rev, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR707b_SWT_rev;
-	1: spriteset_BR707b_SE_rev;
-	default: spriteset_BR707b_SWT_rev;
+	0: sw_BR707b_SWT_rev_loading_mode;
+	1: sw_BR707b_SE_rev_loading_mode;
+	default: sw_BR707b_SWT_rev_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR707c_rev, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR707d_SWT_rev;
-	1: spriteset_BR707d_SE_rev;
-	default: spriteset_BR707c_SWT_rev;
+	0: sw_BR707d_SWT_rev_loading_mode;
+	1: sw_BR707d_SE_rev_loading_mode;
+	default: sw_BR707c_SWT_rev_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR707d_rev, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR707d_SWT_rev;
-	1: spriteset_BR707d_SE_rev;
-	default: spriteset_BR707d_SWT_rev;
+	0: sw_BR707d_SWT_rev_loading_mode;
+	1: sw_BR707d_SE_rev_loading_mode;
+	default: sw_BR707d_SWT_rev_loading_mode;
 }
 
 // SE has a second middle-car variant here; SWT keeps regular middle car.
 switch(FEAT_TRAINS, SELF, sw_BR707e_rev, [STORE_TEMP(position_in_consist_from_end - position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR707d_SWT_rev;
-	1: spriteset_BR707e_SE_rev;
-	default: spriteset_BR707d_SWT_rev;
+	0: sw_BR707d_SWT_rev_loading_mode;
+	1: sw_BR707e_SE_rev_loading_mode;
+	default: sw_BR707d_SWT_rev_loading_mode;
 }
 
 // 5-car Class 707 role order: A, C, E, D, B.
