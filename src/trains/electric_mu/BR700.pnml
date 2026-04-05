@@ -1,5 +1,5 @@
-spriteset(spriteset_BR700_Purchase, "gfx/BR700_v2.png") {
-	template_purchase(200, 0)
+spriteset(spriteset_BR700_Purchase, "gfx/EMU/Desiro_City_WIP.png") {
+	template_purchase(400, 0)
 }
 
 // Class 700 sprites (Desiro City WIP sheet)
@@ -24,10 +24,122 @@ spriteset(spriteset_BR700e_GTR_rev, "gfx/EMU/Desiro_City_WIP.png") { template_tr
 spriteset(spriteset_BR700f_GTR, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 350) }
 spriteset(spriteset_BR700f_GTR_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 375) }
 
-spriteset(spriteset_BR700a_GTRPride, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(175, 175) }
-spriteset(spriteset_BR700a_GTRPride_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(175, 200) }
-spriteset(spriteset_BR700f_GTRPride, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(175, 350) }
-spriteset(spriteset_BR700f_GTRPride_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(175, 375) }
+spriteset(spriteset_BR700a_GTRPride, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 400) }
+spriteset(spriteset_BR700a_GTRPride_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 425) }
+spriteset(spriteset_BR700f_GTRPride, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(0, 450) }
+spriteset(spriteset_BR700f_GTRPride_rev, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(0, 475) }
+
+// Loading sprites (doors open) at x=200, same y coordinates as base sprites.
+spriteset(spriteset_BR700a_GTR_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 175) }
+spriteset(spriteset_BR700a_GTR_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 200) }
+spriteset(spriteset_BR700b_GTR_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 225) }
+spriteset(spriteset_BR700b_GTR_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 225) }
+spriteset(spriteset_BR700c_GTR_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 250) }
+spriteset(spriteset_BR700c_GTR_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 250) }
+spriteset(spriteset_BR700d_GTR_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 275) }
+spriteset(spriteset_BR700d_GTR_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 275) }
+spriteset(spriteset_BR700g_GTR_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 300) }
+spriteset(spriteset_BR700g_GTR_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 300) }
+spriteset(spriteset_BR700e_GTR_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 325) }
+spriteset(spriteset_BR700e_GTR_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 325) }
+spriteset(spriteset_BR700f_GTR_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 350) }
+spriteset(spriteset_BR700f_GTR_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 375) }
+spriteset(spriteset_BR700a_GTRPride_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 400) }
+spriteset(spriteset_BR700a_GTRPride_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 425) }
+spriteset(spriteset_BR700f_GTRPride_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old(200, 450) }
+spriteset(spriteset_BR700f_GTRPride_rev_loading, "gfx/EMU/Desiro_City_WIP.png") { template_train32px_old_reversed(200, 475) }
+
+spritegroup spritegroup_BR700a_GTR { loading: spriteset_BR700a_GTR_loading; loaded: spriteset_BR700a_GTR; }
+spritegroup spritegroup_BR700a_GTR_rev { loading: spriteset_BR700a_GTR_rev_loading; loaded: spriteset_BR700a_GTR_rev; }
+spritegroup spritegroup_BR700b_GTR { loading: spriteset_BR700b_GTR_loading; loaded: spriteset_BR700b_GTR; }
+spritegroup spritegroup_BR700b_GTR_rev { loading: spriteset_BR700b_GTR_rev_loading; loaded: spriteset_BR700b_GTR_rev; }
+spritegroup spritegroup_BR700c_GTR { loading: spriteset_BR700c_GTR_loading; loaded: spriteset_BR700c_GTR; }
+spritegroup spritegroup_BR700c_GTR_rev { loading: spriteset_BR700c_GTR_rev_loading; loaded: spriteset_BR700c_GTR_rev; }
+spritegroup spritegroup_BR700d_GTR { loading: spriteset_BR700d_GTR_loading; loaded: spriteset_BR700d_GTR; }
+spritegroup spritegroup_BR700d_GTR_rev { loading: spriteset_BR700d_GTR_rev_loading; loaded: spriteset_BR700d_GTR_rev; }
+spritegroup spritegroup_BR700g_GTR { loading: spriteset_BR700g_GTR_loading; loaded: spriteset_BR700g_GTR; }
+spritegroup spritegroup_BR700g_GTR_rev { loading: spriteset_BR700g_GTR_rev_loading; loaded: spriteset_BR700g_GTR_rev; }
+spritegroup spritegroup_BR700e_GTR { loading: spriteset_BR700e_GTR_loading; loaded: spriteset_BR700e_GTR; }
+spritegroup spritegroup_BR700e_GTR_rev { loading: spriteset_BR700e_GTR_rev_loading; loaded: spriteset_BR700e_GTR_rev; }
+spritegroup spritegroup_BR700f_GTR { loading: spriteset_BR700f_GTR_loading; loaded: spriteset_BR700f_GTR; }
+spritegroup spritegroup_BR700f_GTR_rev { loading: spriteset_BR700f_GTR_rev_loading; loaded: spriteset_BR700f_GTR_rev; }
+spritegroup spritegroup_BR700a_GTRPride { loading: spriteset_BR700a_GTRPride_loading; loaded: spriteset_BR700a_GTRPride; }
+spritegroup spritegroup_BR700a_GTRPride_rev { loading: spriteset_BR700a_GTRPride_rev_loading; loaded: spriteset_BR700a_GTRPride_rev; }
+spritegroup spritegroup_BR700f_GTRPride { loading: spriteset_BR700f_GTRPride_loading; loaded: spriteset_BR700f_GTRPride; }
+spritegroup spritegroup_BR700f_GTRPride_rev { loading: spriteset_BR700f_GTRPride_rev_loading; loaded: spriteset_BR700f_GTRPride_rev; }
+
+switch(FEAT_TRAINS, SELF, sw_BR700a_GTR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700a_GTR;
+	spritegroup_BR700a_GTR;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700a_GTR_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700a_GTR_rev;
+	spritegroup_BR700a_GTR_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700b_GTR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700b_GTR;
+	spritegroup_BR700b_GTR;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700b_GTR_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700b_GTR_rev;
+	spritegroup_BR700b_GTR_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700c_GTR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700c_GTR;
+	spritegroup_BR700c_GTR;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700c_GTR_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700c_GTR_rev;
+	spritegroup_BR700c_GTR_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700d_GTR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700d_GTR;
+	spritegroup_BR700d_GTR;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700d_GTR_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700d_GTR_rev;
+	spritegroup_BR700d_GTR_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700g_GTR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700g_GTR;
+	spritegroup_BR700g_GTR;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700g_GTR_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700g_GTR_rev;
+	spritegroup_BR700g_GTR_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700e_GTR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700e_GTR;
+	spritegroup_BR700e_GTR;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700e_GTR_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700e_GTR_rev;
+	spritegroup_BR700e_GTR_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700f_GTR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700f_GTR;
+	spritegroup_BR700f_GTR;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700f_GTR_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700f_GTR_rev;
+	spritegroup_BR700f_GTR_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700a_GTRPride_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700a_GTRPride;
+	spritegroup_BR700a_GTRPride;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700a_GTRPride_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700a_GTRPride_rev;
+	spritegroup_BR700a_GTRPride_rev;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700f_GTRPride_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700f_GTRPride;
+	spritegroup_BR700f_GTRPride;
+}
+switch(FEAT_TRAINS, SELF, sw_BR700f_GTRPride_rev_loading_mode, param_loading_sprites) {
+	0: spriteset_BR700f_GTRPride_rev;
+	spritegroup_BR700f_GTRPride_rev;
+}
 
 // ---------------------------------------------------------------------------
 // Selector chain overview (novice-oriented)
@@ -56,88 +168,88 @@ spriteset(spriteset_BR700f_GTRPride_rev, "gfx/EMU/Desiro_City_WIP.png") { templa
 
 // Role selectors (forward, chosen by livery/cargo subtype)
 switch(FEAT_TRAINS, SELF, sw_BR700a, cargo_subtype) {
-	0: spriteset_BR700a_GTR;
-	1: spriteset_BR700a_GTRPride;
-	default: spriteset_BR700a_GTR;
+	0: sw_BR700a_GTR_loading_mode;
+	1: sw_BR700a_GTRPride_loading_mode;
+	default: sw_BR700a_GTR_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR700b, cargo_subtype) {
-	0: spriteset_BR700b_GTR;
-	1: spriteset_BR700b_GTR;
-	default: spriteset_BR700b_GTR;
+	0: sw_BR700b_GTR_loading_mode;
+	1: sw_BR700b_GTR_loading_mode;
+	default: sw_BR700b_GTR_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR700c, cargo_subtype) {
-	0: spriteset_BR700c_GTR;
-	1: spriteset_BR700c_GTR;
-	default: spriteset_BR700c_GTR;
+	0: sw_BR700c_GTR_loading_mode;
+	1: sw_BR700c_GTR_loading_mode;
+	default: sw_BR700c_GTR_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR700d, cargo_subtype) {
-	0: spriteset_BR700d_GTR;
-	1: spriteset_BR700d_GTR;
-	default: spriteset_BR700d_GTR;
+	0: sw_BR700d_GTR_loading_mode;
+	1: sw_BR700d_GTR_loading_mode;
+	default: sw_BR700d_GTR_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR700g, cargo_subtype) {
-	0: spriteset_BR700g_GTR;
-	1: spriteset_BR700g_GTR;
-	default: spriteset_BR700g_GTR;
+	0: sw_BR700g_GTR_loading_mode;
+	1: sw_BR700g_GTR_loading_mode;
+	default: sw_BR700g_GTR_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR700e, cargo_subtype) {
-	0: spriteset_BR700e_GTR;
-	1: spriteset_BR700e_GTR;
-	default: spriteset_BR700e_GTR;
+	0: sw_BR700e_GTR_loading_mode;
+	1: sw_BR700e_GTR_loading_mode;
+	default: sw_BR700e_GTR_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR700f, cargo_subtype) {
-	0: spriteset_BR700f_GTR;
-	1: spriteset_BR700f_GTRPride;
-	default: spriteset_BR700f_GTR;
+	0: sw_BR700f_GTR_loading_mode;
+	1: sw_BR700f_GTRPride_loading_mode;
+	default: sw_BR700f_GTR_loading_mode;
 }
 
 // Role selectors (reversed sprites, with mirrored cargo subtype via var 0xF2)
 switch(FEAT_TRAINS, SELF, sw_BR700a_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR700a_GTR_rev;
-	1: spriteset_BR700a_GTRPride_rev;
-	default: spriteset_BR700a_GTR_rev;
+	0: sw_BR700a_GTR_rev_loading_mode;
+	1: sw_BR700a_GTRPride_rev_loading_mode;
+	default: sw_BR700a_GTR_rev_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR700b_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR700b_GTR_rev;
-	1: spriteset_BR700b_GTR_rev;
-	default: spriteset_BR700b_GTR_rev;
+	0: sw_BR700b_GTR_rev_loading_mode;
+	1: sw_BR700b_GTR_rev_loading_mode;
+	default: sw_BR700b_GTR_rev_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR700c_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR700c_GTR_rev;
-	1: spriteset_BR700c_GTR_rev;
-	default: spriteset_BR700c_GTR_rev;
+	0: sw_BR700c_GTR_rev_loading_mode;
+	1: sw_BR700c_GTR_rev_loading_mode;
+	default: sw_BR700c_GTR_rev_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR700d_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR700d_GTR_rev;
-	1: spriteset_BR700d_GTR_rev;
-	default: spriteset_BR700d_GTR_rev;
+	0: sw_BR700d_GTR_rev_loading_mode;
+	1: sw_BR700d_GTR_rev_loading_mode;
+	default: sw_BR700d_GTR_rev_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR700g_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR700g_GTR_rev;
-	1: spriteset_BR700g_GTR_rev;
-	default: spriteset_BR700g_GTR_rev;
+	0: sw_BR700g_GTR_rev_loading_mode;
+	1: sw_BR700g_GTR_rev_loading_mode;
+	default: sw_BR700g_GTR_rev_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR700e_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR700e_GTR_rev;
-	1: spriteset_BR700e_GTR_rev;
-	default: spriteset_BR700e_GTR_rev;
+	0: sw_BR700e_GTR_rev_loading_mode;
+	1: sw_BR700e_GTR_rev_loading_mode;
+	default: sw_BR700e_GTR_rev_loading_mode;
 }
 
 switch(FEAT_TRAINS, SELF, sw_BR700f_rev, [STORE_TEMP(position_in_consist_from_end-position_in_consist, 0x10F), var[0x61, 0, 0x0000FFFF, 0xF2]]) {
-	0: spriteset_BR700f_GTR_rev;
-	1: spriteset_BR700f_GTRPride_rev;
-	default: spriteset_BR700f_GTR_rev;
+	0: sw_BR700f_GTR_rev_loading_mode;
+	1: sw_BR700f_GTRPride_rev_loading_mode;
+	default: sw_BR700f_GTR_rev_loading_mode;
 }
 
 // 700/0 role order by articulated position:
